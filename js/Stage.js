@@ -77,16 +77,16 @@ const Ticker = (function TickerFactory(window) {
 		let frameTime = timestamp - lastTimestamp;
 		lastTimestamp = timestamp;
 		// make sure negative time isn't reported (first frame can be whacky)
-		if (frameTime < 0) {
+		if (frameTime &lt; 0) {
 			frameTime = 17;
 		}
 		// - cap minimum framerate to 15fps[~68ms] (assuming 60fps[~17ms] as 'normal')
-		else if (frameTime > 68) {
+		else if (frameTime &gt; 68) {
 			frameTime = 68;
 		}
 
 		// fire custom listeners
-		listeners.forEach(listener => listener.call(window, frameTime, frameTime / 16.6667));
+		listeners.forEach(listener =&gt; listener.call(window, frameTime, frameTime / 16.6667));
 
 		// always queue another frame
 		queueFrame();
@@ -176,7 +176,7 @@ const Stage = (function StageFactory(window, document, Ticker) {
 	Stage.prototype.dispatchEvent = function dispatchEvent(event, val) {
 		const listeners = this._listeners[event];
 		if (listeners) {
-			listeners.forEach(listener => listener.call(this, val));
+			listeners.forEach(listener =&gt; listener.call(this, val));
 		}else{
 			throw('Invalid Event');
 		}
@@ -207,7 +207,7 @@ const Stage = (function StageFactory(window, document, Ticker) {
 	// handle interaction
 	Stage.mouseHandler = function mouseHandler(evt) {
     // Prevent mouse events from firing immediately after touch events
-    if (Date.now() - lastTouchTimestamp < 500) {
+    if (Date.now() - lastTouchTimestamp &lt; 500) {
       return;
     }
 
@@ -218,7 +218,7 @@ const Stage = (function StageFactory(window, document, Ticker) {
 			type = 'end';
 		}
 
-		Stage.stages.forEach(stage => {
+		Stage.stages.forEach(stage =&gt; {
 			const pos = Stage.windowToCanvas(stage.canvas, evt.clientX, evt.clientY);
 			stage.pointerEvent(type, pos.x / stage.dpr, pos.y / stage.dpr);
 		});
@@ -235,7 +235,7 @@ const Stage = (function StageFactory(window, document, Ticker) {
 		}
 	
     // Dispatch "pointer events" for all changed touches across all stages.
-		Stage.stages.forEach(stage => {
+		Stage.stages.forEach(stage =&gt; {
       // Safari doesn't treat a TouchList as an iteratable, hence Array.from()
       for (let touch of Array.from(evt.changedTouches)) {
         let pos;
@@ -263,7 +263,7 @@ const Stage = (function StageFactory(window, document, Ticker) {
 		};
 
 		// whether pointer event was dispatched over canvas element
-		evt.onCanvas = (x >= 0 && x <= this.width && y >= 0 && y <= this.height);
+		evt.onCanvas = (x &gt;= 0 &amp;&amp; x &lt;= this.width &amp;&amp; y &gt;= 0 &amp;&amp; y &lt;= this.height);
 
 		// dispatch
 		this.dispatchEvent('pointer'+type, evt);
@@ -280,3 +280,4 @@ const Stage = (function StageFactory(window, document, Ticker) {
 	return Stage;
 
 })(window, document, Ticker);
+</canvas>

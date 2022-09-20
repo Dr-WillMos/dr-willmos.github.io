@@ -19,9 +19,9 @@
   var ms = ['msFullscreenEnabled', 'msFullscreenElement', 'msRequestFullscreen', 'msExitFullscreen', 'MSFullscreenChange', 'MSFullscreenError'];
 
   // so it doesn't throw if no window or document
-  var doc = typeof window !== 'undefined' && typeof window.document !== 'undefined' ? window.document : {};
+  var doc = typeof window !== 'undefined' &amp;&amp; typeof window.document !== 'undefined' ? window.document : {};
 
-  var vendor = 'fullscreenEnabled' in doc && Object.keys(key) || webkit[0] in doc && webkit || moz[0] in doc && moz || ms[0] in doc && ms || [];
+  var vendor = 'fullscreenEnabled' in doc &amp;&amp; Object.keys(key) || webkit[0] in doc &amp;&amp; webkit || moz[0] in doc &amp;&amp; moz || ms[0] in doc &amp;&amp; ms || [];
 
   var fscreen = {
     requestFullscreen: function requestFullscreen(element) {

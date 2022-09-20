@@ -22,40 +22,40 @@ const MyMath = (function MyMathFactory(Math) {
 	MyMath.twoPI = Math.PI * 2;
 
 	// Pythagorean Theorem distance calculation
-	MyMath.dist = (width, height) => {
+	MyMath.dist = (width, height) =&gt; {
 		return Math.sqrt(width * width + height * height);
 	};
 	
 	// Pythagorean Theorem point distance calculation
 	// Same as above, but takes coordinates instead of dimensions.
-	MyMath.pointDist = (x1, y1, x2, y2) => {
+	MyMath.pointDist = (x1, y1, x2, y2) =&gt; {
 		const distX = x2 - x1;
 		const distY = y2 - y1;
 		return Math.sqrt(distX * distX + distY * distY);
 	};
 	
 	// Returns the angle (in radians) of a 2D vector
-	MyMath.angle = (width, height) => ( MyMath.halfPI + Math.atan2(height, width) );
+	MyMath.angle = (width, height) =&gt; ( MyMath.halfPI + Math.atan2(height, width) );
 
 	// Returns the angle (in radians) between two points
 	// Same as above, but takes coordinates instead of dimensions.
-	MyMath.pointAngle = (x1, y1, x2, y2) => ( MyMath.halfPI + Math.atan2(y2 - y1, x2 - x1) );
+	MyMath.pointAngle = (x1, y1, x2, y2) =&gt; ( MyMath.halfPI + Math.atan2(y2 - y1, x2 - x1) );
 
 	// Splits a speed vector into x and y components (angle needs to be in radians)
-	MyMath.splitVector = (speed, angle) => ({
+	MyMath.splitVector = (speed, angle) =&gt; ({
 		x: Math.sin(angle) * speed,
 		y: -Math.cos(angle) * speed
 	});
 
 	// Generates a random number between min (inclusive) and max (exclusive)
-	MyMath.random = (min, max) => Math.random() * (max - min) + min;
+	MyMath.random = (min, max) =&gt; Math.random() * (max - min) + min;
 	
 	// Generates a random integer between and possibly including min and max values
-	MyMath.randomInt = (min, max) => ((Math.random() * (max - min + 1)) | 0) + min;
+	MyMath.randomInt = (min, max) =&gt; ((Math.random() * (max - min + 1)) | 0) + min;
 
 	// Returns a random element from an array, or simply the set of provided arguments when called
 	MyMath.randomChoice = function randomChoice(choices) {
-		if (arguments.length === 1 && Array.isArray(choices)) {
+		if (arguments.length === 1 &amp;&amp; Array.isArray(choices)) {
 			return choices[(Math.random() * choices.length) | 0];
 		}
 		return arguments[(Math.random() * arguments.length) | 0];

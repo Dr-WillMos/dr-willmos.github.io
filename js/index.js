@@ -6,19 +6,19 @@
 console.clear();
 
 
-const IS_MOBILE = window.innerWidth <= 640;
-const IS_DESKTOP = window.innerWidth > 800;
-const IS_HEADER = IS_DESKTOP && window.innerHeight < 300;
+const IS_MOBILE = window.innerWidth &lt;= 640;
+const IS_DESKTOP = window.innerWidth &gt; 800;
+const IS_HEADER = IS_DESKTOP &amp;&amp; window.innerHeight &lt; 300;
 // Detect high end devices. This will be a moving target.
-const IS_HIGH_END_DEVICE = (() => {
+const IS_HIGH_END_DEVICE = (() =&gt; {
 	const hwConcurrency = navigator.hardwareConcurrency;
 	if (!hwConcurrency) {
 		return false;
 	}
 	// Large screens indicate a full size computer, which often have hyper threading these days.
 	// So a quad core desktop machine has 8 cores. We'll place a higher min threshold there.
-	const minCount = window.innerWidth <= 1024 ? 4 : 8;
-	return hwConcurrency >= minCount;
+	const minCount = window.innerWidth &lt;= 1024 ? 4 : 8;
+	return hwConcurrency &gt;= minCount;
 })();
 // Prevent canvases from getting too large on ridiculous screen sizes.
 // 8K - can restrict this if needed
@@ -100,7 +100,7 @@ function toggleFullscreen() {
 
 // Sync fullscreen changes with store. An event listener is necessary because the user can
 // toggle fullscreen mode directly through the browser, and we want to react to that.
-fscreen.addEventListener('fullscreenchange', () => {
+fscreen.addEventListener('fullscreenchange', () =&gt; {
 	store.setState({ fullscreen: isFullscreen() });
 });
 
@@ -111,7 +111,7 @@ fscreen.addEventListener('fullscreenchange', () => {
 const store = {
 	_listeners: new Set(),
 	_dispatch(prevState) {
-		this._listeners.forEach(listener => listener(this.state, prevState))
+		this._listeners.forEach(listener =&gt; listener(this.state, prevState))
 	},
 	
 	state: {
@@ -149,7 +149,7 @@ const store = {
 	
 	subscribe(listener) {
 		this._listeners.add(listener);
-		return () => this._listeners.remove(listener);
+		return () =&gt; this._listeners.remove(listener);
 	},
 	
 	// Load / persist select state to localStorage
@@ -186,7 +186,7 @@ const store = {
 			// Attempt to parse data, ignoring if there is an error.
 			try {
 				const sizeRaw = localStorage.getItem('configSize');
-				size = typeof sizeRaw === 'string' && JSON.parse(sizeRaw);
+				size = typeof sizeRaw === 'string' &amp;&amp; JSON.parse(sizeRaw);
 			}
 			catch(e) {
 				console.log('Recovered from error parsing saved config:');
@@ -195,7 +195,7 @@ const store = {
 			}
 			// Only restore validated values
 			const sizeInt = parseInt(size, 10);
-			if (sizeInt >= 0 && sizeInt <= 4) {
+			if (sizeInt &gt;= 0 &amp;&amp; sizeInt &lt;= 4) {
 				this.state.config.size = String(sizeInt);
 			}
 		}
@@ -262,7 +262,7 @@ function updateConfig(nextConfig) {
 	configDidUpdate();
 }
 
-// Map config to various properties & apply side effects
+// Map config to various properties &amp; apply side effects
 function configDidUpdate() {
 	const config = store.state.config;
 	
@@ -281,19 +281,19 @@ function configDidUpdate() {
 // Selectors
 // -----------
 
-const isRunning = (state=store.state) => !state.paused && !state.menuOpen;
+const isRunning = (state=store.state) =&gt; !state.paused &amp;&amp; !state.menuOpen;
 // Whether user has enabled sound.
-const soundEnabledSelector = (state=store.state) => state.soundEnabled;
+const soundEnabledSelector = (state=store.state) =&gt; state.soundEnabled;
 // Whether any sounds are allowed, taking into account multiple factors.
-const canPlaySoundSelector = (state=store.state) => isRunning(state) && soundEnabledSelector(state);
+const canPlaySoundSelector = (state=store.state) =&gt; isRunning(state) &amp;&amp; soundEnabledSelector(state);
 // Convert quality to number.
-const qualitySelector = () => +store.state.config.quality;
-const shellNameSelector = () => store.state.config.shell;
+const qualitySelector = () =&gt; +store.state.config.quality;
+const shellNameSelector = () =&gt; store.state.config.shell;
 // Convert shell size to number.
-const shellSizeSelector = () => +store.state.config.size;
-const finaleSelector = () => store.state.config.finale;
-const skyLightingSelector = () => +store.state.config.skyLighting;
-const scaleFactorSelector = () => store.state.config.scaleFactor;
+const shellSizeSelector = () =&gt; +store.state.config.size;
+const finaleSelector = () =&gt; store.state.config.finale;
+const skyLightingSelector = () =&gt; +store.state.config.skyLighting;
+const scaleFactorSelector = () =&gt; store.state.config.scaleFactor;
 
 
 
@@ -398,7 +398,7 @@ const appNodes = {
 };
 
 // Convert appNodes selectors to dom nodes
-Object.keys(appNodes).forEach(key => {
+Object.keys(appNodes).forEach(key =&gt; {
 	appNodes[key] = document.querySelector(appNodes[key]);
 });
 
@@ -474,34 +474,34 @@ function getConfigFromDOM() {
 	};
 };
 
-const updateConfigNoEvent = () => updateConfig();
+const updateConfigNoEvent = () =&gt; updateConfig();
 appNodes.quality.addEventListener('input', updateConfigNoEvent);
 appNodes.shellType.addEventListener('input', updateConfigNoEvent);
 appNodes.shellSize.addEventListener('input', updateConfigNoEvent);
-appNodes.autoLaunch.addEventListener('click', () => setTimeout(updateConfig, 0));
-appNodes.finaleMode.addEventListener('click', () => setTimeout(updateConfig, 0));
+appNodes.autoLaunch.addEventListener('click', () =&gt; setTimeout(updateConfig, 0));
+appNodes.finaleMode.addEventListener('click', () =&gt; setTimeout(updateConfig, 0));
 appNodes.skyLighting.addEventListener('input', updateConfigNoEvent);
-appNodes.longExposure.addEventListener('click', () => setTimeout(updateConfig, 0));
-appNodes.hideControls.addEventListener('click', () => setTimeout(updateConfig, 0));
-appNodes.fullscreen.addEventListener('click', () => setTimeout(toggleFullscreen, 0));
+appNodes.longExposure.addEventListener('click', () =&gt; setTimeout(updateConfig, 0));
+appNodes.hideControls.addEventListener('click', () =&gt; setTimeout(updateConfig, 0));
+appNodes.fullscreen.addEventListener('click', () =&gt; setTimeout(toggleFullscreen, 0));
 // Changing scaleFactor requires triggering resize handling code as well.
-appNodes.scaleFactor.addEventListener('input', () => {
+appNodes.scaleFactor.addEventListener('input', () =&gt; {
 	updateConfig();
 	handleResize();
 });
 
-Object.keys(nodeKeyToHelpKey).forEach(nodeKey => {
+Object.keys(nodeKeyToHelpKey).forEach(nodeKey =&gt; {
 	const helpKey = nodeKeyToHelpKey[nodeKey];
-	appNodes[nodeKey].addEventListener('click', () => {
+	appNodes[nodeKey].addEventListener('click', () =&gt; {
 		store.setState({ openHelpTopic: helpKey });
 	});
 });
 
-appNodes.helpModalCloseBtn.addEventListener('click', () => {
+appNodes.helpModalCloseBtn.addEventListener('click', () =&gt; {
 	store.setState({ openHelpTopic: null });
 });
 
-appNodes.helpModalOverlay.addEventListener('click', () => {
+appNodes.helpModalOverlay.addEventListener('click', () =&gt; {
 	store.setState({ openHelpTopic: null });
 });
 
@@ -509,17 +509,17 @@ appNodes.helpModalOverlay.addEventListener('click', () => {
 
 // Constant derivations
 const COLOR_NAMES = Object.keys(COLOR);
-const COLOR_CODES = COLOR_NAMES.map(colorName => COLOR[colorName]);
+const COLOR_CODES = COLOR_NAMES.map(colorName =&gt; COLOR[colorName]);
 // Invisible stars need an indentifier, even through they won't be rendered - physics still apply.
 const COLOR_CODES_W_INVIS = [...COLOR_CODES, INVISIBLE];
 // Map of color codes to their index in the array. Useful for quickly determining if a color has already been updated in a loop.
-const COLOR_CODE_INDEXES = COLOR_CODES_W_INVIS.reduce((obj, code, i) => {
+const COLOR_CODE_INDEXES = COLOR_CODES_W_INVIS.reduce((obj, code, i) =&gt; {
 	obj[code] = i;
 	return obj;
 }, {});
 // Tuples is a map keys by color codes (hex) with values of { r, g, b } tuples (still just objects).
 const COLOR_TUPLES = {};
-COLOR_CODES.forEach(hex => {
+COLOR_CODES.forEach(hex =&gt; {
 	COLOR_TUPLES[hex] = {
 		r: parseInt(hex.substr(1, 2), 16),
 		g: parseInt(hex.substr(3, 2), 16),
@@ -535,13 +535,13 @@ function randomColorSimple() {
 // Get a random color, with some customization options available.
 let lastColor;
 function randomColor(options) {
-	const notSame = options && options.notSame;
-	const notColor = options && options.notColor;
-	const limitWhite = options && options.limitWhite;
+	const notSame = options &amp;&amp; options.notSame;
+	const notColor = options &amp;&amp; options.notColor;
+	const limitWhite = options &amp;&amp; options.limitWhite;
 	let color = randomColorSimple();
 	
 	// limit the amount of white chosen randomly
-	if (limitWhite && color === COLOR.White && Math.random() < 0.6) {
+	if (limitWhite &amp;&amp; color === COLOR.White &amp;&amp; Math.random() &lt; 0.6) {
 		color = randomColorSimple();
 	}
 	
@@ -561,7 +561,7 @@ function randomColor(options) {
 }
 
 function whiteOrGold() {
-	return Math.random() < 0.5 ? COLOR.Gold : COLOR.White;
+	return Math.random() &lt; 0.5 ? COLOR.Gold : COLOR.White;
 }
 
 
@@ -571,14 +571,14 @@ function makePistilColor(shellColor) {
 }
 
 // Unique shell types
-const crysanthemumShell = (size=1) => {
-	const glitter = Math.random() < 0.25;
-	const singleColor = Math.random() < 0.72;
+const crysanthemumShell = (size=1) =&gt; {
+	const glitter = Math.random() &lt; 0.25;
+	const singleColor = Math.random() &lt; 0.72;
 	const color = singleColor ? randomColor({ limitWhite: true }) : [randomColor(), randomColor({ notSame: true })];
-	const pistil = singleColor && Math.random() < 0.42;
-	const pistilColor = pistil && makePistilColor(color);
-	const secondColor = singleColor && (Math.random() < 0.2 || color === COLOR.White) ? pistilColor || randomColor({ notColor: color, limitWhite: true }) : null;
-	const streamers = !pistil && color !== COLOR.White && Math.random() < 0.42;
+	const pistil = singleColor &amp;&amp; Math.random() &lt; 0.42;
+	const pistilColor = pistil &amp;&amp; makePistilColor(color);
+	const secondColor = singleColor &amp;&amp; (Math.random() &lt; 0.2 || color === COLOR.White) ? pistilColor || randomColor({ notColor: color, limitWhite: true }) : null;
+	const streamers = !pistil &amp;&amp; color !== COLOR.White &amp;&amp; Math.random() &lt; 0.42;
 	let starDensity = glitter ? 1.1 : 1.25;
 	if (isLowQuality) starDensity *= 0.8;
 	if (isHighQuality) starDensity = 1.2;
@@ -598,7 +598,7 @@ const crysanthemumShell = (size=1) => {
 };
 
 
-const ghostShell = (size=1) => {
+const ghostShell = (size=1) =&gt; {
 	// Extend crysanthemum shell
 	const shell = crysanthemumShell(size);
 	// Ghost effect can be fast, so extend star life
@@ -607,8 +607,8 @@ const ghostShell = (size=1) => {
 	let ghostColor = randomColor({ notColor: COLOR.White });
 	// Always use streamers, and sometimes a pistil
 	shell.streamers = true;
-	const pistil = Math.random() < 0.42;
-	const pistilColor = pistil && makePistilColor(ghostColor);
+	const pistil = Math.random() &lt; 0.42;
+	const pistilColor = pistil &amp;&amp; makePistilColor(ghostColor);
 	// Ghost effect - transition from invisible to chosen color
 	shell.color = INVISIBLE;
 	shell.secondColor = ghostColor;
@@ -620,7 +620,7 @@ const ghostShell = (size=1) => {
 };
 
 
-const strobeShell = (size=1) => {
+const strobeShell = (size=1) =&gt; {
 	const color = randomColor({ limitWhite: true });
 	return {
 		shellSize: size,
@@ -632,16 +632,16 @@ const strobeShell = (size=1) => {
 		glitter: 'light',
 		glitterColor: COLOR.White,
 		strobe: true,
-		strobeColor: Math.random() < 0.5 ? COLOR.White : null,
-		pistil: Math.random() < 0.5,
+		strobeColor: Math.random() &lt; 0.5 ? COLOR.White : null,
+		pistil: Math.random() &lt; 0.5,
 		pistilColor: makePistilColor(color)
 	};
 };
 
 
-const palmShell = (size=1) => {
+const palmShell = (size=1) =&gt; {
 	const color = randomColor();
-	const thick = Math.random() < 0.5;
+	const thick = Math.random() &lt; 0.5;
 	return {
 		shellSize: size,
 		color,
@@ -652,9 +652,9 @@ const palmShell = (size=1) => {
 	};
 };
 
-const ringShell = (size=1) => {
+const ringShell = (size=1) =&gt; {
 	const color = randomColor();
-	const pistil = Math.random() < 0.75;
+	const pistil = Math.random() &lt; 0.75;
 	return {
 		shellSize: size,
 		ring: true,
@@ -666,12 +666,12 @@ const ringShell = (size=1) => {
 		pistilColor: makePistilColor(color),
 		glitter: !pistil ? 'light' : '',
 		glitterColor: color === COLOR.Gold ? COLOR.Gold : COLOR.White,
-		streamers: Math.random() < 0.3
+		streamers: Math.random() &lt; 0.3
 	};
 	// return Object.assign({}, defaultShell, config);
 };
 
-const crossetteShell = (size=1) => {
+const crossetteShell = (size=1) =&gt; {
 	const color = randomColor({ limitWhite: true });
 	return {
 		shellSize: size,
@@ -681,22 +681,22 @@ const crossetteShell = (size=1) => {
 		starDensity: 0.85,
 		color,
 		crossette: true,
-		pistil: Math.random() < 0.5,
+		pistil: Math.random() &lt; 0.5,
 		pistilColor: makePistilColor(color)
 	};
 };
 
-const floralShell = (size=1) => ({
+const floralShell = (size=1) =&gt; ({
 	shellSize: size,
 	spreadSize: 300 + size * 120,
 	starDensity: 0.12,
 	starLife: 500 + size * 50,
 	starLifeVariation: 0.5,
-	color: Math.random() < 0.65 ? 'random' : (Math.random() < 0.15 ? randomColor() : [randomColor(), randomColor({ notSame: true })]),
+	color: Math.random() &lt; 0.65 ? 'random' : (Math.random() &lt; 0.15 ? randomColor() : [randomColor(), randomColor({ notSame: true })]),
 	floral: true
 });
 
-const fallingLeavesShell = (size=1) => ({
+const fallingLeavesShell = (size=1) =&gt; ({
 	shellSize: size,
 	color: INVISIBLE,
 	spreadSize: 300 + size * 120,
@@ -708,7 +708,7 @@ const fallingLeavesShell = (size=1) => ({
 	fallingLeaves: true
 });
 
-const willowShell = (size=1) => ({
+const willowShell = (size=1) =&gt; ({
 	shellSize: size,
 	spreadSize: 300 + size * 100,
 	starDensity: 0.6,
@@ -718,9 +718,9 @@ const willowShell = (size=1) => ({
 	color: INVISIBLE
 });
 
-const crackleShell = (size=1) => {
+const crackleShell = (size=1) =&gt; {
 	// favor gold
-	const color = Math.random() < 0.75 ? COLOR.Gold : randomColor();
+	const color = Math.random() &lt; 0.75 ? COLOR.Gold : randomColor();
 	return {
 		shellSize: size,
 		spreadSize: 380 + size * 75,
@@ -731,12 +731,12 @@ const crackleShell = (size=1) => {
 		glitterColor: COLOR.Gold,
 		color,
 		crackle: true,
-		pistil: Math.random() < 0.65,
+		pistil: Math.random() &lt; 0.65,
 		pistilColor: makePistilColor(color)
 	};
 };
 
-const horsetailShell = (size=1) => {
+const horsetailShell = (size=1) =&gt; {
 	const color = randomColor();
 	return {
 		shellSize: size,
@@ -746,14 +746,14 @@ const horsetailShell = (size=1) => {
 		starDensity: 0.9,
 		starLife: 2500 + size * 300,
 		glitter: 'medium',
-		glitterColor: Math.random() < 0.5 ? whiteOrGold() : color,
+		glitterColor: Math.random() &lt; 0.5 ? whiteOrGold() : color,
 		// Add strobe effect to white horsetails, to make them more interesting
 		strobe: color === COLOR.White
 	};
 };
 
 function randomShellName() {
-	return Math.random() < 0.5 ? 'Crysanthemum' : shellNames[(Math.random() * (shellNames.length - 1) + 1) | 0 ];
+	return Math.random() &lt; 0.5 ? 'Crysanthemum' : shellNames[(Math.random() * (shellNames.length - 1) + 1) | 0 ];
 }
 
 function randomShell(size) {
@@ -804,16 +804,16 @@ function init() {
 	
 	// Populate dropdowns
 	function setOptionsForSelect(node, options) {
-		node.innerHTML = options.reduce((acc, opt) => acc += `<option value="${opt.value}">${opt.label}</option>`, '');
+		node.innerHTML = options.reduce((acc, opt) =&gt; acc += `<option value="${opt.value}">${opt.label}</option>`, '');
 	}
 
 	// shell type
 	let options = '';
-	shellNames.forEach(opt => options += `<option value="${opt}">${opt}</option>`);
+	shellNames.forEach(opt =&gt; options += `<option value="${opt}">${opt}</option>`);
 	appNodes.shellType.innerHTML = options;
 	// shell size
 	options = '';
-	['3"', '4"', '6"', '8"', '12"', '16"'].forEach((opt, i) => options += `<option value="${i}">${opt}</option>`);
+	['3"', '4"', '6"', '8"', '12"', '16"'].forEach((opt, i) =&gt; options += `<option value="${i}">${opt}</option>`);
 	appNodes.shellSize.innerHTML = options;
 	
 	setOptionsForSelect(appNodes.quality, [
@@ -832,7 +832,7 @@ function init() {
 	setOptionsForSelect(
 		appNodes.scaleFactor,
 		[0.5, 0.62, 0.75, 0.9, 1.0, 1.5, 2.0]
-		.map(value => ({ value: value.toFixed(2), label: `${value*100}%` }))
+		.map(value =&gt; ({ value: value.toFixed(2), label: `${value*100}%` }))
 	);
 	
 	// Begin simulation
@@ -870,7 +870,7 @@ function getRandomShellSize() {
 	const size = baseSize - variance;
 	const height = maxVariance === 0 ? Math.random() : 1 - (variance / maxVariance);
 	const centerOffset = Math.random() * (1 - height * 0.65) * 0.5;
-	const x = Math.random() < 0.5 ? 0.5 - centerOffset : 0.5 + centerOffset;
+	const x = Math.random() &lt; 0.5 ? 0.5 - centerOffset : 0.5 + centerOffset;
 	return {
 		size,
 		x: fitShellPositionInBoundsH(x),
@@ -927,7 +927,7 @@ function seqTwoRandom() {
 	const leftOffset = Math.random() * 0.2 - 0.1;
 	const rightOffset = Math.random() * 0.2 - 0.1;
 	shell1.launch(0.3 + leftOffset, size1.height);
-	setTimeout(() => {
+	setTimeout(() =&gt; {
 		shell2.launch(0.7 + rightOffset, size2.height);
 	}, 100);
 	
@@ -951,13 +951,13 @@ function seqTriple() {
 	const leftDelay = 1000 + Math.random() * 400;
 	const rightDelay = 1000 + Math.random() * 400;
 	
-	setTimeout(() => {
+	setTimeout(() =&gt; {
 		const offset = Math.random() * 0.08 - 0.04;
 		const shell2 = new Shell(shellType(smallSize));
 		shell2.launch(0.2 + offset, 0.1);
 	}, leftDelay);
 	
-	setTimeout(() => {
+	setTimeout(() =&gt; {
 		const offset = Math.random() * 0.08 - 0.04;
 		const shell3 = new Shell(shellType(smallSize));
 		shell3.launch(0.8 + offset, 0.1);
@@ -970,7 +970,7 @@ function seqPyramid() {
 	const barrageCountHalf = IS_DESKTOP ? 7 : 4;
 	const largeSize = shellSizeSelector();
 	const smallSize = Math.max(0, largeSize - 3);
-	const randomMainShell = Math.random() < 0.78 ? crysanthemumShell : ringShell;
+	const randomMainShell = Math.random() &lt; 0.78 ? crysanthemumShell : ringShell;
 	const randomSpecialShell = randomShell;
 
 	function launchShell(x, useSpecial) {
@@ -979,24 +979,24 @@ function seqPyramid() {
 			? useSpecial ? randomSpecialShell : randomMainShell
 			: shellTypes[shellNameSelector()];
 		const shell = new Shell(shellType(useSpecial ? largeSize : smallSize));
-		const height = x <= 0.5 ? x / 0.5 : (1 - x) / 0.5;
+		const height = x &lt;= 0.5 ? x / 0.5 : (1 - x) / 0.5;
 		shell.launch(x, useSpecial ? 0.75 : height * 0.42);
 	}
 	
 	let count = 0;
 	let delay = 0;
-	while(count <= barrageCountHalf) {
+	while(count &lt;= barrageCountHalf) {
 		if (count === barrageCountHalf) {
-			setTimeout(() => {
+			setTimeout(() =&gt; {
 				launchShell(0.5, true);
 			}, delay);
 		} else {
 			const offset = count / barrageCountHalf * 0.5;
 			const delayOffset = Math.random() * 30 + 30;
-			setTimeout(() => {
+			setTimeout(() =&gt; {
 				launchShell(offset, false);
 			}, delay);
-			setTimeout(() => {
+			setTimeout(() =&gt; {
 				launchShell(1 - offset, false);
 			}, delay + delayOffset);
 		}
@@ -1013,7 +1013,7 @@ function seqSmallBarrage() {
 	const barrageCount = IS_DESKTOP ? 11 : 5;
 	const specialIndex = IS_DESKTOP ? 3 : 1;
 	const shellSize = Math.max(0, shellSizeSelector() - 2);
-	const randomMainShell = Math.random() < 0.78 ? crysanthemumShell : ringShell;
+	const randomMainShell = Math.random() &lt; 0.78 ? crysanthemumShell : ringShell;
 	const randomSpecialShell = randomFastShell();
 	
 	// (cos(x*5π+0.5π)+1)/2 is a custom wave bounded by 0 and 1 used to set varying launch heights
@@ -1029,7 +1029,7 @@ function seqSmallBarrage() {
 	
 	let count = 0;
 	let delay = 0;
-	while(count < barrageCount) {
+	while(count &lt; barrageCount) {
 		if (count === 0) {
 			launchShell(0.5, false)
 			count += 1;
@@ -1038,10 +1038,10 @@ function seqSmallBarrage() {
 			const offset = (count + 1) / barrageCount / 2;
 			const delayOffset = Math.random() * 30 + 30;
 			const useSpecial = count === specialIndex;
-			setTimeout(() => {
+			setTimeout(() =&gt; {
 				launchShell(0.5 + offset, useSpecial);
 			}, delay);
-			setTimeout(() => {
+			setTimeout(() =&gt; {
 				launchShell(0.5 - offset, useSpecial);
 			}, delay + delayOffset);
 			count += 2;
@@ -1082,7 +1082,7 @@ function startSequence() {
 	
 	if (finaleSelector()) {
 		seqRandomFastShell();
-		if (currentFinaleCount < finaleCount) {
+		if (currentFinaleCount &lt; finaleCount) {
 			currentFinaleCount++;
 			return 170;
 		}
@@ -1094,21 +1094,21 @@ function startSequence() {
 	
 	const rand = Math.random();
 	
-	if (rand < 0.08 && Date.now() - seqSmallBarrage.lastCalled > seqSmallBarrage.cooldown) {
+	if (rand &lt; 0.08 &amp;&amp; Date.now() - seqSmallBarrage.lastCalled &gt; seqSmallBarrage.cooldown) {
 		return seqSmallBarrage();
 	}
 	
-	if (rand < 0.1) {
+	if (rand &lt; 0.1) {
 		return seqPyramid();
 	}
 	
-	if (rand < 0.6 && !IS_HEADER) {
+	if (rand &lt; 0.6 &amp;&amp; !IS_HEADER) {
 		return seqRandomShell();
 	}
-	else if (rand < 0.8) {
+	else if (rand &lt; 0.8) {
 		return seqTwoRandom();
 	}
-	else if (rand < 1) {
+	else if (rand &lt; 1) {
 		return seqTriple();
 	}
 }
@@ -1121,16 +1121,16 @@ function handlePointerStart(event) {
 	activePointerCount++;
 	const btnSize = 50;
 	
-	if (event.y < btnSize) {
-		if (event.x < btnSize) {
+	if (event.y &lt; btnSize) {
+		if (event.x &lt; btnSize) {
 			togglePause();
 			return;
 		}
-		if (event.x > mainStage.width/2 - btnSize/2 && event.x < mainStage.width/2 + btnSize/2) {
+		if (event.x &gt; mainStage.width/2 - btnSize/2 &amp;&amp; event.x &lt; mainStage.width/2 + btnSize/2) {
 			toggleSound();
 			return;
 		}
-		if (event.x > mainStage.width - btnSize) {
+		if (event.x &gt; mainStage.width - btnSize) {
 			toggleMenu();
 			return;
 		}
@@ -1187,10 +1187,10 @@ function handleResize() {
 	// Try to adopt screen size, heeding maximum sizes specified
 	const containerW = Math.min(w, MAX_WIDTH);
 	// On small screens, use full device height
-	const containerH = w <= 420 ? h : Math.min(h, MAX_HEIGHT);
+	const containerH = w &lt;= 420 ? h : Math.min(h, MAX_HEIGHT);
 	appNodes.stageContainer.style.width = containerW + 'px';
 	appNodes.stageContainer.style.height = containerH + 'px';
-	stages.forEach(stage => stage.resize(containerW, containerH));
+	stages.forEach(stage =&gt; stage.resize(containerW, containerH));
 	// Account for scale
 	const scaleFactor = scaleFactorSelector();
 	stageW = containerW / scaleFactor;
@@ -1209,7 +1209,7 @@ let speedBarOpacity = 0;
 let autoLaunchTime = 0;
 
 function updateSpeedFromEvent(event) {
-	if (isUpdatingSpeed || event.y >= mainStage.height - 44) {
+	if (isUpdatingSpeed || event.y &gt;= mainStage.height - 44) {
 		// On phones it's hard to hit the edge pixels in order to set speed at 0 or 1, so some padding is provided to make that easier.
 		const edge = 16;
 		const newSpeed = (event.x - edge) / (mainStage.width - edge * 2);
@@ -1231,7 +1231,7 @@ function updateGlobals(timeStep, lag) {
 	// Always try to fade out speed bar
 	if (!isUpdatingSpeed) {
 	speedBarOpacity -= lag / 30; // half a second
-		if (speedBarOpacity < 0) {
+		if (speedBarOpacity &lt; 0) {
 			speedBarOpacity = 0;
 		}
 	}
@@ -1239,7 +1239,7 @@ function updateGlobals(timeStep, lag) {
 	// auto launch shells
 	if (store.state.config.autoLaunch) {
 		autoLaunchTime -= timeStep;
-		if (autoLaunchTime <= 0) {
+		if (autoLaunchTime &lt;= 0) {
 			autoLaunchTime = startSequence() * 1.25;
 		}
 	}
@@ -1260,10 +1260,10 @@ function update(frameTime, lag) {
 	const starDragHeavy = 1 - (1 - Star.airDragHeavy) * speed;
 	const sparkDrag = 1 - (1 - Spark.airDrag) * speed;
 	const gAcc = timeStep / 1000 * GRAVITY;
-	COLOR_CODES_W_INVIS.forEach(color => {
+	COLOR_CODES_W_INVIS.forEach(color =&gt; {
 		// Stars
 		const stars = Star.active[color];
-		for (let i=stars.length-1; i>=0; i=i-1) {
+		for (let i=stars.length-1; i&gt;=0; i=i-1) {
 			const star = stars[i];
 			// Only update each star once per frame. Since color can change, it's possible a star could update twice without this, leading to a "jump".
 			if (star.updateFrame === currentFrame) {
@@ -1272,7 +1272,7 @@ function update(frameTime, lag) {
 			star.updateFrame = currentFrame;
 			
 			star.life -= timeStep;
-			if (star.life <= 0) {
+			if (star.life &lt;= 0) {
 				stars.splice(i, 1);
 				Star.returnInstance(star);
 			} else {
@@ -1302,7 +1302,7 @@ function update(frameTime, lag) {
 				
 				if (star.sparkFreq) {
 					star.sparkTimer -= timeStep;
-					while (star.sparkTimer < 0) {
+					while (star.sparkTimer &lt; 0) {
 						star.sparkTimer += star.sparkFreq * 0.75 + star.sparkFreq * burnRateInverse * 4;
 						Spark.add(
 							star.x,
@@ -1316,8 +1316,8 @@ function update(frameTime, lag) {
 				}
 				
 				// Handle star transitions
-				if (star.life < star.transitionTime) {
-					if (star.secondColor && !star.colorChanged) {
+				if (star.life &lt; star.transitionTime) {
+					if (star.secondColor &amp;&amp; !star.colorChanged) {
 						star.colorChanged = true;
 						star.color = star.secondColor;
 						stars.splice(i, 1);
@@ -1328,7 +1328,7 @@ function update(frameTime, lag) {
 					}
 					
 					if (star.strobe) {
-						// Strobes in the following pattern: on:off:off:on:off:off in increments of `strobeFreq` ms.
+						// Strobes in the following pattern: on:off:off<span class="github-emoji"><span>🔛</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f51b.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>off:off in increments of `strobeFreq` ms.
 						star.visible = Math.floor(star.life / star.strobeFreq) % 3 === 0;
 					}
 				}
@@ -1337,10 +1337,10 @@ function update(frameTime, lag) {
 											
 		// Sparks
 		const sparks = Spark.active[color];
-		for (let i=sparks.length-1; i>=0; i=i-1) {
+		for (let i=sparks.length-1; i&gt;=0; i=i-1) {
 			const spark = sparks[i];
 			spark.life -= timeStep;
-			if (spark.life <= 0) {
+			if (spark.life &lt;= 0) {
 				sparks.splice(i, 1);
 				Spark.returnInstance(spark);
 			} else {
@@ -1404,13 +1404,13 @@ function render(speed) {
 	trailsCtx.lineWidth = Star.drawWidth;
 	trailsCtx.lineCap = isLowQuality ? 'square' : 'round';
 	mainCtx.strokeStyle = '#fff';
-  mainCtx.lineWidth = 1;
+ &nbsp;mainCtx.lineWidth = 1;
 	mainCtx.beginPath();
-	COLOR_CODES.forEach(color => {
+	COLOR_CODES.forEach(color =&gt; {
 		const stars = Star.active[color];
 		trailsCtx.strokeStyle = color;
 		trailsCtx.beginPath();
-		stars.forEach(star => {
+		stars.forEach(star =&gt; {
 			if (star.visible) {
 				trailsCtx.moveTo(star.x, star.y);
 				trailsCtx.lineTo(star.prevX, star.prevY);
@@ -1425,11 +1425,11 @@ function render(speed) {
 	// Draw sparks
 	trailsCtx.lineWidth = Spark.drawWidth;
 	trailsCtx.lineCap = 'butt';
-	COLOR_CODES.forEach(color => {
+	COLOR_CODES.forEach(color =&gt; {
 		const sparks = Spark.active[color];
 		trailsCtx.strokeStyle = color;
 		trailsCtx.beginPath();
-		sparks.forEach(spark => {
+		sparks.forEach(spark =&gt; {
 			trailsCtx.moveTo(spark.x, spark.y);
 			trailsCtx.lineTo(spark.prevX, spark.prevY);
 		});
@@ -1468,7 +1468,7 @@ function colorSky(speed) {
 	targetSkyColor.b = 0;
 	// Add each known color to sky, multiplied by particle count of that color. This will put RGB values wildly out of bounds, but we'll scale them back later.
 	// Also add up total star count.
-	COLOR_CODES.forEach(color => {
+	COLOR_CODES.forEach(color =&gt; {
 		const tuple = COLOR_TUPLES[color];
 		const count =  Star.active[color].length;
 		totalStarCount += count;
@@ -1507,14 +1507,10 @@ function createParticleArc(start, arcLength, count, randomness, particleFactory)
 	// Would be nice to fix this a better way.
 	const end = start + arcLength - (angleDelta * 0.5);
 	
-	if (end > start) {
+	if (end &gt; start) {
 		// Optimization: `angle=angle+angleDelta` vs. angle+=angleDelta
 		// V8 deoptimises with let compound assignment
-		for (let angle=start; angle<end; angle=angle+angleDelta) {
-			particleFactory(angle + Math.random() * angleDelta * randomness);
-		}
-	} else {
-		for (let angle=start; angle>end; angle=angle+angleDelta) {
+		for (let angle=start; angleend; angle=angle+angleDelta) {
 			particleFactory(angle + Math.random() * angleDelta * randomness);
 		}
 	}
@@ -1534,7 +1530,7 @@ function createBurst(count, particleFactory, startAngle=0, arcLength=PI_2) {
 	
 	// Make a series of rings, sizing them as if they were spaced evenly
 	// along the curved surface of a sphere.
-	for (let i=0; i<=C_HALF; i++) {
+	for (let i=0; i&lt;=C_HALF; i++) {
 		const ringAngle = i / C_HALF * PI_HALF;
 		const ringSize = Math.cos(ringAngle);
 		const partsPerFullRing = C * ringSize;
@@ -1545,24 +1541,7 @@ function createBurst(count, particleFactory, startAngle=0, arcLength=PI_2) {
 		// Each particle needs a bit of randomness to improve appearance.
 		const maxRandomAngleOffset = angleInc * 0.33;
 		
-		for (let i=0; i<partsPerArc; i++) {
-			const randomAngleOffset = Math.random() * maxRandomAngleOffset;
-			let angle = angleInc * i + angleOffset + randomAngleOffset;
-			particleFactory(angle, ringSize);
-		}
-	}
-}
-
-
-
-
-// Various star effects.
-// These are designed to be attached to a star's `onDeath` event.
-
-// Crossette breaks star into four same-color pieces which branch in a cross-like shape.
-function crossetteEffect(star) {
-	const startAngle = Math.random() * PI_HALF;
-	createParticleArc(startAngle, PI_2, 4, 0.5, (angle) => {
+		for (let i=0; i {
 		Star.add(
 			star.x,
 			star.y,
@@ -1577,7 +1556,7 @@ function crossetteEffect(star) {
 // Flower is like a mini shell
 function floralEffect(star) {
 	const count = 12 + 6 * quality;
-	createBurst(count, (angle, speedMult) => {
+	createBurst(count, (angle, speedMult) =&gt; {
 		Star.add(
 			star.x,
 			star.y,
@@ -1596,7 +1575,7 @@ function floralEffect(star) {
 
 // Floral burst with willow stars
 function fallingLeavesEffect(star) {
-	createBurst(7, (angle, speedMult) => {
+	createBurst(7, (angle, speedMult) =&gt; {
 		const newStar = Star.add(
 			star.x,
 			star.y,
@@ -1622,7 +1601,7 @@ function fallingLeavesEffect(star) {
 // Crackle pops into a small cloud of golden sparks.
 function crackleEffect(star) {
 	const count = isHighQuality ? 32 : 16;
-	createParticleArc(0, PI_2, count, 1.8, (angle) => {
+	createParticleArc(0, PI_2, count, 1.8, (angle) =&gt; {
 		Spark.add(
 			star.x,
 			star.y,
@@ -1693,7 +1672,7 @@ class Shell {
 		const comet = this.comet = Star.add(
 			launchX,
 			launchY,
-			typeof this.color === 'string' && this.color !== 'random' ? this.color : COLOR.White,
+			typeof this.color === 'string' &amp;&amp; this.color !== 'random' ? this.color : COLOR.White,
 			Math.PI,
 			launchVelocity * (this.horsetail ? 1.2 : 1),
 			// Hang time is derived linearly from Vi; exact number came from testing
@@ -1719,12 +1698,12 @@ class Shell {
 		
 		// Randomly make comet "burn out" a bit early.
 		// This is disabled for horsetail shells, due to their very short airtime.
-		if (Math.random() > 0.4 && !this.horsetail) {
+		if (Math.random() &gt; 0.4 &amp;&amp; !this.horsetail) {
 			comet.secondColor = INVISIBLE;
 			comet.transitionTime = Math.pow(Math.random(), 1.5) * 700 + 500;
 		}
 		
-		comet.onDeath = comet => this.burst(comet.x, comet.y);
+		comet.onDeath = comet =&gt; this.burst(comet.x, comet.y);
 		
 		soundManager.playSound('lift');
 	}
@@ -1738,14 +1717,14 @@ class Shell {
 		// Some death effects, like crackle, play a sound, but should only be played once.
 		let playedDeathSound = false;
 		
-		if (this.crossette) onDeath = (star) => {
+		if (this.crossette) onDeath = (star) =&gt; {
 			if (!playedDeathSound) {
 				soundManager.playSound('crackleSmall');
 				playedDeathSound = true;
 			}
 			crossetteEffect(star);
 		}
-		if (this.crackle) onDeath = (star) => {
+		if (this.crackle) onDeath = (star) =&gt; {
 			if (!playedDeathSound) {
 				soundManager.playSound('crackle');
 				playedDeathSound = true;
@@ -1797,7 +1776,7 @@ class Shell {
 		
 		// Star factory for primary burst, pistils, and streamers.
 		let firstStar = true;
-		const starFactory = (angle, speedMult) => {
+		const starFactory = (angle, speedMult) =&gt; {
 			// For non-horsetail shells, compute an initial vertical speed to add to star burst.
 			// The magic number comes from testing what looks best. The ideal is that all shell
 			// bursts appear visually centered for the majority of the star life (excl. willows etc.)
@@ -1811,8 +1790,8 @@ class Shell {
 				speedMult * speed,
 				// add minor variation to star life
 				this.starLife + Math.random() * this.starLife * this.starLifeVariation,
-				this.horsetail ? this.comet && this.comet.speedX : 0,
-				this.horsetail ? this.comet && this.comet.speedY : -standardInitialSpeed
+				this.horsetail ? this.comet &amp;&amp; this.comet.speedX : 0,
+				this.horsetail ? this.comet &amp;&amp; this.comet.speedY : -standardInitialSpeed
 			);
 	
 			if (this.secondColor) {
@@ -1856,7 +1835,7 @@ class Shell {
 				const ringStartAngle = Math.random() * Math.PI;
 				const ringSquash = Math.pow(Math.random(), 2) * 0.85 + 0.15;;
 				
-				createParticleArc(0, PI_2, this.starCount, 0, angle => {
+				createParticleArc(0, PI_2, this.starCount, 0, angle =&gt; {
 					// Create a ring, squashed horizontally
 					const initSpeedX = Math.sin(angle) * speed * ringSquash;
 					const initSpeedY = Math.cos(angle) * speed;
@@ -1890,7 +1869,7 @@ class Shell {
 			}
 		}
 		else if (Array.isArray(this.color)) {
-			if (Math.random() < 0.5) {
+			if (Math.random() &lt; 0.5) {
 				const start = Math.random() * Math.PI;
 				const start2 = start + Math.PI;
 				const arc = Math.PI;
@@ -1987,7 +1966,7 @@ const BurstFlash = {
 // Particles are stored in arrays keyed by color (code, not name) for improved rendering performance.
 function createParticleCollection() {
 	const collection = {};
-	COLOR_CODES_W_INVIS.forEach(color => {
+	COLOR_CODES_W_INVIS.forEach(color =&gt; {
 		collection[color] = [];
 	});
 	return collection;
@@ -2044,7 +2023,7 @@ const Star = {
 	// Public method for cleaning up and returning an instance back to the pool.
 	returnInstance(instance) {
 		// Call onDeath handler if available (and pass it current star instance)
-		instance.onDeath && instance.onDeath(instance);
+		instance.onDeath &amp;&amp; instance.onDeath(instance);
 		// Clean up
 		instance.onDeath = null;
 		instance.secondColor = null;
@@ -2144,7 +2123,7 @@ const soundManager = {
 		const allFilePromises = [];
 
 		function checkStatus(response) {
-			if (response.status >= 200 && response.status < 300) {
+			if (response.status &gt;= 200 &amp;&amp; response.status &lt; 300) {
 				return response;
 			}
 			const customError = new Error(response.statusText);
@@ -2153,17 +2132,17 @@ const soundManager = {
 		}
 
 		const types = Object.keys(this.sources);
-		types.forEach(type => {
+		types.forEach(type =&gt; {
 			const source = this.sources[type];
 			const { fileNames } = source;
 			const filePromises = [];
-			fileNames.forEach(fileName => {
+			fileNames.forEach(fileName =&gt; {
 				const fileURL = this.baseURL + fileName;
 				// Promise will resolve with decoded audio buffer.
 				const promise = fetch(fileURL)
 					.then(checkStatus)
-					.then(response => response.arrayBuffer())
-					.then(data => new Promise(resolve => {
+					.then(response =&gt; response.arrayBuffer())
+					.then(data =&gt; new Promise(resolve =&gt; {
 						this.ctx.decodeAudioData(data, resolve);
 					}));
 
@@ -2172,7 +2151,7 @@ const soundManager = {
 			});
 
 			Promise.all(filePromises)
-				.then(buffers => {
+				.then(buffers =&gt; {
 					source.buffers = buffers;
 				});
 		});
@@ -2193,7 +2172,7 @@ const soundManager = {
 		// is enable audio, it doesn't work. Using a setTimeout allows the first interaction to be registered.
 		// Perhaps a better solution is to track whether the user has interacted, and if not but they try enabling
 		// sound, show a tooltip that they should tap again to enable sound.
-		setTimeout(() => {
+		setTimeout(() =&gt; {
 			this.ctx.resume();
 		}, 250);
 	},
@@ -2218,14 +2197,14 @@ const soundManager = {
 		// Disallow starting new sounds if sound is disabled, app is running in slow motion, or paused.
 		// Slow motion check has some wiggle room in case user doesn't finish dragging the speed bar
 		// *all* the way back.
-		if (!canPlaySoundSelector() || simSpeed < 0.95) {
+		if (!canPlaySoundSelector() || simSpeed &lt; 0.95) {
 			return;
 		}
 		
 		// Throttle small bursts, since floral/falling leaves shells have a lot of them.
 		if (type === 'burstSmall') {
 			const now = Date.now();
-			if (now - this._lastSmallBurstTime < 20) {
+			if (now - this._lastSmallBurstTime &lt; 20) {
 				return;
 			}
 			this._lastSmallBurstTime = now;
@@ -2277,11 +2256,11 @@ if (IS_HEADER) {
 } else {
 	// Allow status to render, then preload assets and start app.
 	setLoadingStatus('Lighting Fuses');
-	setTimeout(() => {
+	setTimeout(() =&gt; {
 		soundManager.preload()
 		.then(
 			init,
-			reason => {
+			reason =&gt; {
 				// Codepen preview doesn't like to load the audio, so just init to fix the preview for now.
 				init();
 				// setLoadingStatus('Error Loading Audio');
@@ -2289,4 +2268,4 @@ if (IS_HEADER) {
 			}
 		);
 	}, 0);
-}
+}</select>
