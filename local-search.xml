@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>在Fluid中添加一言</title>
+    <link href="/2022/09/24/%E4%B8%80%E8%A8%80/"/>
+    <url>/2022/09/24/%E4%B8%80%E8%A8%80/</url>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="一言-隶属于萌创团队，其初衷是为用户提供来自动漫，哲学，名著，游戏等来源的一句走心之言，分享对世界的理解和感受。"><a href="#一言-隶属于萌创团队，其初衷是为用户提供来自动漫，哲学，名著，游戏等来源的一句走心之言，分享对世界的理解和感受。" class="headerlink" title="一言,隶属于萌创团队，其初衷是为用户提供来自动漫，哲学，名著，游戏等来源的一句走心之言，分享对世界的理解和感受。"></a><a href="http://hitokoto.cn/">一言</a>,隶属于萌创团队，其初衷是为用户提供来自动漫，哲学，名著，游戏等来源的一句走心之言，分享对世界的理解和感受。</h3><h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><h3 id="一言可以增加博客的随机性和文学性，有利于丰富网站内容。"><a href="#一言可以增加博客的随机性和文学性，有利于丰富网站内容。" class="headerlink" title="一言可以增加博客的随机性和文学性，有利于丰富网站内容。"></a>一言可以增加博客的随机性和文学性，有利于丰富网站内容。</h3><h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="在Fluid的主题配置”（指的是-theme-x2F-fluid-x2F-config-yml-或者-config-fluid-yml，这取决于你安装Fluid的方式）中找到（ctrl-F）Slogan打字机相关配置，将其改为如下配置"><a href="#在Fluid的主题配置”（指的是-theme-x2F-fluid-x2F-config-yml-或者-config-fluid-yml，这取决于你安装Fluid的方式）中找到（ctrl-F）Slogan打字机相关配置，将其改为如下配置" class="headerlink" title="在Fluid的主题配置”（指的是 theme/fluid/_config.yml 或者 _config.fluid.yml，这取决于你安装Fluid的方式）中找到（ctrl+F）Slogan打字机相关配置，将其改为如下配置;"></a>在Fluid的主题配置”（指的是 theme/fluid/_config.yml 或者 _config.fluid.yml，这取决于你安装Fluid的方式）中找到（<strong>ctrl+F</strong>）Slogan打字机相关配置，将其改为如下配置;</h3><figure class="highlight autoit"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs autoit">slogan:<br>  enable: <span class="hljs-literal">true</span>       <span class="hljs-meta"># 改为true</span><br><br>  <span class="hljs-meta"># 为空则按 hexo config.subtitle 显示</span><br>  <span class="hljs-meta"># If empty, text based on `subtitle` in hexo config</span><br>  text: <span class="hljs-string">"明眸如初，又见苍岚"</span>           <span class="hljs-meta">#写不写都可以</span><br><br>  <span class="hljs-meta"># 通过 API 接口作为首页副标题的内容，必须返回的是 JSON 格式，如果请求失败则按 text 字段显示，该功能必须先开启 typing 打字机功能</span><br>  <span class="hljs-meta"># Subtitle of the homepage through the API, must be returned a JSON. If the request fails, it will be displayed in `text` value. This feature must first enable the typing animation</span><br>  api:<br>    enable: <span class="hljs-literal">true</span><br><br>    <span class="hljs-meta"># 请求地址</span><br>    <span class="hljs-meta"># Request url</span><br>    url: <span class="hljs-string">"https://v1.hitokoto.cn/"</span>            <span class="hljs-meta">#添加一言接口</span><br><br>    <span class="hljs-meta"># 请求方法</span><br>    <span class="hljs-meta"># Request method</span><br>    <span class="hljs-meta"># Available: GET | POST | PUT</span><br>    method: <span class="hljs-string">"GET"</span>                             <br><br>    <span class="hljs-meta"># 请求头</span><br>    <span class="hljs-meta"># Request headers</span><br>    headers: {}   <br><br>    <span class="hljs-meta"># 从请求结果获取字符串的取值字段，最终必须是一个字符串，例如返回结果为 {<span class="hljs-string">"data"</span>: {<span class="hljs-string">"author"</span>: <span class="hljs-string">"fluid"</span>, <span class="hljs-string">"content"</span>: <span class="hljs-string">"An elegant theme"</span>}}, 则取值字段为 [<span class="hljs-string">'data'</span>, <span class="hljs-string">'content'</span>]；如果返回是列表则自动选择第一项</span><br>    <span class="hljs-meta"># The value field of the string obtained from the response. For example, the response content is {<span class="hljs-string">"data"</span>: {<span class="hljs-string">"author"</span>: <span class="hljs-string">"fluid"</span>, <span class="hljs-string">"content"</span>: <span class="hljs-string">"An elegant theme"</span>}}, the expected `keys: [<span class="hljs-string">'data'</span>,<span class="hljs-string">'content'</span>]`<span class="hljs-comment">; if the return is a list, the first item is automatically selected</span></span><br>    keys: [<span class="hljs-string">'hitokoto'</span>]                    <span class="hljs-meta">#填写Keys</span><br><br></code></pre></td></tr></tbody></table></figure><h3 id="保存，键入hexo-clean-hexo-g-hexo-s-即可预览效果。"><a href="#保存，键入hexo-clean-hexo-g-hexo-s-即可预览效果。" class="headerlink" title="保存，键入hexo clean  hexo g hexo s 即可预览效果。"></a>保存，键入<code>hexo clean</code>  <code>hexo g</code> <code>hexo s </code>即可预览效果。</h3>]]></content>
+    
+    
+    <categories>
+      
+      <category>Fluid</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>《百年孤独》：拉美的呻吟</title>
     <link href="/2022/09/24/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC/"/>
     <url>/2022/09/24/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC/</url>
