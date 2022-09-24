@@ -234,7 +234,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/1.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/a.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -276,7 +276,7 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/09/19/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC/" target="_self">
+        <a href="/2022/09/24/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC/" target="_self">
           <img src="https://s1.ax1x.com/2022/08/16/v0mnoR.jpg" srcset="/img/loading.gif" lazyload alt="《百年孤独》：拉美的呻吟">
         </a>
       </div>
@@ -284,13 +284,13 @@
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/09/19/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC/" target="_self">
+        <a href="/2022/09/24/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC/" target="_self">
           《百年孤独》：拉美的呻吟
         </a>
       </h1>
 
       
-      <a class="index-excerpt " href="/2022/09/19/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC/" target="_self">
+      <a class="index-excerpt " href="/2022/09/24/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC/" target="_self">
         <div>
           写在前面：本文将从魔幻现实主义的巅峰，拉美的历史，马孔多的百年，孤独的意义四个板块介绍世界名著《百年孤独》。全文字数较多，建议分段阅读。参考书籍：马尔克斯《百年孤独》斯塔夫利阿诺斯《全球通史》，陆春祥《印加帝国陨落的隐喻》金句摘抄        1.生命中曾经有过的所有灿烂，原来终究，都需要用寂寞来偿还。 2.无论走到哪里，都应该记住，过去都是假的，回忆是一条没有尽头的路。 3.生命中真正重要的不
         </div>
@@ -300,8 +300,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-09-19 08:43" pubdate>
-              2022-09-19
+            <time datetime="2022-09-24 11:37" pubdate>
+              2022-09-24
             </time>
           </div>
         
@@ -452,7 +452,37 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        typing(text);
+        jQuery.ajax({
+          type: 'GET',
+          url: 'https://v1.hitokoto.cn/?k',
+          headers: {},
+          dataType: 'json',
+          success: function(result) {
+            var apiText;
+            if (result) {
+              var keys = 'hitokoto'.split(',');
+              if (result instanceof Array) {
+                result = result[0];
+              }
+              for (const k of keys) {
+                var value = result[k];
+                if (typeof value === 'string') {
+                  apiText = value;
+                  break;
+                } else if (value instanceof Object) {
+                  result = value;
+                }
+              }
+            }
+            apiText ? typing(apiText) : typing(text);
+          },
+          error: function(xhr, status, error) {
+            if (error) {
+              console.error('Failed to request https://v1.hitokoto.cn/?k:', error);
+            }
+            typing(text);
+          }
+        })
       
     })(window, document);
   </script>
