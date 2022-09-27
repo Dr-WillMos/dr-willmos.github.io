@@ -5,7 +5,98 @@
 
 
 
-<head>
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
   <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
@@ -26,8 +117,8 @@
 <meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f559.png?v8">
 <meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">
 <meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/2764.png?v8">
-<meta property="article:published_time" content="2022-09-26T07:38:12.959Z">
-<meta property="article:modified_time" content="2022-09-26T07:38:12.959Z">
+<meta property="article:published_time" content="2022-09-27T07:07:45.367Z">
+<meta property="article:modified_time" content="2022-09-27T07:07:45.367Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f559.png?v8">
@@ -238,6 +329,18 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
@@ -351,7 +454,7 @@
 
 <article class="about-content page-content mt-5">
   <div class="markdown-body">
-    <h2 id="clock10-博客时光轴："><a href="#clock10-博客时光轴：" class="headerlink" title=":clock10:博客时光轴："></a><span class="github-emoji"><span>🕙</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f559.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>博客时光轴：</h2><h3 id="·2020年-首次在博客园注册博客。"><a href="#·2020年-首次在博客园注册博客。" class="headerlink" title="·2020年 首次在博客园注册博客。"></a>·2020年 首次在博客园注册博客。</h3><h3 id="·2021年-开始着手搭建独立博客。"><a href="#·2021年-开始着手搭建独立博客。" class="headerlink" title="·2021年 开始着手搭建独立博客。"></a>·2021年 开始着手搭建独立博客。</h3><h3 id="·8月15日，投入运行，但因不可抗力因素停止维护，成为比特之海繁星中的一个。"><a href="#·8月15日，投入运行，但因不可抗力因素停止维护，成为比特之海繁星中的一个。" class="headerlink" title="·8月15日，投入运行，但因不可抗力因素停止维护，成为比特之海繁星中的一个。"></a>·8月15日，投入运行，但因不可抗力因素停止维护，成为比特之海繁星中的一个。</h3><h3 id="·2022年-重新开始部署博客"><a href="#·2022年-重新开始部署博客" class="headerlink" title="·2022年 重新开始部署博客"></a>·2022年 重新开始部署博客</h3><h3 id="·8月17日-独立博客部署完成，以静态网站的形式部署在GItHub上，并开始维护。"><a href="#·8月17日-独立博客部署完成，以静态网站的形式部署在GItHub上，并开始维护。" class="headerlink" title="·8月17日 独立博客部署完成，以静态网站的形式部署在GItHub上，并开始维护。"></a>·8月17日 独立博客部署完成，以静态网站的形式部署在GItHub上，并开始维护。</h3><h3 id="·8月26日-将博客部署值Vercel加快国内访问速度，但Vercel疑似被墙，故放弃此分流点。"><a href="#·8月26日-将博客部署值Vercel加快国内访问速度，但Vercel疑似被墙，故放弃此分流点。" class="headerlink" title="·8月26日 将博客部署值Vercel加快国内访问速度，但Vercel疑似被墙，故放弃此分流点。"></a>·8月26日 将博客部署值Vercel加快国内访问速度，但Vercel疑似被墙，故放弃此分流点。</h3><h3 id="·2022年9月17日-购买域名WillMo-gay，为期一年。（这不代表我是GAY），域名一年后过期，建议添加Github地址"><a href="#·2022年9月17日-购买域名WillMo-gay，为期一年。（这不代表我是GAY），域名一年后过期，建议添加Github地址" class="headerlink" title="·2022年9月17日 购买域名WillMo.gay，为期一年。（这不代表我是GAY），域名一年后过期，建议添加Github地址"></a>·2022年9月17日 购买域名WillMo.gay，为期一年。（<del>这不代表我是GAY</del>），域名一年后过期，建议添加<a target="_blank" rel="noopener" href="https://dr-willmos.github.io/">Github地址</a></h3><h3 id="·2022年9月18日-提交网站直Google-Bing申请收录，等待审核。"><a href="#·2022年9月18日-提交网站直Google-Bing申请收录，等待审核。" class="headerlink" title="·2022年9月18日 提交网站直Google,Bing申请收录，等待审核。"></a>·2022年9月18日 提交网站直Google,Bing申请收录，等待审核。</h3><h3 id="·2022年9月19日-接入评论插件Valine，测试成功。"><a href="#·2022年9月19日-接入评论插件Valine，测试成功。" class="headerlink" title="·2022年9月19日 接入评论插件Valine，测试成功。"></a>·2022年9月19日 接入评论插件Valine，测试成功。</h3><h3 id="·9月20日-网站通过审核，被Bing收录。"><a href="#·9月20日-网站通过审核，被Bing收录。" class="headerlink" title="·9月20日 网站通过审核，被Bing收录。"></a>·9月20日 网站通过审核，被Bing收录。</h3><h3 id="·9月22日-部署网站至Netlify分流，以接收百度蜘蛛。"><a href="#·9月22日-部署网站至Netlify分流，以接收百度蜘蛛。" class="headerlink" title="·9月22日 部署网站至Netlify分流，以接收百度蜘蛛。"></a>·9月22日 部署网站至<a target="_blank" rel="noopener" href="https://willmo.netlify.app/">Netlify</a>分流，以接收百度蜘蛛。</h3><h3 id="·9月23日-发生DNS污染，正在试图修复。"><a href="#·9月23日-发生DNS污染，正在试图修复。" class="headerlink" title="·9月23日 发生DNS污染，正在试图修复。"></a>·9月23日 发生DNS污染，正在试图修复。</h3><h3 id="·9月24日-放弃域名WillMo-gay，使用Netlify作为主站。"><a href="#·9月24日-放弃域名WillMo-gay，使用Netlify作为主站。" class="headerlink" title="·9月24日 放弃域名WillMo.gay，使用Netlify作为主站。"></a>·9月24日 放弃域名WillMo.gay，使用<a target="_blank" rel="noopener" href="https://willmo.netlify.app/">Netlify</a>作为主站。</h3><h3 id="·9月25日-网站添加一言。DNS污染问题得到解决。"><a href="#·9月25日-网站添加一言。DNS污染问题得到解决。" class="headerlink" title="·9月25日 网站添加一言。DNS污染问题得到解决。"></a>·9月25日 网站添加一言。DNS污染问题得到解决。</h3><h3 id="·现在-网站稳定维护，未来可期。"><a href="#·现在-网站稳定维护，未来可期。" class="headerlink" title="·现在 网站稳定维护，未来可期。"></a>·现在 网站稳定维护，未来可期。</h3><h2 id="star-关于我"><a href="#star-关于我" class="headerlink" title=":star:关于我"></a><span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>关于我</h2><h3 id="读者，CV工程师，邮箱：-87-x69-x6c-108-x4d-x6f-45-66-x6c-x6f-x67-x65-114-64-x6f-x75-x74-108-111-x6f-x6b-46-99-111-109"><a href="#读者，CV工程师，邮箱：-87-x69-x6c-108-x4d-x6f-45-66-x6c-x6f-x67-x65-114-64-x6f-x75-x74-108-111-x6f-x6b-46-99-111-109" class="headerlink" title="读者，CV工程师，邮箱：WillMo-Bloger@outlook.com"></a>读者，CV工程师，邮箱：<a href="mailto:WillMo-Bloger@outlook.com">WillMo-Bloger@outlook.com</a></h3><h3 id="一般在周日更新知识性文章，工作日内只会更新报错提示和临时方案。"><a href="#一般在周日更新知识性文章，工作日内只会更新报错提示和临时方案。" class="headerlink" title="一般在周日更新知识性文章，工作日内只会更新报错提示和临时方案。"></a>一般在周日更新知识性文章，工作日内只会更新报错提示和临时方案。</h3><h3 id="具体可以访问我的个人主页"><a href="#具体可以访问我的个人主页" class="headerlink" title="具体可以访问我的个人主页"></a>具体可以访问我的<a target="_blank" rel="noopener" href="https://dr-willmos.github.io/personal.github.io">个人主页</a></h3><h2 id="heart-寄语"><a href="#heart-寄语" class="headerlink" title=":heart:寄语"></a><span class="github-emoji"><span>❤</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>寄语</h2><h3 id="时光不语，却回答了所有问题。"><a href="#时光不语，却回答了所有问题。" class="headerlink" title="时光不语，却回答了所有问题。"></a>时光不语，却回答了所有问题。</h3>
+    <h2 id="clock10-博客时光轴："><a href="#clock10-博客时光轴：" class="headerlink" title=":clock10:博客时光轴："></a><span class="github-emoji"><span>🕙</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f559.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>博客时光轴：</h2><h3 id="·2020年-首次在博客园注册博客。"><a href="#·2020年-首次在博客园注册博客。" class="headerlink" title="·2020年 首次在博客园注册博客。"></a>·2020年 首次在博客园注册博客。</h3><h3 id="·2021年-开始着手搭建独立博客。"><a href="#·2021年-开始着手搭建独立博客。" class="headerlink" title="·2021年 开始着手搭建独立博客。"></a>·2021年 开始着手搭建独立博客。</h3><h3 id="·8月15日，投入运行，但因不可抗力因素停止维护，成为比特之海繁星中的一个。"><a href="#·8月15日，投入运行，但因不可抗力因素停止维护，成为比特之海繁星中的一个。" class="headerlink" title="·8月15日，投入运行，但因不可抗力因素停止维护，成为比特之海繁星中的一个。"></a>·8月15日，投入运行，但因不可抗力因素停止维护，成为比特之海繁星中的一个。</h3><h3 id="·2022年-重新开始部署博客"><a href="#·2022年-重新开始部署博客" class="headerlink" title="·2022年 重新开始部署博客"></a>·2022年 重新开始部署博客</h3><h3 id="·8月17日-独立博客部署完成，以静态网站的形式部署在GItHub上，并开始维护。"><a href="#·8月17日-独立博客部署完成，以静态网站的形式部署在GItHub上，并开始维护。" class="headerlink" title="·8月17日 独立博客部署完成，以静态网站的形式部署在GItHub上，并开始维护。"></a>·8月17日 独立博客部署完成，以静态网站的形式部署在GItHub上，并开始维护。</h3><h3 id="·8月26日-将博客部署值Vercel加快国内访问速度，但Vercel疑似被墙，故放弃此分流点。"><a href="#·8月26日-将博客部署值Vercel加快国内访问速度，但Vercel疑似被墙，故放弃此分流点。" class="headerlink" title="·8月26日 将博客部署值Vercel加快国内访问速度，但Vercel疑似被墙，故放弃此分流点。"></a>·8月26日 将博客部署值Vercel加快国内访问速度，但Vercel疑似被墙，故放弃此分流点。</h3><h3 id="·2022年9月17日-购买域名WillMo-gay，为期一年。（这不代表我是GAY），域名一年后过期，建议添加Github地址"><a href="#·2022年9月17日-购买域名WillMo-gay，为期一年。（这不代表我是GAY），域名一年后过期，建议添加Github地址" class="headerlink" title="·2022年9月17日 购买域名WillMo.gay，为期一年。（这不代表我是GAY），域名一年后过期，建议添加Github地址"></a>·2022年9月17日 购买域名WillMo.gay，为期一年。（<del>这不代表我是GAY</del>），域名一年后过期，建议添加<a target="_blank" rel="noopener" href="https://dr-willmos.github.io/">Github地址</a></h3><h3 id="·2022年9月18日-提交网站直Google-Bing申请收录，等待审核。"><a href="#·2022年9月18日-提交网站直Google-Bing申请收录，等待审核。" class="headerlink" title="·2022年9月18日 提交网站直Google,Bing申请收录，等待审核。"></a>·2022年9月18日 提交网站直Google,Bing申请收录，等待审核。</h3><h3 id="·2022年9月19日-接入评论插件Valine，测试成功。"><a href="#·2022年9月19日-接入评论插件Valine，测试成功。" class="headerlink" title="·2022年9月19日 接入评论插件Valine，测试成功。"></a>·2022年9月19日 接入评论插件Valine，测试成功。</h3><h3 id="·9月20日-网站通过审核，被Bing收录。"><a href="#·9月20日-网站通过审核，被Bing收录。" class="headerlink" title="·9月20日 网站通过审核，被Bing收录。"></a>·9月20日 网站通过审核，被Bing收录。</h3><h3 id="·9月22日-部署网站至Netlify分流，以接收百度蜘蛛。"><a href="#·9月22日-部署网站至Netlify分流，以接收百度蜘蛛。" class="headerlink" title="·9月22日 部署网站至Netlify分流，以接收百度蜘蛛。"></a>·9月22日 部署网站至<a target="_blank" rel="noopener" href="https://willmo.netlify.app/">Netlify</a>分流，以接收百度蜘蛛。</h3><h3 id="·9月23日-发生DNS污染，正在试图修复。"><a href="#·9月23日-发生DNS污染，正在试图修复。" class="headerlink" title="·9月23日 发生DNS污染，正在试图修复。"></a>·9月23日 发生DNS污染，正在试图修复。</h3><h3 id="·9月24日-放弃域名WillMo-gay，使用Netlify作为主站。"><a href="#·9月24日-放弃域名WillMo-gay，使用Netlify作为主站。" class="headerlink" title="·9月24日 放弃域名WillMo.gay，使用Netlify作为主站。"></a>·9月24日 放弃域名WillMo.gay，使用<a target="_blank" rel="noopener" href="https://willmo.netlify.app/">Netlify</a>作为主站。</h3><h3 id="·9月25日-网站添加一言。DNS污染问题得到解决。"><a href="#·9月25日-网站添加一言。DNS污染问题得到解决。" class="headerlink" title="·9月25日 网站添加一言。DNS污染问题得到解决。"></a>·9月25日 网站添加一言。DNS污染问题得到解决。</h3><h3 id="·9月26日-建立友链界面。"><a href="#·9月26日-建立友链界面。" class="headerlink" title="·9月26日 建立友链界面。"></a>·9月26日 建立友链界面。</h3><h3 id="·现在-网站稳定维护，未来可期。"><a href="#·现在-网站稳定维护，未来可期。" class="headerlink" title="·现在 网站稳定维护，未来可期。"></a>·现在 网站稳定维护，未来可期。</h3><h2 id="star-关于我"><a href="#star-关于我" class="headerlink" title=":star:关于我"></a><span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>关于我</h2><h3 id="读者，CV工程师，邮箱：-87-x69-108-108-x4d-x6f-x2d-x42-108-111-103-101-114-64-x6f-x75-x74-x6c-111-111-x6b-46-x63-111-x6d"><a href="#读者，CV工程师，邮箱：-87-x69-108-108-x4d-x6f-x2d-x42-108-111-103-101-114-64-x6f-x75-x74-x6c-111-111-x6b-46-x63-111-x6d" class="headerlink" title="读者，CV工程师，邮箱：WillMo-Bloger@outlook.com"></a>读者，CV工程师，邮箱：<a href="mailto:WillMo-Bloger@outlook.com">WillMo-Bloger@outlook.com</a></h3><h3 id="一般在周日更新知识性文章，工作日内只会更新报错提示和临时方案。"><a href="#一般在周日更新知识性文章，工作日内只会更新报错提示和临时方案。" class="headerlink" title="一般在周日更新知识性文章，工作日内只会更新报错提示和临时方案。"></a>一般在周日更新知识性文章，工作日内只会更新报错提示和临时方案。</h3><h3 id="具体可以访问我的个人主页"><a href="#具体可以访问我的个人主页" class="headerlink" title="具体可以访问我的个人主页"></a>具体可以访问我的<a target="_blank" rel="noopener" href="https://dr-willmos.github.io/personal.github.io">个人主页</a></h3><h2 id="heart-寄语"><a href="#heart-寄语" class="headerlink" title=":heart:寄语"></a><span class="github-emoji"><span>❤</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png?v8" srcset="/img/loading.gif" lazyload aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>寄语</h2><h3 id="时光不语，却回答了所有问题。"><a href="#时光不语，却回答了所有问题。" class="headerlink" title="时光不语，却回答了所有问题。"></a>时光不语，却回答了所有问题。</h3>
   </div>
 
   
