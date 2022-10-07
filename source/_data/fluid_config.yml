@@ -1,0 +1,22 @@
+index:
+  banner_img: /images/uploads/a.png
+  banner_img_height: 0
+post:
+  banner_img: /images/uploads/a.png
+  banner_img_height: 0
+  default_index_img: /images/uploads/5.jpg
+archive:
+  banner_img: /images/uploads/a.png
+  banner_img_height: 0
+category:
+  banner_img: /images/uploads/a.png
+  banner_img_height: 0
+tag:
+  banner_img: /images/uploads/a.png
+  banner_img_height: 0
+about:
+  banner_img: /images/uploads/a.png
+  banner_img_height: 0
+links:
+  banner_img: /images/uploads/a.png
+  banner_img_height: 0
