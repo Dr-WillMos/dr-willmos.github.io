@@ -1,208 +1,150 @@
 backend:
-  name: git-gateway # https://github.com/netlify/netlify-cms
-  branch: main # 要更新的分支(可选；默认为主分支)
-
-# This line should *not* be indented
-publish_mode: editorial_workflow
-
-# This line should *not* be indented
-media_folder: "source/images/uploads" # 媒体文件将存储在图片/上载下的Repo中。
-public_folder: "/images/uploads" # 上传的媒体的src属性将以/images/uploads开头。
-
-site_url: https://willmo.netlify.app # 网站网址
-display_url: https://willmo.netlify.app # 显示网址
-
-locale: "zh_Hans" # 语言环境 https://github.com/netlify/netlify-cms/tree/master/packages/netlify-cms-locales/src
-
-collections: # https://www.netlifycms.org/docs/configuration-options/#collections
-  - name: "posts" # 在路由中使用，例如：/admin/collections/blog。
-    label: "Post" # 在用户界面中使用
-    folder: "source/_posts" # 存储文件的文件夹的路径。
-    create: true # 允许用户在这个集合中创建新的文件。
-    fields: # 每份文件的字段，通常是前面的内容。
-      - {
-          label: "顶部图",
-          name: "banner_img",
-          widget: "image",
-          required: false,
-        }
-      - {
-          label: "文章封面",
-          name: "index_img",
-          widget: "image",
-          required: false,
-        }
-      - { label: "文章排序", name: "sticky", widget: "number", required: false }
-      - { label: "标题", name: "title", widget: "string" }
-      - {
-          label: "发布日期",
-          name: "date",
-          widget: "datetime",
-          format: "YYYY-MM-DD HH:mm:ss",
-          dateFormat: "YYYY-MM-DD",
-          timeFormat: "HH:mm:ss",
-          required: false,
-        }
-      - {
-          label: "更新日期",
-          name: "updated",
-          widget: "datetime",
-          format: "YYYY-MM-DD HH:mm:ss",
-          dateFormat: "YYYY-MM-DD",
-          timeFormat: "HH:mm:ss",
-          required: false,
-        }
-      - { label: "标签", name: "tags", widget: "list", required: false }
-      - { label: "分类", name: "categories", widget: "list", required: false }
-      - { label: "关键词", name: "keywords", widget: "list", required: false }
-      - { label: "摘要", name: "excerpt", widget: "list", required: false }
-      - { label: "内容", name: "body", widget: "markdown", required: false }
-      - {
-          label: "永久链接",
-          name: "permalink",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "评论",
-          name: "comments",
-          widget: "boolean",
-          default: true,
-          required: false,
-        }
-
-  - name: "pages"
-    label: "Pages"
+  name: git-gateway
+  branch: master
+media_folder: source/images
+public_folder: /images
+collections:
+  - name: all_posts
+    fields: &ref_0
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+        dateFormat: YYYY-MM-DD
+        timeFormat: HH:mm:ss
+        format: YYYY-MM-DD HH:mm:ss
+        required: false
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+      - label: Categories
+        name: categories
+        widget: list
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+        required: false
+      - label: Permalink
+        name: permalink
+        widget: string
+        required: false
+      - label: Comments
+        name: comments
+        widget: boolean
+        default: true
+        required: false
+    label: Post
+    folder: source/_posts
+    create: true
+    editor:
+      preview: true
+  - label: Page
+    name: pages
+    delete: false
     files:
-      - file: "source/about/index.md"
-        name: "about"
-        label: "关于"
-        fields:
-          - { label: "标题", name: "title", widget: "string" }
-          - { label: "内容", name: "body", widget: "markdown", required: false }
-          - {
-              label: "评论",
-              name: "comments",
-              widget: "boolean",
-              default: true,
-              required: false,
-            }
-
-  # 如果你不是fluid主题，请删除以下配置，或者对文件路径及字段进行修改
-  - name: "settings"
-    label: "settings"
-    files:
-      - file: "source/_data/fluid_config.yml"
-        name: "fluid"
-        label: "fluid主题配置"
+      - name: css-index.md
+        label: css
+        file: source\css\index.md
         editor:
-          preview: true # 是否开启编辑预览
-        fields:
-          - label: "首页"
-            name: "index"
-            widget: "object"
-            collapsed: true # 是否折叠显示
-            fields:
-              - label: "顶部图"
-                name: "banner_img"
-                widget: "image"
-              - label: "高度"
-                name: "banner_img_height"
-                widget: "number"
-          - label: "文章页"
-            name: "post"
-            widget: "object"
-            collapsed: true
-            fields:
-              - label: "顶部图(默认)"
-                name: "banner_img"
-                widget: "image"
-              - label: "高度"
-                name: "banner_img_height"
-                widget: "number"
-              - label: "文章封面图(默认)"
-                name: "default_index_img"
-                widget: "image"
-          - label: "归档页"
-            name: "archive"
-            widget: "object"
-            collapsed: true
-            fields:
-              - label: "顶部图"
-                name: "banner_img"
-                widget: "image"
-              - label: "高度"
-                name: "banner_img_height"
-                widget: "number"
-          - label: "分类页"
-            name: "category"
-            widget: "object"
-            collapsed: true
-            fields:
-              - label: "顶部图"
-                name: "banner_img"
-                widget: "image"
-              - label: "高度"
-                name: "banner_img_height"
-                widget: "number"
-          - label: "标签页"
-            name: "tag"
-            widget: "object"
-            collapsed: true
-            fields:
-              - label: "顶部图"
-                name: "banner_img"
-                widget: "image"
-              - label: "高度"
-                name: "banner_img_height"
-                widget: "number"
-          - label: "关于页"
-            name: "about"
-            widget: "object"
-            collapsed: true
-            fields:
-              - label: "顶部图"
-                name: "banner_img"
-                widget: "image"
-              - label: "高度"
-                name: "banner_img_height"
-                widget: "number"
-          - label: "友链页面"
-            name: "links"
-            widget: "object"
-            collapsed: true
-            fields:
-              - label: "顶部图"
-                name: "banner_img"
-                widget: "image"
-              - label: "高度"
-                name: "banner_img_height"
-                widget: "number"
-              - label: "项目"
-                name: "items"
-                widget: "list"
-                fields:
-                  - {
-                      label: "网站名称",
-                      name: "title",
-                      widget: "string",
-                      required: false,
-                    }
-                  - {
-                      label: "网址描述",
-                      name: "intro",
-                      widget: "string",
-                      required: false,
-                    }
-                  - {
-                      label: "网站地址",
-                      name: "link",
-                      widget: "string",
-                      required: false,
-                    }
-                  - {
-                      label: "网站图片",
-                      name: "avatar",
-                      widget: "image",
-                      required: false,
-                    }
+          preview: true
+        fields: *ref_0
+      - name: css-fluid-extension.css
+        label: ''
+        file: source\css\fluid-extension.css
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: css-reset.min.css
+        label: ''
+        file: source\css\reset.min.css
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: css-style.css
+        label: ''
+        file: source\css\style.css
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: book-index.md
+        label: 书单
+        file: source\book\index.md
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: example-index.md
+        label: example
+        file: source\example\index.md
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: example-index.html
+        label: ''
+        file: source\example\index.html
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: about-index.md
+        label: WillMo
+        file: source\about\index.md
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-DynamicLine.js
+        label: ''
+        file: source\js\DynamicLine.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-MyMath.js
+        label: ''
+        file: source\js\MyMath.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-backgroundize.js
+        label: ''
+        file: source\js\backgroundize.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-Stage.js
+        label: ''
+        file: source\js\Stage.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-fscreen.js
+        label: ''
+        file: source\js\fscreen.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-duration.js
+        label: ''
+        file: source\js\duration.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-index.js
+        label: ''
+        file: source\js\index.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: photos-index.md
+        label: photos
+        file: source\photos\index.md
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: styles-backgroundize.css
+        label: ''
+        file: source\styles\backgroundize.css
+        editor:
+          preview: true
+        fields: *ref_0
