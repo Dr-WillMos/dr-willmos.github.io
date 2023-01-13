@@ -52,6 +52,12 @@ collections:
         editor:
           preview: true
         fields: *ref_0
+      - name: book-index.md
+        label: 书单
+        file: source\book\index.md
+        editor:
+          preview: true
+        fields: *ref_0
       - name: css-fluid-extension.css
         label: ''
         file: source\css\fluid-extension.css
@@ -64,21 +70,15 @@ collections:
         editor:
           preview: true
         fields: *ref_0
+      - name: about-index.md
+        label: WillMo
+        file: source\about\index.md
+        editor:
+          preview: true
+        fields: *ref_0
       - name: css-style.css
         label: ''
         file: source\css\style.css
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: book-index.md
-        label: 书单
-        file: source\book\index.md
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: example-index.md
-        label: example
-        file: source\example\index.md
         editor:
           preview: true
         fields: *ref_0
@@ -88,21 +88,9 @@ collections:
         editor:
           preview: true
         fields: *ref_0
-      - name: about-index.md
-        label: WillMo
-        file: source\about\index.md
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: js-DynamicLine.js
-        label: ''
-        file: source\js\DynamicLine.js
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: js-MyMath.js
-        label: ''
-        file: source\js\MyMath.js
+      - name: example-index.md
+        label: example
+        file: source\example\index.md
         editor:
           preview: true
         fields: *ref_0
@@ -112,21 +100,33 @@ collections:
         editor:
           preview: true
         fields: *ref_0
+      - name: js-MyMath.js
+        label: ''
+        file: source\js\MyMath.js
+        editor:
+          preview: true
+        fields: *ref_0
       - name: js-Stage.js
         label: ''
         file: source\js\Stage.js
         editor:
           preview: true
         fields: *ref_0
-      - name: js-fscreen.js
+      - name: js-DynamicLine.js
         label: ''
-        file: source\js\fscreen.js
+        file: source\js\DynamicLine.js
         editor:
           preview: true
         fields: *ref_0
       - name: js-duration.js
         label: ''
         file: source\js\duration.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-fscreen.js
+        label: ''
+        file: source\js\fscreen.js
         editor:
           preview: true
         fields: *ref_0
