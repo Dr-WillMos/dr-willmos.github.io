@@ -3,7 +3,62 @@ backend:
   branch: master
 media_folder: source/images
 public_folder: /images
+publish_mode: editorial_workflow
+pages:
+  enabled: true
+  config:
+    label: Page
+    delete: false
+    editor:
+      preview: true
+over_format: true
 collections:
+  - name: posts
+    label: Post
+    folder: source/_posts
+    sort: date:desc
+    create: true
+    editor:
+      preview: true
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+        format: YYYY-MM-DD HH:mm:ss
+        dateFormat: YYYY-MM-DD
+        timeFormat: HH:mm:ss
+        required: false
+      - label: Updeted Date
+        name: updated
+        widget: datetime
+        format: YYYY-MM-DD HH:mm:ss
+        required: false
+        dateFormat: YYYY-MM-DD
+        timeFormat: HH:mm:ss
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+      - label: Categories
+        name: categories
+        widget: list
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+        required: false
+      - label: Permalink
+        name: permalink
+        widget: string
+        required: false
+      - label: Comments
+        name: comments
+        widget: boolean
+        default: true
+        required: false
   - name: all_posts
     fields: &ref_0
       - label: Title
@@ -46,27 +101,15 @@ collections:
     name: pages
     delete: false
     files:
-      - name: about-index.md
-        label: WillMo
-        file: source\about\index.md
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: styles-backgroundize.css
-        label: ''
-        file: source\styles\backgroundize.css
-        editor:
-          preview: true
-        fields: *ref_0
       - name: book-index.md
         label: 书单
         file: source\book\index.md
         editor:
           preview: true
         fields: *ref_0
-      - name: example-index.md
-        label: example
-        file: source\example\index.md
+      - name: about-index.md
+        label: WillMo
+        file: source\about\index.md
         editor:
           preview: true
         fields: *ref_0
@@ -76,9 +119,15 @@ collections:
         editor:
           preview: true
         fields: *ref_0
-      - name: photos-index.md
-        label: photos
-        file: source\photos\index.md
+      - name: example-index.md
+        label: example
+        file: source\example\index.md
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: css-reset.min.css
+        label: ''
+        file: source\css\reset.min.css
         editor:
           preview: true
         fields: *ref_0
@@ -94,21 +143,15 @@ collections:
         editor:
           preview: true
         fields: *ref_0
-      - name: css-reset.min.css
-        label: ''
-        file: source\css\reset.min.css
-        editor:
-          preview: true
-        fields: *ref_0
       - name: css-style.css
         label: ''
         file: source\css\style.css
         editor:
           preview: true
         fields: *ref_0
-      - name: js-MyMath.js
+      - name: js-DynamicLine.js
         label: ''
-        file: source\js\MyMath.js
+        file: source\js\DynamicLine.js
         editor:
           preview: true
         fields: *ref_0
@@ -118,9 +161,15 @@ collections:
         editor:
           preview: true
         fields: *ref_0
-      - name: js-DynamicLine.js
+      - name: js-MyMath.js
         label: ''
-        file: source\js\DynamicLine.js
+        file: source\js\MyMath.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-duration.js
+        label: ''
+        file: source\js\duration.js
         editor:
           preview: true
         fields: *ref_0
@@ -136,15 +185,21 @@ collections:
         editor:
           preview: true
         fields: *ref_0
-      - name: js-duration.js
+      - name: styles-backgroundize.css
         label: ''
-        file: source\js\duration.js
+        file: source\styles\backgroundize.css
         editor:
           preview: true
         fields: *ref_0
       - name: js-index.js
         label: ''
         file: source\js\index.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: photos-index.md
+        label: photos
+        file: source\photos\index.md
         editor:
           preview: true
         fields: *ref_0
