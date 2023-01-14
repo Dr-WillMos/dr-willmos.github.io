@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: master
+  branch: main
 media_folder: source/images
 public_folder: /images
 publish_mode: editorial_workflow
@@ -11,7 +11,12 @@ pages:
     delete: false
     editor:
       preview: true
-over_format: true
+netlify_cms:
+  scripts:
+    - >-
+      https://cdn.jsdelivr.net/gh/JiangTJ/hexo-netlify-cms-example@0.0.1/source/js/cms/youtube.js
+    - >-
+      https://cdn.jsdelivr.net/gh/JiangTJ/hexo-netlify-cms-example@0.0.1/source/js/cms/img.js
 collections:
   - name: posts
     label: Post
@@ -107,15 +112,9 @@ collections:
         editor:
           preview: true
         fields: *ref_0
-      - name: book-index.md
-        label: 书单
-        file: source\book\index.md
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: css-reset.min.css
+      - name: css-fluid-extension.css
         label: ''
-        file: source\css\reset.min.css
+        file: source\css\fluid-extension.css
         editor:
           preview: true
         fields: *ref_0
@@ -125,15 +124,15 @@ collections:
         editor:
           preview: true
         fields: *ref_0
-      - name: css-fluid-extension.css
-        label: ''
-        file: source\css\fluid-extension.css
-        editor:
-          preview: true
-        fields: *ref_0
       - name: css-style.css
         label: ''
         file: source\css\style.css
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: css-reset.min.css
+        label: ''
+        file: source\css\reset.min.css
         editor:
           preview: true
         fields: *ref_0
@@ -149,27 +148,21 @@ collections:
         editor:
           preview: true
         fields: *ref_0
+      - name: book-index.md
+        label: 书单
+        file: source\book\index.md
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: photos-index.md
+        label: photos
+        file: source\photos\index.md
+        editor:
+          preview: true
+        fields: *ref_0
       - name: js-DynamicLine.js
         label: ''
         file: source\js\DynamicLine.js
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: js-MyMath.js
-        label: ''
-        file: source\js\MyMath.js
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: js-Stage.js
-        label: ''
-        file: source\js\Stage.js
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: js-duration.js
-        label: ''
-        file: source\js\duration.js
         editor:
           preview: true
         fields: *ref_0
@@ -179,15 +172,27 @@ collections:
         editor:
           preview: true
         fields: *ref_0
+      - name: js-Stage.js
+        label: ''
+        file: source\js\Stage.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-MyMath.js
+        label: ''
+        file: source\js\MyMath.js
+        editor:
+          preview: true
+        fields: *ref_0
       - name: js-fscreen.js
         label: ''
         file: source\js\fscreen.js
         editor:
           preview: true
         fields: *ref_0
-      - name: photos-index.md
-        label: photos
-        file: source\photos\index.md
+      - name: js-duration.js
+        label: ''
+        file: source\js\duration.js
         editor:
           preview: true
         fields: *ref_0
