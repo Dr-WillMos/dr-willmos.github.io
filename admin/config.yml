@@ -46,9 +46,9 @@ collections:
     name: pages
     delete: false
     files:
-      - name: css-index.md
-        label: css
-        file: source\css\index.md
+      - name: book-index.md
+        label: 书单
+        file: source\book\index.md
         editor:
           preview: true
         fields: *ref_0
@@ -58,27 +58,9 @@ collections:
         editor:
           preview: true
         fields: *ref_0
-      - name: css-fluid-extension.css
+      - name: styles-backgroundize.css
         label: ''
-        file: source\css\fluid-extension.css
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: css-reset.min.css
-        label: ''
-        file: source\css\reset.min.css
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: css-style.css
-        label: ''
-        file: source\css\style.css
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: book-index.md
-        label: 书单
-        file: source\book\index.md
+        file: source\styles\backgroundize.css
         editor:
           preview: true
         fields: *ref_0
@@ -94,33 +76,9 @@ collections:
         editor:
           preview: true
         fields: *ref_0
-      - name: js-DynamicLine.js
-        label: ''
-        file: source\js\DynamicLine.js
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: js-Stage.js
-        label: ''
-        file: source\js\Stage.js
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: js-MyMath.js
-        label: ''
-        file: source\js\MyMath.js
-        editor:
-          preview: true
-        fields: *ref_0
       - name: js-backgroundize.js
         label: ''
         file: source\js\backgroundize.js
-        editor:
-          preview: true
-        fields: *ref_0
-      - name: js-fscreen.js
-        label: ''
-        file: source\js\fscreen.js
         editor:
           preview: true
         fields: *ref_0
@@ -130,9 +88,33 @@ collections:
         editor:
           preview: true
         fields: *ref_0
-      - name: photos-index.md
-        label: photos
-        file: source\photos\index.md
+      - name: js-DynamicLine.js
+        label: ''
+        file: source\js\DynamicLine.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-MyMath.js
+        label: ''
+        file: source\js\MyMath.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-Stage.js
+        label: ''
+        file: source\js\Stage.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: js-fscreen.js
+        label: ''
+        file: source\js\fscreen.js
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: css-index.md
+        label: css
+        file: source\css\index.md
         editor:
           preview: true
         fields: *ref_0
@@ -142,9 +124,27 @@ collections:
         editor:
           preview: true
         fields: *ref_0
-      - name: styles-backgroundize.css
+      - name: css-style.css
         label: ''
-        file: source\styles\backgroundize.css
+        file: source\css\style.css
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: css-fluid-extension.css
+        label: ''
+        file: source\css\fluid-extension.css
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: css-reset.min.css
+        label: ''
+        file: source\css\reset.min.css
+        editor:
+          preview: true
+        fields: *ref_0
+      - name: photos-index.md
+        label: photos
+        file: source\photos\index.md
         editor:
           preview: true
         fields: *ref_0
