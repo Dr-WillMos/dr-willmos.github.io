@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>在Fluid中添加一言</title>
+    <link href="/posts/7938d7d6/"/>
+    <url>/posts/7938d7d6/</url>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="一言-隶属于萌创团队，其初衷是为用户提供来自动漫，哲学，名著，游戏等来源的一句走心之言，分享对世界的理解和感受。"><a href="#一言-隶属于萌创团队，其初衷是为用户提供来自动漫，哲学，名著，游戏等来源的一句走心之言，分享对世界的理解和感受。" class="headerlink" title="一言,隶属于萌创团队，其初衷是为用户提供来自动漫，哲学，名著，游戏等来源的一句走心之言，分享对世界的理解和感受。"></a><a href="http://hitokoto.cn/">一言</a>,隶属于萌创团队，其初衷是为用户提供来自动漫，哲学，名著，游戏等来源的一句走心之言，分享对世界的理解和感受。</h3><h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><h3 id="一言可以增加博客的随机性和文学性，有利于丰富网站内容。"><a href="#一言可以增加博客的随机性和文学性，有利于丰富网站内容。" class="headerlink" title="一言可以增加博客的随机性和文学性，有利于丰富网站内容。"></a>一言可以增加博客的随机性和文学性，有利于丰富网站内容。</h3><h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="在Fluid的主题配置”（指的是-theme-x2F-fluid-x2F-config-yml-或者-config-fluid-yml，这取决于你安装Fluid的方式）中找到（ctrl-F）Slogan打字机相关配置，将其改为如下配置"><a href="#在Fluid的主题配置”（指的是-theme-x2F-fluid-x2F-config-yml-或者-config-fluid-yml，这取决于你安装Fluid的方式）中找到（ctrl-F）Slogan打字机相关配置，将其改为如下配置" class="headerlink" title="在Fluid的主题配置”（指的是 theme/fluid/_config.yml 或者 _config.fluid.yml，这取决于你安装Fluid的方式）中找到（ctrl+F）Slogan打字机相关配置，将其改为如下配置;"></a>在Fluid的主题配置”（指的是 theme/fluid/_config.yml 或者 _config.fluid.yml，这取决于你安装Fluid的方式）中找到（<strong>ctrl+F</strong>）Slogan打字机相关配置，将其改为如下配置;</h3><figure class="highlight autoit"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs autoit">slogan:<br>  enable: <span class="hljs-literal">true</span>       <span class="hljs-meta"># 改为true</span><br><br>  <span class="hljs-meta"># 为空则按 hexo config.subtitle 显示</span><br>  <span class="hljs-meta"># If empty, text based on `subtitle` in hexo config</span><br>  text: <span class="hljs-string">"明眸如初，又见苍岚"</span>           <span class="hljs-meta">#写不写都可以</span><br><br>  <span class="hljs-meta"># 通过 API 接口作为首页副标题的内容，必须返回的是 JSON 格式，如果请求失败则按 text 字段显示，该功能必须先开启 typing 打字机功能</span><br>  <span class="hljs-meta"># Subtitle of the homepage through the API, must be returned a JSON. If the request fails, it will be displayed in `text` value. This feature must first enable the typing animation</span><br>  api:<br>    enable: <span class="hljs-literal">true</span><br><br>    <span class="hljs-meta"># 请求地址</span><br>    <span class="hljs-meta"># Request url</span><br>    url: <span class="hljs-string">"https://v1.hitokoto.cn/"</span>            <span class="hljs-meta">#添加一言接口</span><br><br>    <span class="hljs-meta"># 请求方法</span><br>    <span class="hljs-meta"># Request method</span><br>    <span class="hljs-meta"># Available: GET | POST | PUT</span><br>    method: <span class="hljs-string">"GET"</span>                           <br><br>    <span class="hljs-meta"># 请求头</span><br>    <span class="hljs-meta"># Request headers</span><br>    headers: {}   <br><br>    <span class="hljs-meta"># 从请求结果获取字符串的取值字段，最终必须是一个字符串，例如返回结果为 {<span class="hljs-string">"data"</span>: {<span class="hljs-string">"author"</span>: <span class="hljs-string">"fluid"</span>, <span class="hljs-string">"content"</span>: <span class="hljs-string">"An elegant theme"</span>}}, 则取值字段为 [<span class="hljs-string">'data'</span>, <span class="hljs-string">'content'</span>]；如果返回是列表则自动选择第一项</span><br>    <span class="hljs-meta"># The value field of the string obtained from the response. For example, the response content is {<span class="hljs-string">"data"</span>: {<span class="hljs-string">"author"</span>: <span class="hljs-string">"fluid"</span>, <span class="hljs-string">"content"</span>: <span class="hljs-string">"An elegant theme"</span>}}, the expected `keys: [<span class="hljs-string">'data'</span>,<span class="hljs-string">'content'</span>]`<span class="hljs-comment">; if the return is a list, the first item is automatically selected</span></span><br>    keys: [<span class="hljs-string">'hitokoto'</span>]                    <span class="hljs-meta">#填写Keys</span><br><br></code></pre></td></tr></tbody></table></figure><h3 id="保存，键入hexo-clean-hexo-g-hexo-s-即可预览效果。"><a href="#保存，键入hexo-clean-hexo-g-hexo-s-即可预览效果。" class="headerlink" title="保存，键入hexo clean  hexo g hexo s 即可预览效果。"></a>保存，键入<code>hexo clean</code>  <code>hexo g</code> <code>hexo s </code>即可预览效果。</h3>]]></content>
+    
+    
+    <categories>
+      
+      <category>博客折腾</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>关于存在主义的一点思考</title>
+    <link href="/posts/33e93045/"/>
+    <url>/posts/33e93045/</url>
+    
+    <content type="html"><![CDATA[<h2 id="人生的意义是什么？"><a href="#人生的意义是什么？" class="headerlink" title="人生的意义是什么？"></a>人生的意义是什么？</h2><h3 id="·人一无所有地来到这个世界上，成为万千生灵中的沧海一粟，除了存在别无其他。这是，人的本质仅仅是人。随着时间，人民会成长，也被附加了一系列的可能：子女，学生，职员，父母…-而本质又是由人本身决定的。人可以自由地选择自己的人生和活法，从而重新拥有被重新定义的机会。人不同于工具，对工具而言，在物件被铸造成形之前就被人在图纸上决定了本质，一块铁锭的本质就是剪刀。但人不一样，先是生命的存在，再是本质的定义，即“存在先于本质”。存在的本身是重复，我们在社会的法则中按部就班，两点一线，朝九晚五，成为了流水线上的一枚螺丝钉，在无尽的重复中，存在的意义开始淡化，最后彻底消失，同理，由无数存在组成的世界也是无意义的。而实际上，对个体而言，存在是无意义的，却也不需要意义，因为它凌驾于意义之上。"><a href="#·人一无所有地来到这个世界上，成为万千生灵中的沧海一粟，除了存在别无其他。这是，人的本质仅仅是人。随着时间，人民会成长，也被附加了一系列的可能：子女，学生，职员，父母…-而本质又是由人本身决定的。人可以自由地选择自己的人生和活法，从而重新拥有被重新定义的机会。人不同于工具，对工具而言，在物件被铸造成形之前就被人在图纸上决定了本质，一块铁锭的本质就是剪刀。但人不一样，先是生命的存在，再是本质的定义，即“存在先于本质”。存在的本身是重复，我们在社会的法则中按部就班，两点一线，朝九晚五，成为了流水线上的一枚螺丝钉，在无尽的重复中，存在的意义开始淡化，最后彻底消失，同理，由无数存在组成的世界也是无意义的。而实际上，对个体而言，存在是无意义的，却也不需要意义，因为它凌驾于意义之上。" class="headerlink" title="·人一无所有地来到这个世界上，成为万千生灵中的沧海一粟，除了存在别无其他。这是，人的本质仅仅是人。随着时间，人民会成长，也被附加了一系列的可能：子女，学生，职员，父母….而本质又是由人本身决定的。人可以自由地选择自己的人生和活法，从而重新拥有被重新定义的机会。人不同于工具，对工具而言，在物件被铸造成形之前就被人在图纸上决定了本质，一块铁锭的本质就是剪刀。但人不一样，先是生命的存在，再是本质的定义，即“存在先于本质”。存在的本身是重复，我们在社会的法则中按部就班，两点一线，朝九晚五，成为了流水线上的一枚螺丝钉，在无尽的重复中，存在的意义开始淡化，最后彻底消失，同理，由无数存在组成的世界也是无意义的。而实际上，对个体而言，存在是无意义的，却也不需要意义，因为它凌驾于意义之上。"></a>·人一无所有地来到这个世界上，成为万千生灵中的沧海一粟，除了存在别无其他。这是，人的本质仅仅是人。随着时间，人民会成长，也被附加了一系列的可能：子女，学生，职员，父母….而本质又是由人本身决定的。人可以自由地选择自己的人生和活法，从而重新拥有被重新定义的机会。人不同于工具，对工具而言，在物件被铸造成形之前就被人在图纸上决定了本质，一块铁锭的本质就是剪刀。但人不一样，先是生命的存在，再是本质的定义，即“存在先于本质”。存在的本身是重复，我们在社会的法则中按部就班，两点一线，朝九晚五，成为了流水线上的一枚螺丝钉，在无尽的重复中，存在的意义开始淡化，最后彻底消失，同理，由无数存在组成的世界也是无意义的。而实际上，对个体而言，存在是无意义的，却也不需要意义，因为它凌驾于意义之上。</h3><h3 id="·人的存在分为肉体和意识两部分，意识无时不刻观察下着肉体，而肉体又在不断变化，二者的分离存在不可否认，但意识无法做到苏格拉底的“认识你自己”。正如加缪所说：“我与我的灵魂之间是如此遥远，而我的存在又是如此真实。”"><a href="#·人的存在分为肉体和意识两部分，意识无时不刻观察下着肉体，而肉体又在不断变化，二者的分离存在不可否认，但意识无法做到苏格拉底的“认识你自己”。正如加缪所说：“我与我的灵魂之间是如此遥远，而我的存在又是如此真实。”" class="headerlink" title="·人的存在分为肉体和意识两部分，意识无时不刻观察下着肉体，而肉体又在不断变化，二者的分离存在不可否认，但意识无法做到苏格拉底的“认识你自己”。正如加缪所说：“我与我的灵魂之间是如此遥远，而我的存在又是如此真实。”"></a>·人的存在分为肉体和意识两部分，意识无时不刻观察下着肉体，而肉体又在不断变化，二者的分离存在不可否认，但意识无法做到苏格拉底的“认识你自己”。正如加缪所说：“我与我的灵魂之间是如此遥远，而我的存在又是如此真实。”</h3><h3 id="·人是理性的，而世界是非理性的。人可以利用规则去认知规则之外的事，而人与人在一起，就组成一个无序，混乱而非理性的“荒诞”世界：明明可以和平共处，而没有正邪之分的战争却带来的断肢和弹坑；明明合作就能共赢，非得卷的你死我活；有太多的善人遭到报应，有太多的恶人得到的善终，世界的荒诞造就了生活这团无意义，无逻辑，从充满偶然和不公的”虚无“。人们在重复中度过生命，想西西弗推向山顶的巨石。人们在一如既往的重复中开始怀疑人生的意义，而那位伟大的反抗者与创造者的故事就此开始。"><a href="#·人是理性的，而世界是非理性的。人可以利用规则去认知规则之外的事，而人与人在一起，就组成一个无序，混乱而非理性的“荒诞”世界：明明可以和平共处，而没有正邪之分的战争却带来的断肢和弹坑；明明合作就能共赢，非得卷的你死我活；有太多的善人遭到报应，有太多的恶人得到的善终，世界的荒诞造就了生活这团无意义，无逻辑，从充满偶然和不公的”虚无“。人们在重复中度过生命，想西西弗推向山顶的巨石。人们在一如既往的重复中开始怀疑人生的意义，而那位伟大的反抗者与创造者的故事就此开始。" class="headerlink" title="·人是理性的，而世界是非理性的。人可以利用规则去认知规则之外的事，而人与人在一起，就组成一个无序，混乱而非理性的“荒诞”世界：明明可以和平共处，而没有正邪之分的战争却带来的断肢和弹坑；明明合作就能共赢，非得卷的你死我活；有太多的善人遭到报应，有太多的恶人得到的善终，世界的荒诞造就了生活这团无意义，无逻辑，从充满偶然和不公的”虚无“。人们在重复中度过生命，想西西弗推向山顶的巨石。人们在一如既往的重复中开始怀疑人生的意义，而那位伟大的反抗者与创造者的故事就此开始。"></a>·人是理性的，而世界是非理性的。人可以利用规则去认知规则之外的事，而人与人在一起，就组成一个无序，混乱而非理性的“荒诞”世界：明明可以和平共处，而没有正邪之分的战争却带来的断肢和弹坑；明明合作就能共赢，非得卷的你死我活；有太多的善人遭到报应，有太多的恶人得到的善终，世界的荒诞造就了生活这团无意义，无逻辑，从充满偶然和不公的”虚无“。人们在重复中度过生命，想西西弗推向山顶的巨石。人们在一如既往的重复中开始怀疑人生的意义，而那位伟大的反抗者与创造者的故事就此开始。</h3><h3 id="·人生的虚无，世界的荒诞需要由意识来拯救。我们的肉体跟随着我们的意识做的每一件能让我们感到快乐的事，都是有价值的，都是对“意义”的伟大创造，也是对虚无人生的反抗。意识的存在让我们卸下高雅的伪装，回归最本质的快乐，而不用在于他人的目光。我们是通过自己建立起来的自己，而不是通过他人建立起来的自己，我们完全可以拒绝他人对我们的影响，活的真实，自在。"><a href="#·人生的虚无，世界的荒诞需要由意识来拯救。我们的肉体跟随着我们的意识做的每一件能让我们感到快乐的事，都是有价值的，都是对“意义”的伟大创造，也是对虚无人生的反抗。意识的存在让我们卸下高雅的伪装，回归最本质的快乐，而不用在于他人的目光。我们是通过自己建立起来的自己，而不是通过他人建立起来的自己，我们完全可以拒绝他人对我们的影响，活的真实，自在。" class="headerlink" title="·人生的虚无，世界的荒诞需要由意识来拯救。我们的肉体跟随着我们的意识做的每一件能让我们感到快乐的事，都是有价值的，都是对“意义”的伟大创造，也是对虚无人生的反抗。意识的存在让我们卸下高雅的伪装，回归最本质的快乐，而不用在于他人的目光。我们是通过自己建立起来的自己，而不是通过他人建立起来的自己，我们完全可以拒绝他人对我们的影响，活的真实，自在。"></a>·人生的虚无，世界的荒诞需要由意识来拯救。我们的肉体跟随着我们的意识做的每一件能让我们感到快乐的事，都是有价值的，都是对“意义”的伟大创造，也是对虚无人生的反抗。意识的存在让我们卸下高雅的伪装，回归最本质的快乐，而不用在于他人的目光。我们是通过自己建立起来的自己，而不是通过他人建立起来的自己，我们完全可以拒绝他人对我们的影响，活的真实，自在。</h3><h3 id="·“重要的不是治愈，而是带着病痛活下去。”荒谬是起点，而对抗荒谬的是反抗，在重复的人生中追随意识创造意义，就是对虚无最大的反击。别再懊恼过去的错误，别再沉迷于虚无缥缈的未来。活在当下，自认为有意义地消耗每一个小时，爱生活的本身，而不是爱生活的意义。"><a href="#·“重要的不是治愈，而是带着病痛活下去。”荒谬是起点，而对抗荒谬的是反抗，在重复的人生中追随意识创造意义，就是对虚无最大的反击。别再懊恼过去的错误，别再沉迷于虚无缥缈的未来。活在当下，自认为有意义地消耗每一个小时，爱生活的本身，而不是爱生活的意义。" class="headerlink" title="·“重要的不是治愈，而是带着病痛活下去。”荒谬是起点，而对抗荒谬的是反抗，在重复的人生中追随意识创造意义，就是对虚无最大的反击。别再懊恼过去的错误，别再沉迷于虚无缥缈的未来。活在当下，自认为有意义地消耗每一个小时，爱生活的本身，而不是爱生活的意义。"></a>·“重要的不是治愈，而是带着病痛活下去。”荒谬是起点，而对抗荒谬的是反抗，在重复的人生中追随意识创造意义，就是对虚无最大的反击。别再懊恼过去的错误，别再沉迷于虚无缥缈的未来。活在当下，自认为有意义地消耗每一个小时，爱生活的本身，而不是爱生活的意义。</h3><h2 id="How-do-you-believe-How-do-you-live"><a href="#How-do-you-believe-How-do-you-live" class="headerlink" title="How do you believe How do you live."></a>How do you believe How do you live.</h2><h2 id="你怎样信仰-你就怎样生活"><a href="#你怎样信仰-你就怎样生活" class="headerlink" title="你怎样信仰 你就怎样生活"></a>你怎样信仰 你就怎样生活</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>哲学思考</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Thinking</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>新的月光</title>
+    <link href="/posts/newmoonlight/"/>
+    <url>/posts/newmoonlight/</url>
+    
+    <content type="html"><![CDATA[<h2 id="新的月光"><a href="#新的月光" class="headerlink" title="新的月光"></a>新的月光</h2><p>WillMo博士颓废地坐在鱼冢里，在O5的注视中沉默地迎接晨曦的到来。</p><p>O5回到了他们的圆桌上，MTF收起了枪，随着打卡机的响起，所有的Site又开始了新的呼吸。</p><p>WillMo博士大概确实是与过去诀别了，他将所有关于研究员Lucy的物件都锁在了他办公室无人知晓的角落里。</p><blockquote><p><strong>您有一封新的邮件，请查收。</strong></p><p><strong>-打开</strong></p><p><strong>信息分析部门主管WillMo博士：</strong></p><p>我们的特工突袭了Are We Cool Yet?的一处地点，并缴获了一系列异常项目，相关资料已在附件中给出。其中的一项是一个布满花纹的USB存储设备，我们需要你和你的部门分析其存储原理并尽可能分析其异常性质的来源。如果可以，请在10.4日前将检测报告发送给<br>Ruby博士。</p><p>——艺术异常部副主管Lucy</p></blockquote><p>博士看着这熟悉的署名，感到一股陌生和茫然，但鱼冢里的墓碑很快就把他拉回了现实。</p><p>“同名的“他抱着这样的念头，打开了那台布满灰尘的终端。<br>…….</p><blockquote><p><strong>您的邮件已发送。</strong></p></blockquote><p>最终执念还是战胜了理性，他迫不及待打开基金会的职员数据库，查询了”Lucy”这个字段，然后焦急地等待回应。</p><blockquote><p><strong>员工编号：[权限不足]</strong></p><p><strong>姓名：Lucy ▆▆▆▆</strong></p><p><strong>性别：女</strong></p><p><strong>出生日期：[权限不足]</strong></p><p><strong>国籍：[权限不足]</strong></p><p><strong>所属站点：Site-69</strong></p><p><strong>职位：4级部门副主管</strong></p><p><strong>入职日期：[权限不足]</strong></p><p><strong>安全许可等级：4级</strong></p><p><strong>专长：对研究艺术类异常项目有敏锐感知力，已被指派追踪GOI”Are We Cool yet”。</strong></p></blockquote><p>WillMo博士盯着这几行有限的信息，记起了同级权限人员的信息只能有限查阅。<br>“这是O5的阴谋，还是说只是一个同名者呢？”WillMo博士这样想着，直到夜色吞没了他的思绪。<br> ………<br>大梦一场过后，年轻的博士觉得这位同事的身份已经无关紧要，真正有价值的是那个熟悉的名字。曾经他很弱小，躲在沉默后面对Lucy投以注视，一幕又一幕的背影，在他的自卑下似乎套上了一层神的光辉，就此，成为里无数个月夜中辗转反侧的白月光。但是等他足够强大，带着鲜花和底气来见她时，迎接他的只是一座孤零零的坟墓。而现在，这个名字的出现好像是上帝给的另一次机会，让他能够在余生中将自己从遗憾中拯救回来，去保护那个曾经未能保护的人。</p><p><strong>灯光从窗户透过，WillMo博士正在进行他自己的救赎。</strong></p><hr>]]></content>
+    
+    
+    <categories>
+      
+      <category>随笔</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>随感</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>原码，反码，补码一文速通</title>
+    <link href="/posts/d6c660ac/"/>
+    <url>/posts/d6c660ac/</url>
+    
+    <content type="html"><![CDATA[<h2 id="机器数：万物之基"><a href="#机器数：万物之基" class="headerlink" title="机器数：万物之基"></a>机器数：万物之基</h2><p><strong>就是二进制数，这些而二进制数能够被机器理解并执行。</strong></p><p><strong>机器数带有符号，计算机字长为8位，所以最高位代表符号，</strong>正数是0<strong>，</strong>负数是1<strong>，例如0000 0011就表示+3，1000 0011就代表-3。</strong> <strong>以上的0000 0011就是机器数。</strong></p><h2 id="真值"><a href="#真值" class="headerlink" title="真值"></a>真值</h2><p>带符号位的机器数对应的十进制数就是<strong>机器数的真值</strong>。例如: 0000 0011=+000 0011=+3</p><h2 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h2><p>即最基本的使用二进制代表十进制，<strong>是人脑最容易理解的表示方式</strong>。</p><p><strong>[+1]原=0000 0001</strong></p><p><strong>第一位不表示值，只表示正负。</strong></p><p><strong>[1111 1111]代表-127</strong></p><p><strong>注：原码的0有两种表示形式：0000 0000和1000 0000</strong></p><h2 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h2><p><strong>正数的反码是其本身；</strong></p><p><strong>负数的反码是在其原码的基础上，符号位不变，其余各个位取反。</strong></p><p><strong>[+1] = [0000 0001]原= [0000 0001]反</strong></p><p><strong>[-1] = [1000 0001]原= [1111 1110]反</strong></p><p><strong>如果一个反码表示的是负数，人脑****无法直观的看出来</strong>它的数值。通常要将其转换成原码再计算。</p><p><strong>注：0的反码也有两种：0000 0000和1111 1111</strong></p><h2 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h2><p><strong>正数的补码还是其本身；</strong></p><p><strong>负数的补码是在其原码的基础上，符号位不变，其余各位取反，最后+1。(也即在反码的基础上+1)</strong></p><p><strong>[+1] = [0000 0001]原= [0000 0001]反= [0000 0001]补</strong></p><p><strong>[-1] = [1000 0001]原= [1111 1110]反= [1111 1111]补</strong></p><p><em>原码，反码，补码是表示同一个数字的三种不同形式。</em></p><h2 id="为什么要有补码和反码？"><a href="#为什么要有补码和反码？" class="headerlink" title="为什么要有补码和反码？"></a>为什么要有补码和反码？</h2><p><strong>计算十进制的表达式： 1 - 1 = 0</strong></p><p><strong>1 - 1 = 1 + (-1) = [0000 0001]原+ [1000 0001]原= [1000 0010]原= -2</strong></p><p><strong>如果用原码表示，让符号位也参与计算，显然对于减法来说，结果是不正确的。这也就是为何计算机内部不使用原码表示一个数。</strong></p><p><strong>为了解决原码做减法的问题， 出现了反码：</strong></p><p><strong>计算十进制的表达式：1 - 1 = 0</strong></p><p><strong>1 - 1 = 1 + (-1) = [0000 0001]原+ [1000 0001]原= [0000 0001]反+ [1111 1110]反= [1111 1111]反= [1000 0000]原= -0</strong></p><p><strong>发现用反码计算减法，结果的真值部分是正确的。而唯一的问题其实就出现在”0”这个特殊的数值上，虽然人们理解上</strong><strong>+0和-0</strong>是一样的，但是0带符号是没有任何意义的，而且会有[0000 0000]原和[1000 0000]原两个编码表示0。</p><p><strong>于是补码的出现，解决了0的符号问题以及0的两个编码问题：</strong></p><p><strong>1-1 = 1 + (-1) = [0000 0001]原+ [1000 0001]原= [0000 0001]补+ [1111 1111]补= [1 0000 0000]补=[0000 0000]补=[0000 0000]原注意：进位1不在计算机字长里。</strong></p><p><strong>这样0用[0000 0000]表示，而以前出现问题的-0则不存在了。而且可以用[1000 0000]表示-128：-128的由来如下：</strong></p><p><strong>(-1) + (-127) = [1000 0001]原+ [1111 1111]原= [1111 1111]补+ [1000 0001]补= [1000 0000]补</strong></p><p><strong>-1-127的结果应该是-128，在用补码运算的结果中，[1000  0000]补就是-128，但是注意因为实际上是使用以前的-0的补码来表示-128，所以-128并没有原码和反码表示。(对-128的补码表示[1000 0000]补，算出来的原码是[0000 0000]原，这是不正确的)</strong></p><p><strong>使用补码，不仅仅修复了0的符号以及存在两个编码的问题，而且还能够多表示一个最低数。这就是为什么8位二进制，使用原码或反码表示的范围为[-127, +127]，而使用补码表示的范围为[-128, 127]。</strong></p><p><strong>因为机器使用补码，所以对于编程中常用到的有符号的32位int类型，可以表示范围是: [-231, 231-1] 因为第一位表示的是符号位，而使用补码表示时又可以多保存一个最小值。</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>网络工程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>网络工程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>WillMo的人事档案</title>
+    <link href="/posts/e6ed99b1/"/>
+    <url>/posts/e6ed99b1/</url>
+    
+    <content type="html"><![CDATA[<h2 id="SCP-人事档案"><a href="#SCP-人事档案" class="headerlink" title="SCP 人事档案"></a>SCP 人事档案</h2><p><strong>员工编号：21-1944</strong></p><p><strong>姓名：WillMo ▆▆▆▆</strong></p><p><strong>性别：女</strong></p><p><strong>出生日期：05/11/9</strong></p><p><strong>最高教育经历:杭州▆▆▆▆大学 研究生</strong></p><p><strong>国籍：中国</strong></p><p><strong>所属站点：Site-CN-21</strong></p><p><strong>职位：特遣特工，3级网络工程师</strong></p><p><strong>入职日期：26/09/25</strong></p><p><strong>安全许可等级：3级</strong></p><h2 id="个人简介："><a href="#个人简介：" class="headerlink" title="个人简介："></a>个人简介：</h2><p>WillMo在网络运维方面拥有卓越的专业知识和丰富的经验。2024/06/12，WillMo曾“意外”骇入基金会内部网络而被派遣的MTF逮捕。鉴于其良好合作态度和过硬的技术，WillMo被允许在基金会工作并享受相关福利。</p><p><strong>专业技能：</strong></p><ul><li>应急处理基金会内网入侵情况，维护基金会网络资产的安全。</li><li>在程序架构和智能控制方面具有出色的能力，能够协助相关部门进行开发工作。</li><li>熟练掌握多种语言，包括英语和汉语，便于与不同背景的人员进行沟通和合作。</li><li>精通级特殊载具驾驶(特种车辆、牵引运载车辆、歼击机、空天战斗机，电子对抗飞机等)，以便执行任务时尽快到达指定地点或执行基金会任务。</li><li>基本级使用标准枪械（手枪，突击步枪，狙击步枪等），以便保护站点和任务期间攻击敌对GOI成员甚至异常个体。</li><li>专家级使用重型异常武器（单兵恶魔学防御系统，奇术步枪等），即使该技能已被道德伦理委员会证明为非法获取，但仍能够允许其在高危战况下保护基金会资产甚至摧毁大型异常实体和其他GOI大型载具。</li></ul><p><strong>工作记录：</strong></p><ul><li><strong>协同工程部门共同开发了基金会太空武器-“灵弩”。</strong><br><img src="https://s2.loli.net/2024/09/07/ygkp6EIjtHLefQY.jpg" alt="freecompress-768024303850541199_3_.jpg"></li></ul><blockquote><p>WillMo博士对接“灵弩”时的记录</p></blockquote><ul><li><p>注意到与其年龄和入职时间不符合的技能掌握程度，道德伦理委员会对WillMo博士展开调查并证实其使用了多重非法手段（包括但不限于违规使用异常项目▆▆▆▆等手段）迅速获取了一系列技能，并对其提出弹劾，后被O5议会将提案降级为警告处罚。</p><ul><li>被O5议会配发特别行动令牌，以便收容失效时打开4级权限以下的防爆门。<br><img src="https://s2.loli.net/2024/09/08/SLFyBYnsAM7VKwI.jpg" alt="_W_VWV__TYXR_XWV__S_MVF.jpg"></li></ul></li></ul><blockquote><p>特别行动令牌</p></blockquote><p><strong>心理评估：</strong></p><p><strong>显示出中度的心理稳定性和适应能力，但在面对高压力和特殊异常情况时较难保持冷静和理智。</strong></p><p><strong><del>对欠薪的情况十分抗拒甚至抱有敌意</del>工作情绪稳定，但薪资需要按时发放。</strong></p><p><strong>禁止任何非心理部门的员工在WillMo博士面前提起王▆▆特工，违者将被行政处罚。</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>随笔</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>scp</tag>
+      
+      <tag>档案</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Fluid主题自定义界面使用markdown</title>
+    <link href="/posts/379e7120/"/>
+    <url>/posts/379e7120/</url>
+    
+    <content type="html"><![CDATA[<p>创建自定义界面时，使用以下格式即可，可继承hexo对markdown的特定渲染。</p><figure class="highlight applescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs applescript">&lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"markdown-body"</span>&gt;<br>正文<br>&lt;/<span class="hljs-keyword">div</span>&gt;<br><br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>博客折腾</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Fluid</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>未来计划</title>
+    <link href="/posts/db95087c/"/>
+    <url>/posts/db95087c/</url>
+    
+    <content type="html"><![CDATA[<h1 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h1><h2 id="1-顶级期刊"><a href="#1-顶级期刊" class="headerlink" title="1.顶级期刊"></a>1.顶级期刊</h2><p>**可以找老师要，上面论文要多看看，目前已知(待验证)**<strong>Computer Networks</strong></p><p><strong>Journal of Network and Computer Applications</strong></p><p><strong>International Journal of Communication Systems</strong></p><p><strong>Wireless Networks</strong></p><p><strong>Computer Communications</strong></p><h2 id="2-行业现实很重要"><a href="#2-行业现实很重要" class="headerlink" title="2.行业现实很重要"></a>2.行业现实很重要</h2><p><strong>（无论科研还是就业，①参考取景框看世界的专业和行业深度解读视频②各类机构针对该行业的最新行业报告注意是行业不是专业。)</strong></p><h2 id="3-AI大模型"><a href="#3-AI大模型" class="headerlink" title="3.AI大模型"></a>3.AI大模型</h2><p><strong>（Al工具：文心一言，讯飞星火，豆包，kimi等下集更详细）</strong></p><h2 id="4-多媒体技能"><a href="#4-多媒体技能" class="headerlink" title="4.多媒体技能"></a>4.多媒体技能</h2><p><strong>（首推：图片和视频处理。比较推荐做自媒体，只是推荐没说必须，自行选择哟。电脑上：Adobe全家桶中的PS和PR）</strong></p><h2 id="5-办公自动化技能"><a href="#5-办公自动化技能" class="headerlink" title="5.办公自动化技能"></a>5.办公自动化技能</h2><p><strong>（技能建议大家采用需求导向学习：先看入门的基础教程or教材，然后打住，具体运用中碰到实际问题再针对学习进阶的技巧和操作）</strong></p><h2 id="6-理工农科"><a href="#6-理工农科" class="headerlink" title="6.理工农科"></a>6.理工农科</h2><p><strong>（熟练掌握学科要求的软件还有编程]专业英语要打磨好哟，因为学校要求一般是SCI的英文期刊。）</strong></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>可以关注其他专业和自己专业的结合点针对展开其他领域的技能学习)</strong></p><h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p><strong>当我写下这份文档，过去的一切已与我彻底诀别，不顾过去，循此苦旅，直抵群星。       ——Dr.WillMo</strong></p><p>2024年8月31日</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>随笔</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>计划</tag>
+      
+      <tag>自我</tag>
+      
+      <tag>坚持</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>孤独之旅</title>
+    <link href="/posts/4553e66c/"/>
+    <url>/posts/4553e66c/</url>
+    
+    <content type="html"><![CDATA[<h1 id="孤独之旅"><a href="#孤独之旅" class="headerlink" title="孤独之旅"></a>孤独之旅</h1><p>PS:好友写的文，走向成熟与独立是我们每个人的必经之路，特此纪念。              ——WillMo</p><p>开学报告的那一天，公寓楼里楼外都挤满了许多的新生和他们的家长。家长们含辛茹苦地帮孩子打理了几乎所有的东西。</p><p>然而，这个来自遥远的南方的男孩却显得格格不入:蓬头垢面，孤零零一人拖着一堆的行李。在如山高的人海中，他是那么的矮小。</p><p>他独自笨拙地整理着床铺，独自为缺少的物资而发愁、奔波。他不善长打交道，面对一群“外地人”的追问，他只能木讷地笑笑。</p><p>他曾想要当一名好军训学员，可他今天却晕晕地发烧病倒了。</p><p>他曾以为“只要能吃就行”，可他吃下麻婆豆腐后嗓子被辣哑了。</p><p>他曾想为家里省下买书钱而一人劳碌了半天，可他的努力被“买书只能买一整套”的公告给撕碎了。</p><p>椰子树的身影不再，迎面而来的是挺拔的松、杉、柏木；南方的口音不再，四周充满着升调的北方口音；熟悉的朋友们不再，只能一个人慢慢地摸爬滚打……</p><p>“等待我的是什么呢？”他心想，“是将来有可能挂科的数学，内卷的焦虑，还是就业升学的彷徨?亦或者是各种生活上的烦恼……”</p><p>酸痛麻木的四肢和眩晕的大脑不允许他继续想下去了。梦里，他和曾经朝夕相伴的基友们一起，躺在小叶榄仁下，痴痴地望着天上的白云，看它们懒洋洋地<strong>聚拢、舒展，和飘散……</strong><br><a href="https://imgse.com/i/pAEFRbD"><img src="https://s21.ax1x.com/2024/08/30/pAEFRbD.jpg" alt="pAEFRbD.jpg"></a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>随笔</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>随感</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>二周目无伤游行大师</title>
+    <link href="/posts/5fcdfef9/"/>
+    <url>/posts/5fcdfef9/</url>
+    
+    <content type="html"><![CDATA[<p><strong>二周目无伤游行大师，也算是了结了类魂从未过无伤的遗憾。</strong></p><div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"> <iframe src="https://player.bilibili.com/player.html?isOutside=true&amp;aid=113001042546265&amp;bvid=BV1atWMeFENn&amp;cid=500001657555076&amp;p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;"></iframe></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>Game</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>lies of p</tag>
+      
+      <tag>游戏时刻</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>【实战演练】：绕过Cloudflare获取网站真实IP</title>
+    <link href="/posts/e39bfa4e/"/>
+    <url>/posts/e39bfa4e/</url>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>笔者暑假内卷累了，网上冲浪的时候发现了需求：</p><p><a href="https://imgse.com/i/pC7Bix1"><img src="https://s1.ax1x.com/2023/07/19/pC7Bix1.png" alt="pC7Bix1.png"></a>看起来还有一定的悬赏，所以试一试。<br>我已获得站长授权，属于合法测试。</p><h3 id="理论思路"><a href="#理论思路" class="headerlink" title="理论思路"></a>理论思路</h3><p>一个网站注定留下蛛丝马迹，具体思路可以是挖洞，搜索引擎（google hacking等），或者RSS邮箱泄密，我们试着第二种。<br>而对于三件套，这是用来查找在线服务的工具，就好比说shodan，与谷歌不同的，Shodan不是在网上搜索网址，而是直接进入互联网的背后通道。Shodan可以说是一款“黑暗”谷歌，一刻不停的在寻找着所有和互联网关联的服务器、摄像头、打印机、路由器等等。每个月Shodan都会在大约5亿个服务器上日夜不停地搜集信息。<br>信息收集————<a href="https://search.censys.io/">Censys</a>查DNS解析记录————网监三件套（<a href="https://www.shodan.io/">Shodan</a>，<a href="https://www.zoomeye.org/">钟馗之眼</a>，<a href="https://fofa.info/">Fofa</a>）————Nmap扫描端口————逐个排查————访问检验。</p><h3 id="实践开始"><a href="#实践开始" class="headerlink" title="实践开始"></a>实践开始</h3><p>测试目标：<a href="https://develxxxxx.com/%EF%BC%88%E4%BF%9D%E6%8A%A4%EF%BC%8C%E5%85%8D%E5%BE%97%E9%97%B2%E4%BA%BADDos%E6%90%9E%E4%BA%8B%EF%BC%89">https://develxxxxx.com/（保护，免得闲人DDos搞事）</a><br>笔者打开Censys，查了一波。<a href="https://imgse.com/i/pCTaDdH"><img src="https://s1.ax1x.com/2023/07/18/pCTaDdH.png" alt="pCTaDdH.png"></a>什么都没有<br>那就开三件套看看，我们首选Fofa，用起来方便些。先访问一下网站，出现了网站标题：<a href="https://imgse.com/i/pCTawLD"><img src="https://s1.ax1x.com/2023/07/18/pCTawLD.png" alt="pCTawLD.png"></a><br>看起来是一个Hexo的博客，那就以标题为切入点，在Fofa输入<code>title="Hexo" &amp;&amp; country="KR" &amp;&amp; region="Seoul"</code>弹出以下结果：<a href="https://imgse.com/i/pCTayFA"><img src="https://s1.ax1x.com/2023/07/18/pCTayFA.png" alt="pCTayFA.png"></a><br>很好，但一个个排查太浪费时间了，我们做一下<a href="https://port.hwcha.com/">端口扫描</a>，发现了一些开放端口，这会成为判断依据<a href="https://imgse.com/i/pCTaTFs"><img src="https://s1.ax1x.com/2023/07/18/pCTaTFs.png" alt="pCTaTFs.png"></a><br>将扫出来的端口键入搜索语句，有<code>title="Hexo" &amp;&amp; country="KR" &amp;&amp; region="Seoul" &amp;&amp; port="80"</code>这里调用80端口是因为其很常见，一般网站都会以此作为门户，得到了结果<a href="https://imgse.com/i/pCTarod"><img src="https://s1.ax1x.com/2023/07/18/pCTarod.png" alt="pCTarod.png"></a>发现158开头的很明显摆在了第二位，单机终端图标看看网站正文，发现了网站中相应的字样“主题，博主等”<a href="https://imgse.com/i/pCTdpk9"><img src="https://s1.ax1x.com/2023/07/18/pCTdpk9.png" alt="pCTdpk9.png"></a>，猜测得到验证，由此我们就得到了真实IP地址。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本站被暗黑引擎抓到了数据包，可能存在被绕过Cdn而Ddos攻击的风险。<br>感谢阅读！</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>渗透测试</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Hacking</tag>
+      
+      <tag>网安</tag>
+      
+      <tag>Cloudflare</tag>
+      
+      <tag>IP</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>《百年孤独》：拉美的呻吟</title>
+    <link href="/posts/986a860d/"/>
+    <url>/posts/986a860d/</url>
+    
+    <content type="html"><![CDATA[<h1 id="写在前面：本文将从魔幻现实主义的巅峰，拉美的历史，马孔多的百年，孤独的意义四个板块介绍世界名著《百年孤独》。全文字数较多，建议分段阅读。参考书籍：马尔克斯《百年孤独》斯塔夫利阿诺斯《全球通史》，陆春祥《印加帝国陨落的隐喻》"><a href="#写在前面：本文将从魔幻现实主义的巅峰，拉美的历史，马孔多的百年，孤独的意义四个板块介绍世界名著《百年孤独》。全文字数较多，建议分段阅读。参考书籍：马尔克斯《百年孤独》斯塔夫利阿诺斯《全球通史》，陆春祥《印加帝国陨落的隐喻》" class="headerlink" title="写在前面：本文将从魔幻现实主义的巅峰，拉美的历史，马孔多的百年，孤独的意义四个板块介绍世界名著《百年孤独》。全文字数较多，建议分段阅读。参考书籍：马尔克斯《百年孤独》斯塔夫利阿诺斯《全球通史》，陆春祥《印加帝国陨落的隐喻》"></a>写在前面：本文将从魔幻现实主义的巅峰，<strong>拉美的历史</strong>，马孔多的百年，孤独的意义四个板块介绍世界名著《百年孤独》。全文字数较多，建议分段阅读。参考书籍：马尔克斯《百年孤独》斯塔夫利阿诺斯《全球通史》，陆春祥《印加帝国陨落的隐喻》</h1><h2 id="金句摘抄"><a href="#金句摘抄" class="headerlink" title="金句摘抄"></a>金句摘抄</h2><p><font face="华文新魏" color="black" size="6">        1.生命中曾经有过的所有灿烂，原来终究，都需要用寂寞来偿还。</font></p><font face="华文新魏" color="black" size="6"><p>2.无论走到哪里，都应该记住，过去都是假的，回忆是一条没有尽头的路。</p><p>3.生命中真正重要的不是你遭遇了什么，而是你记住了哪些事，又是如何铭记的。</p><p>4.买下一张永久车票，登上一列永无终点的火车。</p><p>5.只是觉得人的内心苦楚无法言说，人的很多举措无可奈何，百年一参透，百年一孤寂。</p><p>6.平庸将你的心灵烘干到没有一丝水分，然后荣光才会拨动你心灵最深处的弦。</p><p>7.预感总是悠然来临，灵光一现，好像一种确凿无疑的信念在瞬间萌生却无从捕捉。</p><p>8.往日的推心置腹已经一去不返，同谋和交流变成敌意与缄默。</p><p>9.过去都是假的，回忆没有归路，春天总是一去不返，最疯狂执着的爱情也终究是过眼云烟。</p><p>10.很多人选择了向虚拟现实的魅力屈服，寄情于自我幻想，这纵然不切实际却更能与人安慰。</p><p>11.我们趋行在人生这个更古的旅途，在坎坷中奔跑，在挫折里涅盘忧愁缠满全身，痛苦飘洒一地我们累，却无从止歇；我们苦，却无法回避。</p><p>12.战争已经被扔进了存放悲惨记忆的高阁它仅仅在开启香槟酒的砰砰爆气里被偶尔提到。</p><p>13.此时微风初起；风中充盈着过往的群声喊喳，日日天竺葵的呢喃，无法排遣的怀念来临前的失望叹息。</p><p>14.一个幸福晚年的秘诀不是别的，而是与孤寂签订一个体面的协定。</p><p>15.一分钟的和好抵得过一辈子的友谊。</p><p>16.寂寞是造化对群居者的诅咒，孤独才是寂寞唯一出口。</p><p>17.多年以后，面对行刑队</p><p>奥雷里亚诺·布恩迪亚上校将会回想起父亲带他</p><p>去见识冰块的那个遥远的下午。</p><p>18.原来时间也会失误和出现意外，并因此迸裂，在某个房间留下永恒的片段。</p><p>19.死神一直追随他的脚步。嗅闻他的行踪，但尚未下定决心，给他最后一击。</p><p>20.“奥雷里亚诺”，他悲伤地敲下发报键，“马孔多在下雨。”</p><p>21.生命从来不曾离开过孤独而独立存在。无论是我们出生、我们成长、</p><p>22.我们相爱还是我们成功失败</p><p>直到最后的最后</p><p>孤独犹如影子一样存在于生命一隅。</p><p>羊皮卷上所载一切</p><p>自永远至永远不会在重复，</p><p>因为注定经受百年孤独的家族</p><p>不会有第二次机会在大地上出现。</p></font><p><font face="华文新魏" color="black" size="6">不到一百年，就不该有人知道其中的含义。<br></font></p><h2 id="魔幻现实主义的巅峰"><a href="#魔幻现实主义的巅峰" class="headerlink" title="魔幻现实主义的巅峰"></a>魔幻现实主义的巅峰</h2><p><font face="华文新魏" color="black" size="6"><img src="https://s1.ax1x.com/2022/08/13/vNtcFJ.jpg" alt="image"><br>《百年孤独》是哥伦比亚作家加西亚·马尔克斯创作的长篇小说，是其代表作，也是拉丁美洲魔幻现实主义文学的代表作，被誉为“再现拉丁美洲历史社会图景的鸿篇巨著””魔幻现实主义的巅峰之作“。<br>什么是魔幻现实主义？魔幻现实主义指的是20世纪的一种绘画，这种绘画用现实主义（REALISM）的精确来描绘物体，但是却悖论般地表现出一种由于对时空因素进行迥然不同的并置所致的奇异的效果，后继而成为一种文学艺术形式。魔幻现实主义来自于拉美，在黑暗的殖民统治下，这种表现手法被广泛用于揭露社会弊端，抨击社会现实，是顺应历史之流的产物。</font></p><hr><h2 id="拉美的历史"><a href="#拉美的历史" class="headerlink" title="拉美的历史"></a>拉美的历史</h2><p><font face="华文新魏" color="black" size="6">美洲坐落于世界西方，是世界上自然条件最为优越的大陆之一。它有着锯齿形的海岸线和大流量的运河。五大湖为森林提供了充足的水源，原始的自然环境为繁多的动植物提供了居所，全大陆地形较为平整，适宜居住。<br>据考察，3万年前，来自西伯利亚的人们穿过白令海来到阿拉斯加，成为了开垦美洲的先驱者。即使早期移民来自于经济不发达的地区，但经过数千年的耕耘，美洲印第安人发展了丰富多彩的种种文化，其中包括2000种截然不同的文字和不同形式的耕作制度。此外，印第安人培育了100多种植物，其中的南瓜,玉米，可可，花生在现代都是极为重要的作物。<br>美洲印第安人逐渐形成了三大文明：玛雅文明，阿兹特克文明和印加文明。<br>15世纪，哥伦布的船队发现了美洲，就此带来了枪炮，战争，掠夺，动荡和拉美的伤口。石质砍刀对上火枪和战马，倒下的只有印第安人的尸体。尸横遍野，印第安人试图用发达的宗教和文化掩盖技术上落后的事实，但西方人的炮火始终没有停止咆哮。<br>仅仅一小群冒险者就可以轻易推翻和根除三大文明，技术压制当然不是唯一因素。另外一个因素是，反抗的一方缺乏最起码的团结。被夹在两大洋之间的美洲不具备跨过大海与其他文明交流的能力，甚至各印第安文明之间也缺乏交流，因此没有相互影响.</font></p><font face="华文新魏" color="black" size="6"><blockquote><p>关于秘鲁和中美洲之间的相互关系，完全可以说，人们已经承认，在从形成期到西班牙人入侵这段漫长的时期内，所有证明这些地区之间存在着相互联系的实物或记录都是不可靠的。</p></blockquote></font><p><font face="华文新魏" color="black" size="6">硝烟过后，殖民者开始切割美洲的血管，用血腥的手去夺取血腥的财宝。欧洲列强对拉丁美洲实行了三次掠夺。<br>一是直接性掠夺：<br>1532年9月，殖民者皮萨罗对印加帝国发动战争，俘获了国王阿塔瓦尔帕，勒索了数万磅的真金白银。得到百分之二十分成的西班牙王室又加大战争拨款，给拉美的财富给予重创。手持枪炮的士兵把拉美的金银送到欧洲贵族的腰包里，用来装裱他们的城堡。<br>二是土地掠夺：在榨干拉美的金银之后，英国开始进行三角贸易，从非洲拉来的黑奴在拉美的土地上种植香蕉，烟草等让西方贵族满意的商品，再运到欧洲大肆出售。土地的过度利用和粮食作物的稀缺使拉美人民苦不堪言。<br>三是经济掠夺：长期被列强统治的拉美根本没有发展工业的机会，拉美就不可能制作自己的工艺品。而美洲人民只好依赖出口低级农产品勉强过活，但却不得不用十倍以上的价格买回欧洲的工艺品，列强的资本输出使得美洲更加贫困。<br>拉美的文明在外来侵略的浪潮中愈加贫困，丧失了出路和希望。</font></p><hr><h2 id="马孔多的百年"><a href="#马孔多的百年" class="headerlink" title="马孔多的百年"></a>马孔多的百年</h2><p><font face="华文新魏" color="black" size="6">《百年孤独》讲述了以何塞·阿尔卡蒂奥·布恩迪亚为首的乡亲在荒野之中开辟新家园“马孔多”的故事。随时代的改变，马孔多先后经历了兴盛与衰败，贫苦与富足，安定与动乱，繁华与死寂。而布恩迪亚家族的故事也在飓风的呼啸声和蚂蚁的啃咬声中走到了尽头，”一场突如其来的飓风把整个儿马孔多镇从地球上刮走，从此这个村镇就永远地消失了。</font></p><h2 id="孤独的意义"><a href="#孤独的意义" class="headerlink" title="孤独的意义"></a>孤独的意义</h2><p>  <font face="华文新魏" color="black" size="5">作者马尔克斯出生于哥伦比亚，他在见证了拉美令人哭泣和绝望的历史后写下了这部荒诞的家族史，因此，《百年孤独》很大程度上是拉美历史的缩影。从何塞·阿尔卡蒂奥·布恩迪亚的玻璃城市梦境和布恩迪亚家族的抗争史中可知，《百年孤独》的主题便是孤独与绝望，孤独在绝望中愈演愈烈，绝望在孤独中肆意生长。<br>   孤独这一主题是在书中的描写中揭示的。书中极少对家族成员之间的交流进行描写，展示在我们面前的好像是一个没有感情，没有信任，没有了解的可悲家庭。孤独是布恩迪亚家族的家徽，每位家庭成员不由自主地佩戴它，而他们在试图摆脱孤独时又被孤独束缚住了手脚，最后的结果不是在无尽的空虚中了结了自己就是再次被扔回到孤独的深海中去，家族的创始人何塞·阿尔卡蒂奥·布恩迪亚晚年因为思想守旧，在面对新事物时又被孤独击败，疯癫地成为树下的可怜虫；奥雷里亚诺上校一生经历了32场战争，遭遇14次暗杀，73次埋伏，后因战争的不明意义试图开枪自杀。<br>    绝望来自于失败，而失败源于抗争，布恩迪亚家族史可以说是一部抗争史。在故事的开始，夫妻二人就为了逃避骂声和偏见而开辟马孔多；后人又在为了某些东旭（尊严，自由，金钱）而抗争。上校起初以自由为口号发动战争，后才发觉自己是在用权力和战火掩饰自己的胆怯，仅仅是为了尊严而开枪；何塞·阿尔卡蒂奥第二引领工人运动，为工人利益而斗争······而这些英雄般的斗争，也最终迎来了结局：自由党上校的全线投降和3000名工人横七竖八的尸体···，人们在失败中绝望，在绝望中更加孤独。但有一人例外，与孤独斗争许久的乌尔苏拉被认为是家族精神的代表，她竭力反抗，想尽一切办法联合家族和马孔多，但依然没有成效和出路，最终在晚年被岁月追上，化作尘土。<br> 书中有两个值得注意的细节：一是上校的同僚马尔克斯上校与作者同名。像对马孔多一样，马尔克斯也见证了拉美的历史。却又对苟延残喘的拉美爱莫能助。二是家族中重复命名的每一代人都没有重复上一代人所做的事，但都无一例外地迎来了失败的结局。<br> 本书最大的手法就是以小见大，马孔多已不仅仅是荒野中的一个小镇，更是整个拉美文明的代表。同时拥有富饶的自然资源和广大贫苦人民的拉美是畸形的，也是可悲的。鲁迅说：“悲剧就是将有价值的东西毁灭给人看。”西方殖民者三次掠夺美洲，以枪炮掏空美洲的内脏，压迫着拉美的人民。面对外来文化，拉美人民不是没有抗争过，而是像书中的重复命名一样：尽管方式各不相同，但最终躲不开封建主义和资本主义的打击，逃不掉失败的命运。这也许就是为什么羊皮卷上写的：“家族的第一个人被绑在树上死去，最后一个人被蚂蚁吃掉。”有如此强的宿命感。黑格尔说：“人类从历史中学到的唯一教训，就是没有从历史中吸取到任何教训。”书中“失眠症”的后果就是失忆。拉美越来越多年轻人开始忘记拉美那段屈辱而血腥的历史，再加上在少数人的别有用心，拉美的历史逐渐不被人提起，成为历史的悲剧。</font><br> <font face="华文新魏" color="black" size="6">马尔克斯上校看着窗外的大雨说：“马孔多在下雨。”这场雨到现在都没有停，而真正造成在场雨的人不知道，也不在乎。</font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>拾遗阁</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Book</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>

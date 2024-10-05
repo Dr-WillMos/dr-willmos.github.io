@@ -1,0 +1,7 @@
+//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/qipao.js
+
+//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/caidai.js
+
+//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/yinghua.js
+
+//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/timeDate.js
