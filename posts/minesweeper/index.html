@@ -1,0 +1,921 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="扫雷开发笔记思维导图 流程图 难度设置简单：9*9 10雷 中级： 16*16 40雷 困难 ： 20*20  70雷 完整代码见Github仓库，如果喜欢可以点个Star。 写在前面我们使用了二位数组来实现扫雷，因Easyx库使用了C++的库且C++已适配绝大部分C语言的语法，所以我们提交的是.cpp文件，并封装了exe文件，可以直接双击运行。 开发环境使用IDE：VS 2022 项目属性：使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="扫雷开发笔记">
+<meta property="og:url" content="http://example.com/posts/minesweeper/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="扫雷开发笔记思维导图 流程图 难度设置简单：9*9 10雷 中级： 16*16 40雷 困难 ： 20*20  70雷 完整代码见Github仓库，如果喜欢可以点个Star。 写在前面我们使用了二位数组来实现扫雷，因Easyx库使用了C++的库且C++已适配绝大部分C语言的语法，所以我们提交的是.cpp文件，并封装了exe文件，可以直接双击运行。 开发环境使用IDE：VS 2022 项目属性：使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/12/12/pUmrKvMqWwcASfd.png">
+<meta property="article:published_time" content="2024-12-12T15:39:35.880Z">
+<meta property="article:modified_time" content="2024-12-26T05:41:33.424Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="开发">
+<meta property="article:tag" content="项目">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2024/12/12/pUmrKvMqWwcASfd.png">
+  
+  
+  
+  <title>扫雷开发笔记 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/12/12/vi1h3mL2CdgD86T.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="扫雷开发笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-12-12 15:39" pubdate>
+          2024年12月12日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          76 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">扫雷开发笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="扫雷开发笔记"><a href="#扫雷开发笔记" class="headerlink" title="扫雷开发笔记"></a>扫雷开发笔记</h1><h3 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h3><p><img src="https://s2.loli.net/2024/12/12/I9y8N2B4luAZMUC.png" srcset="/img/loading.gif" lazyload alt="扫雷游戏开发(1)"></p>
+<h2 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h2><p><img src="https://s2.loli.net/2024/12/13/bCRM3mutWTE7QV1.png" srcset="/img/loading.gif" lazyload alt=".png"></p>
+<h2 id="难度设置"><a href="#难度设置" class="headerlink" title="难度设置"></a>难度设置</h2><p>简单：9*9 10雷</p>
+<p>中级： 16*16 40雷</p>
+<p>困难 ： 20*20  70雷</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><p>见<a target="_blank" rel="noopener" href="https://github.com/Dr-WillMos/Minesweeper">Github仓库</a>，如果喜欢可以点个Star。</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>我们使用了二位数组来实现扫雷，因Easyx库使用了C++的库且C++已适配绝大部分C语言的语法，所以我们提交的是.cpp文件，并封装了exe文件，可以直接双击运行。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>使用IDE：VS 2022</p>
+<p>项目属性：使用多字节字符集</p>
+<p>C语言标准：C89</p>
+<h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;easyx.h&gt;</span>  <span class="hljs-comment">// EasyX图形库，安装方式请见官网文档</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;time.h&gt;</span>       <span class="hljs-comment">//计时库</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;windows.h&gt;</span> <span class="hljs-comment">//windows的库，用于获取时间戳</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX_ROW 20</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX_COL 20       <span class="hljs-comment">//以最大雷区作为常量</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> IMG_SIZE 40     <span class="hljs-comment">// 这个数字用于实现从二维数组到游戏窗口的坐标转化</span></span><br><br>IMAGE img[<span class="hljs-number">13</span>];           <span class="hljs-comment">// 以数组的方式引入图片</span><br><span class="hljs-type">int</span> mine[MAX_ROW + <span class="hljs-number">2</span>][MAX_COL + <span class="hljs-number">2</span>];  <span class="hljs-comment">//+2是为了解决边缘问题</span><br><span class="hljs-type">int</span> num = <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> mx;<br><span class="hljs-type">int</span> my;<br><span class="hljs-type">int</span> ROW = <span class="hljs-number">16</span>, COL = <span class="hljs-number">16</span>, MINE_NUM = <span class="hljs-number">40</span>;<br><br><span class="hljs-comment">//定义时间常量</span><br><span class="hljs-type">time_t</span> start_time;<br><span class="hljs-type">time_t</span> current_time;<br><span class="hljs-type">int</span> elapsed_time;<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>时间戳：</strong>时间戳是使用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/212550?fromModule=lemma_inlink">数字签名</a>技术产生的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE/5947370?fromModule=lemma_inlink">数据</a>，因为程序的运行时间不同，时间戳也会不断变化，我们使用它作为生成随机数的种子。</p>
+<h2 id="游戏初始化模块（gameInit"><a href="#游戏初始化模块（gameInit" class="headerlink" title="游戏初始化模块（gameInit)"></a>游戏初始化模块（gameInit)</h2><h3 id="开始界面停留"><a href="#开始界面停留" class="headerlink" title="开始界面停留"></a>开始界面停留</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs C">initgraph(IMG_SIZE * ROW + <span class="hljs-number">240</span>, IMG_SIZE * COL);  <span class="hljs-comment">//创建游戏窗口</span><br><span class="hljs-type">int</span> mid1 = (IMG_SIZE * ROW + <span class="hljs-number">240</span>) / <span class="hljs-number">2</span>;<br><span class="hljs-type">int</span> mid2 = (IMG_SIZE * COL) / <span class="hljs-number">2</span>;<br><span class="hljs-type">int</span> y_length = IMG_SIZE * COL;<br><span class="hljs-type">int</span> x_length = IMG_SIZE * ROW + <span class="hljs-number">240</span>;<br><br>settextstyle(<span class="hljs-number">30</span>, <span class="hljs-number">0</span>, _T(<span class="hljs-string">"宋体"</span>));         <span class="hljs-comment">//这里是以字符的左上角作为坐标基准</span><br>settextcolor(WHITE);<br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* text = <span class="hljs-string">"开始"</span>;<br><br><span class="hljs-comment">// 获取字符串的宽度和高度</span><br><span class="hljs-type">int</span> textWidth = textwidth(text);<br><span class="hljs-type">int</span> textHeight = textheight(text);<br><br><span class="hljs-comment">// 计算字符串的中央位置</span><br><span class="hljs-type">int</span> centerX = x_length / <span class="hljs-number">2</span> - textWidth / <span class="hljs-number">2</span>;<br><span class="hljs-type">int</span> centerY = y_length / <span class="hljs-number">2</span> - textHeight / <span class="hljs-number">2</span>;<br><br><br>cleardevice();<br><br>outtextxy(centerX, centerY, text);<br><br><br><span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {<br>    ExMessage em;<br>    <span class="hljs-keyword">if</span> (peekmessage(&amp;em, EX_MOUSE)) {<br>        <span class="hljs-keyword">if</span> (em.message == WM_LBUTTONDOWN) {<br>            <span class="hljs-keyword">if</span> (em.x &gt;= centerX &amp;&amp; em.x &lt;= centerX + textWidth &amp;&amp;<br>                em.y &gt;= centerY &amp;&amp; em.y &lt;= centerY + textHeight) {     <span class="hljs-comment">// 点击开始（处于坐标范围内），否则用户永远卡在该循环内。</span><br>                <span class="hljs-keyword">break</span>;<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>这里使通过点击处是否处于字符坐标区间内来判定是否开始。</p>
+<h3 id="初始化计时器"><a href="#初始化计时器" class="headerlink" title="初始化计时器"></a>初始化计时器</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// 初始化计时器</span><br>start_time = time(<span class="hljs-literal">NULL</span>);<br>current_time = start_time;<br>elapsed_time = <span class="hljs-number">0</span>;<br><br><span class="hljs-comment">// 设置字体和颜色</span><br>settextstyle(<span class="hljs-number">20</span>, <span class="hljs-number">0</span>, _T(<span class="hljs-string">"宋体"</span>));<br>settextcolor(RGB(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>));<br>outtextxy(IMG_SIZE * ROW + <span class="hljs-number">20</span>, <span class="hljs-number">20</span>, _T(<span class="hljs-string">"Time: "</span>));<br></code></pre></td></tr></tbody></table></figure>
+
+<p>这里没什么好说的。</p>
+<h3 id="加载图片"><a href="#加载图片" class="headerlink" title="加载图片"></a>加载图片</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// 加载图片</span><br><span class="hljs-type">char</span> buf[<span class="hljs-number">260</span>] = <span class="hljs-string">""</span>;      <span class="hljs-comment">//用于存储图片路径</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">12</span>; ++i) {<br>    <span class="hljs-built_in">memset</span>(buf, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(buf));<span class="hljs-comment">//每次循环前，使用 memset 函数将 buf 数组清零</span><br>    sprintf_s(buf, <span class="hljs-string">"./img/%d.jpg"</span>, i);  <span class="hljs-comment">//将路径格式化</span><br>    loadimage(&amp;img[i], buf, IMG_SIZE, IMG_SIZE);<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>memset函数能够快速填充空字符来清楚buff数组。</p>
+<h3 id="随机数种子"><a href="#随机数种子" class="headerlink" title="随机数种子"></a>随机数种子</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C">LARGE_INTEGER frequency;<br>LARGE_INTEGER start;<br>QueryPerformanceFrequency(&amp;frequency);<br>QueryPerformanceCounter(&amp;start);<br>srand((<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>)(start.QuadPart));<br></code></pre></td></tr></tbody></table></figure>
+
+<p>以当前时间戳来作为生成随机数的种子，使得在短时间内多次启动程序生成的随机数都是不同的。</p>
+<h3 id="生成雷区"><a href="#生成雷区" class="headerlink" title="生成雷区"></a>生成雷区</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">int</span> row, col;<br><span class="hljs-built_in">memset</span>(mine, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(mine));  <span class="hljs-comment">// 清空雷区</span><br><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; MINE_NUM;) {  <span class="hljs-comment">//随机生成雷</span><br>    row = rand() % ROW + <span class="hljs-number">1</span>;<br>    col = rand() % COL + <span class="hljs-number">1</span>;        <span class="hljs-comment">//rand函数，1-9之间随机生成值</span><br>    <span class="hljs-keyword">if</span> (mine[row][col] == <span class="hljs-number">0</span>) {<br>        mine[row][col] = <span class="hljs-number">9</span>;      <span class="hljs-comment">//9表示地雷</span><br>        ++i;<br>    }<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="更新格子数据"><a href="#更新格子数据" class="headerlink" title="更新格子数据"></a>更新格子数据</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// 更新周围数字（九宫格内雷的数量）</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; ROW; ++i) {<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; COL; ++j) {<br>        <span class="hljs-keyword">if</span> (mine[i][j] == <span class="hljs-number">9</span>) {<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a = i - <span class="hljs-number">1</span>; a &lt;= i + <span class="hljs-number">1</span>; ++a) {<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> b = j - <span class="hljs-number">1</span>; b &lt;= j + <span class="hljs-number">1</span>; ++b) {<br>                    <span class="hljs-keyword">if</span> (mine[a][b] != <span class="hljs-number">9</span>) {<br>                        mine[a][b]++;<br>                    }<br>                }<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="数据偏移加密"><a href="#数据偏移加密" class="headerlink" title="数据偏移加密"></a>数据偏移加密</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// 给所有格子加上偏移量，防止与被翻开格子冲突，也是加密数据的一种表现</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; ROW + <span class="hljs-number">1</span>; ++i) {<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; COL + <span class="hljs-number">1</span>; ++j) {<br>        mine[i][j] += <span class="hljs-number">20</span>;  <span class="hljs-comment">//只有显示为29的才是雷，在20-28之间的都是非雷格子，点击翻开格子和递归翻开格子的操作就是-20</span><br>    }<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+
+<p>类似于凯撒密码，但这里的偏移值为20</p>
+<h2 id="游戏胜利判断模块-isOver"><a href="#游戏胜利判断模块-isOver" class="headerlink" title="游戏胜利判断模块(isOver)"></a>游戏胜利判断模块(isOver)</h2><h3 id="检查是否踩到雷"><a href="#检查是否踩到雷" class="headerlink" title="检查是否踩到雷"></a>检查是否踩到雷</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">bool</span> isHitMine = <span class="hljs-literal">false</span>;  <span class="hljs-comment">//布尔型变量，只有0和1两种形式（即true和flase）</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; ROW + <span class="hljs-number">1</span>; ++i) {<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; COL + <span class="hljs-number">1</span>; ++j) {<br>        <span class="hljs-keyword">if</span> (mine[i][j] == <span class="hljs-number">9</span> &amp;&amp; (mine[i][j] &lt; <span class="hljs-number">20</span> || mine[i][j] &gt; <span class="hljs-number">29</span>)) {  <span class="hljs-comment">// 雷被翻开</span><br>            isHitMine = <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">break</span>;<br>        }<br>    }<br>    <span class="hljs-keyword">if</span> (isHitMine) <span class="hljs-keyword">break</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>布尔型变量：其只有0和1两种形式，即flase和true，常作为条件判断。</p>
+<h3 id="重置计数器并弹出消息盒子"><a href="#重置计数器并弹出消息盒子" class="headerlink" title="重置计数器并弹出消息盒子"></a>重置计数器并弹出消息盒子</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// 如果踩雷</span><br><span class="hljs-keyword">if</span> (isHitMine) {<br>    <span class="hljs-type">int</span> ok = MessageBox(GetHWnd(), <span class="hljs-string">"还要排雷吗"</span>, <span class="hljs-string">"你没了"</span>, MB_OKCANCEL);  <span class="hljs-comment">//easyx的函数，弹出消息盒子</span><br>    <span class="hljs-keyword">if</span> (ok == IDOK) {<br>        <span class="hljs-comment">// 重置雷区</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; ROW + <span class="hljs-number">1</span>; ++i) {<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; COL + <span class="hljs-number">1</span>; ++j) {<br>                <span class="hljs-keyword">if</span> (mine[i][j] == <span class="hljs-number">9</span>) {<br>                    mine[i][j] += <span class="hljs-number">20</span>;         <span class="hljs-comment">// 将雷标记为已翻开</span><br>                }<br>            }<br>        }<br>        num = <span class="hljs-number">0</span>;<br>        start_time = time(<span class="hljs-literal">NULL</span>);        <span class="hljs-comment">// 重置游戏开始时间</span><br>        elapsed_time = <span class="hljs-number">0</span>;                    <span class="hljs-comment">// 重置计时器</span><br>        gameInit();                        <span class="hljs-comment">// 重新初始化雷区和图像</span><br>    }<br>    <span class="hljs-keyword">else</span> {<br>        <span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);  <span class="hljs-comment">// 退出游戏</span><br>    }<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+
+<p><code>exit(-1);</code>：终止当前进程。</p>
+<h3 id="检查非雷格子被翻开"><a href="#检查非雷格子被翻开" class="headerlink" title="检查非雷格子被翻开"></a>检查非雷格子被翻开</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">int</span> uncoveredNonMine = <span class="hljs-number">0</span>;            <span class="hljs-comment">//翻开的非雷格子数量</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; ROW + <span class="hljs-number">1</span>; ++i) {<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; COL + <span class="hljs-number">1</span>; ++j) {<br>        <span class="hljs-keyword">if</span> (mine[i][j] &lt; <span class="hljs-number">20</span> &amp;&amp; mine[i][j] != <span class="hljs-number">9</span>) {          <span class="hljs-comment">// 非雷且已翻开</span><br>            uncoveredNonMine++;<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="游戏绘制模块-gameDraw"><a href="#游戏绘制模块-gameDraw" class="headerlink" title="游戏绘制模块 (gameDraw)"></a>游戏绘制模块 (gameDraw)</h2><h3 id="对指定格子进行贴图"><a href="#对指定格子进行贴图" class="headerlink" title="对指定格子进行贴图"></a>对指定格子进行贴图</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; ROW + <span class="hljs-number">1</span>; ++i) {<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; COL + <span class="hljs-number">1</span>; ++j) {<br>        <span class="hljs-type">int</span> x = (j - <span class="hljs-number">1</span>) * IMG_SIZE;<br>        <span class="hljs-type">int</span> y = (i - <span class="hljs-number">1</span>) * IMG_SIZE;<br>        <span class="hljs-keyword">if</span> (mine[i][j] &gt;= <span class="hljs-number">0</span> &amp;&amp; mine[i][j] &lt;= <span class="hljs-number">9</span>) {<br>            putimage(x, y, &amp;img[mine[i][j]]);<br>        }<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mine[i][j] &gt;= <span class="hljs-number">20</span> &amp;&amp; mine[i][j] &lt; <span class="hljs-number">30</span>) {<br>            putimage(x, y, &amp;img[<span class="hljs-number">10</span>]);<br>        }<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mine[i][j] &gt; <span class="hljs-number">29</span>) {<br>            putimage(x, y, &amp;img[<span class="hljs-number">11</span>]);<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="显示计数器"><a href="#显示计数器" class="headerlink" title="显示计数器"></a>显示计数器</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs C">    <span class="hljs-comment">// 显示计时器</span><br>    <span class="hljs-type">char</span> time_str[<span class="hljs-number">20</span>];<br>    sprintf_s(time_str, <span class="hljs-string">"%d s"</span>, elapsed_time);<br>    settextcolor(RGB(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>));<br>    outtextxy(IMG_SIZE * ROW + <span class="hljs-number">80</span>, <span class="hljs-number">20</span>, _T(<span class="hljs-string">"     "</span>));<br>    settextcolor(RGB(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>));<br>    outtextxy(IMG_SIZE * ROW + <span class="hljs-number">110</span>, <span class="hljs-number">20</span>, time_str);<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="递归展开格子模块（openNUll）"><a href="#递归展开格子模块（openNUll）" class="headerlink" title="递归展开格子模块（openNUll）"></a>递归展开格子模块（openNUll）</h2><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-keyword">if</span> (mine[r][c] == <span class="hljs-number">0</span>) {<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = r - <span class="hljs-number">1</span>; i &lt;= r + <span class="hljs-number">1</span>; ++i) {<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = c - <span class="hljs-number">1</span>; j &lt;= c + <span class="hljs-number">1</span>; ++j) {<br>            <span class="hljs-keyword">if</span> ((mine[i][j] == <span class="hljs-number">20</span> || mine[i][j] != <span class="hljs-number">29</span>) &amp;&amp; mine[i][j] &gt; <span class="hljs-number">9</span>) {<br>                mine[i][j] -= <span class="hljs-number">20</span>;<br>                num++;<br>                openNUll(i, j);<br>            }<br>        }<br>    }<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="开始菜单模块-showMenu"><a href="#开始菜单模块-showMenu" class="headerlink" title="开始菜单模块(showMenu)"></a>开始菜单模块(showMenu)</h2><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs C">initgraph(<span class="hljs-number">400</span>, <span class="hljs-number">300</span>);  <span class="hljs-comment">// 创建菜单窗口</span><br>setbkcolor(WHITE);<br>cleardevice();<br><br>settextstyle(<span class="hljs-number">20</span>, <span class="hljs-number">0</span>, _T(<span class="hljs-string">"宋体"</span>));<br>settextcolor(BLACK);<br>outtextxy(<span class="hljs-number">150</span>, <span class="hljs-number">50</span>, _T(<span class="hljs-string">"选择游戏难度："</span>));<br>outtextxy(<span class="hljs-number">150</span>, <span class="hljs-number">100</span>, _T(<span class="hljs-string">"1. 简单"</span>));<br>outtextxy(<span class="hljs-number">150</span>, <span class="hljs-number">140</span>, _T(<span class="hljs-string">"2. 中等"</span>));<br>outtextxy(<span class="hljs-number">150</span>, <span class="hljs-number">180</span>, _T(<span class="hljs-string">"3. 困难"</span>));<br><br><span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {<br>    ExMessage em;<br>    <span class="hljs-keyword">if</span> (peekmessage(&amp;em, EX_MOUSE)) {<br>        <span class="hljs-keyword">if</span> (em.message == WM_LBUTTONDOWN) {<br>            <span class="hljs-keyword">if</span> (em.x &gt; <span class="hljs-number">150</span> &amp;&amp; em.x &lt; <span class="hljs-number">250</span> &amp;&amp; em.y &gt; <span class="hljs-number">100</span> &amp;&amp; em.y &lt; <span class="hljs-number">120</span>) {     <span class="hljs-comment">// 点击简单（处于坐标范围内）</span><br>                ROW = <span class="hljs-number">9</span>;<br>                COL = <span class="hljs-number">9</span>;<br>                MINE_NUM = <span class="hljs-number">10</span>;<br>                <span class="hljs-keyword">break</span>;<br>            }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (em.x &gt; <span class="hljs-number">150</span> &amp;&amp; em.x &lt; <span class="hljs-number">250</span> &amp;&amp; em.y &gt; <span class="hljs-number">140</span> &amp;&amp; em.y &lt; <span class="hljs-number">160</span>) {   <span class="hljs-comment">// 点击中等</span><br>                ROW = <span class="hljs-number">16</span>;<br>                COL = <span class="hljs-number">16</span>;<br>                MINE_NUM = <span class="hljs-number">40</span>;<br>                <span class="hljs-keyword">break</span>;<br>            }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (em.x &gt; <span class="hljs-number">150</span> &amp;&amp; em.x &lt; <span class="hljs-number">250</span> &amp;&amp; em.y &gt; <span class="hljs-number">180</span> &amp;&amp; em.y &lt; <span class="hljs-number">200</span>) {    <span class="hljs-comment">// 点击困难</span><br>                ROW = <span class="hljs-number">20</span>;<br>                COL = <span class="hljs-number">20</span>;<br>                MINE_NUM = <span class="hljs-number">70</span>;<br>                <span class="hljs-keyword">break</span>;<br>            }<br>        }<br>    }<br>}<br>closegraph();  <span class="hljs-comment">// 关闭菜单窗口</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="侧边栏提示模块-tips"><a href="#侧边栏提示模块-tips" class="headerlink" title="侧边栏提示模块(tips)"></a>侧边栏提示模块(tips)</h2><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C">current_time = time(<span class="hljs-literal">NULL</span>);<br>elapsed_time = (<span class="hljs-type">int</span>)(current_time - start_time);<br><br><span class="hljs-type">char</span> time_str[<span class="hljs-number">20</span>];<br>sprintf_s(time_str, <span class="hljs-string">"%d s"</span>, elapsed_time);<br><br>settextcolor(RGB(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>));         <span class="hljs-comment">//设置时间字体颜色。</span><br>outtextxy(IMG_SIZE * ROW + <span class="hljs-number">85</span>, <span class="hljs-number">20</span>, time_str);                 <span class="hljs-comment">//easyx的输出</span><br>outtextxy(IMG_SIZE * ROW + <span class="hljs-number">15</span>, <span class="hljs-number">50</span>, _T(<span class="hljs-string">"鼠标左键：翻开格子"</span>));<br>outtextxy(IMG_SIZE * ROW + <span class="hljs-number">15</span>, <span class="hljs-number">80</span>, _T(<span class="hljs-string">"鼠标右键：标记地雷"</span>));<br>outtextxy(IMG_SIZE * ROW + <span class="hljs-number">15</span>, <span class="hljs-number">110</span>, _T(<span class="hljs-string">"所有的非雷格子都被打开"</span>));<br>outtextxy(IMG_SIZE * ROW + <span class="hljs-number">15</span>, <span class="hljs-number">140</span>, _T(<span class="hljs-string">"才算游戏胜利"</span>));<br>outtextxy(IMG_SIZE * ROW + <span class="hljs-number">15</span>, <span class="hljs-number">170</span>, _T(<span class="hljs-string">"祝你游戏愉快"</span>));<br><br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="鼠标消息处理模块-mouseClick"><a href="#鼠标消息处理模块-mouseClick" class="headerlink" title="鼠标消息处理模块(mouseClick)"></a>鼠标消息处理模块(mouseClick)</h2><h3 id="左键点击并保护雷区"><a href="#左键点击并保护雷区" class="headerlink" title="左键点击并保护雷区"></a>左键点击并保护雷区</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> firstClick = <span class="hljs-literal">true</span>;  <span class="hljs-comment">// 用一个变量标记是否为第一次点击</span><br>ExMessage em;                                 <span class="hljs-comment">//Easyx函数存储消息</span><br><span class="hljs-keyword">if</span> (peekmessage(&amp;em, EX_MOUSE)) {<br>    mx = em.y / IMG_SIZE + <span class="hljs-number">1</span>;<br>    my = em.x / IMG_SIZE + <span class="hljs-number">1</span>;<br><br>    <span class="hljs-keyword">if</span> (em.lbutton) {          <span class="hljs-comment">// 鼠标左键点击</span><br>        <span class="hljs-keyword">if</span> (firstClick) {<br>            firstClick = <span class="hljs-literal">false</span>;  <span class="hljs-comment">// 标记第一次点击已完成，准备随机布雷。</span><br><br>            <span class="hljs-comment">// 生成雷区并保护第一次点击及其周围，不能在周围生成雷</span><br>            <span class="hljs-type">int</span> protectedRow = mx;<br>            <span class="hljs-type">int</span> protectedCol = my;           <span class="hljs-comment">//获取鼠标点击位置。</span><br><br>            <span class="hljs-comment">// 随机生成雷区</span><br>            <span class="hljs-type">int</span> row, col;<br>            <span class="hljs-built_in">memset</span>(mine, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(mine));  <span class="hljs-comment">// 清空雷区，清除gameinit函数的第一次结果</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; MINE_NUM;) {<br>                row = rand() % ROW + <span class="hljs-number">1</span>;<br>                col = rand() % COL + <span class="hljs-number">1</span>;<br><br>                <span class="hljs-comment">// 跳过第一次点击区域及其周围九宫格</span><br>                <span class="hljs-keyword">if</span> (row &gt;= protectedRow - <span class="hljs-number">1</span> &amp;&amp; row &lt;= protectedRow + <span class="hljs-number">1</span> &amp;&amp;<br>                    col &gt;= protectedCol - <span class="hljs-number">1</span> &amp;&amp; col &lt;= protectedCol + <span class="hljs-number">1</span>) {<br>                    <span class="hljs-keyword">continue</span>;<br>                }<br><br>                <span class="hljs-keyword">if</span> (mine[row][col] == <span class="hljs-number">0</span>) {<br>                    mine[row][col] = <span class="hljs-number">9</span>;  <span class="hljs-comment">// 9 表示地雷</span><br>                    ++i;<br>                }<br>            }<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="更新周围数据"><a href="#更新周围数据" class="headerlink" title="更新周围数据"></a>更新周围数据</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// 更新周围数字</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; ROW + <span class="hljs-number">1</span>; ++i) {<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; COL + <span class="hljs-number">1</span>; ++j) {<br>        <span class="hljs-keyword">if</span> (mine[i][j] == <span class="hljs-number">9</span>) {<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a = i - <span class="hljs-number">1</span>; a &lt;= i + <span class="hljs-number">1</span>; ++a) {<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> b = j - <span class="hljs-number">1</span>; b &lt;= j + <span class="hljs-number">1</span>; ++b) {<br>                    <span class="hljs-keyword">if</span> (mine[a][b] != <span class="hljs-number">9</span>) {<br>                        mine[a][b]++;<br>                    }<br>                }<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="加密数据"><a href="#加密数据" class="headerlink" title="加密数据"></a>加密数据</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; ROW + <span class="hljs-number">1</span>; ++i) {<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; COL + <span class="hljs-number">1</span>; ++j) {<br>        mine[i][j] += <span class="hljs-number">20</span>;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="翻开格子"><a href="#翻开格子" class="headerlink" title="翻开格子"></a>翻开格子</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C">    <span class="hljs-keyword">if</span> (mine[mx][my] &gt; <span class="hljs-number">9</span>) {<br>        mine[mx][my] -= <span class="hljs-number">20</span>;<br>        openNUll(mx, my);<br>        num++;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="右键标记功能"><a href="#右键标记功能" class="headerlink" title="右键标记功能"></a>右键标记功能</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C">        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (em.rbutton) {  <span class="hljs-comment">// 鼠标右键标记</span><br>            <span class="hljs-keyword">if</span> (mine[mx][my] &gt; <span class="hljs-number">9</span> &amp;&amp; mine[mx][my] &lt;= <span class="hljs-number">29</span>) {<br>                mine[mx][my] += <span class="hljs-number">20</span>;<br>            }<br>            <span class="hljs-keyword">else</span> {<br>                mine[mx][my] -= <span class="hljs-number">20</span>;<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="主函数部分（main）"><a href="#主函数部分（main）" class="headerlink" title="主函数部分（main）"></a>主函数部分（main）</h2><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br>    showMenu();<br>    gameInit();<br>    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {          <span class="hljs-comment">//不断循环保证数据随时更新</span><br>        tips();<br>        mouseClick();<br>        gameDraw();<br>        isOver();<br>    }<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="整体原理"><a href="#整体原理" class="headerlink" title="整体原理"></a>整体原理</h2><ul>
+<li><strong>菜单的调用</strong>程序从 <code>main</code>函数开始执行，首先调用 <code>showMenu</code>函数创建一个菜单窗口，展示不同难度选项供玩家选择，玩家通过鼠标点击相应区域确定游戏难度（简单、中等、困难），对应不同的行数、列数和雷的数量设置。</li>
+<li><strong>初始化操作</strong>选择完难度后，<code>gameInit</code>函数被调用，进行多方面的初始化操作。先是利用 <code>initgraph</code>初始化图形界面，设置好窗口大小并准备显示游戏内容。接着初始化计时器，记录游戏开始时间，用于后续统计游戏用时。同时，加载游戏中所需的各类图片资源，像代表数字、空白格、地雷等不同状态的图片。然后，生成雷区布局，通过获取合适的随机数种子，按照设定好的雷数，在排除首次点击及其周边九宫格范围的情况下，随机放置地雷，并根据地雷分布更新周围格子所对应的周边地雷数量，最后通过给每个格子数据添加偏移量的方式对雷区数据进行加密处理，便于后续判断格子状态和展开操作。</li>
+<li><strong>界面更新与提示</strong>：在游戏运行的主循环（<code>main</code>函数中的 <code>while (true)</code>循环）里，每次循环都会调用 <code>tips</code>函数来更新游戏界面右侧的提示信息，包括显示游戏耗时以及告知玩家鼠标左右键的操作功能（左键翻开格子、右键标记地雷等），让玩家清楚游戏进展情况和操作方法。</li>
+<li><strong>鼠标交互处理</strong>：<code>mouseClick</code>函数负责处理鼠标消息。对于鼠标左键点击，若为首次点击，会保护点击位置及其九宫格区域不布雷，随后生成雷区、更新周围雷数并加密雷区；若非首次点击，会根据点击格子的状态进行相应处理，比如翻开空白格及递归展开其周围空白格，同时统计翻开格子数量。对于鼠标右键点击，则是实现对格子进行标记地雷或取消标记的功能，通过改变对应格子存储的数据来体现标记状态的切换。</li>
+<li><strong>界面绘制展示</strong>：<code>gameDraw</code>函数根据雷区二维数组中每个格子的数据值，确定要在对应位置绘制的图片（例如对应数字的图片、空白格图片、地雷图片等），将雷区当前的状态直观展示在游戏窗口上，同时更新显示游戏的计时器信息，实时呈现游戏的状态变化。</li>
+<li><strong>游戏结束判断</strong>：<code>isOver</code>函数负责判断游戏是否结束，分为失败和胜利两种情况。通过遍历雷区数组，判断是否有雷被翻开以此来确定是否踩雷，若踩雷则弹出消息框询问玩家是否继续游戏，继续则重置相关状态重新开始，取消则退出游戏。同时，会统计已翻开的非雷格子数量，当该数量等于总格子数减去雷数时，判定游戏胜利，同样弹出消息框让玩家选择继续游戏或者退出，选择继续就重置状态重新初始化游戏，选择退出则直接结束程序。</li>
+</ul>
+<h2 id="开发过程出现的BUG和解决思路"><a href="#开发过程出现的BUG和解决思路" class="headerlink" title="开发过程出现的BUG和解决思路"></a>开发过程出现的BUG和解决思路</h2><p><strong>1.开头暴雷</strong></p>
+<p>第一个解决思路是开头暴雷后重新排雷，结果出现了内存溢出的错误，第二个思路是先不排雷，在第一次点击的地方生成保护区，再开始排雷。笔者引入了一个bool值，解决了该问题。</p>
+<p><strong>2.重新开始后失去开头保护</strong></p>
+<p>一开始的解决思路是使用goto，但这会降低代码可读性，也不符合编译标准。所以，我编写了一个新的函数<code>restartgame</code>来重置游戏，这个思路被证实能够完美地解决该问题。</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>这可能是一个很拙劣的游戏源码，但编写他花了我和我的组员很多时间，如果喜欢，别忘了点个<a target="_blank" rel="noopener" href="https://github.com/Dr-WillMos/Minesweeper">Star</a>,谢谢。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/" class="category-chain-item">网络工程</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Game/" class="category-chain-item">Game</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BC%96%E7%A8%8B/">#编程</a>
+      
+        <a href="/tags/%E5%BC%80%E5%8F%91/">#开发</a>
+      
+        <a href="/tags/%E9%A1%B9%E7%9B%AE/">#项目</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/2024/" title="2024这一年">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2024这一年</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/shell_sort/" title="希尔排序：基于插入算法的改进版本">
+                        <span class="hidden-mobile">希尔排序：基于插入算法的改进版本</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
