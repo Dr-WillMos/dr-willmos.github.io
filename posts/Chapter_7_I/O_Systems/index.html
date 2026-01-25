@@ -1,0 +1,1032 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第七章：输入输出系统除了CPU和主存之外的设备都是外围设备，简称外设。 每个外设都有各自的控制器，也可以称为I&#x2F;O接口。   机械硬盘（磁盘）主存的存储速度很快，但是属于易失性存储器，断电后容易丢失，而且每个sRAM造价很高。 所以我们需要外存来长期存取数据。  机械硬盘的构造如下：   位密度：单位长度内存放的二进制数目。 扇区：就是数学意义上的扇形。    对比维度 低密度存储（恒定扇区数）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第七章：输入输出系统">
+<meta property="og:url" content="http://example.com/posts/Chapter_7_I/O_Systems/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="第七章：输入输出系统除了CPU和主存之外的设备都是外围设备，简称外设。 每个外设都有各自的控制器，也可以称为I&#x2F;O接口。   机械硬盘（磁盘）主存的存储速度很快，但是属于易失性存储器，断电后容易丢失，而且每个sRAM造价很高。 所以我们需要外存来长期存取数据。  机械硬盘的构造如下：   位密度：单位长度内存放的二进制数目。 扇区：就是数学意义上的扇形。    对比维度 低密度存储（恒定扇区数）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png">
+<meta property="article:published_time" content="2026-01-25T04:29:05.813Z">
+<meta property="article:modified_time" content="2026-01-25T04:29:06.537Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机组成原理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png">
+  
+  
+  
+  <title>第七章：输入输出系统 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第七章：输入输出系统"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-25 04:29" pubdate>
+          2026年1月25日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          45 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">第七章：输入输出系统</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第七章：输入输出系统"><a href="#第七章：输入输出系统" class="headerlink" title="第七章：输入输出系统"></a>第七章：输入输出系统</h1><p><strong>除了CPU和主存之外的设备都是外围设备，简称外设。</strong></p>
+<p><strong>每个外设都有各自的控制器，也可以称为I/O接口。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/w5n4WmeQM8ukvhS.png" srcset="/img/loading.gif" lazyload alt="image-20260103171311870"></p>
+<p><img src="https://s2.loli.net/2026/01/03/sxUPBrVwR2jHkt3.png" srcset="/img/loading.gif" lazyload alt="image-20260103171324998"></p>
+<h3 id="机械硬盘（磁盘）"><a href="#机械硬盘（磁盘）" class="headerlink" title="机械硬盘（磁盘）"></a>机械硬盘（磁盘）</h3><p><strong>主存的存储速度很快，但是属于易失性存储器，断电后容易丢失，而且每个sRAM造价很高。</strong></p>
+<p><strong>所以我们需要外存来长期存取数据。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/MLmA3YdI9th1zaQ.png" srcset="/img/loading.gif" lazyload alt="image-20260103171657999"></p>
+<p><strong>机械硬盘的构造如下：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/DyFe5Efni2PtKXm.png" srcset="/img/loading.gif" lazyload alt="image-20260103172127430"></p>
+<p><img src="https://s2.loli.net/2026/01/03/FiuyprHkNgE5Ic6.png" srcset="/img/loading.gif" lazyload alt="image-20260103172144628"></p>
+<p><strong>位密度：单位长度内存放的二进制数目。</strong></p>
+<p><strong>扇区：就是数学意义上的扇形。</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>对比维度</strong></th>
+<th><strong>低密度存储（恒定扇区数）</strong></th>
+<th><strong>高密度存储（恒定位密度）</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>分区方式</strong></td>
+<td><strong>将盘面划分为数量相等</strong>的扇形区域</td>
+<td><strong>将盘面划分为弧长相等</strong>的扇形区域</td>
+</tr>
+<tr>
+<td><strong>位密度特性</strong></td>
+<td><strong>内圈位密度高，外圈位密度低磁盘整体位密度不均</strong></td>
+<td><strong>内外圈位密度保持一致磁盘整体位密度恒定</strong></td>
+</tr>
+<tr>
+<td><strong>扇区数量</strong></td>
+<td><strong>每个磁道上的扇区数量相同</strong></td>
+<td><strong>外圈磁道的扇区数量远多于</strong>内圈磁道</td>
+</tr>
+<tr>
+<td><strong>优点</strong></td>
+<td><strong>控制逻辑相对简单（早期技术）</strong></td>
+<td><strong>大幅提升存储容量</strong>，更好地利用外圈空间</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td><strong>存储空间浪费严重（外圈位密度低）</strong></td>
+<td><strong>需要更复杂的磁头和控制算法来读写不同数量的扇区</strong></td>
+</tr>
+</tbody></table>
+<p><img src="https://s2.loli.net/2026/01/03/FYM7WGjiQDgo16B.png" srcset="/img/loading.gif" lazyload alt="image-20260103172530927"></p>
+<p><img src="https://s2.loli.net/2026/01/03/CWQpsovG29xJTi1.png" srcset="/img/loading.gif" lazyload alt="image-20260103172922303"></p>
+<h3 id="磁盘的平均存取时间"><a href="#磁盘的平均存取时间" class="headerlink" title="磁盘的平均存取时间"></a>磁盘的平均存取时间</h3><p><strong>一次存取的时间由三部分时间构成：</strong></p>
+<ul>
+<li><strong>寻道时间：磁头从当前位置移动到目标数据所在磁道</strong>所需的时间</li>
+<li><strong>旋转等待时间：磁头到达目标磁道后，等待磁盘旋转，使目标扇区转到磁头下方</strong>所需的时间</li>
+<li><strong>数据传输时间：目标扇区位于磁头下方后，实际读取或写入数据</strong>所花费的时间</li>
+</ul>
+<p><strong>以上三种时间都有最好和最坏情况，只能取平均，作为评判磁盘性能的指标给到消费者。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/ov7DYAjzFEtgJfN.png" srcset="/img/loading.gif" lazyload alt="image-20260103181015576"></p>
+<p><strong>看一道例题：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/6JodCpTe7qyB1KW.png" srcset="/img/loading.gif" lazyload alt="image-20260103181213967"></p>
+<p><img src="https://s2.loli.net/2026/01/03/TGatJglLS5mE1ob.png" srcset="/img/loading.gif" lazyload alt="image-20260103181739046"></p>
+<h3 id="磁盘驱动器和控制器"><a href="#磁盘驱动器和控制器" class="headerlink" title="磁盘驱动器和控制器"></a>磁盘驱动器和控制器</h3><p><strong>CPU的寄存器很小，需要配合主存来控制磁盘。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/UOHNn3wzV6x97vs.png" srcset="/img/loading.gif" lazyload alt="image-20260103183142943"></p>
+<p><strong>CPU的机器字长是4个字节，那么一共512B的数据就需要传128次（我指的是128个周期），数据经过CPU后放到主存这种传输效率是比较慢的。</strong></p>
+<p><strong>位于主机和磁盘之间的是磁盘控制器，能够翻译地址。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/fKF5axiTOsUHJRW.png" srcset="/img/loading.gif" lazyload alt="image-20260103183533070"></p>
+<p><strong>具体流程如下：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/wsuWtLRXF583EQV.png" srcset="/img/loading.gif" lazyload alt="image-20260103184002764"></p>
+<p><strong>首先，主机通过总线将逻辑块号发送到磁盘控制器翻译地址，同时将主存中的数据的头32位数据传到数据缓冲寄存器。磁盘控制器的电路发出写控制信号，地址翻译模块将翻译后的地址发送到磁盘驱动器进行寻道，完毕后发回结束信号，随即磁头开始定位并匹配，匹配后发回信号，控制器发送写命令，开始读写数据。数据缓冲寄存器的数据送到磁头，主句再将后续的数据经过数据缓冲寄存器写到磁盘。</strong></p>
+<p><strong>总结一下：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/NQOYBethqoXvaVZ.png" srcset="/img/loading.gif" lazyload alt="image-20260103184937070"></p>
+<h3 id="固态硬盘（SSD）"><a href="#固态硬盘（SSD）" class="headerlink" title="固态硬盘（SSD）"></a>固态硬盘（SSD）</h3><p><strong>比机械硬盘更快，但是很贵。</strong></p>
+<p><strong>固态硬盘使用半导体材料制成，是高密度非易失。型存储。但是读取能够马上读取，写需要先擦除再写入，写速度和磁盘差不多，而且擦写是有寿命的</strong></p>
+<p><strong>固态硬盘是用页和块来分区的，CPU通过硬盘控制器来实现对硬盘的管理。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/z8bUte5pBSKvXL3.png" srcset="/img/loading.gif" lazyload alt="image-20260103185343981"></p>
+<p><strong>为了解决擦写寿命短的问题，硬盘控制器引入了磨损均衡，分为两种</strong></p>
+<ul>
+<li><strong>动态磨损均衡：写入数据时，自动选择较新的闪存块。</strong></li>
+<li><strong>静态磨损均衡：就算没有数据写入，SSD也会检测并自动进行数据分配，让老的闪存块承担无须写数据的存储任务，同时让新的闪存块腾出空间，承担平常的写操作。</strong></li>
+</ul>
+<h3 id="IO模块的通用接口"><a href="#IO模块的通用接口" class="headerlink" title="IO模块的通用接口"></a>IO模块的通用接口</h3><p><strong>无论是磁盘还是硬盘以及其他的外设，我们都可以把他们的控制器称作是IO接口。</strong></p>
+<p><strong>他们具有一些通用特性，请回忆计网那本书的内容。</strong></p>
+<p><strong>主机想要访问某一设备时，IO桥会将目标设备号广播，直到目标外设回应</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/zJmniI1E8oPtMGp.png" srcset="/img/loading.gif" lazyload alt="image-20260103200325016"></p>
+<p><strong>这意味着IO接口要和主机通讯，IO接口中有数据缓冲寄存器，设备状态寄存器，命令控制寄存器等寄存器用数据总线与主机相连。还有设备选择电路用地址总线与主机相连，还有IO控制电路用控制总线与主机相连。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/ApQm3jRyLU67Y9F.png" srcset="/img/loading.gif" lazyload alt="image-20260103200929408"></p>
+<p><strong>比如打印机的IO运行模式：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/BO1XKYaembcAzqr.png" srcset="/img/loading.gif" lazyload alt="image-20260103201032975"></p>
+<p><strong>现在需要把主存中的ABC三个字符打印出来。</strong></p>
+<p><strong>CPU发送启动命令，打印机命令译码器分析，启动打印机，状态寄存器设置为就绪，随即主存的A暂存在eax寄存器，读出打印机为就绪状态，A和打印命令通过数据总线传送到打印机，译码器分析后打印机开始工作，状态设置为busy，CPU将B传到eax寄存器之后不断检查打印机状态，如果为就绪就继续下一个字母。</strong></p>
+<p><strong>循环这个流程，直到完全打印完毕。</strong></p>
+<p><strong>IO端口的编址有独立编址和统一编址。</strong></p>
+<p><strong>独立编址就是基于总线并独立于主存地址，给每个外设分配一个地址，操作时加上OUT或INSERT等关键词来表示对IO设备的操作。这种方式因为IO设备数量不多，寻址快，但是只有输入输出，灵活性差。</strong></p>
+<p><strong>统一编址就是将主存的一部分地址拿出来分配给IO设备，常被精简指令集采用，不需要设置专门的IO指令，只需要经典的访存指令就能满足需求，CPU会自动根据地址的区间来判断具体的操作设备。</strong></p>
+<h3 id="IO程序查询方式"><a href="#IO程序查询方式" class="headerlink" title="IO程序查询方式"></a>IO程序查询方式</h3><p><strong>我们上个例子说到，打印机忙碌时，CPU不断检查打印机状态，这就是一种独占查询方式，CPU必须干等着，利用率很低，即使实时性无可比拟。</strong></p>
+<p><strong>定时查询方式</strong>：CPU启动I/O后，<strong>返回执行正常程序</strong>。同时，一个定时器被设定，每隔固定时间（如每毫秒）产生一次中断，CPU在中断处理程序中查询一次设备状态。利用率较高，但是存在延迟。</p>
+<p><strong>我们以鼠标为例子：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/04/oe9k4mbB37gYTD6.png" srcset="/img/loading.gif" lazyload alt="image-20260104075518671"></p>
+<p><strong>再以硬盘为例子：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/04/rqW4KEkgCPU78ab.png" srcset="/img/loading.gif" lazyload alt="image-20260104075649177"></p>
+<p><strong>所以：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/04/tBURdVDMc4f2N7r.png" srcset="/img/loading.gif" lazyload alt="image-20260104075718827"></p>
+<p><strong>但是我们希望时外设自己执行完命令就主动通知CPU，而不是CPU是不是就要去看一样，那样就可以实现并行运行。</strong></p>
+<p><del>就像我希望老师可以在讲完后主动提醒我这节课签到而不是我一直盯着智慧课堂看他签不签到。</del></p>
+<h3 id="IO程序中断控制方式"><a href="#IO程序中断控制方式" class="headerlink" title="IO程序中断控制方式"></a>IO程序中断控制方式</h3><p><strong>I/O（输入/输出）程序中断控制方式是计算机管理中一种关键的数据交换机制。它的核心思想是变被动等待为主动通知</strong>：CPU启动I/O设备后便可继续执行原有任务，当设备完成操作时主动“打断”CPU，CPU再转去处理这次I/O请求，从而极大提升了工作效率。</p>
+<p><strong>初始化与并行工作</strong>：CPU执行一条I/O指令，启动外部设备（如磁盘读取）。之后，CPU<strong>不再等待</strong>，而是立即返回执行其主程序。此时，<strong>CPU和设备处于并行工作状态</strong>。</p>
+<p><strong>中断请求与响应</strong>：当设备完成数据准备后，它会通过中断请求线向CPU发出一个<strong>中断请求信号</strong>。CPU并非随时响应，而是在<strong>当前指令执行周期结束时</strong>，才会检查是否有中断请求。如果请求有效且未被屏蔽，CPU则会响应中断。</p>
+<p><strong>核心处理与数据传送</strong>：响应中断后，CPU通过<strong>中断向量表</strong>自动定位并执行对应的<strong>中断服务程序</strong>。ISR的核心任务包括从I/O设备的数据寄存器中读取一个字（或字节）的数据，并最终将其存入内存。</p>
+<p><strong>收尾与返回</strong>：数据传送完成后，ISR<strong>中断服务例程</strong>会执行<strong>中断返回指令</strong>。该指令能自动恢复之前保存的现场，使CPU跳回主程序的断点处继续执行</p>
+<p><strong>这一次我们以键盘为例</strong></p>
+<p><img src="https://s2.loli.net/2026/01/05/UprKDSndwVE39Xx.png" srcset="/img/loading.gif" lazyload alt="image-20260105151315875"></p>
+<p><strong>假设当前CPU正在执行某一程序的某条指令D，下一条指令程序的地址是0x1234，也就是说PC里的地址是0x1234。这时你在键盘上输入了一个字母a，字母a被送到数据寄存器中，同时IO控制电路发送高电平刀中断触发器中，随后CPU在执行完毕指令D之后给中断触发器发送一个中断查询信号，看看有没有外设向CPU发送中断请求。随机中断触发器通过控制总线发送中断信号发送到CPU的中断系统，随即CPU知道键盘有新数据产生，现在需要优先处理键盘数据，所以CPU会执行键盘中断程序。将PC中的值0x1234移动到栈内存中，然后将PC的值设置为键盘中断程序的首条指令的地址0x8888，开始执行程序，键盘中断程序将输入的a移动到主存并将其显示到显示器当中。当键盘中断程序结束后，PC再取回存在栈内存中的0x1234继续执行原程序。</strong></p>
+<blockquote>
+<p><strong>网课还讲了打印机和鼠标的例子，但是没有补充</strong></p>
+</blockquote>
+<p><strong>这种方式一些问题，一个是中断触发器分布在多个IO接口中难以管理，而且cpu一次只能响应一次中断请求，这就产生了类似总线总裁的问题。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/05/q985RLPj6hondiv.png" srcset="/img/loading.gif" lazyload alt="image-20260105154448281"></p>
+<p><strong>为了解决这个问题，就有了中断控制器，内置介个中断请求寄存器，接到每个外设的中断触发器中。控制器在接收到CPU的中断查询信号时，会将已接收的中断请求通过中断判优电路排序优先级，再通过设备编码器返回编码后的向量地址（存储地址）。</strong></p>
+<p><strong>插播一下跳转，每个子程序的头指令的地址都会放在主存的某个地方并且有一个相应的地址与之对应，比如上图中0x6666对应地址0xCCCC，对应程序打印机中断服务程序。</strong></p>
+<p><strong>比如现在鼠标发出一个中断信号，经过判别电路和编码器生成的中断向量地址0x665F，随后PC值会被转移到栈内存，PC值更新为0x665F，执行，跳转到0x8888，执行鼠标中断服务程序。</strong></p>
+<h3 id="中断控制的条件和步骤"><a href="#中断控制的条件和步骤" class="headerlink" title="中断控制的条件和步骤"></a>中断控制的条件和步骤</h3><p><img src="https://s2.loli.net/2026/01/05/zIursPeDJ6x5fhE.png" srcset="/img/loading.gif" lazyload alt="image-20260105162424392"></p>
+<p><strong>整个过程分为三部</strong></p>
+<ul>
+<li><strong>中断识别和判优</strong></li>
+<li><strong>中断响应</strong></li>
+<li><strong>中断处理</strong></li>
+</ul>
+<p><strong>CPU响应中断是有条件的</strong></p>
+<ul>
+<li><strong>至少有一个中断请求</strong></li>
+<li><strong>当前指令刚刚执行完</strong></li>
+<li><strong>CPU处于开中断状态</strong></li>
+</ul>
+<p><strong>指令执行完CPU才会发送中断查询信号。</strong></p>
+<h4 id="中断识别与判优"><a href="#中断识别与判优" class="headerlink" title="中断识别与判优"></a>中断识别与判优</h4><p><strong>CPU执行某一条指令完毕时，中断控制器接收到CPU发送的中断查询请求，内部集合，判优，编码中断请求，并发回到CPU中去。</strong></p>
+<h4 id="中断响应"><a href="#中断响应" class="headerlink" title="中断响应"></a>中断响应</h4><p><strong>通过中断隐指令完成，中断隐指令不是一个真正的指令，而是CPU一个自动完成的流程。</strong></p>
+<p><strong>中断隐指令：</strong></p>
+<ul>
+<li><strong>关中断</strong></li>
+<li><ul>
+<li><strong>一个标志，因为CPU一时间只能处理一个请求，当关中断尾关时，CPU不再接收新的请求。</strong></li>
+</ul>
+</li>
+<li><strong>断点与程序状态</strong></li>
+<li><ul>
+<li><strong>断点其实就是当前PC的值，处理中断的时候断点会被放到EPC寄存器（MIPS）或者栈内存（x86）中。程序状态将存放在CPU的标志寄存器中去</strong></li>
+</ul>
+</li>
+<li><strong>寻找中断服务程序入口地址并跳转</strong></li>
+<li><ul>
+<li><strong>就是根据中断控制器传入的向量地址找到中断程序的首条指令的地址</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="中断处理阶段"><a href="#中断处理阶段" class="headerlink" title="中断处理阶段"></a>中断处理阶段</h4><p><strong>中断处理涉及到控制流程的转移，那么就需要关注原来执行的程序A。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/05/zCwQLdKkjgh8e73.png" srcset="/img/loading.gif" lazyload alt="image-20260105162726978"></p>
+<p><strong>鼠标中断服务程序执行完了CPU要回到程序A继续执行，就分为以下几个流程。</strong></p>
+<ul>
+<li><strong>保护现场</strong></li>
+<li><ul>
+<li><strong>在刚进入中断服务程序时，通过软件（如PUSH指令）将当前所有通用寄存器（如EAX, EBX等）和程序状态字的值压入系统堆栈保存 。</strong></li>
+</ul>
+</li>
+<li><strong>恢复现场</strong></li>
+<li><ul>
+<li><strong>在中断服务程序结束前，通过软件（如POP指令）将之前压栈的寄存器值按相反顺序弹出到原来的寄存器中 。</strong></li>
+</ul>
+</li>
+<li><strong>开中断</strong></li>
+<li><ul>
+<li><strong>在恢复现场操作之后、执行中断返回指令之前，使用STI等指令将中断标志位重新置位。这通常在中断服务程序的最后阶段进行。</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>整体流程：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/05/EkAob6QTqgP4uD2.png" srcset="/img/loading.gif" lazyload alt="image-20260105163544780"></p>
+<p><strong>以上描述的是单中断，以下我们探讨多重中断（嵌套中断）</strong></p>
+<h3 id="多重中断和中断屏蔽字"><a href="#多重中断和中断屏蔽字" class="headerlink" title="多重中断和中断屏蔽字"></a>多重中断和中断屏蔽字</h3><p><strong>多重中断：是指当CPU正在执行某个中断服务程序时，另一个中断源又提出了新的中断请求，而CPU又响应了这个请求，暂时停止正在的中断服务程序，转去执行新的中断服务程序。</strong></p>
+<p><strong>多重中断的</strong>“关中断”的状态并不是整个中断处理过程中不可改变的，操作系统可以通过软件指令在关键时刻“开中断”，从而允许更高优先级的中断嵌入。</p>
+<p><strong>比如，现在是CPU正在运行鼠标中断服务程序，CPU为了能够接收更高级的中断请求将关中断设置为开</strong>，随即将鼠标中断服务程序的断电保存到其他地方去，执行键盘中断程序，这就实现了多重中断。</p>
+<p><img src="https://s2.loli.net/2026/01/05/3SHTqmkvrKGo9l8.png" srcset="/img/loading.gif" lazyload alt="image-20260105201502482"></p>
+<p><strong>但是这么做就需要保证：只有优先级更高的中断源请求才可以中断比其级别低的中断服务程序，反之则不然。</strong></p>
+<p><strong>要完成这个逻辑就需要引入中断屏蔽字。</strong></p>
+<p><strong>中断屏蔽字：一组二进制代码，用来控制CPU是否响应某个中断源发出的请求，从而实现对中断处理顺序的精细管理。</strong></p>
+<p><strong>比如有以下四个中断源，那就需要完成这样的逻辑</strong></p>
+<p><img src="https://s2.loli.net/2026/01/05/dJNaEMf5gPS1ryw.png" srcset="/img/loading.gif" lazyload alt="image-20260105202252241"></p>
+<p><strong>我们就需要这样的中断屏蔽字来实现，在这里，1就是不接受对应外设的中断请求。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/05/JQUXfpA1uZPc8Te.png" srcset="/img/loading.gif" lazyload alt="image-20260105202941209"></p>
+<p><strong>那么硬件具体如何实现？</strong></p>
+<p><img src="https://s2.loli.net/2026/01/05/GldteyJAUcrowDp.png" srcset="/img/loading.gif" lazyload alt="image-20260105203324449"></p>
+<p><strong>如图，中断控制器内置一个中断屏蔽字寄存器，现在CPU正在执行C的中断服务程序，当B传出中断请求，控制器的判优电路认为B优先级低，CPU不会响应B的指令。如果是A发送请求，那根据判优电路，A的优先级高，C的断电被保存，控制流程转移，开始执行A的中断服务程序。A的中断服务程序执行完后，开始执行C的中断服务程序。</strong></p>
+<h3 id="磁盘的中断控制"><a href="#磁盘的中断控制" class="headerlink" title="磁盘的中断控制"></a>磁盘的中断控制</h3><p><img src="https://s2.loli.net/2026/01/05/9tFe58ShHjLykBC.png" srcset="/img/loading.gif" lazyload alt="image-20260105204530798"></p>
+<h2 id="DMA控制方式"><a href="#DMA控制方式" class="headerlink" title="DMA控制方式"></a>DMA控制方式</h2><p><strong>DMA（Direct Memory Access，直接内存访问）是一项重要的计算机技术，它允许外部设备（如硬盘、网卡）与计算机内存之间直接进行数据交换，而无需中央处理器（CPU）频繁介入。</strong></p>
+<p><strong>DMA接口可以位于任何外设当中，比如有能力绕过CPU将数据从磁盘直接移动到主存中，从而减轻CPU开销。</strong></p>
+<p><strong>DMA接口又名DMA控制器，内部构成是：</strong></p>
+<ul>
+<li><strong>AR：Address Register，主存地址寄存器</strong></li>
+<li><strong>WC：Word Count，字计数器</strong></li>
+<li><strong>BR：Buffer Register，数据缓冲寄存器</strong></li>
+<li><strong>DAR：Device Address Register，设备地址寄存器</strong></li>
+<li><strong>其他控制逻辑</strong></li>
+</ul>
+<p><img src="https://s2.loli.net/2026/01/05/JfW9bdP6VX7NeBw.png" srcset="/img/loading.gif" lazyload alt="image-20260105211356026"></p>
+<p><strong>如图CPU将操作参数传至DMA控制器中后，磁盘准备好一个字的数据传到DMA的BR中，同时发送DMA请求，DMA控制逻辑发送总线申请，主存控制器允许使用总线，DMA发送主存地址和主存读写命令，一个字的数据被传到主存，最后DMA控制逻辑授予磁盘一个DMA周期，主存地址AR和WC也要相应变化，为下一个字做准备。最后发送DMA中断请求，CPU接受后执行DMA中断服务，开始检查传输是否有误等后续工作。</strong></p>
+<p><strong>如果有时候DMA准备使用主存时，CPU已经使用主存。这就产生了冲突。</strong></p>
+<p><strong>解决的第一种方法就是DMA夺权：DMA就会向CPU提出申请让他取消使用主存让出总线控制权，DMA获取控制器完成数据传输后会将控制权还给CPU。但是这种方法会导致CPU在DMA使用总线时进入什么都不做的空窗期。</strong></p>
+<p><strong>第二种是周期挪用：IO设备挪用或者窃取总线占用权一个或几个贮存周期。DMA仅在需要传输数据时</strong>“借用”一个或几个总线周期。若CPU不使用总线，则无冲突；若冲突，则DMA优先（这个时候BR已经是满的，IO设备再等会触发BR覆写，原有数据丢失会导致整体传输失败）</p>
+<p><strong>第三种是DMA和CPU交替访问：将CPU的工作周期强制分时</strong>，一部分专供DMA访存，另一部分专供CPU访存，这样会扩大存储周期</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/Chapter_6_CPU/" title="第六章：中央处理器">
+                        <span class="hidden-mobile">第六章：中央处理器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

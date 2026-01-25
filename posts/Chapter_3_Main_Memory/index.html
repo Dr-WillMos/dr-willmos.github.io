@@ -1,0 +1,1163 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第三章：主存储器 思维导图   数电内容在此略过 寄存器就是能够存储一定位数的二进制位的电子元件 机器字长:CPU一次能够处理的数据的位数，与CPU的寄存器位数有关  bus是读口，RA和RB是输入要读的寄存器的编号，busW是写口，配合CLK时钟信号和WE使能端，RW写入寄存器地址，往寄存器内写入信息。 主存储器存储原理一个字节等于8位二进制，这是计算机普遍适用的规律 也就是1B &#x3D; 8Bit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三章：主存储器">
+<meta property="og:url" content="http://example.com/posts/Chapter_3_Main_Memory/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="第三章：主存储器 思维导图   数电内容在此略过 寄存器就是能够存储一定位数的二进制位的电子元件 机器字长:CPU一次能够处理的数据的位数，与CPU的寄存器位数有关  bus是读口，RA和RB是输入要读的寄存器的编号，busW是写口，配合CLK时钟信号和WE使能端，RW写入寄存器地址，往寄存器内写入信息。 主存储器存储原理一个字节等于8位二进制，这是计算机普遍适用的规律 也就是1B &#x3D; 8Bit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png">
+<meta property="article:published_time" content="2026-01-25T04:13:07.204Z">
+<meta property="article:modified_time" content="2026-01-25T04:13:08.033Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机组成原理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png">
+  
+  
+  
+  <title>第三章：主存储器 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第三章：主存储器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-25 04:13" pubdate>
+          2026年1月25日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          39 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">第三章：主存储器</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第三章：主存储器"><a href="#第三章：主存储器" class="headerlink" title="第三章：主存储器"></a>第三章：主存储器</h1><blockquote>
+<p><strong>思维导图</strong></p>
+</blockquote>
+<p><img src="https://s2.loli.net/2025/11/21/f7iHGPU1R2rqdWI.png" srcset="/img/loading.gif" lazyload alt="image-20251121200709266"></p>
+<p><strong>数电内容在此略过</strong></p>
+<p><strong>寄存器就是能够存储一定位数的二进制位的电子元件</strong></p>
+<p><strong>机器字长:CPU一次能够处理的数据的位数，与CPU的寄存器位数有关</strong></p>
+<p><img src="https://s2.loli.net/2025/11/21/BDoebIykMr1qTwn.png" srcset="/img/loading.gif" lazyload alt="image-20251121203419264"></p>
+<p><strong>bus是读口，RA和RB是输入要读的寄存器的编号，busW是写口，配合CLK时钟信号和WE使能端，RW写入寄存器地址，往寄存器内写入信息。</strong></p>
+<h2 id="主存储器存储原理"><a href="#主存储器存储原理" class="headerlink" title="主存储器存储原理"></a>主存储器存储原理</h2><p><strong>一个字节等于8位二进制</strong>，这是计算机普遍适用的规律</p>
+<p><strong>也就是1B = 8Bit</strong></p>
+<p><strong>所以有 1024B = 1KB</strong></p>
+<p><strong>1024KB = 1MB</strong></p>
+<p><strong>在计算机内部是1024为进率</strong></p>
+<p><strong>所以4GB = 4 * 1024 * 1024* 1024 /8B</strong></p>
+<p><strong>= 2 ^ 29个存储字</strong></p>
+<p><strong>平时下载速度不是波特率而是比特率。</strong></p>
+<h3 id="ROM"><a href="#ROM" class="headerlink" title="ROM"></a>ROM</h3><blockquote>
+<p><strong>只读，正常工作时只能读出数据，切断电源信息也不会消失，存储不经常改变的信息</strong></p>
+</blockquote>
+<p><img src="https://s2.loli.net/2025/11/21/LO6qcgJ5PReWCm2.png" srcset="/img/loading.gif" lazyload alt="image-20251121204505080"></p>
+<p><strong>掩膜只读寄存器（Mask ROM）</strong></p>
+<p><strong>掩膜ROM由地址译码器和存储都阵列两部分组成，结构如下：</strong></p>
+<p><img src="https://s2.loli.net/2025/11/21/KI98ynX1V7te5Ez.png" srcset="/img/loading.gif" lazyload alt="image-20251121205143797"></p>
+<p><strong>可以看到，先是一个3-8译码器直接连接CPU，并且四根位线与8根字字选择线相交，并且在某些交点用二极管链接，那么输入地址和数据输出就是以下关系：</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>A2</strong></th>
+<th><strong>A1</strong></th>
+<th><strong>A0</strong></th>
+<th><strong>F0</strong></th>
+<th><strong>F1</strong></th>
+<th><strong>F2</strong></th>
+<th><strong>F3</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+</tr>
+</tbody></table>
+<p><strong>3根地址线，有2^3=8个地址，每个地址存</strong> <strong>放4位二进制，总容量8*4=32bit</strong></p>
+<p><strong>一次性读出来4位二进制称作一个存储字（存储单元），存储字长就是4，</strong></p>
+<p><strong>存储元：存储一个位的电路</strong></p>
+<p><strong>如果有10根地址线，8根位线，那就是2^10 * 8 = 1K * 8 = 1KB</strong></p>
+<p><strong>存储信息只读，这就是为什么使用二极管链接。</strong></p>
+<h3 id="可编程ROM"><a href="#可编程ROM" class="headerlink" title="可编程ROM"></a>可编程ROM</h3><p><strong>可编程只读存储器（PROM）</strong></p>
+<p><img src="https://s2.loli.net/2025/11/21/2EfpSO3lKcWazxL.png" srcset="/img/loading.gif" lazyload alt="image-20251121210807957"></p>
+<p><strong>存储元改为使用熔丝链接，熔丝只能允许一次数据交换，之后便会自行熔断，所以只能写入一次。</strong></p>
+<p><strong>可擦除可编程只读存储器（EPROM）</strong></p>
+<p><img src="https://s2.loli.net/2025/11/21/iX741OuhPScknBl.png" srcset="/img/loading.gif" lazyload alt="image-20251121210949401"></p>
+<p><strong>能够反复写入擦除读取，不过擦除需要专门工具，而且是MOS工艺，速度比较慢，而且一旦擦除整个数据都会消失</strong></p>
+<p><strong>电擦除电改写只读存储器（EEPROM）</strong></p>
+<p><img src="https://s2.loli.net/2025/11/21/fO73lIPeqBYnLmX.png" srcset="/img/loading.gif" lazyload alt="image-20251121211137338"></p>
+<p><strong>使用电来擦除</strong></p>
+<p><strong>快闪只读存储器（FM）</strong></p>
+<h3 id="RAM"><a href="#RAM" class="headerlink" title="RAM"></a>RAM</h3><blockquote>
+<p><strong>随机存取存储器</strong></p>
+</blockquote>
+<p><strong>随机：按地址访问存储单元，因为每个地址译码时间是一样的，所以每个单元的访问时间是一个常数，与地址无关。</strong></p>
+<p><img src="https://s2.loli.net/2025/11/23/MIlCZJPioXjvNzn.png" srcset="/img/loading.gif" lazyload alt="image-20251123144024546"></p>
+<p><strong>唯一需要运算的地方就是地址译码器。</strong></p>
+<p><strong>这样的译码方式叫一维译码，只适用于小容量。</strong></p>
+<p><strong>二维译码(重合法，双译码法)：使用两个译码器。</strong></p>
+<p><img src="https://s2.loli.net/2025/11/23/JKZmYPkT7SLONg8.png" srcset="/img/loading.gif" lazyload alt="image-20251123144606317"></p>
+<p><strong>一个黑块就是一个存储单元，那么两个译码器就构成了64个存储单元，这样的结构称为存储阵列</strong>。</p>
+<p><strong>但是如果XY</strong>(也就是行地址译码器和列地址译码器)分别只输入了一位，那意味着能够直接读取一行。</p>
+<p><img src="https://s2.loli.net/2025/11/23/v58mtDBJLxciPeI.png" srcset="/img/loading.gif" lazyload alt="image-20251123145359317"></p>
+<h4 id="静态SRAM"><a href="#静态SRAM" class="headerlink" title="静态SRAM"></a>静态SRAM</h4><p><strong>SRAM存储元一开始保存的是0还是1是随机的。</strong></p>
+<p><img src="https://s2.loli.net/2025/11/23/cWVkK6gdj4FhGuT.png" srcset="/img/loading.gif" lazyload alt="image-20251123150450133"></p>
+<p><strong>存储阵列示意图：</strong></p>
+<p><img src="https://s2.loli.net/2025/11/23/9Rlt7Efu8v3SXMB.png" srcset="/img/loading.gif" lazyload alt="image-20251123150652294"></p>
+<p><strong>可以看到每个列地址使用了6个MOS管来构成双稳态触发器，访问速度非常快而且通电时数据就永久保持。</strong></p>
+<p><strong>X地址选择5，Y选择3，那么Y=3的线连接两个MOS管导通，WE为低电平，将数据线传输的数据写到存储单元(5,3)中。</strong></p>
+<h4 id="动态DRAM"><a href="#动态DRAM" class="headerlink" title="动态DRAM"></a>动态DRAM</h4><p><img src="https://s2.loli.net/2025/11/23/AlFELiKHSmZDnCj.png" srcset="/img/loading.gif" lazyload alt="image-20251123151659551"></p>
+<p><img src="https://s2.loli.net/2025/11/23/berNZ2A6hyv4HWR.png" srcset="/img/loading.gif" lazyload alt="image-20251123152038530"></p>
+<p><strong>可以看到每个列地址是一个MOS管加一个电容来连接。电容会漏电，数据会丢失，访问慢。</strong></p>
+<p><strong>所以，读取数据的同时，会清空存储电荷的电容，导致原始数据被破坏。因此，必须在读取后立即执行一次“再生”操作，将数据重新写回。</strong></p>
+<h3 id="存储器的存储周期"><a href="#存储器的存储周期" class="headerlink" title="存储器的存储周期"></a>存储器的存储周期</h3><p><strong>读出时间:指从存储器接收到读命令开始，到读取出信息所需时间</strong></p>
+<p><strong>写入时间:指从存储器接收到写命令开始，至信息被写入存储器所需的时间</strong></p>
+<p><strong>存储周期：进行一次操作需要的时间，也就是存\取时间+恢复时间。</strong></p>
+<h3 id="DRAM刷新"><a href="#DRAM刷新" class="headerlink" title="DRAM刷新"></a>DRAM刷新</h3><p><strong>DRAM的电容会缓慢放电，放电过多会导致信息丢失，破坏性读取后也会直接清空电容电量，所以必须定时给电容充电，这个过程称为刷新或者读后再生。</strong></p>
+<p><strong>刷新是以行为单位进行的，是由刷新计数器和刷新控制器来进行的</strong></p>
+<p>刷新周期定义为：<strong>上次对整个存储器刷新结束时作为开始点，到下次对整个存储器全部刷新一遍为止的时间间隔。</strong></p>
+<p><strong>和总线的仲裁类型差不多，这里有刷新也有刷新策略：</strong></p>
+<ul>
+<li><p><strong>集中刷新</strong></p>
+<ul>
+<li><strong>在规定的一个刷新周期内，对全部存储元集中一段时间进行逐行刷新</strong></li>
+<li><strong>存储阵列式128*128，刷新周期是2ms，存储周期是0.5us，刷新单行的时间可以看作是存储（读取）单行的时间，那就是128 * 0.5us=64us，那么刷新周期为2ms，也就是2000us，我们就划分为前1936us来进行读写操作，后64us刷新，刷新时间为死时间，在这个时间内无法进行读写。</strong></li>
+</ul>
+<p><img src="https://s2.loli.net/2025/11/23/nIAoDMfO4s8hVCL.png" srcset="/img/loading.gif" lazyload alt="image-20251123155833655"></p>
+</li>
+<li><p><strong>分散刷新</strong></p>
+<ul>
+<li><strong>对每行存储单元的刷新分散到每个存储周期内完成。将存储周期分为两段，前段存取，后半段刷新。</strong></li>
+<li><strong>存储阵列式128*128，刷新周期是2ms，存储周期是0.5us，Tm是存取，Tr是刷新操作，Tc就是读取并刷新一行的时间。这样没有死时间但是会延长存储周期一倍或者更多。到点就强制刷新，这可能会干扰CPU正在进行的操作。</strong></li>
+</ul>
+<p><img src="https://s2.loli.net/2025/11/23/woJ7A4KBqZUxiyh.png" srcset="/img/loading.gif" lazyload alt="image-20251123160507879"></p>
+</li>
+<li><p><strong>异步刷新</strong></p>
+<ul>
+<li><strong>前两种方式的结合，能够缩短死时间，又可以充分利用最大刷新间隔为2ms的特点。</strong></li>
+<li><strong>存储阵列式128*128，刷新周期是2ms，存储周期是0.5us，将刷新周期平均分配到每一行上，那么刷新间隔是2ms/128行 = 15.6us，那么在存取一行后就会刷新一次。</strong></li>
+</ul>
+<p><img src="https://s2.loli.net/2025/11/23/sP89MuNlHexAco1.png" srcset="/img/loading.gif" lazyload alt="image-20251123164942461"></p>
+</li>
+</ul>
+<h3 id="DRAM和SRAM"><a href="#DRAM和SRAM" class="headerlink" title="DRAM和SRAM"></a>DRAM和SRAM</h3><p><strong>SRAM是“快而贵”的缓存，DRAM是“大而便宜”的主存</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>特性维度</strong></th>
+<th><strong>SRAM（静态随机存储器）</strong></th>
+<th><strong>DRAM（动态随机存储器）</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>基本存储单元</strong></td>
+<td><strong>6个晶体管（MOS管）构成一个****双稳态触发器</strong></td>
+<td><strong>1个晶体管（MOS管） + 1个****电容</strong></td>
+</tr>
+<tr>
+<td><strong>数据保持原理</strong></td>
+<td><strong>只要通电，数据就****永久保持</strong>（静态）</td>
+<td><strong>电容会漏电，数据****会丢失</strong>，需要定期<strong>刷新</strong>（动态）</td>
+</tr>
+<tr>
+<td><strong>速度</strong></td>
+<td><strong>非常快</strong>（访问周期约10ns级别）</td>
+<td><strong>较慢</strong>（访问周期约50ns级别，含刷新开销）</td>
+</tr>
+<tr>
+<td><strong>集成度/容量</strong></td>
+<td><strong>低（一个单元要6个晶体管）</strong></td>
+<td><strong>高（一个单元只需1个晶体管1个电容）</strong></td>
+</tr>
+<tr>
+<td><strong>功耗</strong></td>
+<td><strong>较高（持续通电）</strong></td>
+<td><strong>较低（待机时功耗低，但刷新会增加总功耗）</strong></td>
+</tr>
+<tr>
+<td><strong>成本</strong></td>
+<td><strong>高</strong>（芯片面积大，制造复杂）</td>
+<td><strong>低</strong>（芯片面积小，结构简单）</td>
+</tr>
+<tr>
+<td><strong>主要应用</strong></td>
+<td><strong>CPU高速缓存</strong>（L1, L2, L3 Cache）</td>
+<td><strong>主存储器</strong>（内存条/运行内存）</td>
+</tr>
+<tr>
+<td><strong>核心挑战</strong></td>
+<td><strong>面积大，成本高</strong></td>
+<td><strong>需要刷新电路</strong>，设计更复杂</td>
+</tr>
+</tbody></table>
+<h3 id="主存如何与CPU连接"><a href="#主存如何与CPU连接" class="headerlink" title="主存如何与CPU连接"></a>主存如何与CPU连接</h3><p><strong>我们将之前讲过的逻辑电路看成一块集成电路IC，称作存储芯片</strong></p>
+<p><img src="https://s2.loli.net/2025/11/23/nX3hrsaWFTMUOQR.png" srcset="/img/loading.gif" lazyload alt="image-20251123165558704"></p>
+<p><strong>单个存储芯片不可能做得很大，为我们需要扩展存储芯片的容量大小。</strong></p>
+<p><img src="https://s2.loli.net/2025/11/23/Qe5yvgLnR2VwANE.png" srcset="/img/loading.gif" lazyload alt="image-20251123165832393"></p>
+<p><strong>CPU通过主存控制器</strong>与存储芯片链接。</p>
+<p><img src="https://s2.loli.net/2025/11/23/eQpqL6cfrK4IaNW.png" srcset="/img/loading.gif" lazyload alt="image-20251123192730840"></p>
+<p><strong>现代计算机中，主存控制器已被集成到CPU中，所以有些图不会画出主存控制器。</strong></p>
+<p><strong>m是MDR的位数，也就是存储字长，n是MAR的位数，2^n是存储字数量。</strong></p>
+<p><strong>建议配合上图理解。</strong></p>
+<p><img src="https://s2.loli.net/2025/11/23/YRuL5Oiqj63D8rW.png" srcset="/img/loading.gif" lazyload alt="image-20251123193908944"></p>
+<h3 id="主存的扩展"><a href="#主存的扩展" class="headerlink" title="主存的扩展"></a>主存的扩展</h3><p><strong>如果说一个主存是1K * 4Bit，说明存储字数量为1K，存储字长为4位，主存容量就是4096位，根据一个字节8位那就是512B（这里的B是字节Byte），那么也就是一共有1024个存储单元，每个存储单元能够存储4位二进制，芯片通过4根数据线换数据。</strong></p>
+<ul>
+<li><strong>位扩展：增大存储字</strong><ul>
+<li><strong>我们希望有8根数据线进行是数据交换，字长就被扩张到8位</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/11/24/7KdEso8rfPnl6xC.png" srcset="/img/loading.gif" lazyload alt="image-20251124135041016"></p>
+<p><strong>注意看，第一芯片链接D0-D3，第二芯片链接D4-D7，那就是一共有8个数据线来交换数据，这就增加了存储字长。</strong></p>
+<ul>
+<li><strong>字扩展：增加存储字数量</strong><ul>
+<li><strong>我们通过加一个芯片，扩大地址数，也就是扩大存储字数量。</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/11/24/kSBEbAxYytjIHCF.png" srcset="/img/loading.gif" lazyload alt="image-20251124140100173"></p>
+<p><strong>注意看，我们用两个芯片并联了地址信号并用一个非门将两芯片的片选信号连接起来，这就使得地址数扩大了一倍，那就是扩大了存储字数量。</strong></p>
+<ul>
+<li><strong>字,位扩展</strong><ul>
+<li><strong>两个方法的结合，能够同时扩大存储字长和存储字数量。</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/11/24/S6L8CQPYsAe71pq.png" srcset="/img/loading.gif" lazyload alt="image-20251124140535880"></p>
+<h2 id="CPU和主存链接的例题"><a href="#CPU和主存链接的例题" class="headerlink" title="CPU和主存链接的例题"></a>CPU和主存链接的例题</h2><p><img src="https://s2.loli.net/2025/11/24/yTmsIQjKADr1qMl.png" srcset="/img/loading.gif" lazyload alt="image-20251124142411532"></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1G29JYQE8b?spm_id_from=333.788.player.switch&amp;vd_source=cb9728ea927f0db8dc6b78c5ae60b004&amp;p=37">讲解视频</a></p>
+<h3 id="同步主存储器SDRAM（DRAM）"><a href="#同步主存储器SDRAM（DRAM）" class="headerlink" title="同步主存储器SDRAM（DRAM）"></a>同步主存储器SDRAM（DRAM）</h3><p><strong>MFC异步通信很大程度拖慢了CPU时间。</strong></p>
+<h4 id="行缓冲器"><a href="#行缓冲器" class="headerlink" title="行缓冲器"></a>行缓冲器</h4><p><strong>SDRAM的行缓冲器</strong>是集成在SDRAM芯片内部的一个<strong>高速静态存储器（SRAM）缓存</strong>。它的作用是：当CPU要访问SDRAM时，<strong>并不直接去庞大的存储单元阵列中读取数据，而是先把整个一行数据（通常几千位）一次性从慢速的DRAM阵列预取到这个高速的行缓冲器中</strong>，后续的读写操作都在这个缓冲器上完成，从而极大提升访问速度。</p>
+<p><img src="https://s2.loli.net/2025/11/24/THjrhz9g3Gk6LNp.png" srcset="/img/loading.gif" lazyload alt="image-20251124144736726"></p>
+<p><strong>如果地址线输入01，那就是选中了第二行，行缓存器会提取所有第二行的数据并保存，</strong></p>
+<p><strong>随即传入列地址00,就能够从缓冲器中读取第一列的八位数据。基于行缓冲器SRAM的高速率，这个过程是非常快的。</strong></p>
+<h5 id="突发传输"><a href="#突发传输" class="headerlink" title="突发传输"></a>突发传输</h5><p><img src="https://s2.loli.net/2025/11/24/XeJ4HIuYKsDVPci.png" srcset="/img/loading.gif" lazyload alt="image-20251124145154160"></p>
+<p><strong>行缓冲器中有两个寄存器，一个是BL，保存突发长度，第二个是CL，CAS（列地址信号）潜伏期</strong></p>
+<h5 id="DDR（Double-Data-Rate）-SDRAM"><a href="#DDR（Double-Data-Rate）-SDRAM" class="headerlink" title="DDR（Double Data Rate） SDRAM"></a>DDR（Double Data Rate） SDRAM</h5><p><img src="https://s2.loli.net/2025/11/24/pxwkXvnqRPM4u8z.png" srcset="/img/loading.gif" lazyload alt="image-20251124150106165"></p>
+<p><strong>DDR技术也在不断更新</strong></p>
+<p><img src="https://s2.loli.net/2025/11/24/StTVLBfarmeyA5z.png" srcset="/img/loading.gif" lazyload alt="image-20251124150137825"></p>
+<h3 id="按字节寻址"><a href="#按字节寻址" class="headerlink" title="按字节寻址"></a>按字节寻址</h3><p><strong>温习一下主存结构：</strong></p>
+<p><img src="https://s2.loli.net/2025/11/24/naKxmH8oZVMPvkY.png" srcset="/img/loading.gif" lazyload alt="image-20251124152421868"></p>
+<p><strong>八根数据线，那每次能够读写一个字节。</strong></p>
+<p><strong>有32个地址线，使用二进制表示地址太长了，所以我们往往使用十六进制来表示，例如</strong><code>0x00000004</code>等。</p>
+<p><strong>所以每个地址对应一个字节，根据地址来找到地址就是根据字节寻址。</strong></p>
+<p><strong>如果每个地址存储的字节数 &lt;=1的话，那就只能使用按字节寻址。</strong></p>
+<h3 id="按字寻址"><a href="#按字寻址" class="headerlink" title="按字寻址"></a>按字寻址</h3><p><strong>如果每个地址存放的字节数多比如32位，那因为一个字节等于八个二进制位（这是计算机的普遍标准），我们就可以定义四个字节为一个字，那么每个地址对应1个字，我们就能够通过查找字来确定要查找的数据的位置，也就是按字寻址。</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>按字节寻址</strong></th>
+<th><strong>按字寻址</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>基本寻址单位</strong></td>
+<td><strong>字节</strong></td>
+<td><strong>字</strong></td>
+</tr>
+<tr>
+<td><strong>地址对应数据量</strong></td>
+<td><strong>1个字节</strong></td>
+<td><strong>1个字（如32位系统下为4个字节）</strong></td>
+</tr>
+<tr>
+<td><strong>灵活性</strong></td>
+<td><strong>高</strong>，可精确访问任意字节</td>
+<td><strong>低</strong>，以字为单位访问</td>
+</tr>
+<tr>
+<td><strong>地址空间利用</strong></td>
+<td><strong>地址线与字节地址对应</strong></td>
+<td><strong>地址线与字地址对应，相同地址线可管理更大物理内存</strong></td>
+</tr>
+<tr>
+<td><strong>常见应用</strong></td>
+<td><strong>现代通用计算机（如x86架构）</strong></td>
+<td><strong>某些早期或特定领域的硬件系统</strong></td>
+</tr>
+</tbody></table>
+<p><strong>事实上按字寻址</strong>凭借<strong>相同地址线能够管理更大内存</strong>，是对早期计算机制造瓶颈的妥协。</p>
+<p><strong>现在不存在技术瓶颈，使用字节寻址是现代计算机的绝对主流</strong>。</p>
+<h3 id="高速缓存Cache"><a href="#高速缓存Cache" class="headerlink" title="高速缓存Cache"></a>高速缓存Cache</h3><p>时间局限性：<strong>被访问的某个存储单元带一个叫短时间间隔内可能又被访问</strong>，比如for循环等</p>
+<p>空间局限性：<strong>被访问的某个存储单元的邻近单元在一个较短时间间隔内也可能被访问。比如顺序执行的指令，遍历数组等</strong></p>
+<p><strong>而Cache的设计，就是****预测</strong>程序的行为会遵循局部性原理。一方面他会保存最近使用的数据等待再次访问，另一方面他会预取相邻的数据等待CPU访问。如果下一次CPU要访问的数据刚好在Cache中，那么就能利用Cache的高速访问来缩短时间，这样的情况我们称之为”<strong>命中（Hit）</strong>“。这样的机制能够使速度提升很多倍。</p>
+<p><img src="https://s2.loli.net/2025/11/25/I1WFykcP5fMdQTZ.png" srcset="/img/loading.gif" lazyload alt="image-20251125135735079"></p>
+<p><strong>这个代码的作用是求和数组，函数中有for循环，这符合时间局部性，而且数组在内存中是顺序排列的，这就是符合空间局部性。</strong></p>
+<p><img src="https://s2.loli.net/2025/11/25/dqBWOlh3a9fDVwM.png" srcset="/img/loading.gif" lazyload alt="image-20251125140609316"></p>
+<p><strong>注意看，C语言中，数组是按行存储的，程序一的按行访问，正好对应了顺序访问的局部性原则，程序二却是按列访问，这意味着访问完</strong><code>A[0][0]</code>之后会直接跳转到<code>A[0][2047]</code>这会大大降低Cache命中的概率，所以空间局部性很差。</p>
+<h3 id="Cache基本工作原理"><a href="#Cache基本工作原理" class="headerlink" title="Cache基本工作原理"></a>Cache基本工作原理</h3><p><strong>Cache往往集成到CPU中，并于主存控制器，ALU等连接到一起，在CPU正式操作前，他会预取一部分的数据和指令保存，供CPU使用</strong></p>
+<p><img src="https://s2.loli.net/2025/11/25/SjXLR7gotIrQHiq.png" srcset="/img/loading.gif" lazyload alt="image-20251125144701973"></p>
+<p><strong>总结一下</strong></p>
+<p><img src="https://s2.loli.net/2025/11/25/WGOyM2dAvenHr9D.png" srcset="/img/loading.gif" lazyload alt="image-20251125144947176"></p>
+<p><strong>如果CPU访问主存单元所在的主存块在Cache中，则称为Cache命中(hit)。</strong> <strong>命中的概率称为命中率（hitrate），它等于命中次数与访问总次数之比。</strong> <strong>如果CPU访间主存单元所在的主存块不在Cache 中，则称为Cache 不命中（miss)。</strong> <strong>不命中的概率称为缺失率（missrate)，它等于不命中次数与访问总次数之比。</strong></p>
+<h3 id="主存块的划分和相关地址的计算"><a href="#主存块的划分和相关地址的计算" class="headerlink" title="主存块的划分和相关地址的计算"></a>主存块的划分和相关地址的计算</h3><p><img src="https://s2.loli.net/2025/11/25/yQSV3GBad7LvNEO.png" srcset="/img/loading.gif" lazyload alt="image-20251125145824600"></p>
+<p><strong>Cache和主存块的三种映射方式是直接映射，组相联映射，全相联映射</strong>。</p>
+<p><strong>抱歉，这三个映射方式我没看，也许有时间会补上。</strong></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/Chapter_4_Representation_and_operation_of_data/" title="第四章：数据的表示与运算">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第四章：数据的表示与运算</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/Chapter_2_Bus_Structure/" title="第二章：总线结构">
+                        <span class="hidden-mobile">第二章：总线结构</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
