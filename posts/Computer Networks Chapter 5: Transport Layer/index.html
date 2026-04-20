@@ -1,0 +1,1210 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第五章：运输层进程间基于网络的通信第2~4章依次介绍了计算机网络体系结构中的物理层、数据链路层和网络层，它们共同解决了将主机通过异构网络互联起来所面临的问题，实现了主机到主机的通信。 然而在计算机网络中实际进行通信的真正实体，是位于通信两端主机中的进程。如何为运行在不同主机上的应用进程提供直接的逻辑通信服务，就是运输层的主要任务。运输层协议称为端到端协议。  我们从计算机体系结构来看：  注意：运">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络第五章：运输层">
+<meta property="og:url" content="http://example.com/posts/Computer%20Networks%20Chapter%205:%20Transport%20Layer/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="第五章：运输层进程间基于网络的通信第2~4章依次介绍了计算机网络体系结构中的物理层、数据链路层和网络层，它们共同解决了将主机通过异构网络互联起来所面临的问题，实现了主机到主机的通信。 然而在计算机网络中实际进行通信的真正实体，是位于通信两端主机中的进程。如何为运行在不同主机上的应用进程提供直接的逻辑通信服务，就是运输层的主要任务。运输层协议称为端到端协议。  我们从计算机体系结构来看：  注意：运">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png">
+<meta property="article:published_time" content="2026-04-20T11:47:18.618Z">
+<meta property="article:modified_time" content="2026-04-20T11:47:19.263Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png">
+  
+  
+  
+  <title>计算机网络第五章：运输层 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="计算机网络第五章：运输层"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-20 11:47" pubdate>
+          2026年4月20日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          100 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机网络第五章：运输层</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第五章：运输层"><a href="#第五章：运输层" class="headerlink" title="第五章：运输层"></a>第五章：运输层</h1><h4 id="进程间基于网络的通信"><a href="#进程间基于网络的通信" class="headerlink" title="进程间基于网络的通信"></a>进程间基于网络的通信</h4><p>第2~4章依次介绍了计算机网络体系结构中的物理层、数据链路层和网络层，它们共同解决了将主机通过异构网络互联起来所面临的问题，实现了主机到主机的通信。</p>
+<p>然而在计算机网络中实际进行通信的真正实体，是位于通信两端主机中的进程。<br>如何为运行在不同主机上的应用进程提供直接的逻辑通信服务，就是运输层的主要任务。运输层协议称为端到端协议。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/xA3i/image-20260414102058876.png" srcset="/img/loading.gif" lazyload alt="image-20260414102058876"></p>
+<p>我们从计算机体系结构来看：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/vLi6/image-20260414102239039.png" srcset="/img/loading.gif" lazyload alt="image-20260414102239039"></p>
+<p>注意：运输层的端口不是物理端口，而是0-65535的端口。</p>
+<p>运输层向应用层实体屏蔽了下面网络核心的细节（例如网络拓扑、所采用的路由选择协议等），它使应用进程看见的就好像是在两个运输层实体之间有一条端到端的逻辑通信信道。<br>根据应用需求的不同，因特网的运输层为应用层提供了两种不同的运输层协议，即<strong>面向连接的TCP</strong>和<strong>无连接的UDP</strong>,这两种协议就是本章要讨论的主要内容。</p>
+<h3 id="TCP-x2F-IP体系结构运输层中最重要的两个协议"><a href="#TCP-x2F-IP体系结构运输层中最重要的两个协议" class="headerlink" title="TCP/IP体系结构运输层中最重要的两个协议"></a>TCP/IP体系结构运输层中最重要的两个协议</h3><p><img src="https://files.seeusercontent.com/2026/04/14/2Tvm/image-20260414103102501.png" srcset="/img/loading.gif" lazyload alt="image-20260414103102501"></p>
+<ul>
+<li>传输控制协议(Transmission Control Protocol,TCP)为其上层提供的是面向连接的可靠的数据传输服务</li>
+<li>使用TCP通信的双方，在传送数据之前必须首先建立TCP连接（逻辑连接，而非物理连接）。数据传输结束后必须要释放TCP连接，</li>
+<li>TCP为了实现可靠传输，就必须使用很多措施，例如TCP连接管理、确认机制、{<br>超时重传、流量控制以及拥塞控制等</li>
+<li>TCP的实现复杂，TCP报文段的首部比较大，占用处理机资源比较多</li>
+</ul>
+<hr>
+<ul>
+<li>用户数据报协议(User Datagram Protocol,UDP)其上层提供的是无连接的不可靠的数据传输服务。</li>
+<li>使用UDP通信的双方，在传送数据之前不需要建立连接。</li>
+<li>UDP不需要实现可靠传输，因此不需要使用实现可靠传输的各种机制。</li>
+<li>UDP的实现简单，UDP用户数据报的首部比较小。</li>
+</ul>
+<h3 id="端口号，复用与分用的概念"><a href="#端口号，复用与分用的概念" class="headerlink" title="端口号，复用与分用的概念"></a>端口号，复用与分用的概念</h3><h4 id="运输层端口号"><a href="#运输层端口号" class="headerlink" title="运输层端口号"></a>运输层端口号</h4><p>运行在计算机上的进程是使用进程标识符(Process ldentification,PID)来标识的。</p>
+<ul>
+<li>然而，因特网上的计算机并不是使用统一的操作系统，而不同操作系统(Windows、.Linux、MacOS)又使用不同格式的进程标识符。</li>
+<li>为了使运行不同操作系统的计算机的应用进程之间能够基于网络进行通信，就必须使用统一的方法对TCP体系的应用进程进行标识。</li>
+</ul>
+<p>TCP体系结构的运输层使用端口号来标识和区分应用层的不同应用进程。端口号的长度为16比特，取值范围是0-65535。</p>
+<p>端口号分为两类：</p>
+<ul>
+<li>服务器端使用的端口号</li>
+<li><ul>
+<li>熟知端口号0-1023</li>
+<li><ul>
+<li>由IANA分配给TCP/IP体系结构应用层中最重要的一些应用协议。</li>
+</ul>
+</li>
+<li>登记端口号1024-49151</li>
+<li><ul>
+<li>为没有熟知端口号的应用程序使用。要使用这类端口号，必须在IANA进行登记，以防止重复。例如，Microsoft RDP微软远程桌面应用程序使用的端口号是3389。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>客户端使用端口号</li>
+<li><ul>
+<li>仅在客户端使用，由客户进程在运行时动态选择，通信结束后会被系统收回，以便给其他客户进程使用</li>
+</ul>
+</li>
+</ul>
+<p>端口号只具有本地意义，即端口号只是为了标识本计算机网络协议栈应用层中的各应用进程。在因特网中，不同计算机中的相同端口号是没有关系的，即相互独立。另外，TCP和UDP端口号之间也是没有关系的。</p>
+<h4 id="发送方的复用和接收方分用"><a href="#发送方的复用和接收方分用" class="headerlink" title="发送方的复用和接收方分用"></a>发送方的复用和接收方分用</h4><p><img src="https://files.seeusercontent.com/2026/04/14/vkN0/image-20260414104202241.png" srcset="/img/loading.gif" lazyload alt="image-20260414104202241"></p>
+<p>运输层中的<strong>复用</strong>与<strong>分用</strong>是同一通信过程的两个方向，核心是借助<strong>端口号</strong>来区分不同应用程序的数据流。</p>
+<ul>
+<li><strong>复用</strong>：发送方主机的多个应用进程（如浏览器、邮件客户端）都可以使用同一个运输层协议（如TCP或UDP）来发送数据。运输层将这些来自不同应用的数据块封装上首部（包含目的端口号等信息），合并成同一个协议的数据流，交给网络层发送。</li>
+<li><strong>分用</strong>：接收方主机的运输层从网络层收到数据后，根据数据首部中的目的端口号，将数据准确交付到正在该端口“监听”的对应应用进程。</li>
+</ul>
+<p>来看一个例子：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/qtI3/image-20260414105032977.png" srcset="/img/loading.gif" lazyload alt="image-20260414105032977"></p>
+<p>用户级PC向DNS服务器发送一个DNS查询请求报文，发送端口是49152，目的端口是DNS服务器的53号端口，DNS服务器查询到域名对应的IP后返回给49152端口，随后“根据域名查询IP地址”这一进程已结束，端口49152被收回</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/t1cG/image-20260414105357378.png" srcset="/img/loading.gif" lazyload alt="image-20260414105357378"></p>
+<p>随后分配给浏览器使用，浏览器发送请求，请求查看Web服务器的首页内容，发送端口是49152，目的端口是Web服务器的80端口，随后Web返回首页内容，PC在显示器中显示。这就完成了对端口和协议的复用和分用。</p>
+<h3 id="TCP和UDP对比"><a href="#TCP和UDP对比" class="headerlink" title="TCP和UDP对比"></a>TCP和UDP对比</h3><p>UDP使用的是无连接不可靠的传输服务，原理简单，在本节就能介绍完。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/h2sJ/image-20260414105834202.png" srcset="/img/loading.gif" lazyload alt="image-20260414105834202"></p>
+<p>TCP有建立连接和断开连接的过程，以保证可靠运输。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/on9J/image-20260414110214687.png" srcset="/img/loading.gif" lazyload alt="image-20260414110214687"></p>
+<p>UDP相对自由，支持单播多播和广播，但是TCP需要建立链接，这意味着只能进行单播通信。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/Co9w/image-20260414110552874.png" srcset="/img/loading.gif" lazyload alt="image-20260414110552874"></p>
+<p><strong>UDP面向应用报文</strong>：UDP对应用程序交下来的数据，<strong>原封不动地</strong>加上首部就发送出去。一个应用报文（比如一段文字“Hello”）就封装成一个UDP数据报，网络层一次发送一个完整的报文。接收方的UDP也一次交付一个完整的报文。因此，<strong>应用程序必须选择合适大小的报文</strong>，如果太大，IP层可能需要分片，降低效率；如果太小，则首部开销相对较大。</p>
+<p><strong>TCP面向字节流</strong>：TCP把应用程序交下来的数据看成仅仅是<strong>一连串无结构的字节流</strong>。它不保证发送方应用程序发出的数据块和接收方应用程序收到的数据块具有对应的大小关系。TCP会根据网络情况和窗口大小，<strong>自主决定</strong>将多少字节流封装成一个TCP报文段发送出去。接收方也是将字节流按顺序重组后，源源不断地交付给应用程序。</p>
+<p>TCP支持全双工通信。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/omU7/image-20260414111235348.png" srcset="/img/loading.gif" lazyload alt="image-20260414111235348"></p>
+<p>UDP发现误码后不会要求重传，而是直接丢弃，毕竟IP电话，视频会议的少量数据包无关痛痒。这能够有效保障传输速度。</p>
+<p>即使网际层提供的也是无连接不可靠传输服务，但是位于传输层的TCP提供了面向连接的可靠传输服务支持，TCP建立的信道能够处理误码，丢失，乱序，重复等问题。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/d3oQ/image-20260414111619447.png" srcset="/img/loading.gif" lazyload alt="image-20260414111619447"></p>
+<p>TCP的传输机制比UDP复杂得多，所以首部被设计的很复杂才能适应需求。</p>
+<h3 id="TCP报文段首部格式"><a href="#TCP报文段首部格式" class="headerlink" title="TCP报文段首部格式"></a>TCP报文段首部格式</h3><p>TCP的全部功能需要依靠其首部中的各字段来实现。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/M5ve/image-20260414122030259.png" srcset="/img/loading.gif" lazyload alt="image-20260414122030259"></p>
+<p>端口号就不在赘述了。</p>
+<ul>
+<li>序号：占32比特，取值范围0~232.1。当序号增加到最后一个时，下一个序号又回到0。用来指出本TCP报文段数据载荷的第一个字节的序号。</li>
+<li>确认号：占32比特，取值范围0~232.1。当确认号增加到最后一个时，下一个确认号又回到0。用来指出期望收到对方下一个TCP报文段的数据载荷的第一个字节的序号，同时也是对之前收到的所有数据的确认。</li>
+<li>确认标志位ACK：<strong>表示该报文段是一个确认报文</strong>。只有当ACK取值为1时，确认号字段才有效。ACK取值为0时，确认号字段无效，这不是一个确认报文。 TCP规定：在TCP连接建立后，所有传送的TCP报文段都必须把ACK置1。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/14/ev5D/image-20260414122827114.png" srcset="/img/loading.gif" lazyload alt="image-20260414122827114"></p>
+<p>如图：客户端向服务器发送TCP数据报，该数据表示：</p>
+<ul>
+<li>已确认此前发送的800字节的数据没有问题，现在需要800往后的数据</li>
+<li>ACK=1，该报文有效，没有问题，意义很灵活，需要结合情景理解。</li>
+<li>序号=201，这是客户端向主机传送的以第201字节为开头的数据。</li>
+</ul>
+<p>服务器传回也差不多。</p>
+<p>放个例题：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/un4Z/image-20260414123310496.png" srcset="/img/loading.gif" lazyload alt="image-20260414123310496"></p>
+<p>继续看字段：</p>
+<ul>
+<li>数据偏移：占4比特，该字段的取值以4字节为单位。指出TCP报文段的数据载荷部分的起始处距离TCP报文段的起始处有多远，这实际上指出了TCP报文段的首部长度。该字段的存在是因为扩展首部的存在使得首部的长度不是固定的。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/14/ld6H/image-20260414124058947.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>保留：占6比特，保留为以后使用，目前置为0</li>
+<li>窗口：占16比特，该字段的取值以字节为单位。指出发送本报文段的一方的接收窗口的大小，即接收缓存的可用空间大小，这用来表征接收方的接收能力。在计算机网络中，经常用接收方的接收能力的大小来控制发送方的数据发送量，这就是所谓的流量控制(后面会介绍)。</li>
+<li>检验和：占16比特，用来检查整个TCP报文在传输过程中是否出现了误码。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/14/Iru3/image-20260414124956506.png" srcset="/img/loading.gif" lazyload alt="image-20260414124956506"></p>
+<ul>
+<li>同步标志位SYN：用于TCP“三报文握手”建立连接，当SYN=1且ACK=0时，表明这是一个TCP连接请求报文段。对方若同意建立连接，则应在响应的TCP报文段的首部中使SYN=1且ACK=1。综上所述，SYN为1的TCP报文段要么是一个连接请求报文段，要么是一个连接响应报文段。</li>
+<li>终止标志位FIN：用于TCP“四报文挥手”释放连接。当FIN=1时，表明此TCP报文段的发送方已经将全部数据发送完毕，现在要求释放TCP连接</li>
+<li>复位标志位RST：用于复位TCP连接。当RST=1时，表明TCP连接中出现严重差错，必须释放连接，然后再重新建立连接。 RST置1还用来拒绝一个非法的TCP报文段或拒绝打开一个TCP连接。</li>
+<li>推送标志位PSH：发送方TCP把PSH置1，并立即创建一个TCP报文段发送出去，而不需要积累到足够多的数据再发送。接收方TCP收到PSH为1的TCP报文段，就尽快地交付给应用进程而不再等到接收到足够多的数据才向上交付。</li>
+</ul>
+<blockquote>
+<p>出于效率的考虑，TCP的发送方可能会延迟发送数据，而TCP的接收方可能会延迟向应用进程交付数据。这样可以一次处理更多的数据。但是当两个应用进程进行交互式通信时，有时在一端的应用进程希望在键入一个命令后立即就能够收到对方的响应。在这种情况下，应用进程可以通知TCP使用推送(PUSH)操作。</p>
+</blockquote>
+<ul>
+<li>紧急指针字段URG：占16比特，以字节为单位，用来指明紧急数据的长度。当发送方有紧急数据时，可将紧急数据“插队”到发送缓存的最前面，并立刻封装至一个TCP报文段中进行发送。紧急指针会指出本报文段数据载荷部分包含了多长的紧急数据，紧急数据之后是普通数据。接收方收到紧急标志位为1的TCP报文段，会按照紧急指针字段的值从报文段数据载中取出紧急数据并直接上交应用进程，而不必在接收缓存中排队。当URG=1时，紧急指针字段有效。当URG=0时，紧急指针字段无效。</li>
+<li>选项：长度可变，最大40字节。</li>
+<li><ul>
+<li>最大报文段长度MSS选项：指出TCP报文段数据载荷部分的最大长度，而不是整个TCP报文段的长度。</li>
+<li>窗口扩大选项：用来扩大窗口，提高吞吐率。</li>
+<li>时间戳选项：·用于计算往返时间RTT·用于处理序号超范围的情况，又称为防止序号绕回PAWS。</li>
+<li>选择确认选项：用来实现选择确认功能。</li>
+</ul>
+</li>
+<li>填充：若选项字段的长度加上20字节固定首部的长度不能被4字节整除时，需要填充相应数量的比特 0以确保首部长度能被4字节整除。IPv4数据报中也是这么干的。</li>
+</ul>
+<h3 id="TCP三报文握手建立链接"><a href="#TCP三报文握手建立链接" class="headerlink" title="TCP三报文握手建立链接"></a>TCP三报文握手建立链接</h3><blockquote>
+<p>这两个过程中序号和数据携带的关系没写出来。</p>
+</blockquote>
+<p>TCP运输连接有以下三个阶段：</p>
+<ul>
+<li>通过“三报文握手”来建立TCP连接。</li>
+<li>基于已建立的TCP连接进行可靠的数据传输。</li>
+<li>在数据传输结束后，还要通过“四报文挥手”来释放TCP连接。</li>
+</ul>
+<p>建立链接是为了解决以下问题：</p>
+<ul>
+<li>使TCP双方能够确知对方的存在。</li>
+<li>使TCP双方能够协商一些参数（例如最大报文段长度、最大窗口大小、时间戳选项等）。</li>
+<li>使TCP双方能够对运输实体资源进行分配和初始化。运输实体资源包括缓存大小、各状态变量、连接表中的项目等。</li>
+</ul>
+<p>来看看链接过程：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/6vqP/image-20260414192524603.png" srcset="/img/loading.gif" lazyload alt="image-20260414192524603"></p>
+<p>初始状态下，双方的TCP监听都是关闭状态，首先，服务器的TCP进程创建传输控制块TCB,随后进入TCP监听状态。</p>
+<p>随后用户端主机向服务器发送TCP请求链接报文，该报文SYN=1，seq为序号，被设置为X用于作为初始序号。随后服务器接收TCP请求并处理，同意后返回TCP请求接收报文，该报文SYN=1，ACK=1，seq=y，ack=x+1.seq是服务器选择的初始序号。</p>
+<p>用户端主机接收到确认报文之后会发回一个确认TCP报文，ack=1，seq=x+1，ack=y+1.随后进入链接已建立状态。</p>
+<blockquote>
+<p>TCP规定普通的TCP确认报文段可以携带数据，但如果不携带数据，则不消耗序号。<br>如果该报文段不携带数据，则TCP客户进程要发送的下一个数据报文段的序号仍为x+1。</p>
+</blockquote>
+<p>服务器收到后进入链接已建立的状态。</p>
+<p>思考最后用户端发送的TCP报文是否多余？</p>
+<p>不多余，来看下面两报文握手的情况：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/cqH5/image-20260414193436857.png" srcset="/img/loading.gif" lazyload alt="image-20260414193436857"></p>
+<p>第一次传的TCP请求链接报文在网络链路中迷失，随后触发超时重传，TCP客户机和服务器正常握手，传输数据后正常关闭。</p>
+<p>这是，此前迷失的TCP请求链接报文抵达服务器，服务器照例进入链接已建立的状态并传回确认TCP报文，但是用户机已没有传输请求所以不理睬，这会导致服务器一直等待用户机的数据，这会导致资源浪费。</p>
+<h3 id="TCP四报文挥手释放链接"><a href="#TCP四报文挥手释放链接" class="headerlink" title="TCP四报文挥手释放链接"></a>TCP四报文挥手释放链接</h3><p>来看看过程：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/lX7u/image-20260414194820074.png" srcset="/img/loading.gif" lazyload alt="image-20260414194820074"></p>
+<p>TCP客户机准备关闭TCP链接，向TCP服务器发送释放报文段，FIN=1，ACK=1，<strong>seq=u</strong>,ack</p>
+<p>=v,seq等于最后一个数据的字节序号+1，ack等于<strong>TCP客户进程之前已收到的数据的</strong>最后一个字节的序号加1。</p>
+<p>随后服务器接收并处理报文，进入关闭等待状态后发送回一个TCP确认终止报文段，ACK=1，seq=v，<strong>ack=u+1</strong>，此时，从TCP客户进程到TCP服务器进程这个方向的连接就释放了，此时的TCP链接处于半关闭状态，TCP客户进程已经没有数据要发送了。</p>
+<p>随后服务器准备关闭连接，进入最后确认状态并发送报文，FIN=1，ACK=1，seq=w,ack=u+1.seq定义为w是因为半关闭状态下服务器可能发送了一些数据。</p>
+<p>随后用户机发回确认报文，ACK=1，seq=u+1，ack=w+1.随后服务器进入关闭状态。用户机需要经过2倍的MSL等待时间后才能进入关闭状态，撤销TCB控制块。</p>
+<blockquote>
+<p>MSL是最长报文段寿命(Maximum Segment Lifetime):的英文缩写词，[RFC793]建议为2分钟。也就是说，TCP客户进程进入时间等待(TIME WAIT)状态后，还要经过4分钟才能进入关闭(CLOSED)状态。实际上MSL在现实中被设置为更短</p>
+</blockquote>
+<p>还是一样的，用户机最后的等待是很有必要的。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/7vxT/image-20260414195943855.png" srcset="/img/loading.gif" lazyload alt="image-20260414195943855"></p>
+<p>如果最后用户机发送的报文丢失，服务器触发超时重传重新发送的报文无法被已经关闭的用户机接收，这会使得服务器永远无法进入关闭状态。</p>
+<p>而MSL就是报文在链路中的最大寿命，超出这个时间的报文将永远不会抵达目的地。</p>
+<h4 id="TCP保活计时器"><a href="#TCP保活计时器" class="headerlink" title="TCP保活计时器"></a>TCP保活计时器</h4><p>TCP保活计时器是TCP协议中的一个<strong>可选机制</strong>，用于检测一个空闲的TCP连接是否仍然有效。</p>
+<p>如果链接建立后用户机停电关闭，服务器就不可能将数据送达，就可能陷入到无限制的超时重传中，保活计时器就是为了解决这个问题：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/eJ5r/image-20260414200542907.png" srcset="/img/loading.gif" lazyload alt="image-20260414200542907"></p>
+<h3 id="TCP的流量控制"><a href="#TCP的流量控制" class="headerlink" title="TCP的流量控制"></a>TCP的流量控制</h3><p>如图：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/1Inu/image-20260414200915718.png" srcset="/img/loading.gif" lazyload alt="image-20260414200915718"></p>
+<p>如果服务器未能及时取走缓存区内的数据，而用户机又在一昧发送，会导致缓存充满后溢出，数据丢失。</p>
+<p>TCP为应用程序提供了流量控制(Flow Control)机制，以解决因发送方发送数据太快而导致接收方来不及接收，造成接收方的接收缓存溢出的问题。<br>流量控制的基本方法：接收方根据自己的接收能力（接收缓存的可用空间大小）控制发送方的速率，如果接收方缓存已用尽，发送方就等待。</p>
+<blockquote>
+<p>rwnd字段是 接收窗口 的缩写，其作用是由接收方明确告知发送方：自己当前还有多少空闲的缓冲区容量可以接收数据。</p>
+</blockquote>
+<p><img src="https://files.seeusercontent.com/2026/04/14/qBc8/image-20260414202112548.png" srcset="/img/loading.gif" lazyload alt="image-20260414202112548"></p>
+<p>如图，主机B的接收缓存是400字节，主机A发送了3个分组，但是最后一个分组(201)丢失，随后主机B传回累积确认分组，表示“前201数据已接收，我的接收缓存还剩下300字节”随后主机A将调整发送窗口大小，并将发送窗口向右滑动，将已被接受的数据溢出窗口外，开始传输201~500的数据。此时，主机B已经实现了对主机A的第一次流量控制。</p>
+<p>这种窗口不断滑动又动态调整大小的机制，就是大名鼎鼎的<strong>滑动窗口机制</strong></p>
+<p>但是还是存在一个问题，那就是带有rwnd字段的报文丢失会导致死锁问题:</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/5Jxl/image-20260414202817201.png" srcset="/img/loading.gif" lazyload alt="image-20260414202817201"></p>
+<p>所以需要一个计时器来解决：</p>
+<p>TCP为每一个连接都设有一个持续计时器，只要TCP连接的一方收到对方的零窗口通知，就启动持续计时器。当持续计时器超时时，就发送一个零窗口探测报文段，仅携带1字节的数据。对方在确认这个零窗口探测报文段时，给出自己现在的接收窗口值。如果接收窗口值仍然是0，那么收到这个报文段的一方就重新启动持续计时器，如果接收窗口值不是0，那么死锁的局面就可以被打破了。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/gdX3/image-20260414203226032.png" srcset="/img/loading.gif" lazyload alt="image-20260414203226032"></p>
+<p><strong>实际上TCP规定：即使接收窗口值为0，也必须接受零窗口探测报文段、确认报文段以及携带有紧急数据的报文段。</strong></p>
+<p>且因为零窗口探测报文段也有重传计时器，当重传计时器超时后，零窗口探测报文段会被重传。</p>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><p>在某段时间，若对网络中某一资源的需求超过了该资源所能提供的可用部分，网络性能就要变坏，这种情况就叫作拥塞(congestion)。</p>
+<ul>
+<li>计算机网络中的链路容量（带宽）、交换节点中的缓存和处理机等都是网络的资源。</li>
+</ul>
+<p>若出现拥塞而不进行控制，整个网络的吞吐量将随输入负荷的增大而下降。更严重的是，如果输入负载超过了拥塞控制的能力范围，就会导致死锁。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/14/h7sB/image-20260414210205080.png" srcset="/img/loading.gif" lazyload alt="image-20260414210205080"></p>
+<p>所以，拥塞控制的目的是防止过多的数据注入到网络中，使网络能够承受现有的网络负荷</p>
+<h4 id="与流量控制的区别"><a href="#与流量控制的区别" class="headerlink" title="与流量控制的区别"></a>与流量控制的区别</h4><p>流量控制：</p>
+<ul>
+<li>以接收方的接收能力控制发送方（源点）<br>的发送速率</li>
+<li>只与特定的点对点通信的发送方和接收方之间的流量有关</li>
+</ul>
+<p>拥塞控制：</p>
+<ul>
+<li>源点根据各方面因素，按拥塞控制算法自行控制发送速率。</li>
+<li>全局性问题，涉及网络中所有的主机，路由器等</li>
+</ul>
+<h4 id="拥塞控制的基本方法"><a href="#拥塞控制的基本方法" class="headerlink" title="拥塞控制的基本方法"></a>拥塞控制的基本方法</h4><p>开环控制：</p>
+<ul>
+<li>试图用良好的设计来解决问题</li>
+<li>确保从一开始就保证问题不出现</li>
+<li>一旦运行起来就不需要中途修正</li>
+<li>当网络的流量特征可以精准规定且性能要求能够事先获得时适用</li>
+</ul>
+<p>闭环控制：</p>
+<ul>
+<li>检测网络拥塞在何时何地发生</li>
+<li>把控制发生的相关信息传送到可以采取行动的地方</li>
+<li>调整网络的运行以解决拥塞问题</li>
+<li>目前因特网广泛采用闭环控制方法，在此我们只讨论闭环的拥塞控制算法。</li>
+</ul>
+<h4 id="衡量网络拥塞的指标"><a href="#衡量网络拥塞的指标" class="headerlink" title="衡量网络拥塞的指标"></a>衡量网络拥塞的指标</h4><ul>
+<li>由于缓存溢出而丢弃的分组的百分比</li>
+<li>路由器的平均队列长度</li>
+<li>超时重传的分组数量</li>
+<li>平均分组时延和分组时延的标准差</li>
+</ul>
+<p>根据拥塞信息的反馈形式，可将闭环拥塞控制算法分为</p>
+<ul>
+<li>显式反馈算法</li>
+<li><ul>
+<li>从拥塞节点(即路由器)向源点提供关于<br>网络中拥塞状态的显式反馈信息。</li>
+</ul>
+</li>
+<li>隐式反馈算法</li>
+<li><ul>
+<li>源点自身通过对网络行为的观察（例如超时重传或往返时间RTT)来推断网络是否发生了拥塞。TCP采用的就是隐式反馈算法。</li>
+</ul>
+</li>
+</ul>
+<p>注意，拥塞控制并不仅仅是运输层要考虑的问题。显式反馈算法就必须涉及网络层。虽然一些网络体系结构（如ATM网络）主要在网络层实现拥塞控制，但因特网主要利用隐式反馈在运输层实现拥塞控制。</p>
+<p>且进行拥塞控制是需要代价的，可能需要在节点之间交换信息和各种命令，以便选择拥塞控制的策略并实施控制，这样会产生额外开销。<br>还可能需要预留一些资源用于特殊用户或特殊情况，这样就降低了网络资源的共享程度。</p>
+<h4 id="拥塞控制的4种方法"><a href="#拥塞控制的4种方法" class="headerlink" title="拥塞控制的4种方法"></a>拥塞控制的4种方法</h4><p>为了集中精力讨论拥塞控制算法的基本原理，假定如下条件</p>
+<ul>
+<li>数据是单方向传送的，而另一个方向只传送确认。</li>
+<li>接收方总是有足够大的接收缓存空间，因而发送方的发送窗口的大小仅由网络的拥塞程度来决定，也就是不考虑接收方对发送方的流量控制。</li>
+<li>以TCP最大报文段MSS(即TCP报文段的数据载荷部分)的个数作为讨论问题的单位，而不是以字节为单位(尽管TCP是面向字节流的)。</li>
+</ul>
+<p>所谓的4种方法是：</p>
+<ul>
+<li>慢开始算法</li>
+<li>拥塞避免算法</li>
+<li>快重传算法</li>
+<li>快恢复算法</li>
+</ul>
+<p>我们必须清楚为了实现控制，收发双方需要维护的字段：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/Y1zf/image-20260415103315955.png" srcset="/img/loading.gif" lazyload alt="image-20260415103315955"></p>
+<p>请回忆流量控制时讲到的窗口：发送方需要维护两个状态变量，发送窗口swnd和拥塞窗口cwnd，接收方需要维护接收窗口rwnd。</p>
+<p>发送窗口的大小等于接收窗口和拥塞窗口的最小值，保证同时满足拥塞控制和流量控制。</p>
+<p>cwnd的维护原则：只要网络没有出现拥塞<br>拥塞窗口就再增大一些，但只要网络出现拥<br>塞，拥塞窗口就减少一些<br>判断网络出现拥塞的依据：没有按时收到应<br>当到达的TCP确认报文段而产生了超时重传。</p>
+<p>接下来看过程：</p>
+<p>发送方需要维护一个变量叫慢开始门限ssthresh，控制TCP从“慢开始”阶段切换到“拥塞避免”阶段的时机。</p>
+<p><strong>当cwnd&lt;ssthresh时，使用慢开始算法。**<br>**当cwnd&gt;ssthresh时，停止使用慢开始算法而改用拥塞避免算法。</strong><br><strong>当cwnd=ssthresh时，既可使用慢开始算法，也可使用拥塞避免算法：</strong></p>
+<p>慢开始算法：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/1zjE/image-20260415103938542.png" srcset="/img/loading.gif" lazyload alt="image-20260415103938542"></p>
+<p>起始，拥塞窗口为1，慢开始门限为16，发送窗口等于拥塞窗口，每完成一次“传输轮次”(一次发送分组和一次确认分组)拥塞窗口的值就变为两倍，呈指数式增长，这就是慢开始算法。</p>
+<p>直到拥塞窗口的大小抵达慢开始门限，就要改用拥塞避免算法：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/k4Bq/image-20260415104248506.png" srcset="/img/loading.gif" lazyload alt="image-20260415104248506"></p>
+<p>改用拥塞避免算法后，完成传输轮次后拥塞窗口不再指数式增长，而是逐次+1增长，直到出现报文丢失。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/zTe2/image-20260415104426924.png" srcset="/img/loading.gif" lazyload alt="image-20260415104426924"></p>
+<p>出现报文丢失后，发送方记录此时的拥塞窗口大小，记下“拥塞窗口达到该值时，会出现拥塞”，并将该值的一半赋予慢开始门限，将拥塞窗口重置为1,重新开始慢开始算法。</p>
+<p>随后达到门限后又改用拥塞避免算法，循环往复。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/tXa0/image-20260415104700582.png" srcset="/img/loading.gif" lazyload alt="image-20260415104700582"></p>
+<p>需要注意的是：“慢开始”是指一开始向网络注入的报文段少，而并不是指拥塞窗口CWD的值增长速度慢。</p>
+<p>“拥塞避免”也并非指完全能够避免拥塞，而是指在拥塞避免阶段将cwd值控制为按线性规<br>律增长，使网络比较不容易出现拥塞。</p>
+<p>这两种算法在1988年提出，那时候的TCP属于Tahoe版本</p>
+<hr>
+<p>后来1990年增加了两个新的拥塞控制算法，分别是：</p>
+<ul>
+<li>快重传</li>
+<li>快恢复</li>
+</ul>
+<p>实际上，网络中的报文出现超时重传并不都是因为网络拥塞。还有可能因为高延迟，设置错误，生存时间过长等问题。但是发送方总是都认为是网络拥塞而启动慢开始算法，会导致传输效率下降。</p>
+<p>采用快重传算法可以让发送方尽早知道发生了个别TCP报文段的丢失：</p>
+<ul>
+<li>“快重传”是指使发送方尽快（尽早）进行重传，而不是等重传计时器超时再重传。</li>
+<li>这就要求接收方不要等待自己发送数据时才进行捎带确认，而是要立即发送确认，即使收到了失序的报文段也要立即发出对已收到的报文段的重复确认。</li>
+<li>发送方一旦收到3个连续的重复确认，就将相应的报文段立即重传，而不是等该报文段的重传计时器超时再重传。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/Z9md/image-20260415105942820.png" srcset="/img/loading.gif" lazyload alt="image-20260415105942820"></p>
+<p>如图，发送方每次都在接收方的ACK报文抵达之前发送。当M3报文丢失，发送方发送M4时,接收方会发现接收到的报文段不是按序抵达的，就会重复发送M2报文段，重复该过程3次后发送方会发现M3丢失，立即重传M3.这样就能够在超时重传触发之前重传M3.</p>
+<p>快重传通过重复确认降低了超时重传的可能性</p>
+<p>对于个别丢失的报文段，发送方不会出现超时重传，也就不会误认为出现了拥塞而错误地把拥塞窗口cwnd的值减为1。实践证明，使用快重传可以使整个网络的吞吐量提高约20%。</p>
+<p>与快重传算法配合使用的是快恢复算法，发送方一旦收到3个重复确认，就知道现在只是丢失了个别的报文段，于是不启动慢开始算法，而是执行快恢复算法。</p>
+<p>发送方将慢开始门限ssthresh的值和拥塞窗口cwnd的值都调整为当前cwnd值的一半(而非置为1)，并开始执行拥塞避免算法。<br>也有的快恢复实现是把快恢复开始时的cwnd值再增大一些，即cwnd=新ssthresh+3。</p>
+<ul>
+<li>既然发送方收到了3个重复的确认，就表明有3个数据报文段已经离开了网络。</li>
+<li>这3个报文段不再消耗网络资源而是停留在接收方的接收缓存中。</li>
+<li>可见现在网络中不是堆积了报文段而是减少了3个报文段，因此可以适当把cwnd值增大一些。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/s4yT/image-20260415110834686.png" srcset="/img/loading.gif" lazyload alt="image-20260415110834686"></p>
+<p>拥塞控制的流程图如下：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/hNv7/image-20260415110920300.png" srcset="/img/loading.gif" lazyload alt="image-20260415110920300"></p>
+<p>需要说明的是，TCP拥塞控制仍然是计算机网络中的一个研究热点 TCP拥塞控制算法也还在不断地发展和变化。在这里仅讨论了其基本原理和要点，并没给出更多的细节。拥塞控制算法的设计和优化应该是因特网工程任务组那群书写规则和标准的人考虑的。</p>
+<h3 id="TCP拥塞控制和网际层拥塞控制的关系"><a href="#TCP拥塞控制和网际层拥塞控制的关系" class="headerlink" title="TCP拥塞控制和网际层拥塞控制的关系"></a>TCP拥塞控制和网际层拥塞控制的关系</h3><p>这与网际层对IP数据报的丢弃策略紧密相关：</p>
+<p>路由器的输入缓存（可看作缓存队列，以下简称为队列）通常都按照“先进先出FFO”的规则来处理到达的P数据报。由于队列长度总是有限的，因此当队列已满时，之后再到达的所有IP数据报都将被丢弃，这就叫作尾部丢弃策略.</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/jh9X/image-20260415111336190.png" srcset="/img/loading.gif" lazyload alt="image-20260415111336190"></p>
+<p>为了避免网络中出现全局同步问题，在1998年提出了主动队列管理(Active Queue Management,AQM)。</p>
+<ul>
+<li>所谓“主动”，就是在路由器的队列长度达到某个阈值但还未满时就主动丢弃P数据报，而不是要等到路由器的队列已满时才不得不丢弃后面到达的P数据报，这样就太被动了。</li>
+<li>应当在路由器队列长度达到某个值得警惕的数值时，也就是网络出现了某些拥塞征兆时，就主动丢弃到达的P数据报来造成发送方的超时重传，进而降低发送方的发送速率，因而有可能减轻网络的拥塞程度，甚至不出现网络拥塞。</li>
+</ul>
+<p>AQM的具体实现算法是RED，但是经过实践证明，IETF认为效果太有限了，所以不建议使用，新的算法仍在设计。</p>
+<h3 id="TCP可靠传输的实现"><a href="#TCP可靠传输的实现" class="headerlink" title="TCP可靠传输的实现"></a>TCP可靠传输的实现</h3><p>这个小节，我不知道怎么写。</p>
+<blockquote>
+<p>注意：ack在选择重传协议与TCP协议中并不完全相同。<br>在选择重传协议中，ack表明序号到n为止的数据已正确接收，现在期望收到序号为n+1的数据。<br>在TCP协议中，ack表明序号到n-1为止的数据已正确接收，现在期望收到序号为n的数据。但是这种事情无关痛痒，不影响我们理解整体流程。</p>
+</blockquote>
+<p>以下过程不考虑拥塞问题：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/jx9P/image-20260415114853128.png" srcset="/img/loading.gif" lazyload alt="image-20260415114853128"></p>
+<p>发送方在没有收到接收方确认的情况下，可以把序号落入发送窗口内的数据依次全部发送出去，</p>
+<p>凡是已经发送过的数据，在未收到确认之前都必须暂时保留，以便在超时重传时使用。</p>
+<p>发送窗口具有前沿和后沿，为了标记前沿和后沿之内和之外的不同数据，需要使用三个指针来区分，如上图。</p>
+<p>而接收窗口也具有前沿和后沿，且接收方只能对按序收到的数据中的最高序号给出确认。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/rtV7/image-20260415115732318.png" srcset="/img/loading.gif" lazyload alt="image-20260415115732318"></p>
+<p>如图，31号数据报文在链路中迷失，接收方只能给出“前30号数据已被接受”的确认。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/pHh9/image-20260415120002530.png" srcset="/img/loading.gif" lazyload alt="image-20260415120002530"></p>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><p>虽然发送方的发送窗口是根据接收方的接收窗口设置的，但在同一时刻，发送方的发送窗口并不总是和接收方的<br>接收窗口一样大，这是因为：</p>
+<ul>
+<li>网络传送窗口值需要经历一定的时间滞后，并且这个时间还是不确定的。</li>
+<li>发送方还可能根据网络当时的拥塞情况适当减小自己的发送窗口尺寸。</li>
+</ul>
+<p>对于不按序到达的数据应如何处理，TCP并无明确规定。</p>
+<ul>
+<li>如果接收方把不按序到达的数据一律丢弃，那么接收窗口的管理将会比较简单，但这样做对网络资源的利用不利，因为发送方会重复传送较多的数据。</li>
+<li>TCP通常对不按序到达的数据先临时存放在接收窗口中，等到字节流中所缺少的字节收到后，再按序交付上层的应用进程。<br>TCP要求接收方必须有累积确认（这一点与选择重传协议不同）和捎带确认机制。这样可以减小传输开销。接收方可以在合适的时候发送确认，也可以在自己有数据要发送时把确认信息顺便捎带上。</li>
+<li>接收方不应过分延迟发送确认，否则会导致发送方不必要的超时重传，这反而浪费了网络资源。TCP标准规定确认推迟的时间不应超过0.5秒。若收到一连串具有最大长度的报文段，则必须每隔一个报文段就发送一个确认[RFC1122]</li>
+<li>捎带确认实际上并不经常发生，因为大多数应用程序很少同时在两个方向上发送数据。<br>TCP的通信是全双工通信。通信中的每一方都在发送和接收报文段。因此，每一方都有自己的发送窗口和接收窗口。在谈到这些窗口时，一定要弄清楚是哪一方的窗口。</li>
+</ul>
+<h3 id="TCP超时重传的选择"><a href="#TCP超时重传的选择" class="headerlink" title="TCP超时重传的选择"></a>TCP超时重传的选择</h3><p>TCP超时重传时间RTO的选择是TCP最复杂的问题之一。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/p7uK/image-20260415131841478.png" srcset="/img/loading.gif" lazyload alt="image-20260415131841478"></p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/Yzi9/image-20260415131851543.png" srcset="/img/loading.gif" lazyload alt="image-20260415131851543"></p>
+<p>RTO设置的短了，就会在ACK到达之前触发，引发不必要的重传。如果长了，会导致网络空闲时间增大，降低了传输效率。</p>
+<p>所以RTO应该设置为略大于往返时间RTT。</p>
+<p>但是问题是：</p>
+<p>TCP下层是复杂的因特网环境：</p>
+<ul>
+<li>主机A所发送的报文段可能只经过一个高速率的局域网</li>
+<li>也可能经过多个低速率的网络</li>
+<li>并且每个IP数据报的转发路由还可能不同</li>
+</ul>
+<p>这就意味着RTO必须是动态的。</p>
+<ul>
+<li>不能直接使用略大于某次测量得到的往返时间RTT样本的值作为超时重传时间RTO。</li>
+<li>但是，可以利用每次测量得到的RTT样本计算加权平均往返时间RTTs,这样可以得到比较平滑的往返时间。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/5Nfg/image-20260415132808384.png" srcset="/img/loading.gif" lazyload alt="image-20260415132808384"></p>
+<p>显然，超时重传时间RTO的值应略大于加权平均往返时间RTTs的值(而不是某个RTT样本的值)</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/Mj3n/image-20260415133034320.png" srcset="/img/loading.gif" lazyload alt="image-20260415133034320"></p>
+<p>更让人抓狂的是：RTT的计算严重依赖RTT的测量。如果所测量到的RTT样本不正确，那么所计算出的RTTs和RTT,自然就不正确，进而所计算出的RTO也就不正确。<br>然而，RTT的测量确实是比较复杂的。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/mp9G/image-20260415133312788.png" srcset="/img/loading.gif" lazyload alt="image-20260415133312788"></p>
+<p>发送方出现超时重传时，难以判断RTT属于第一次传输还是重传数据报。</p>
+<h4 id="Karn算法"><a href="#Karn算法" class="headerlink" title="Karn算法"></a>Karn算法</h4><p>在计算加权平均TTs时，只要报文段重传了，就不采用其RTT样本。换句话说，出现重传时，不重新计算 RTTs,进而RTO也不会重新计算。</p>
+<p>但是会引发新问题：</p>
+<p>设想出现这样的情况：报文段的时延突然增大很多并且之后很长一段时间都会保持这种时延（这可能是因为网络拓扑发生了变化)。因此在原来得出的RTO内不会收到确认报文段，于是就重传报文段。但根据Karn算法，不考虑重传的报文段的RTT样本，因此RTO就无法更新，这会导致报文段反复被重传</p>
+<p>所以需要修正：</p>
+<p>报文段每重传一次，就把 RTO增大一些。典型的做法是将新RTO的值取为旧RTO的2倍，</p>
+<h3 id="TCP的选择确认"><a href="#TCP的选择确认" class="headerlink" title="TCP的选择确认"></a>TCP的选择确认</h3><p>在之前介绍TCP的快重传和可靠传输时，TCP接收方只能对按序收到的数据中的最高序号给出确认。当发送方超时重传时，接收方之前已收到的未按序到达的数据也会被重传。</p>
+<p>但是能否设法只传送缺少的数据而不重传已经正确到达，只是未按序到达的数据呢？</p>
+<p>可以，这就是TCP的选择确认功能。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/sT3e/image-20260415133929105.png" srcset="/img/loading.gif" lazyload alt="image-20260415133929105"></p>
+<p>通过指明缺少的字段序号就能够让发送方发送指定的字段。</p>
+<p>但是TCP首部没有预留字段来实现选择确认功能，所以只能使用扩展首部来完成。</p>
+<ul>
+<li>允许SACK选项(1字节)</li>
+<li>SACK选项长度(1字节)</li>
+<li>指明一个边界需要4字节(因为序号为4字节)</li>
+<li>一个字节块需要两个边界，即8字节。<br>因此，最多指明4个字节块的信息。</li>
+</ul>
+<p>但实际上这种选择确认因为实现复杂，且SACK相关文档并没有指明发送方应当怎样响应SACK。最后不了了之，实际上大多数的TCP实现还是重传所有未被确认的数据块。</p>
+<p>第五章结束。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/Chapter%206%20of%20Computer%20Networks:%20Application%20Layer/" title="计算机网络第六章：应用层">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算机网络第六章：应用层</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/Computer%20Networks%20Chapter%204:%20Network%20Layer/" title="计算机网络第四章：网络层">
+                        <span class="hidden-mobile">计算机网络第四章：网络层</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

@@ -1,0 +1,1284 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第三章：数据链路层一些概念 因为物理层不理解也无须理解帧的结构，我们可以看作是信息在链路层的水平传输。注意，这里的链路层协议不同是因为已经不再是直接相连的两个节点，不要认为对等实体的性质是错误的。  链路：指从一个节点到相邻节点的一段物理线路（有线或无线），而中间没有任何其他的交换节点。图中有三段链路，而H1-R2叫通信路径 数据链路：基于链路，当在一条链路上传送数据时，除需要链路本身，还需要一些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络第三章：数据链路层">
+<meta property="og:url" content="http://example.com/posts/Computer%20Networks%20Chapter%203:%20Data%20Link%20Layer/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="第三章：数据链路层一些概念 因为物理层不理解也无须理解帧的结构，我们可以看作是信息在链路层的水平传输。注意，这里的链路层协议不同是因为已经不再是直接相连的两个节点，不要认为对等实体的性质是错误的。  链路：指从一个节点到相邻节点的一段物理线路（有线或无线），而中间没有任何其他的交换节点。图中有三段链路，而H1-R2叫通信路径 数据链路：基于链路，当在一条链路上传送数据时，除需要链路本身，还需要一些">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png">
+<meta property="article:published_time" content="2026-04-20T11:42:30.635Z">
+<meta property="article:modified_time" content="2026-04-20T11:42:31.555Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png">
+  
+  
+  
+  <title>计算机网络第三章：数据链路层 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="计算机网络第三章：数据链路层"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-20 11:42" pubdate>
+          2026年4月20日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          14k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          121 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机网络第三章：数据链路层</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第三章：数据链路层"><a href="#第三章：数据链路层" class="headerlink" title="第三章：数据链路层"></a>第三章：数据链路层</h1><h2 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h2><p><img src="https://s2.loli.net/2026/02/03/wAK1f6B5zepasqd.png" srcset="/img/loading.gif" lazyload alt="image-20260203214001521"></p>
+<p>因为物理层不理解也无须理解帧的结构，我们可以看作是信息在链路层的水平传输。注意，这里的链路层协议不同是<strong>因为已经不再是直接相连的两个节点</strong>，不要认为对等实体的性质是错误的。</p>
+<ul>
+<li><strong>链路</strong>：指从一个节点到相邻节点的一段物理线路（有线或无线），而中间没有任何其他的交换节点。图中有三段链路，而H1-R2叫<strong>通信路径</strong></li>
+<li><strong>数据链路</strong>：基于链路，当在一条链路上传送数据时，除需要链路本身，还需要一些必要的通信协议来控制这些数据的传输，把<strong>实现这些协议的硬件和软件加到链路上</strong>，就构成了数据链路。</li>
+<li><ul>
+<li>网卡和对应的软件驱动已经实现了这些协议，网卡包含了物理层和数据链路层这两层的功能。</li>
+</ul>
+</li>
+<li><strong>帧</strong>：是数据链路层对等实体之间在水平方向进行逻辑通信的协议数据单元<strong>PDU</strong>。</li>
+</ul>
+<h2 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h2><p><img src="https://s2.loli.net/2026/02/03/8Al6EyRoJq1B9ju.png" srcset="/img/loading.gif" lazyload alt="image-20260203215808316"></p>
+<p>如图，帧是数据链路层将下放的数据单元加上链路层首部和尾部形成的。</p>
+<p>所以我们就得到了定义。</p>
+<p><strong>封装成帧</strong>是指数据链路层给上层交付下来的协议数据单元PDU添加一个首部和一个尾部，使之成为<strong>帧</strong>。</p>
+<p>帧的首部和尾部包含重要的控制信息，比如帧定界标识，标识某一段是帧(但并不是每一种协议都有帧定界标志，如以太网V2的MAC帧)</p>
+<p>以太网V2的MAC帧会在物理层加上前导码，前导码会同步接收方的CLK，这使得帧能够被时间自动分组。</p>
+<p>为了提高数据链路层传输帧的效率，应当使帧的<strong>数据载荷的长度尽可能地大于首部和尾部的长度</strong>。</p>
+<p>但是考虑到对缓存空间的需求以及差错控制等诸多因素，每一种数据链路层协议都规定了帧的数据载荷的长度上限，即最大传送单元(Maximum Transfer Unit,MTU)。例如，以太网的MTU为1500个字节。</p>
+<h3 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h3><p><img src="https://s2.loli.net/2026/02/03/ZgOS28MKozxqwTt.png" srcset="/img/loading.gif" lazyload alt="image-20260203222501511"></p>
+<p>如果数据载荷中出现了和帧定界相同的字段，可能导致帧被错误识别，对此我们需要透明传输。</p>
+<p><strong>透明传输</strong>是指数据链路层对上层交付下来的协议数据单元PDU没有任何限制，就好像数据链路层不存在一样。</p>
+<p>实现透明传输有很多方法：</p>
+<ul>
+<li><strong>字节填充</strong>：对于面向字节的物理链路，发送前扫描帧的数据载荷，如果有和帧定界相同的字段就在前加上转义符，接收方读取到转义符就能够正确识别帧</li>
+<li><strong>比特填充</strong>：对于面向比特的物理链路就是用比特填充，大同小异</li>
+</ul>
+<p><img src="https://s2.loli.net/2026/02/03/YFwSaUbKVpOJ5ux.png" srcset="/img/loading.gif" lazyload alt="image-20260203224415198"></p>
+<h3 id="差错传输"><a href="#差错传输" class="headerlink" title="差错传输"></a>差错传输</h3><p><img src="https://s2.loli.net/2026/02/03/MAmGJuga3lYz72t.png" srcset="/img/loading.gif" lazyload alt="image-20260203220526390"></p>
+<p>由于物理等因素，数据在传输的过程中往往不可避免地会出现错误，数据域中可能出现失真，二进制位取反等问题，这被称为<strong>比特差错</strong></p>
+<p>在一段时间内，传输错误的比特数量占所传输比特总数的比率称为误码率(Bit Error Rate,BER)。</p>
+<p>提高链路的信噪比可以降低误码率。<br>但在实际的通信链路上，不可能使误码率下降为零。因此使用差错检测技术是必要手段。</p>
+<p>发送方根据数据载荷算出检错码放在帧尾部，接收方再提取帧尾部，用与发送方相同的计算方式验证传输是否有误。检错码被称为<strong>帧检验序列FCS</strong></p>
+<h4 id="奇偶检验"><a href="#奇偶检验" class="headerlink" title="奇偶检验"></a>奇偶检验</h4><p><strong>奇校验</strong>是在待发送的数据后面添加1个校验位，使得<strong>添加该校验位后的整个数据</strong>中比特1的个数为奇数。<br><strong>偶校验</strong>是在待发送的数据后面添加1个校验位，使得<strong>添加该校验位后的整个数据</strong>中比特1的个数为偶数。</p>
+<p><img src="https://s2.loli.net/2026/02/04/uJshaxAy1GfPz6i.png" srcset="/img/loading.gif" lazyload alt="image-20260204154418422"></p>
+<p>如果产生了两位误码，导致比特1奇性不改变，就无法检测出错误。这就被称为漏检。</p>
+<h4 id="循环冗余校验"><a href="#循环冗余校验" class="headerlink" title="循环冗余校验"></a>循环冗余校验</h4><p>数据链路层广泛使用漏检率极低的**循环冗余校验(Cyclic Redundancy Check,CRC)**检错技术。</p>
+<h4 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h4><ul>
+<li>收发双方约定好一个生成多项式G(X)。</li>
+<li>发送方基于待发送的数据和生成多项式G(X),计算出差错检测码（冗余码），将冗余码添加到待发送数据的后面一起传输。</li>
+<li>接收方收到数据和冗余码后，通过生成多项式G(X)来计算收到的数据和冗余码是否产生了误码。</li>
+</ul>
+<p><img src="https://s2.loli.net/2026/02/04/SXdcqNB3LEYTHiQ.png" srcset="/img/loading.gif" lazyload alt="image-20260204155411807"></p>
+<p><img src="https://s2.loli.net/2026/02/04/qdcYiLaNuo5U1mS.png" srcset="/img/loading.gif" lazyload alt="image-20260204155435579"></p>
+<p><strong>缺一条冗余码计算</strong></p>
+<h3 id="可靠传输与不可靠运输"><a href="#可靠传输与不可靠运输" class="headerlink" title="可靠传输与不可靠运输"></a>可靠传输与不可靠运输</h3><ul>
+<li>可靠传输服务</li>
+</ul>
+<p>如果是可靠，接收方检验出错误包的时候会发送信息让发送方重传，确保每个包都能无误送到。</p>
+<ul>
+<li>不可靠传输服务</li>
+</ul>
+<p>如果是不可靠，接收方在检验出有分组的包会直接丢弃而不会采取任何补救措施。</p>
+<p>在一般情况下，有线链路的误码率比较低。为了减小开销，并不要求数据链路层向其上层提供可靠传输服务。即使出现了误码，可靠传输的问题由其上层处理。</p>
+<p>无线链路易受干扰，误码率比较高，因此要求数据链路层必须向其上层提供可靠传输服务。</p>
+<p>值得一提的是，误码只是传输差错中的一种，差错类型还有分组丢失，分组失序，分组重复，这三种情况发生在<strong>数据链路层的上层</strong></p>
+<p>可靠传输服务并不局限于数据链路层，其他各层均可选择实现可靠传输。可靠传输的实现比较复杂，开销比较大，是否使用可靠传输取决于应用需求。</p>
+<p>下面将介绍三种可靠传输的协议，这三种协议并不局限于数据链路层，也可以用在数据链路层的上层。</p>
+<h4 id="停止-等待协议"><a href="#停止-等待协议" class="headerlink" title="停止-等待协议"></a>停止-等待协议</h4><p><img src="https://s2.loli.net/2026/02/04/1TfLbpWAlBQSYNU.png" srcset="/img/loading.gif" lazyload alt="image-20260204222238920"></p>
+<p>发送方在发送一个分组之后，不会将该分组从发送缓存中立即删除，而是会等待接收方传回ACK确认分组才会删除。接收方在确认传输无误的情况下会返回确认分组。</p>
+<p>接收方在发现收到的分组出错之后，向发送方发送否认分组NAK，发送方察觉到否认分组之后重发该分组，直到接收方确认传输无误传回ACK。</p>
+<p>但是这种机制，如果出现了分组丢失情况，接收方不会发回确认分组。所以，发送方会内置一个计时器RTO，如果在应当传回ACK的时间内没有接到回复，就会重发分组，直到接收方回复ACK确认分组</p>
+<blockquote>
+<p>否认机制是为了可以使发送方在超时计时器超时前就尽快重传，保证传输效率</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2026/02/04/ZNkideB7hqnLmoj.png" srcset="/img/loading.gif" lazyload alt="image-20260204222805497"></p>
+<p>但是如果ACK确认分组在返回的过程中丢失，发送方会重发一次分组，这就造成了分组重复。需要再加一个分组编号机制。</p>
+<p>只要保证每发送一个新的数据分组，其序号与上次发送的数据分组的序号不同就可以了，因此用一个比特来编号就够了，序号有0和1这两个。</p>
+<p><img src="https://s2.loli.net/2026/02/04/gPKJduVi59QSIzL.png" srcset="/img/loading.gif" lazyload alt="image-20260204223037459"></p>
+<p>同理，确认分组也是需要编号的，不然如果ACK迟到的情况：</p>
+<p><img src="https://s2.loli.net/2026/02/04/9aY2jpHqtJmVRSv.png" srcset="/img/loading.gif" lazyload alt="image-20260204223913821"></p>
+<p>这就导致的对第二个分组的传输情况忽视了，所以需要编号。</p>
+<blockquote>
+<p>实际上数据链路层极少出现ACK迟到的情况，可以不给确认分组编号</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2026/02/04/FUgLDufW1QHIoMG.png" srcset="/img/loading.gif" lazyload alt="image-20260204224054592"></p>
+<p>至此，使用停止-等待协议就能够在不可靠信道上实现可靠传输了。</p>
+<blockquote>
+<p><strong>注意：停止-等待协议属于自动请求重传(Automatic Repeat reQuest,ARQ)协议。即重传的请求是发送方自动进行的，而不是接收方请求发送方重传某个误码的数据分组。</strong></p>
+</blockquote>
+<h4 id="信道利用率"><a href="#信道利用率" class="headerlink" title="信道利用率"></a>信道利用率</h4><p><img src="https://s2.loli.net/2026/02/04/lyJmWFRnzHeBKu1.png" srcset="/img/loading.gif" lazyload alt="image-20260204224952452"></p>
+<p>所以，当RTT远大于发送时间TD时(如卫星链路)，会导致信道利用率很低。如果是超时重传，还要更低。</p>
+<p>反之如果在无线局域网的情况下，那信道利用率还是挺高的。</p>
+<p>所以这种协议不是很实用，往往使用其他的两个协议。</p>
+<h3 id="停止-等待协议的局限"><a href="#停止-等待协议的局限" class="headerlink" title="停止-等待协议的局限"></a>停止-等待协议的局限</h3><p>停止-等待协议的<strong>等待接收方传回确认分组</strong>的时间属于<strong>死时间</strong>，使用流水线运输可以优化，即发送方连续发送数据分组。</p>
+<p><img src="https://s2.loli.net/2026/02/06/e9a3JoS6KMZuzIV.png" srcset="/img/loading.gif" lazyload alt="image-20260206123603293"></p>
+<p>但是在使用流水线传输方式时，发送方不能无限制地连续发送数据分组，否则可能会导致网络中的路由器或接收方来不及处理这些数据分组，进而导致数据分组的丢失，这实际上是对网络资源的浪费。因此，必须采取措施来限制发送方连续发送数据分组的数量。</p>
+<p>回退N帧协议采用流水线传输方式，并且利用发送窗口来限制发送方连续发送数据分组的数量，这属于<strong>连续ARQ协议</strong>。</p>
+<h3 id="回退N帧协议"><a href="#回退N帧协议" class="headerlink" title="回退N帧协议"></a>回退N帧协议</h3><p>采用n个比特给分组编序号，序号范围是0～（2n－1）。本例假设采用3个比特给分组编序号则序号范围是0~7。</p>
+<p>发送方需要维护一个发送窗口Wt，在未收到接收方确认分组的情况下，发送方可将序号落入Wt内的所有数据分组连续发送出去。<br>采用n个比特给分组编序号，则Wt的取值范围是1&lt;Wt≤(2的n次方-1)。本例假设采用3个<br>比特给分组编序号，则W的取值范围是2~7，本例取Wt=5。</p>
+<p>同样地，接收方需要维护一个接收窗口WR,只有正确到达接收方（无误码）且序号落入WR内的数据分组才被接收方接收。<br>WR的取值只能是1，这一点与停止等待协议是相同的。</p>
+<p><img src="https://s2.loli.net/2026/02/06/lV8YP7a2tQCm9Up.png" srcset="/img/loading.gif" lazyload alt="image-20260206153907750"></p>
+<p>接收方每正收到一个序号落入接收窗口的数据分组，就将接收窗口向前滑动一个位置，<br>这样就有一个新的序号落入接收窗口。与此同时，接收方还要给发送方发送针对该数据分组的确认分组。</p>
+<p>发送方每收到一个按序确认的确认分组，就将发送窗口向前滑动一个位置，这样就有一个新的序号落入发送窗口，序号落入发送窗口内的数据分组可继续被发送。</p>
+<p>在回退帧协议的工作过程中，发送方的发送窗口和接收方的接收窗口按上述规则不断向前滑动。因此，这类协议又称为<strong>滑动窗口协议</strong>。</p>
+<p>看一个无传输差错的例子：</p>
+<p><img src="https://s2.loli.net/2026/02/06/2Qw3gpaMAxhXTfL.png" srcset="/img/loading.gif" lazyload alt="image-20260206154208297"></p>
+<p>发送方将0-4划分为发送窗口，将0-4连续发送出去，分组经过链路到达接收端，接收方确认传输过程中没有误码失序等情况后就将确认分组ACK传回，每传回一个ACK，接收窗口就向前移动一个分组，发送方每接收一个确认分组，就向前移动一个位置，已发送且不在窗口内的分组就可以从发送分组中删除了。</p>
+<p>在无传输差错的情况下，回退N帧协议的信道利用率比停止.等待协议的信道利用率有显著提高。提高的程度取决于发送窗口的大小。</p>
+<p>如果出现超时重传：</p>
+<p><img src="https://s2.loli.net/2026/02/06/FZJB2ImjE83XrlO.png" srcset="/img/loading.gif" lazyload alt="image-20260206184707489"></p>
+<p>如图，2号分组出现传输错误，接收方将损坏分组二号丢弃，为了保证接受顺序，无论三号和四号是否损坏都会被丢弃。此处，接收窗口只会移动两次到2的位置就停止。随即，在照例发送完0号和1号的ACK分组之后，接收方会<strong>发送针对最近已按序接收的数据分组的确认分组</strong>，在这里是发送一号分组。发送方接收到发送的0和1分组后将发送窗口后移两位。随即发送方两个1号的ACK的重复确认。随即在新的发送窗口中发送5号和6号分组。接收方接到后因为2号缺失导致接收窗口无法移动，又会发送两次1号分组。随即发送方知道<strong>有四个分组(3,4,5,6)未能正确传输</strong>，那么发送方可立即重发或者等到计时器超时再重发发送窗口内的所有分组(在这里是2,3,4,5,6)，即使3,4,5,6此前未出现错误，但是2的缺位导致无法被正确接收。</p>
+<p>这就是回退N帧的由来，一旦出错就要回退N个帧。所以，一个数据分组的差错就可能呙引起大量数据分组的重传在信道质量较差(容易出现误码)的情况下，<strong>回退N帧协议的信道利用率并不比停止-等待协议的信道利用率高。</strong></p>
+<p>值得一提的是，回退N帧协议的接收方采取积累确认的方式。</p>
+<ul>
+<li>接收方不必对收到的每一个数据分组都发送一个确认分组，而是可以在收到几个序号连续的数据分组后，对按序到达的最后一个数据分组发送确认分组。</li>
+<li>接收方何时发送累积确认分组，由具体实现决定。</li>
+<li>确认分组ACKn表明序号为n及之前的所有数据分组都已正确接收。比如，ACK4表示0-4的数据分组都已被正确接收。</li>
+</ul>
+<p>累积确认能够减少向网络中注入确认分组的数量，且即使确认分组丢失，也可能不必重传数据分组。但是不能向发送方及时准确地反映出接收方已正确接收的所有数据分组的数量。</p>
+<p>我们来看一个例子，如果发送窗口的取指大于比特位的范围。</p>
+<p><img src="https://s2.loli.net/2026/02/07/ELqzcxwROSmotvu.png" srcset="/img/loading.gif" lazyload alt="image-20260207154918735"></p>
+<p>发送方连续发送0-7分组，接收方接收并将接收窗口向后移动8个单位，移动到0的位置，传回ACK确认分组。但是ACK在传输中丢失，发送方重传计时器超时重传0-7分组，接收方根据分组号认定为是0号数据可以接受。这就重复传输了8个数据分组造成传输错误。</p>
+<p>所以，如果发送窗口大小超过了比特位的范围会导致接收方无法分辨出新旧分组而导致传输错误。</p>
+<p>回退N帧协议对出错分组之后的重传依旧会浪费通信资源，是一个可以优化的点。</p>
+<p>我们希望发送方能够仅仅重发出现发错的分组，节省信道资源。</p>
+<h3 id="选择-重传协议"><a href="#选择-重传协议" class="headerlink" title="选择-重传协议"></a>选择-重传协议</h3><p><img src="https://s2.loli.net/2026/02/07/xXaAFoQM41CG3su.png" srcset="/img/loading.gif" lazyload alt="image-20260207161725552"></p>
+<p>为了使发送方仅重传出现差错的数据分组接收方<strong>不再采用累积确认</strong>，而需要对每一个正确接收的数据分组进行逐一确认。</p>
+<p><img src="https://s2.loli.net/2026/02/07/aJFBgpZsiGv8hKW.png" srcset="/img/loading.gif" lazyload alt="image-20260207162929705"></p>
+<p>如图，发送方连续发送0-3分组，但是0号数据分组在传输过程中出错，接收方接收到0-3分组，并检查0号分组出错将其丢弃，并将1-3分组缓存(不交付给上层)，接收窗口无法向前滑动 。随即，接收方发回1-3号ACK，发送方收到后无法滑动发送窗口，开始确认1-3号分组已被接受，开始重传0号数据分组。接收方收到后传回ACK0，双方滑动窗口开始下一阶段。</p>
+<p><img src="https://s2.loli.net/2026/02/07/XHSjsiPFxAbVlu9.png" srcset="/img/loading.gif" lazyload alt="image-20260207164034661"></p>
+<p>如果是接收窗口小于发送窗口，就会出现接收方无法分辨新旧数据分组的错误。</p>
+<p>发送方一次性连续发送0-4，被正确传输并接受，接收方滑动窗口并传回0-4号ACK但是0号丢失。随即发送方的0号重传计时器超时，重传0号，接收方发现收到的0号分组处于滑动窗口内，开始接受不属于这里的0号数据分组，这就乱套了。</p>
+<h3 id="点对点协议PPP"><a href="#点对点协议PPP" class="headerlink" title="点对点协议PPP"></a>点对点协议PPP</h3><p>点对点协议(Point-to-Point Protocol,PPP)是目前使用最广泛的<strong>点对点数据链路层协议</strong>。</p>
+<p>PPPoE协议是基于PPP开发的针对以太网的传输协议。</p>
+<p>PPP协议包含了：</p>
+<ul>
+<li>一套网络控制协议NCPs</li>
+<li>一个网络层PDU封装到串行链路的方法</li>
+<li>一个链路控制协议LCP</li>
+</ul>
+<h4 id="PPP帧结构"><a href="#PPP帧结构" class="headerlink" title="PPP帧结构"></a>PPP帧结构</h4><p><img src="https://s2.loli.net/2026/02/07/Sn5xgPrHBCw3I2l.png" srcset="/img/loading.gif" lazyload alt="image-20260207185539431"></p>
+<h4 id="PPP协议的透明传输"><a href="#PPP协议的透明传输" class="headerlink" title="PPP协议的透明传输"></a>PPP协议的透明传输</h4><p><img src="https://s2.loli.net/2026/02/09/xXmhcoUGFkl3PHK.png" srcset="/img/loading.gif" lazyload alt="image-20260209163946147"></p>
+<p><img src="https://s2.loli.net/2026/02/09/Djc1CteUolA2Yaq.png" srcset="/img/loading.gif" lazyload alt="image-20260209164115812"></p>
+<h3 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h3><p><img src="https://s2.loli.net/2026/02/09/nGLpVwSbE58BYAz.png" srcset="/img/loading.gif" lazyload alt="image-20260209164212920"></p>
+<p>帧检验序列FCS字段：其值是使用循环冗余校验CRC计算出的检错码。CRC采用生成的多项式为</p>
+<p>$$<br>CRC-CCITT=X^{16}+X^{12}+X^{5}+1<br>$$</p>
+<p>接收方每收到一个PPP帧，就进行CRC检验。<br>若CRC检验正确，就收下这个帧；否则，就丢弃这个帧。<br>使用PPP的数据链路层，向上提供的是不可靠<br>数据传输服务</p>
+<h3 id="PPP的工作状态"><a href="#PPP的工作状态" class="headerlink" title="PPP的工作状态"></a>PPP的工作状态</h3><p>以用户主机拨号接入因特网服务提供者ISP的拨号服务器的过程为例</p>
+<p><img src="https://s2.loli.net/2026/02/09/WyCR4Jbc9Stlhs6.png" srcset="/img/loading.gif" lazyload alt="image-20260209164645605"></p>
+<h3 id="共享式以太网"><a href="#共享式以太网" class="headerlink" title="共享式以太网"></a>共享式以太网</h3><p>以太网(Ethernet)以曾经被假想的电磁波传播介质一以太(Ether）来命名。<br>以太网最初采用无源电缆（不包含电源线）作为共享总线来传输帧，属于基带总<br>线局域网，传输速率为2.94Mb/s。</p>
+<p>以太网目前已经从传统的共享式以太网发展到交换式以太网，传输速率已经从10Mb/s提高到100Mb/s、1Gb/s甚至10Gb/s。<br>我们会首先介绍最早流行的传输速率<br>为10Mb/s的共享式以太网的相关知识。</p>
+<h3 id="网络适配器和MAC地址"><a href="#网络适配器和MAC地址" class="headerlink" title="网络适配器和MAC地址"></a>网络适配器和MAC地址</h3><p>要将计算机连接到以太网，需要使用相应的网络适配器(Adapter),网络适配器一般简称为“网卡”。</p>
+<p><img src="https://s2.loli.net/2026/02/09/4cjLYJgDsF3ux8M.png" srcset="/img/loading.gif" lazyload alt="image-20260209185930441"></p>
+<p>在计算机内部，网卡与CPU之间的通信，一般是通过计算机主板上的IO总线以并行传输方式进行。<br>网卡与外部以太网（局域网）之间的通信，一般是通过传输媒体（同轴电缆、双绞线电缆、光纤）以<strong>串行方式</strong>进行的。<br>网卡除要实现物理层和数据链路层功能，其另外一个重要功能就是要进行<strong>并行传输和串行传输</strong>的转换。<br>由于网络的传输速率和计算机内部总线上的传输速率并不相同，因此在网卡的核心芯片中都会包含用于缓存数据的存储器。</p>
+<h4 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h4><p>在以太网集群中，多个主机连接在同一个广播信道上，要想实现两个主机之间的通信，则每个主机都必须有一个唯一的标识，即一个数据链路层地址。</p>
+<p>所以，在每个主机发送的帧的首部中，都携带有发送主机（源主机）和接收主机（目的主机）的数据链路层地址。由于这类地址是用于媒体接入控制(Medium Access Control,MAC)的，因此被称为MAC地址。</p>
+<p>MAC地址一般被固化在网卡的电可擦可编程只读存储器EEPROM中，因此MAC地址也被称为硬件地址或物理地址</p>
+<p>一般情况下，普通用户计算机中往往会包含两块网卡：</p>
+<ul>
+<li>一块是用于接入有线局域网的以太网卡</li>
+<li>一块是用于接入无线局域网的Wi-Fi网卡</li>
+</ul>
+<p>每块网卡都有一个全球唯一的MAC地址。<br>某些服务器,交换机或者路由器内置多个网卡，有多个MAC地址。<br>所以，严格来说，MAC地址是对网络上<strong>各接口</strong>的唯一标识，而不是对网络上各设备的唯一标识。</p>
+<p>在IEEE 802局域网中，MAC地址格式如下：</p>
+<p><img src="C:\Users\willm\AppData\Roaming\Typora\typora-user-images\image-20260209220030889.png" srcset="/img/loading.gif" lazyload alt="image-20260209220030889"></p>
+<p>我们能够根据OUI查询到该网卡所属的厂商。</p>
+<p><img src="C:\Users\willm\AppData\Roaming\Typora\typora-user-images\image-20260209221026856.png" srcset="/img/loading.gif" lazyload alt="image-20260209221026856"></p>
+<p><strong>单播</strong>：<strong>一对一</strong>通信，信息从一台设备准确发送到另一台<strong>指定的</strong>设备。</p>
+<p><strong>多播</strong>：<strong>一对多</strong>通信，信息从一台设备发送给<strong>一组有共同需求的</strong>设备。</p>
+<p>如果将本地多播地址设置为<strong>除B0B1以外全1时，就是广播地址</strong></p>
+<p>在发送顺序中：</p>
+<p><img src="C:\Users\willm\AppData\Roaming\Typora\typora-user-images\image-20260209221326998.png" srcset="/img/loading.gif" lazyload alt="image-20260209221326998"></p>
+<h4 id="单播MAC地址使用"><a href="#单播MAC地址使用" class="headerlink" title="单播MAC地址使用"></a>单播MAC地址使用</h4><p><img src="C:\Users\willm\AppData\Roaming\Typora\typora-user-images\image-20260209221829801.png" srcset="/img/loading.gif" lazyload alt="image-20260209221829801"></p>
+<p>主机B填写目的地址和源地址后，发送到当前以太网中的每一个设备，主机A发现收到的帧的目的地址和自己并不匹配(这里不用相同这个词，是要考虑广播这种情况)，所以丢弃该帧。主机B收到后发现匹配，就在检查传输正确与否后上交到网络层等处理。</p>
+<p>若主机B的目的地址填写<code>FF-FF-FF-FF-FF-FF</code>就是广播，以太网中的所有设备都会接收并检查是否有传输错误。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>网卡从网络上每收到一个无误码的帧，就检查帧首部中的目的MAC地址，按以下情况处理：</p>
+<ul>
+<li>如果目的MAC地址是广播地址(FF-FF-FF-FF-FF-FF),则接受该帧。</li>
+<li>如果目的MAC地址与网卡上固化的全球单播MAC地址相同，则接受该帧。</li>
+<li>如果目的MAC地址是网卡支持的多播地址，则接受该帧。</li>
+<li>除上述(1)、(2)和(3)情况外，丢弃该帧。</li>
+</ul>
+<p>网卡还可被设置为一种特殊的工作方式：**混杂方式(Promiscuous Mode)**。工作在混杂方式的网卡只要收到共享媒体上传来的帧就会收下，而不管帧的目的MAC地址是什么。</p>
+<p>全球单播MAC地址就如同身份证上的身份证号码，具有唯一性，它往往与用户个人信<br>息绑定在一起。因此，用户应尽量确保自己拥有的全球单播MAC地址不被泄露。<br>为了避免用户设备连接Wi-F热点时MAC地址泄露的安全问题，目前大多数移动设备都已经采用了随机MAC地址技术。</p>
+<h3 id="CSMA-x2F-CD协议的基本原理"><a href="#CSMA-x2F-CD协议的基本原理" class="headerlink" title="CSMA/CD协议的基本原理"></a>CSMA/CD协议的基本原理</h3><p>在共享总线以太网中，多个站点连接在同一总线上，在使用总线时会发生信道碰撞等问题。CSMA/CD协议用于解决信道的调度问题。</p>
+<p><img src="C:\Users\willm\AppData\Roaming\Typora\typora-user-images\image-20260210210518335.png" srcset="/img/loading.gif" lazyload alt="image-20260210210518335"></p>
+<p>以太网还有一个强化碰撞的机制：发送帧的站点一旦检测到碰撞，除了立即停止发送帧外，还要再继续发送32比特或48比特的人为干扰信号(Jamming Signal),以便有足够多的碰撞信号使所有站点都能检测出碰撞。</p>
+<p>该协议只能尽量避免碰撞，且不可能进行全双工通信，而只能进行半双工通信（双向交替通信）。</p>
+<h3 id="共享式以太网的争用期"><a href="#共享式以太网的争用期" class="headerlink" title="共享式以太网的争用期"></a>共享式以太网的争用期</h3><p>3.4的两个章节后面再看</p>
+<h3 id="使用集线器的共享式以太网"><a href="#使用集线器的共享式以太网" class="headerlink" title="使用集线器的共享式以太网"></a>使用集线器的共享式以太网</h3><p>无源电缆接触点多，依赖元件多，并不可靠，替代他的是更便宜更灵活的集线器。</p>
+<p>集线器具有以下特点：</p>
+<ul>
+<li>使用集线器的以太网虽然物理拓扑是星型的，但在逻辑上仍然是一个总线网。总线上的各站点共享总线资源，使用的还是CSMA/CD协议。</li>
+<li>集线器只工作在物理层，它的每个接口仅简单地转发比特，并不进行碰撞检测。碰撞检测的任务由各站点中的网卡负责。</li>
+<li>集线器一般都有少量的容错能力和网络管理功能，能够修复网络连接中的小问题。</li>
+</ul>
+<h3 id="在物理层扩大以太网"><a href="#在物理层扩大以太网" class="headerlink" title="在物理层扩大以太网"></a>在物理层扩大以太网</h3><p>可以直接使用一个更大的集线器将两个以太网集群相连，但是那么做会形成更大碰撞域，导致碰撞的概率增加。</p>
+<p><img src="C:\Users\willm\AppData\Roaming\Typora\typora-user-images\image-20260211000717786.png" srcset="/img/loading.gif" lazyload alt="image-20260211000717786"></p>
+<h3 id="在数据链路层扩大以太网"><a href="#在数据链路层扩大以太网" class="headerlink" title="在数据链路层扩大以太网"></a>在数据链路层扩大以太网</h3><p>可以使用网桥来扩大以太网</p>
+<p>网桥可以识别帧的结构，且能根据目的地址或自身转发表转发帧。</p>
+<p>网桥不会形成更大碰撞域，不会增加碰撞概率。</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/A9es/image-20260211001036357.png" srcset="/img/loading.gif" lazyload alt="image-20260211001036357"></p>
+<h4 id="自学习和转发帧流程"><a href="#自学习和转发帧流程" class="headerlink" title="自学习和转发帧流程"></a>自学习和转发帧流程</h4><p><img src="https://files.seeusercontent.com/2026/02/16/g9nQ/image-20260211002234919.png" srcset="/img/loading.gif" lazyload alt="image-20260211002234919"></p>
+<p>记得这个吗？</p>
+<p>网桥采用<strong>自学习算法</strong>建立转发表。</p>
+<p>初始时，网桥的转发表是空的，直到接收到第一个广播的帧(A-&gt;B)时，将帧的来源和网桥接口作为键值对登记起来。因为是第一个键值对，没有关于B的接口信息，所以将帧盲目转发给所有接口。当D-&gt;A的帧抵达网桥时，网桥记录D位于接口2并将帧发送到接口1，抵达主机A。剩下的流程不解释。</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/b2Ab/image-20260211003606249.png" srcset="/img/loading.gif" lazyload alt="image-20260211003606249"></p>
+<p>所以：</p>
+<ul>
+<li>网桥收到帧后进行登记（即自学习），登记的内容为帧的源MAC地址和进入网桥的接口号。</li>
+<li>网桥根据帧的目的MAC地址和网桥的转发表对帧进行转发，包含以下三种情况：</li>
+<li><ul>
+<li>·明确转发：网桥知道应当从哪个接口转发帧。</li>
+<li>·盲目转发：网桥不知道应当从哪个接口转发帧，只能将其通过除进网桥的接口外的其他所有接口<br>转发。</li>
+<li>丢弃：网桥知道不应该转发该帧，将其丢弃。</li>
+</ul>
+</li>
+</ul>
+<h3 id="透明网桥的生成树协议STP"><a href="#透明网桥的生成树协议STP" class="headerlink" title="透明网桥的生成树协议STP"></a>透明网桥的生成树协议STP</h3><p>为了提高以太网的可靠性，有时需要在两个以太网之间使用多个透明网桥来提供冗余链路。</p>
+<p>但是如果网络链路形成了闭合环路，那会导致帧在闭合环路中永久兜圈，浪费通信资源。</p>
+<p>所以我们会生成一个连接所有节点的最小生成树，帧的传输就在该生成树中进行。</p>
+<p>生成树：使得每个节点之间都有通路的路径。</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/Fg3k/image-20260211004742372.png" srcset="/img/loading.gif" lazyload alt="image-20260211004742372"></p>
+<h3 id="交换式以太网"><a href="#交换式以太网" class="headerlink" title="交换式以太网"></a>交换式以太网</h3><p>网桥接口很少，只用来连接不同的网段。</p>
+<p>交换式集线器是具有多个接口的网桥，被称为以太网交换机或二层交换机。</p>
+<p>仅使用交换机（而不使用集线器）的以太网就是交换式以太网。</p>
+<p>交换式以太网使用的核心还是网桥，在交换式以太网中进行扩展，<strong>不会</strong>形成一个更大的<strong>冲突域</strong>。</p>
+<h3 id="以太网交换机"><a href="#以太网交换机" class="headerlink" title="以太网交换机"></a>以太网交换机</h3><p>交换机的每个接口可以连接计算机，也可以连接集线器或另一个交换机。</p>
+<p>当交换机的接口与计算机或交换机连接时，可以工作在<strong>全双工</strong>方式，并能在自身内部同时连通多对接口，使每一对相互通信的计算机都能像独占传输媒体那样，无碰撞地传输数据，这样就不需要使用CSMA/CD协议了。</p>
+<p>一般的交换机都采用“存储转发”方式，为了减小交换机的转发时延，某些交换机采用了直通(Cut-Through)交换方式。<br>采用直通交换方式的交换机，在接收帧的同时就立即按帧的目的MAC地址决定该帧的转发接口，然后通过其内部基于<strong>硬件的交叉矩阵</strong>进行转发，而不必把整个帧先缓存后再进行处理。</p>
+<p>(交叉矩阵的图在我看的那本书上有，等我有时间再拍下来。)</p>
+<p>直通交换时延很小，但是不会检查差错，可能将一些无效帧转发给其他主机。</p>
+<h3 id="共享式和交换式对比"><a href="#共享式和交换式对比" class="headerlink" title="共享式和交换式对比"></a>共享式和交换式对比</h3><p>明确，共享式是在物理层扩展，交换式是在数据链路层扩展。</p>
+<p>3.5.2，待补全</p>
+<h3 id="以太网的MAC帧格式"><a href="#以太网的MAC帧格式" class="headerlink" title="以太网的MAC帧格式"></a>以太网的MAC帧格式</h3><p>分为</p>
+<ul>
+<li>DIX Ethernet V2的帧格式</li>
+<li>IEEE 802.3的帧格式</li>
+</ul>
+<p>两者差别很小，第一章较流行，我们介绍第一种。</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/eT4e/image-20260213220419309.png" srcset="/img/loading.gif" lazyload alt="image-20260213220419309"></p>
+<p>目的地址和源地址字段用于指明发送方和接收方。</p>
+<p>类型字段用来指明数据载荷中的内容是由上一层的哪个协议封装的，以便将收到的MAC帧的数据载荷上交给上一层的这个协议。</p>
+<p>FCS是使用CRC生成的帧检验序列FCS,接收方的网卡通过FCS的内容就可检测出帧在传输过程中是否产生了误码。</p>
+<p>数据载荷最小为46，最大为1500字节，过小会填充，过大会分组。</p>
+<p>在以太网中，物理层会给帧加上前导码，以便接收方时钟同步。</p>
+<p>接收方可能收到的无效MAC帧包括以下几种：</p>
+<ul>
+<li>MAC帧的长度不是整数个字节</li>
+<li>通过MAC帧的FCS字段的值检测出帧有误码</li>
+<li>MAC帧的长度不在64~1518字节之间</li>
+</ul>
+<h3 id="虚拟局域网VLAN"><a href="#虚拟局域网VLAN" class="headerlink" title="虚拟局域网VLAN"></a>虚拟局域网VLAN</h3><p>将多个站点通过一个或多个以太网交换机连接起来就构建出了交换式以太网。<br>交换式以太网中的所有站点都属于同一个广播域。随着交换式以太网规摸的扩大，广播域也相应扩大。</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/9Yli/image-20260213224848285.png" srcset="/img/loading.gif" lazyload alt="image-20260213224848285">但是，巨大的广播域会带来一系列问题：</p>
+<ul>
+<li>广播风暴</li>
+<li><ul>
+<li>某大型以太网中，主机A要给主机B发送帧，但是A不知道B的地址，A发送一个ARP广播请求，广播中的所有主机都会收到并查看该请求。这会浪费网络资源和CPU资源。</li>
+</ul>
+</li>
+</ul>
+<p><strong>使用路由器能够分割广播域，因为路由器默认不会对分组进行转发</strong>。但是路由器成本高，大量使用路由器分割是不现实的，我们会使用虚拟局域网来进行逻辑分割。</p>
+<p>虚拟局域网(Virtual Local Area Network,VLAN)是一种将局域网内的站点分成与物理位置无关的逻辑组的技术，一个逻辑组就是一个VLAN,VLAN中的各站点具有某些共同的应用需求。</p>
+<p>属于同一VLAN的站点之间可以直接进行通信，而不同VLAN中的站点之间<strong>不能直接通信</strong>。<br>网络管理员可对局域网中的各交换机进行配置来建立多个逻辑上独立的VLAN。<br>连接在同一交换机上的多个站点可以属于不同的VLAN,而属于同一VLAN的多个站点可以连接在不同的交换机上。</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/Q0su/image-20260213225647003.png" srcset="/img/loading.gif" lazyload alt="image-20260213225647003"></p>
+<p>两个VLAN之间不可直接通信，不会被广播风暴影响。</p>
+<h3 id="VLAN的实现机制"><a href="#VLAN的实现机制" class="headerlink" title="VLAN的实现机制"></a>VLAN的实现机制</h3><p>虚拟局域网VLAN有多种实现技术，最常见的就是基于以太网交换机的接口来实现VLAN。这就需要以太网交换机能够实现以下两个功能：</p>
+<ul>
+<li>能够处理带有VLAN标记的帧，也就是IEEE802.1Q帧。</li>
+<li>交换机的各接口可以支持不同的接口类型，不同接口类型的接口对帧的处理方式有所不同。</li>
+</ul>
+<p>IEEE 802.1Q帧也称为Dot One QI帧，它对以太网V2的MAC帧格式进行了扩展：在源地址字段和类型字段之间插入了4字节的<strong>VLAN标签(tag)字段</strong>，由<strong>标签协议标识符TPID,优先级PRI,规范格式指示符CFI,虚拟局域网标识符VID</strong>组成。</p>
+<ul>
+<li>TPID：长度为16比特，其值固定为0x8100,表示该帧是EEE802.1Q帧，使用对应的协议处理。</li>
+<li>PRI:长度为3比特，取值范围是0~7，值越大优先级越高。当网络阻塞时，设备优先发送优先级高的802.1Q帧。</li>
+<li>CFI:长度为1比特，取值为0表示MAC地址以规范格式封装，取值为1表示MAC地址以非规范式封装。对于以太网，CF的取值为0。</li>
+<li>VID：全写VLAN ID，长度为12比特，取值范围是0~4095，其中0和4095保留不使用。VID是802.1Q帧所属的VLAN编号，设备依赖VID来识别帧所属的VLAN。<strong>广播一般只在同一VLAN转发，限制广播域</strong></li>
+</ul>
+<p>帧是由以太网交换机处理的。</p>
+<p>当交换机收到普通的以太网MAC帧时，会给其插入4字节的VLAN标签使之成为802.1Q帧，该处理简称为“打标签”。<br>当交换机转发802.1Q帧时，可能会删除其4字节的VLAN标签使之成为普通的以太网MAC帧，该处理简称为“去标签”。</p>
+<p>交换机转发802.1Q帧时也有可能不进行“去标签”处理，是否进行“去标签”处理取决于交换机的接口类型。</p>
+<p>根据接受和发送对帧的处理方式不同和接口连接对象不同，能够将以太网交换机接口类型分为Access和Trunk两种。</p>
+<p>PVID（Port VLAN ID）是<strong>端口默认VLAN ID</strong>，指交换机端口为接收到的<strong>未打标签的数据帧</strong>所添加的VLAN标签。在下文中称作“缺省VLAN ID”</p>
+<table>
+<thead>
+<tr>
+<th align="center">特性</th>
+<th align="left">PVID (Port VLAN ID)</th>
+<th>VLAN ID</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>作用对象</strong></td>
+<td align="left"><strong>交换机端口</strong>的属性</td>
+<td><strong>VLAN本身</strong>的标识</td>
+</tr>
+<tr>
+<td align="center"><strong>主要功能</strong></td>
+<td align="left">定义端口对<strong>入向未标记帧</strong>的处理规则</td>
+<td>在交换机内部逻辑上划分广播域</td>
+</tr>
+<tr>
+<td align="center"><strong>配置位置</strong></td>
+<td align="left">在<strong>每个端口</strong>下进行配置</td>
+<td>在全局或VLAN数据库中创建</td>
+</tr>
+<tr>
+<td align="center"><strong>典型场景</strong></td>
+<td align="left">连接PC、服务器等不支持VLAN的终端设备时，端口的PVID通常等于该终端所属的VLAN ID。</td>
+<td>规划网络时，为不同部门（如财务部VLAN 10、技术部VLAN 20）分配不同的ID。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Access端口</strong>：用于连接<strong>不支持VLAN的终端设备</strong>（如PC、服务器、打印机），实现“<strong>一个端口，一个VLAN</strong>”。</li>
+<li><strong>Trunk端口</strong>：用于<strong>交换机之间或交换机与支持VLAN的网络设备（如路由器、另一台交换机）之间的互联</strong>，实现“<strong>一个端口，多个VLAN</strong>”。</li>
+<li><strong>原生VLAN是Trunk端口上一个特殊的VLAN，其数据帧在Trunk链路上以未标记的形式传输。</strong></li>
+<li><strong>标记VLAN是指在Trunk链路上，其数据帧必须携带802.1Q VLAN标签进行传输的VLAN。</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Access端口</th>
+<th>Trunk端口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>设计目的</strong></td>
+<td>接入终端设备</td>
+<td>设备间互联，承载多个VLAN流量</td>
+</tr>
+<tr>
+<td><strong>可承载VLAN数量</strong></td>
+<td><strong>仅1个</strong></td>
+<td><strong>多个</strong>（一个原生VLAN + 多个标记VLAN）</td>
+</tr>
+<tr>
+<td><strong>数据处理（入向）</strong></td>
+<td>接收<strong>未标记</strong>帧，为其打上<strong>端口的PVID</strong>标签。</td>
+<td>接收<strong>标记</strong>帧，根据标签放入对应VLAN；接收<strong>未标记</strong>帧，则打上<strong>原生VLAN（Native VLAN）</strong> 的标签。</td>
+</tr>
+<tr>
+<td><strong>数据处理（出向）</strong></td>
+<td>发送前<strong>剥离VLAN标签</strong>，始终发出<strong>未标记</strong>帧。</td>
+<td>对于<strong>标记VLAN</strong>，保留标签发出；对于<strong>原生VLAN</strong>，<strong>剥离标签</strong>后作为未标记帧发出。</td>
+</tr>
+<tr>
+<td><strong>典型连接对象</strong></td>
+<td>计算机、服务器、IP电话、打印机</td>
+<td>另一台交换机、路由器、支持VLAN的服务器</td>
+</tr>
+<tr>
+<td><strong>与PVID的关系</strong></td>
+<td><strong>端口的PVID就是它所属的VLAN ID</strong>，配置Access端口时，本质上就是在设置它的PVID。</td>
+<td>端口有PVID（即其<strong>原生VLAN的ID</strong>），用于处理未标记帧。Trunk口允许的VLAN列表中通常包含其原生VLAN。</td>
+</tr>
+</tbody></table>
+<p>当以太网交换机启动后，若之前未对其各接口进行过VLAN的相关设置，则各接口的接口类型默为Access,并且各接口的缺省VLAN ID:为1，即各接口默认属于VLAN1。</p>
+<p>对于华为交换机，接口的缺省VLAN ID(VID)称为端口VLAN ID(Port VLAN ID),简记为PVID。对别的交换机则不是这样。<br>交换机的每个接口有且仅有一个PVID。</p>
+<p>看一个例子：</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/xa6F/image-20260214222338597.png" srcset="/img/loading.gif" lazyload alt="image-20260214222338597"></p>
+<p>本例中，主机A发送一个未标识的帧，交换机的一号接口的类型为Access，就将帧打上默认标签VID=1，因为其他四个接口的VID都等于1，所以交换机会将该帧转发到2,3,4号接口。</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/cWy1/image-20260214223259123.png" srcset="/img/loading.gif" lazyload alt="image-20260214223259123"></p>
+<p>本例中，我们可以手动配置以太网交换机，使得1号和2号接口为VLAN2，3号和4号接口为VLAN3。主机C发送一个未标识的帧，交换机将3号端口的PVID作为标签附加到帧中，随后转发到所有PVID为3的端口。</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/jlK8/image-20260214230507223.png" srcset="/img/loading.gif" lazyload alt="image-20260214230507223">如图，主机A发送一个未标识的帧，因为端口1的类型是Access，交换机对帧进行贴标签处理，随后发送到交换机1所有PVID为1的接口。发送到5号Trunk接口后，会去除帧的标签发送给交换机2。交换机2将接收到的未标识帧贴上标签，转发给交换机2所有PVID=2的端口，从这些Access端口去标签发送给主机。</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/Ol0m/image-20260215105048325.png" srcset="/img/loading.gif" lazyload alt="image-20260215105048325"></p>
+<p>如图，主机D发送一个未标识帧，因为端口3的类型是Access，交换机对帧进行贴标签处理，随后发送到交换机1所有PVID=2的接口也就是4接口。因为<strong>5号接口为Trunk类型且帧的VID与5号接口的PVID不相同</strong>，所以带标签的帧会被直接转发到交换机2。在交换机2中，帧被转发到所有PVID=3的接口中。</p>
+<p>总结一下两种接口类型：</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/5tiZ/image-20260215105948724.png" srcset="/img/loading.gif" lazyload alt="image-20260215105948724"></p>
+<p>Hybrid接口是华为交换机私有的接口类型。Hybrid接口既可以用于交换机之间的互连（与Truk接口相同），也可用于交换机与用户计算机之间的互连<br>(与Access接口相同)。<br>除此之外，Hybrid接口的绝大部分功能与Trunk:接口相同。不同点在于Hybrid接口会查看帧的VID值是否在接口的“去标签’列表中，若存在则“去标签”后转发，若不存在则直接转发。</p>
+<h3 id="以太网"><a href="#以太网" class="headerlink" title="以太网"></a>以太网</h3><p>以太网被物理电缆束缚，那么就必须拥有远超无线网络的传输速率。</p>
+<p>3.8未看</p>
+<h3 id="无线局域网"><a href="#无线局域网" class="headerlink" title="无线局域网"></a>无线局域网</h3><p>802.11无线局域网可分为以下两类：</p>
+<ul>
+<li>有固定基础设施的</li>
+<li><ul>
+<li>指的是预先建立的，能够覆盖一定地理范围的，多个固定的通信基站。</li>
+</ul>
+</li>
+<li>无固定基础设施的</li>
+</ul>
+<h4 id="有固定基础设施的802-11无线局域网"><a href="#有固定基础设施的802-11无线局域网" class="headerlink" title="有固定基础设施的802.11无线局域网"></a>有固定基础设施的802.11无线局域网</h4><p><img src="C:\Users\willm\AppData\Roaming\Typora\typora-user-images\image-20260215210154737.png" srcset="/img/loading.gif" lazyload alt="image-20260215210154737"></p>
+<p>采用星型拓扑结构，其中心基站是网络接入点AP，图中结构名为基本服务集BSS。BSS由一个接入点AP和若干个移动站组成，移动站的网络流量都需要经过接入点AP，覆盖地理范围一般小于100米。管理员需要为AP分配一个最大32字节的服务集标识符SSID(也就是WIFI名)和一个无线通信信道。</p>
+<p>能够使用分配系统扩展服务集：</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/Pa8s/image-20260215212121725.png" srcset="/img/loading.gif" lazyload alt="image-20260215212121725"></p>
+<p>如果主机A发送某个数据给主机B，那么数据包依次经过AP1，DS，AP2到达主机B。</p>
+<p>漫游：指的是移动站从一个无线接入点（AP）的信号范围，切换到另一个更强或更合适的接入点保持网络不断的过程。</p>
+<p>在图中表示为主机A到主机A’的过程。</p>
+<p>但是802.11标准并没有定义实现漫游的具体方法，但是定义了以下基本服务：</p>
+<ul>
+<li>关联服务：移动站与接入点AP建立关联的方法有以下两种：</li>
+<li><ul>
+<li>被动扫描：AP周期性发出包含重要参数的信标帧，移动端被动接受</li>
+<li>主动扫描：移动站发出探测请求帧，AP发回探测响应帧。</li>
+</ul>
+</li>
+<li>重建关联服务和分离服务</li>
+<li><ul>
+<li>如果一个移动站要把与某个接入点AP的关联转移到另一个AP,就可以使用重建关联服务；若要终止关联服务，就应使用分离服务。</li>
+</ul>
+</li>
+</ul>
+<h4 id="无固定基础设施的802-11无线局域网"><a href="#无固定基础设施的802-11无线局域网" class="headerlink" title="无固定基础设施的802.11无线局域网"></a>无固定基础设施的802.11无线局域网</h4><p>又名自组织网络，即ad hoc Network网络。</p>
+<p>这种网络没有中心基站AP，具有去中心化的特点</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/waP1/image-20260215222406062.png" srcset="/img/loading.gif" lazyload alt="image-20260215222406062"></p>
+<p>比如，源站A到达目的站E需要移动站BCD作为转发站，显然，转发站需要具有路由功能。</p>
+<p>这种网络需要经过网关才能连接上因特网。</p>
+<p>但802.11无线局域网的ad hoc模式允许网络中的各站点在其通信范围内直接通信，也就是支持站点间的单跳通信，而标准中并没有包括多跳路由功能。因此，802.11无线局域网的ad hoc模式应用较少。</p>
+<h3 id="无线局域网的物理层"><a href="#无线局域网的物理层" class="headerlink" title="无线局域网的物理层"></a>无线局域网的物理层</h3><p>802.11无线局域网的物理层非常复杂，依据工作频段、调制方式、传输速率等，可将其分为多种物理层标准。</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/Pk7p/image-20260215224228628.png" srcset="/img/loading.gif" lazyload alt="image-20260215224228628"></p>
+<p>所以，无线网卡一般会做成多模的，以适应不同的技术标准</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/eCx5/image-20260215224304325.png" srcset="/img/loading.gif" lazyload alt="image-20260215224304325"></p>
+<p>最近又出现新的物理层标准</p>
+<p><img src="https://files.seeusercontent.com/2026/02/16/Jp7y/image-20260215224558785.png" srcset="/img/loading.gif" lazyload alt="image-20260215224558785"></p>
+<h3 id="无线局域网的数据链路层"><a href="#无线局域网的数据链路层" class="headerlink" title="无线局域网的数据链路层"></a>无线局域网的数据链路层</h3><p>无线局域网同样使用广播信道，但是和共享总线以太网使用有线传输介质不同，不能直接照搬以太网的CSMA/CA协议。</p>
+<p>802.11无线局域网采用了另一种称为<strong>CSMA/CA</strong>的协议，称为<strong>载波监听多址接入/碰撞避免</strong>的协议。CSMA部分是相同的，但是碰撞检测CD改为了碰撞避免CA。</p>
+<p>原因如下：</p>
+<ul>
+<li>由于无线信道的传输环境复杂且信号强度的动态范围非常大，在802.11无线网卡上接收到的信号强度一般都远远小于发送信号的强度，信号强度甚至相差百万倍。因此，如果要在802.11无线网卡上实现碰撞检测，对硬件的要求非常高。</li>
+<li>即使能够在硬件上实现碰撞检测功能，但由于无线电波传播的特殊性（存在隐蔽站问题），还会出现无法检测到碰撞的情况，因此实现碰撞检测并没有意义。</li>
+</ul>
+<p>隐蔽站问题：</p>
+<p><img src="https://files.seeusercontent.com/2026/02/17/dgU4/image-20260217160940077.png" srcset="/img/loading.gif" lazyload alt="image-20260217160940077"></p>
+<p>也就是主机A的信号范围内不可见主机B，主机B的信号范围不可见主机A，如果两边同时向AP发送数据就会发生信号碰撞。且碰撞信号强度较弱，即使传播到主机AB也难以检测到。所以不能使用碰撞检测CD，要使用碰撞避免CA协议。</p>
+<h3 id="CSMA-x2F-CA协议"><a href="#CSMA-x2F-CA协议" class="headerlink" title="CSMA/CA协议"></a>CSMA/CA协议</h3><p>很多时候我们获取的原理不是知识，原理只占百分之十。原理只需要三十几个小时的网课，但是知识需要数万小时的调试。</p>
+<h4 id="虚拟载波监听机制"><a href="#虚拟载波监听机制" class="headerlink" title="虚拟载波监听机制"></a>虚拟载波监听机制</h4><p><img src="https://files.seeusercontent.com/2026/02/20/dfP0/image-20260220163832118.png" srcset="/img/loading.gif" lazyload alt="image-20260220163832118"></p>
+<p>DIFS是<strong>DCF帧间间隔</strong>，长度为128us,在DCF方式中，DIFS用来发送数据帧和管理帧，<br>DCF是分布式协调功能(Distributed Coordination Function,DCF)的英文缩写词。在DCF方式下，没有中心控制站点，每个站点使用CSMA/CA协议通过争用信道来获取发送权。DCF方式是802.11定义的默认方式（必须实现）。</p>
+<p>确认信道空闲之后等待DIFS在发送是<strong>考虑到可能其他站有更高优先级的帧需要发送。</strong></p>
+<p>帧首部中的“持续时间”字段的值指出了源站要占用信道的时间（包括目的站发回确认帧所需的时间)。</p>
+<p>短帧间间隔(Short Interframe Space,SIFS)的长度为28us,它是最短的帧间间隔，用来分隔开属于一次对话的各帧。一个站点应当能够在这段时间内从发送方式切换到接收方式。使用SIFS的帧类型有ACK帧、<strong>CTS帧</strong>等。</p>
+<p>因为无线误码率高，所以CSMA/CA协议要配合停止-等待协议来确保可靠传输，与CSMA/CD协议的共享式以太网不同。</p>
+<p>当某个站检测到正在信道中传送的帧首部中的“持续时间”字段时，就调整自己的网络分配向量(Network Allocation Vector,NAV)。NAV指出了完成这次帧的传送且信道转入空闲状态所需的时间。</p>
+<p>随机等待时间的作用在于：<strong>当某个站在发送帧时，很可能有多个站都在监听信道并等待发送帧，一旦信道空闲，这些站几乎同时发送帧而产生碰撞。<br>为了避免上述情况，所有要发送帧的站检测到信道从忙转为空闲后，都要执行退避算法。这样不仅可以减少发生碰撞的概率，还可避免某个站长时间占用无线信道。</strong></p>
+<p>只有在在<strong>检测到信道空闲且该数据帧不是成功发送完上一个数据帧之后立即连续发送的数据帧</strong>时，不使用退避算法。具体就是以下三种情况。</p>
+<ul>
+<li>在发送帧之前检测到信道处于忙态</li>
+<li>在每一次重传一个帧时</li>
+<li>在每一次成功发送帧后要连续发送下一个帧时</li>
+</ul>
+<h4 id="CSMA-x2F-CA协议的退避算法"><a href="#CSMA-x2F-CA协议的退避算法" class="headerlink" title="CSMA/CA协议的退避算法"></a>CSMA/CA协议的退避算法</h4><p>在执行退避算法时，站点为退避计时器设置一个随机的退避时间：</p>
+<ul>
+<li>当退避计时器的时间减小到零时，就开始发送数据</li>
+<li>当退避计时器的时间还未减小到零时而信道又转变为忙状态，这时就冻结退避计时器的数值，重新等待信道变为空闲，再经过帧间间隔DIFS后，继续启动退避计时器。</li>
+<li>在进行第i次退避时，退避时间在时隙编号中随机选择一个，然后乘以基本退避<br>时间（也就是一个时隙的长度）就可以得到随机的退避时间。当时隙编号达到255时（对应于第6次退避）就不再增加了。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/02/20/7kmB/image-20260220165853983.png" srcset="/img/loading.gif" lazyload alt="image-20260220165853983"></p>
+<p>同时为了进一步降低发生碰撞的概率，802.11无线局域网允许源站对信道进行预约。</p>
+<p>RTS(Request To Send)帧是短的控制帧，<br>它包括源地址、目的地址和本次通信（包括目的站发回确认帧所需的时间）所需的持续时间。</p>
+<p>CTS (Clear To Send)帧是短的响应控制帧，<br>它也包括本次通信所需的持续时间（从RTS帧中将此持续时间复制到CTS帧中）。</p>
+<p>使用RTS帧和CTS帧进行信道预约会带来额外开销，但是代价很小能带来稳定的低碰撞率，这是值得的。实际上用户可以选择三种模式：</p>
+<ul>
+<li>使用RTS帧和CTS帧。</li>
+<li>只有当数据帧的长度超过某个数值时才使用RTS帧和CTS帧。</li>
+<li>不使用RTS帧和CTS帧。</li>
+</ul>
+<p>信道预约也属于虚拟载波监听机制。</p>
+<h3 id="无线局域网的MAC帧"><a href="#无线局域网的MAC帧" class="headerlink" title="无线局域网的MAC帧"></a>无线局域网的MAC帧</h3><p>MAC帧分为三种：</p>
+<p><img src="https://files.seeusercontent.com/2026/02/20/yDx9/image-20260221001932333.png" srcset="/img/loading.gif" lazyload alt="image-20260221001932333"></p>
+<p>在这里我们只介绍数据帧，其格式为：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/26/ux2M/image-20260326201756873.png" srcset="/img/loading.gif" lazyload alt="image-20260326201756873"></p>
+<p>其中帧控制字段很复杂。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/Computer%20Networks%20Chapter%204:%20Network%20Layer/" title="计算机网络第四章：网络层">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算机网络第四章：网络层</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/Computer%20Networks%20Chapter%202:%20Physical%20Layer/" title="计算机网络第二章：物理层">
+                        <span class="hidden-mobile">计算机网络第二章：物理层</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

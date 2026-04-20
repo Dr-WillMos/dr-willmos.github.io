@@ -1,0 +1,915 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第六章：中央处理器全章节学习路线：  数电基础组合逻辑电路在任何时刻的输出信号的稳定值，仅仅与该时刻的输入信号有关，而与该时刻以前的输入信号无关。 但时序电路的输出不仅取决于当前的输入，还取决于电路原来的状态。 CPU是边沿反应的，这是为了阻止输出信号震荡的问题。 中央从处理器CPU由数据通路和控制单元组成。 CPU内部集成了一根内部总线，但是存在信号碰撞的问题，也就是在同一时刻只能传输一个数据。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第六章：中央处理器">
+<meta property="og:url" content="http://example.com/posts/Chapter_6_CPU/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="第六章：中央处理器全章节学习路线：  数电基础组合逻辑电路在任何时刻的输出信号的稳定值，仅仅与该时刻的输入信号有关，而与该时刻以前的输入信号无关。 但时序电路的输出不仅取决于当前的输入，还取决于电路原来的状态。 CPU是边沿反应的，这是为了阻止输出信号震荡的问题。 中央从处理器CPU由数据通路和控制单元组成。 CPU内部集成了一根内部总线，但是存在信号碰撞的问题，也就是在同一时刻只能传输一个数据。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png">
+<meta property="article:published_time" content="2026-01-25T04:27:07.602Z">
+<meta property="article:modified_time" content="2026-01-25T04:27:08.486Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机组成原理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png">
+  
+  
+  
+  <title>第六章：中央处理器 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第六章：中央处理器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-25 04:27" pubdate>
+          2026年1月25日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">第六章：中央处理器</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第六章：中央处理器"><a href="#第六章：中央处理器" class="headerlink" title="第六章：中央处理器"></a>第六章：中央处理器</h1><p><strong>全章节学习路线：</strong></p>
+<p><img src="https://s2.loli.net/2025/12/05/51ySOEgGCs2YwmW.png" srcset="/img/loading.gif" lazyload alt="image-20251205193311196"></p>
+<h2 id="数电基础"><a href="#数电基础" class="headerlink" title="数电基础"></a>数电基础</h2><p><strong>组合逻辑电路在任何时刻的输出信号的稳定值，仅仅与该时刻的输入信号有关，而与该时刻以前的输入信号无关。</strong></p>
+<p><strong>但时序电路的输出不仅取决于当前的输入，还取决于电路原来的状态</strong>。</p>
+<p><strong>CPU是边沿反应的，这是为了阻止输出信号震荡的问题。</strong></p>
+<h3 id="中央从处理器"><a href="#中央从处理器" class="headerlink" title="中央从处理器"></a>中央从处理器</h3><p><strong>CPU由数据通路和控制单元组成。</strong></p>
+<p><strong>CPU内部集成了一根内部总线，但是存在信号碰撞的问题，也就是在同一时刻只能传输一个数据。</strong></p>
+<p><img src="https://s2.loli.net/2025/12/05/84oU9hWR6kTLVDy.png" srcset="/img/loading.gif" lazyload alt="image-20251205200944438"></p>
+<p><strong>元件是否进入总线是由三态门把关的，三态门接收到使能信号就允许通过，反之成立，每个三态门都与控制单元连接。控制单元还通过使能信号端来控制每个元件。</strong></p>
+<p><strong>数据通路指的是：指令执行过程中数据经过的路径，包括路径上的部件，称为数据通路。</strong></p>
+<p><strong>控制单元根据每条指令的功能不同生成对数据通路的控制信号，并正确控制指令的执行流程。</strong></p>
+<h3 id="取指阶段"><a href="#取指阶段" class="headerlink" title="取指阶段"></a>取指阶段</h3><p><strong>需要执行的指令存在主存中，那么将指令cong主存读取到CPU的过程就是取指阶段。</strong></p>
+<p><strong>取指阶段由六个微操作组成。</strong></p>
+<p><strong>第一步，CU向pc和mar发送信号，PC的主存地址会通过总线传输到MAR中，MAR将通过总线送到主存中</strong></p>
+<p><strong>第二步：CU向主存发送信号</strong></p>
+<p><strong>第三步：主存返回指令存放到MDR</strong></p>
+<p><strong>第四步：向IR和MDR发送信号，将 MDR发送到IR</strong></p>
+<p><strong>第五步：将IR发送到CU进行译码分析</strong></p>
+<p><strong>第六步：译码分析并执行完毕后，CU向pC发送信号使PC自增1</strong></p>
+<blockquote>
+<p><strong>为了加速单次取指的时间，我们需要注意：部分微操作的次序不可改变。</strong></p>
+<p><strong>被控制对象不同的微操作应尽可能放在同一个时钟周期节省时间。</strong></p>
+<p><strong>占用时间不长的微操作应该安排到同一个时钟周期内完成，允许其有不同的次序</strong></p>
+</blockquote>
+<p><strong>注意看，第一步和第二步的被操作对象不同，那么我们就能够将他们放在同一个时钟周期内</strong></p>
+<p><strong>第三第四第五步有先后顺序，不能改变。</strong></p>
+<p><strong>但是第六步自增可以和第三步安排在同一时钟周期。</strong></p>
+<p><strong>只要这两个微操作不冲突（不使用同一总线或功能部件），就能够放到同一周期以优化性能。</strong></p>
+<p><strong>所以，加速后的操作次序就是</strong></p>
+<p><strong>T1:PC -&gt; MAR,CU-&gt;Read</strong></p>
+<p><strong>T2:M[MAR]-&gt;MDR,PC++</strong></p>
+<p><strong>T3:MDR-&gt;IR,OP[IR]-&gt;CU</strong></p>
+<p><strong>执行一次取指需要三个时钟周期，</strong></p>
+<p><img src="https://s2.loli.net/2025/12/06/5y7Ghq2dc9RDoTj.png" srcset="/img/loading.gif" lazyload alt="image-20251206143343069"></p>
+<h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p><strong>假设这是一个CPU的指令集：</strong></p>
+<p><img src="https://s2.loli.net/2025/12/06/Oij6Cy3IERNJHKo.png" srcset="/img/loading.gif" lazyload alt="image-20251206143638747"></p>
+<p><strong>第一条是将制定主存地址的数据加载到寄存器R0中。</strong></p>
+<p><strong>执行起来有三步。</strong></p>
+<p><strong>T1:Ad[IR]-&gt;MAR,1-&gt;Read 将IR中的地址经过MAR发送到主存，CU发送控制读信号。</strong></p>
+<p><strong>T2:M[MAR]-&gt;MDR 将主存中对应地址的数据取出到MDR</strong></p>
+<p><strong>T3:MDR-&gt;R0 将MDR的数据存入到寄存器R0中。</strong></p>
+<p><strong>再比如，倒数第三条指令，是将R1和R0做加法存到R1</strong></p>
+<p><img src="https://s2.loli.net/2025/12/06/emEpPUHBwkAgMS8.png" srcset="/img/loading.gif" lazyload alt="image-20251206145008437"></p>
+<p><strong>T1:R1-&gt;Y将R1的 值赋给Y</strong></p>
+<p><strong>T2:[R0]+[Y]-&gt;Z 这一步需要CU发送00指令</strong></p>
+<p><strong>T3:Z-&gt;R1</strong></p>
+<p><strong>这三部用的都是同一个对象，不可再做任何优化</strong></p>
+<p><strong>再看JUMP无条件跳转指令</strong></p>
+<p><strong>这个很简单了，就是</strong></p>
+<p><strong>T1:Ad[IR]-&gt;PC</strong></p>
+<p><strong>指令周期：取出并执行一条指令所需的全部时间</strong></p>
+<p><strong>指令周期可以看作是取指周期（Fetch）和执行周期（STORE）组成</strong></p>
+<p><strong>取指周期完成取指令和分析指令的操作</strong></p>
+<p><strong>执行周期是完成执行指令的操作</strong></p>
+<h2 id="控制单元是如何实现的"><a href="#控制单元是如何实现的" class="headerlink" title="控制单元是如何实现的"></a>控制单元是如何实现的</h2><p><strong>控制单元的职能是译码分析，执行指令，发送控制信号等</strong></p>
+<h3 id="组合逻辑控制单元"><a href="#组合逻辑控制单元" class="headerlink" title="组合逻辑控制单元"></a>组合逻辑控制单元</h3><p><img src="https://s2.loli.net/2025/12/06/Iegf72LGSdJVs4H.png" srcset="/img/loading.gif" lazyload alt="image-20251206151741768"></p>
+<p><strong>使用门电路实现，又名硬部件控制单元，适用于早期计算机。</strong></p>
+<p><strong>其执行速度非常快，原子速度接近光速，但是结果复杂，实现困难，不容易扩充和修改指令，可塑性非常差只适合RISC指令系统，但在追求极致速度的场景下也会使用。</strong></p>
+<h3 id="微程序控制单元"><a href="#微程序控制单元" class="headerlink" title="微程序控制单元"></a>微程序控制单元</h3><p><strong>微程序控制采用”存储器替代逻辑”的思想，将机器指令的执行转化为微程序的执行。</strong></p>
+<p><strong>微程序是一个微指令，一条伪指令包括若干微命令，一条机器指令功能由一个微程序完成。</strong></p>
+<p><strong>你记不记得我们说过，CU能够给每个元件发送控制信号？</strong></p>
+<p><strong>那么请回忆计网那本书的内容。CU能够将对所有的元件发送的信号组合成一个长二进制（也就是一条微指令），每一位都对应不同的元件，随后将该二进制在一个时钟周期内广播，就完成了发送控制信号的工作。</strong></p>
+<p><img src="https://s2.loli.net/2025/12/06/S2WXF6zVIPMDiuo.png" srcset="/img/loading.gif" lazyload alt="image-20251206201231806"></p>
+<p><strong>那么取指阶段的三个微操作就对应了CU发送的三条微指令，执行ADD命令也是如此。</strong></p>
+<p><img src="https://s2.loli.net/2025/12/06/siwLObeNoXRHYnZ.png" srcset="/img/loading.gif" lazyload alt="image-20251206201509433"></p>
+<p><strong>这六个微指令合在一起就是微程序，一个微程序就完成一条机器指令的功能，因为取指是公共操作，所以我们会将取指的三个微指令作为一个独立的微程序。</strong></p>
+<p><img src="https://s2.loli.net/2025/12/06/xyDk7lr1F526mQR.png" srcset="/img/loading.gif" lazyload alt="image-20251206203036427"></p>
+<p><strong>这些微程序存放在CU的控制存储器(Control Storage)当中，是一块只读ROM芯片，简称CS。每一条微指令都有对应的微地址。</strong></p>
+<p><strong>还有一个起始和转移地址发生器</strong>，能够生成下一条微指令的微地址，并存入uPC中（与CPU中的PC功能类似）。指令寄存器uIR会根据uPC的地址获取对应的微指令，控制单元开始译码uIR中的指令并对相应的元件发出相应的控制信号到数据通路中，最后在时钟信号的控制下uPC自动加1.</p>
+<p><strong>微程序控制单元中的转移控制模块能够洁厕出下一条指令的微地址</strong></p>
+<h3 id="下一条指令地址的决策"><a href="#下一条指令地址的决策" class="headerlink" title="下一条指令地址的决策"></a>下一条指令地址的决策</h3><p><strong>执行完一条指令后，下一条指令地址有三种方法得到：机器指令操作码，uPC++，控制转移字段。</strong></p>
+<p><strong>CS中，每个指令末尾都带两位二进制作为控制转移字段。控制转移字段能决定下一条指令的地址选取，就是图中的MUX多路选择器的输入。</strong></p>
+<p><img src="https://s2.loli.net/2025/12/06/jaFVSG2XfT4vuWh.png" srcset="/img/loading.gif" lazyload alt="image-20251206210151664"></p>
+<p>这种三合一的计数方法，因为大多数是时候都是程序顺序执行，所以在大部分时间都是uPComing增量+1操作，所以我们称其为“<strong>增量计数法</strong>”，这样的计数法要求微指令必须是顺序存放的。</p>
+<p><strong>针对不是顺序存放的我们使用“断定法“。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/qJ3I7Rx8Oh2WlHi.png" srcset="/img/loading.gif" lazyload alt="image-20260103160903297"></p>
+<p><strong>下址就是下一条指令的微地址。</strong></p>
+<p><strong>这样虽然空间利用率低，但是确实能够解决非顺序存放的问题。</strong></p>
+<h3 id="微命令编码问题"><a href="#微命令编码问题" class="headerlink" title="微命令编码问题"></a>微命令编码问题</h3><p><strong>比如这个过程：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/fAWMec8TzvGiXDJ.png" srcset="/img/loading.gif" lazyload alt="image-20260103161808572"></p>
+<p><strong>这么长一个微指令只有三个1信号，这就显得空间利用率低。另外，因为1-&gt;Read，PC-&gt;MAR，MDR-&gt;IR都需要占用总线，这意味着他们是互斥微命令，不能同时执行。这意味着所有相同后缀的互斥信号都因为互斥能够统一管理和编码。</strong></p>
+<p><strong>所以，我们可以将相容的输出信号放到一起，统一编码来优化空间利用率。</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/MkU356exLwoysmt.png" srcset="/img/loading.gif" lazyload alt="image-20260103162448299">这样空间利用率就得到极大优化，这样的编码法叫做<strong>字段编码法</strong></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/Chapter_7_I/O_Systems/" title="第七章：输入输出系统">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第七章：输入输出系统</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/Chapter_5_Command_System/" title="第五章：指令系统">
+                        <span class="hidden-mobile">第五章：指令系统</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

@@ -1,0 +1,1809 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="操作系统 第二章 这一章会非常非常长，写完的时候统计数据是25036个词。  进程进程和程序不是一回事。 程序：是静态的，就是个存放在磁盘里的可执行文件，就是一系列的指令集合。 进程(Process):是动态的，是程序的一次执行过程。同一个程序的多次执行对应多个进程。  我们启动了三个TIM，任务管理器中就出现了三个TIM进程。 当进程被创建时，操作系统会为该进程分配一个唯一的、不重复的“身份证号">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统第二章：进程">
+<meta property="og:url" content="http://example.com/posts/Operating%20System%20Chapter%202:%20Processes/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="操作系统 第二章 这一章会非常非常长，写完的时候统计数据是25036个词。  进程进程和程序不是一回事。 程序：是静态的，就是个存放在磁盘里的可执行文件，就是一系列的指令集合。 进程(Process):是动态的，是程序的一次执行过程。同一个程序的多次执行对应多个进程。  我们启动了三个TIM，任务管理器中就出现了三个TIM进程。 当进程被创建时，操作系统会为该进程分配一个唯一的、不重复的“身份证号">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s41.ax1x.com/2026/04/20/pecqBUU.jpg">
+<meta property="article:published_time" content="2026-04-20T07:09:54.144Z">
+<meta property="article:modified_time" content="2026-04-20T07:11:29.763Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s41.ax1x.com/2026/04/20/pecqBUU.jpg">
+  
+  
+  
+  <title>操作系统第二章：进程 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s41.ax1x.com/2026/04/20/pecqBUU.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="操作系统第二章：进程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-20 07:09" pubdate>
+          2026年4月20日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          28k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          238 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">操作系统第二章：进程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="操作系统-第二章"><a href="#操作系统-第二章" class="headerlink" title="操作系统 第二章"></a>操作系统 第二章</h1><blockquote>
+<p>这一章会非常非常长，写完的时候统计数据是25036个词。</p>
+</blockquote>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>进程和程序不是一回事。</p>
+<p>程序：<strong>是静态的，就是个存放在磁盘里的可执行文件，就是一系列的指令集合</strong>。</p>
+<p>进程(Process):<strong>是动态的，是程序的一次执行过程。同一个程序的多次执行对应多个进程。</strong></p>
+<p><img src="https://files.seeusercontent.com/2026/03/12/h9Uy/image-20260312154539723.png" srcset="/img/loading.gif" lazyload alt="image-20260312154539723"></p>
+<p>我们启动了三个TIM，任务管理器中就出现了三个TIM进程。</p>
+<p>当进程被创建时，操作系统会为该进程分配一个唯一的、不重复的“身份证号”一一<strong>PID(Process,进程ID)</strong></p>
+<p><img src="https://files.seeusercontent.com/2026/03/12/e7Yp/image-20260312154949635.png" srcset="/img/loading.gif" lazyload alt="image-20260312154949635"></p>
+<p>任务管理器中可见进程的<strong>PID和启动用户名</strong>等信息。这些信息被放在一个数据结构**PCB(Process Control Block)**中，即进程控制块，操作系统需要对各个并发运行的进程进行管理，但凡管理时所需要的信息，都会被放在PCB中。</p>
+<p>因此PCB是一个很重要的数据结构。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/12/ekC9/image-20260312155757926.png" srcset="/img/loading.gif" lazyload alt="image-20260312155757926"></p>
+<p>进程实体是进程在某一时刻的快照，显示出在某一时刻的状态。</p>
+<p>进程是进程实体的运行过程，是<strong>系统进行资源分配和调度的一个独立单位。</strong></p>
+<blockquote>
+<p>调度：系统决定让该进程在CPU上运行，先记住这个不大准确的概念。</p>
+</blockquote>
+<p>在上面的例子中，三个进程的PCB，数据段是不同的，但是程序段是相同的，因为<strong>它们都运行着相同的TIM程序。</strong></p>
+<p>进程具有以下特征：</p>
+<ul>
+<li><strong>动态性</strong>：程序执行过程</li>
+<li><strong>并发性</strong>：各进程能够并发执行</li>
+<li><strong>独立性</strong>：进程能独立运行和获取资源</li>
+<li><strong>异步性</strong>：进程各自独立，不可知的速度推进</li>
+<li><strong>结构性</strong>：每个进程都会提供一个结构化PCB</li>
+</ul>
+<h2 id="进程的状态和转换"><a href="#进程的状态和转换" class="headerlink" title="进程的状态和转换"></a>进程的状态和转换</h2><p>在PCB中<strong>有一个变量叫做state,用于记录进程的状态。</strong></p>
+<p><img src="https://files.seeusercontent.com/2026/03/12/X3gr/image-20260312162001095.png" srcset="/img/loading.gif" lazyload alt="image-20260312162001095"></p>
+<p>进程一开始是<strong>创建态</strong>，随后操作系统开始为其创建PCB，划分数据段，完成后进入<strong>就绪态</strong>，此时进程<strong>已经具备除了处理机之外的所有运行条件。</strong></p>
+<p>CPU处于空闲时，进程被调度(被放在CPU上运行)，成为<strong>运行态</strong>，若进程需要使用打印机，但打印机处于忙状态，进程必须等待，进入<strong>阻塞态</strong>，此时进程不具备处理组件和其他任何运行条件。随后打印机进入空闲，进程申请的打印机资源被分配，进程进入<strong>就绪态</strong>，再调度进入<strong>运行态</strong>，运行完毕或遇到不可修复的错误后进入<strong>终止态</strong>。</p>
+<p>例外的是：如果CPU在运行某个进程时接收到外部的CLK时钟中断，进程会从<strong>运行态退回到就绪态</strong>。且如果是多核CPU，会有多个进程处于运行态。</p>
+<h3 id="进程的组织方式"><a href="#进程的组织方式" class="headerlink" title="进程的组织方式"></a>进程的组织方式</h3><p>进程很多，需要用某种方式标记才能管理和调度。</p>
+<p>使用链接方式就类似于<strong>链表</strong>，也是大多数操作系统使用的方式。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/12/Zq8w/image-20260312163449378.png" srcset="/img/loading.gif" lazyload alt="image-20260312163449378"></p>
+<p>使用索引方式就类似于指针数组。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/12/0Irn/image-20260312163525011.png" srcset="/img/loading.gif" lazyload alt="image-20260312163525011"></p>
+<h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3><p>进程控制的主要功能是<strong>对系统中的所有进程实施有效的管理，它具有创建新进程、撤销已有进程、实现进程状态转换等功能。</strong></p>
+<p>记得原语吗？<strong>不可中断的原子程序</strong>。操作系统就是用原语来实现进程控制的。</p>
+<p>PCB中的变量<strong>State用来表示进程当前所处的状态</strong>，1表示就绪态，2表示阻塞态。那么用链接方式来表示就绪队列和阻塞队列：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/12/H6sf/image-20260312191340179.png" srcset="/img/loading.gif" lazyload alt="image-20260312191340179"></p>
+<p>假设此时进程2等待的事件发生(进程2的处理件已就绪)，则操作系统中，负责进程控制的内核程序至少需要做这样两件事：</p>
+<ul>
+<li><strong>将PCB2的state设为1</strong></li>
+<li><strong>将PCB2从阻塞队列放到就绪队列</strong></li>
+</ul>
+<p>这两件事是必须一次性完成的，否则系统很容易出错。</p>
+<p>我们使用<strong>开/关中断指令</strong>来实现原语的原子性。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/12/M4gv/image-20260312192050833.png" srcset="/img/loading.gif" lazyload alt="image-20260312192050833"></p>
+<p>CPU在执行一条命令完成后，就会检查一次外部有没有输入中断信号，如果有，就中断当前程序去执行中断处理程序，处理完成后才会返回继续处理之前未完成的程序。</p>
+<p>这一部分在我的<strong>计算机组成原理</strong>笔记上有提到。</p>
+<p>而关中断指令，能够让CPU不再检查中断信号，直到执行开中断指令才会恢复检查。因此，指令a和指令b是无法中断的，操作是原子性的，这就实现了程序的原子性。</p>
+<p>很显然，开中断和关中断是<strong>特权指令</strong>，在绝大部分情况下都不应该让应用程序有权执行。</p>
+<p>创建原语的工作是：</p>
+<ul>
+<li><strong>申请空白PCB</strong></li>
+<li><strong>为新进程分配资源</strong></li>
+<li><strong>初始化PCB</strong></li>
+<li><strong>将PCB插入就绪队列</strong></li>
+</ul>
+<p>反过来，撤销原语的工作是：</p>
+<ul>
+<li><strong>找到目标PCB</strong></li>
+<li><strong>若进程在运行，剥夺CPU，将CPU分配给其他进程</strong></li>
+<li><strong>终止其所有子进程</strong></li>
+<li><strong>将进程资源返还给父进程或操作系统</strong></li>
+<li><strong>删除PCB</strong></li>
+</ul>
+<p>但是进程的终止不一定就是撤销原语的成果，当任务正常结束，或者非法使用特权指令，或者是用户选择杀死进程，就不是撤销原语的结果。</p>
+<p>存疑，网课和ai各执一词。</p>
+<p>除了增删，进程控制还需要能将进程在阻塞态和就绪态中切换。</p>
+<p>原语还有阻塞原语和唤醒原语以及切换原语。</p>
+<h2 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h2><p>进程间通信(Inter-Process Communication,IPC)是<strong>指两个进程之间产生数据交互。</strong></p>
+<p>某天你在视频平台上发现了一个极佳的<strong>数字泔水</strong>，然后你果断选择分享发送给好友，那么抖音和微信两个进程之间就发生了进程通信。</p>
+<p>进程通信的过程是<strong>需要操作系统支持</strong>的，因为进程是分配系统资源的单位（包括内存地址空间），因此各进程拥有的内存地址空间相互独立。出于安全考虑，进程是<strong>不能访问其他进程的地址空间</strong>的，所以必须又操作系统支持才能完成进程通信，目前有三种方法，<strong>共享存储，消息传递，管道通信。</strong></p>
+<h4 id="共享存储"><a href="#共享存储" class="headerlink" title="共享存储"></a>共享存储</h4><p>操作系统给需要通信的两个进程划分一片共享的存储空间，<strong>提供信息的进程将信息写入共享存储区，另一进程再读取共享存储区</strong>，就能完成通信。</p>
+<p>然而如果是多个进程需要通信，那么同时往一个共享存储区内写入可能会导致冲突，这就需要<strong>保证对共享空间的访问应该是互斥的</strong>，各个进程可使用操作系统内核提供的同步互斥工具(P,V操作)来实现互斥访问。</p>
+<p>共享存储一样具有两个方式：</p>
+<p>基于存储区共享方式的灵活性很高，数据的形式，存放位置是由进程控制的。</p>
+<p>基于数据结构的共享灵活性差，被局限在某一固定的结构，速度很慢</p>
+<h4 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h4><p>进程间的数据交换以<strong>格式化的消息（Message）为单位</strong>。进程通过操作系统提供的“<strong>发送消息/接收消息</strong>”两个原语进行数据交换。</p>
+<p>类似于计算机网络中的数据包，消息由<strong>消息头和消息体</strong>两部分组成。消息头由发送进程ID和接受进程ID，消息长度等格式化信息组成。消息传递的方式有两种，<strong>直接和间接</strong>。</p>
+<p>消息传递的直接通信方式如下所示：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/13/v1Fx/image-20260313192826804.png" srcset="/img/loading.gif" lazyload alt="image-20260313192826804"></p>
+<p>进程P封装一个消息，使用<strong>发送原语</strong>来指出接收方，操作系统受发送原语召唤会将消息复制到内核空间，挂到进程Q的消息队列(位于进程Q的PCB中)中去，随后如果进程Q使用接收原语来接收进程P的消息，随后操作系统将内核空间里的消息发送到进程Q的内存空间。注意，进程会主动执行接收原语，就好像你出门之前会查看信箱。</p>
+<p>这种方式是点名道姓的，所以是<strong>直接通信</strong>方式。</p>
+<p>消息传递的间接通信方式如下：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/13/Ww8s/image-20260313193845935.png" srcset="/img/loading.gif" lazyload alt="image-20260313193845935"></p>
+<p>首先，进程P在自己的地址空间内完成消息体的填充与封装，随后使用发送原语指明要发送到哪个信箱。随后进程Q执行接收原语，从A信箱接搜信息，这就完成了通信。</p>
+<p>这种方式借用了“信箱”作为中间实体来进行通信。</p>
+<p>间接消息传递和共享存储确实在“<strong>通过一个中间实体进行通信</strong>”这一点上非常相似，但它们的设计哲学、实现方式和核心特性有本质区别。</p>
+<h4 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h4><p>进程通信还有管道通信这一方式：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/13/Ico7/image-20260313195741451.png" srcset="/img/loading.gif" lazyload alt="image-20260313195741451"></p>
+<p>进程P和进程Q之间建立一个管道，<strong>管道内的数据流向是单向的</strong>，就像水管中的水流一样，随后进程P能够向管道写入数据，进程Q能够向管道读出数据。注意，“管道”是一个特殊的共享文件，<strong>又名pipe文件</strong>。其实就是在内存中开辟一个大小固定的内存缓冲区。</p>
+<p>你可能会觉得这和共享存储很像，但共享存储是一片自由的空间，发送和接受的顺序没有先后关系，也允许双向通信。而管道内置一个<strong>字节流队列</strong>，先进先出，进程P先发送的数据必须是第一个被进程Q接收的。</p>
+<p>管道实际上是循环队列，解决普通队列中需要移动数据的问题，<strong>提升传输效率。</strong></p>
+<p>管道只能采用<strong>半双工通信，</strong>同一时间内只能实现单向传输，如需双向就需要两个管道。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/13/1cdL/image-20260313195759615.png" srcset="/img/loading.gif" lazyload alt="image-20260313195759615"></p>
+<p>当管道写满时，写进程将阻塞，直到读进程将管道中的数据取走，即可唤醒写进程。<br>当管道读空时，读进程将阻塞，直到写进程往管道中写入数据，即可唤醒读进程。</p>
+<p>管道中的数据一旦被读出，就彻底消失。因此，当多个进程读同一个管道时，可能会错乱。对此，通常有两种解决方案：</p>
+<ul>
+<li>一个管道允许多个写进程，一个读进程；</li>
+<li>允许有多个写进程，多个读进程，但系统会让各个读进程轮流从管道中读数据，这也是Linux的解决方案。</li>
+</ul>
+<h3 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h3><p>信号(signal)：用于<strong>通知进程某个特定事件已经发生</strong>.（进程收到一个信号后，对该信号进行处理。</p>
+<p>Linux操作系统定义30种信号类型如下：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/13/sa0A/image-20260313201938753.png" srcset="/img/loading.gif" lazyload alt="image-20260313201938753"></p>
+<p>每个信号都有对应的信号处理程序，比如信号9 <strong>SIGKILL</strong>的信号处理程序就是<strong>杀死当前进程。</strong></p>
+<p>信号的发送与保存如下：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/13/Tfk5/image-20260313202833348.png" srcset="/img/loading.gif" lazyload alt="image-20260313202833348"></p>
+<p>进程1的PCB中有两个数组，一个是<strong>待处理信号pending</strong>，一个是<strong>被阻塞信号blocked</strong>，他们的索引值就是<strong>信号类型</strong>。被阻塞信号中值为1的索引(这里是7和8)，待处理信号中这个索引的值将会被忽略。此外两个数组是位向量，每个位对应一个元素是否存在，而无关数量和执行次数，存在就是1，不存在就是0。</p>
+<p>图中，进程2,3和OS内核进程调用了函数kill，那么进程1的PCB的待处理信号的索引1和8的值就被设置为1。进程1无法找出信号发送方。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/13/id0S/image-20260313203414818.png" srcset="/img/loading.gif" lazyload alt="image-20260313203414818"></p>
+<p>用户进程之间可以发送信号，但是有限制的。</p>
+<p>内核具有最高权限，能够给任何进程发送信号。</p>
+<p><strong>当进程从内核态转为用户态时，例行检查是否有待处理信号，如果有就处理信号。</strong></p>
+<p>检查步骤是：<strong>将被阻塞信号全部取反，在将待处理信号和被阻塞信号逐位做与运算</strong>。这样依赖，索引8是被忽视，不被处理的。</p>
+<p>接下来要运行信号1处理程序，那运行流程：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/14/4Iss/image-20260314122246388.png" srcset="/img/loading.gif" lazyload alt="image-20260314122246388"></p>
+<p>进程P1在接收到信号后并不会立即响应，<strong>只有执行指令k(如系统调用)从内核态转化到用户态的时候</strong>，会检测待处理信号并运行信号处理程序，最后返回去执行下一条指令(除非信号直接阻塞或者杀死了进程)。<strong>处理后会将PCB中的待处理信号的对应值归零.</strong></p>
+<p>如果指令k只是一条普通的指令，不导致进程在用户态和内核态之间的切换(如循环计算指令)，那么即使信号抵达，它也无法被处理。这时<strong>操作系统内置的定时器计时结束</strong>会强制将CPU的控制权夺回给内核检查一次指令，检查到IO中断后就会中断当前进程。(存疑，可能跟网课说的不一样。)</p>
+<p>之前说过，操作系统会给每一类信号准备一个默认的信号处理程序，<strong>实际上用户(进程)也能够设置自定义信号处理程序，这会覆盖默认的信号处理程序，且自定义的处理程序只作用于自身进程。</strong></p>
+<p><strong>但有的至高权限的信号无法被自定义覆写，也无法被阻塞。</strong></p>
+<p>比如，序号为28的窗口大小变化，变化时操作系统什么都不用做，但是应用程序内的UI必须随窗口而改变，这个改变就是<strong>自定义信号处理程序</strong>。</p>
+<p>请回看PCB中的两个数组，当收到多个不同类的信号是，通常优先处理序号更小的信号。</p>
+<h4 id="信号与异常"><a href="#信号与异常" class="headerlink" title="信号与异常"></a>信号与异常</h4><p>“信号”可以作为“异常”的配套机制，让进程对操作系统的异常处理进行补充。<br>在进程运行过程中，某些特殊事件可能引发“异常”，操作系统内核负责捕获并处理异常</p>
+<ul>
+<li>有些异常可以由内核完成全部处理（如：缺页异常），此时就不必再使用信号机制。</li>
+<li>有些异常无法由内核完成全部处理，可能还需要用户进程配合，此时就可以用“信号机制”与“异常机制”相互配合（如：在Linux中，发出除以0异常时，内核的异常处理程序会向用户进程发送SIGFPE信号。SIGFPE信号的默认处理程序会将进程终止并转储内存；当然进程可以自定义SIGFPE信号处理程序)。</li>
+</ul>
+<p>如果开发者不修改，那么计算器检测到除以0的时候会自动闪退，这对用户体验很不友好。这时候就需要自定义信号的处理程序来平滑地处理异常。</p>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>在传统的进程机制中，<strong>进程是程序执行流的最小单位。</strong></p>
+<p>有的进程可能需要“同时”做很多事，而传统的进程只能串行地执行一系列程序。为此，引入了“线程”，来增加并发度。</p>
+<p>就好比<strong>Telegram</strong>这个进程，需要同时发送文件，聊天，下载视频等。</p>
+<p>引入线程之后，<strong>线程就是程序执行流的最小单位</strong>。每个进程有不同的线程，线程能够被CPU并发处理。从这个角度看，能够把线程理解是轻量级进程。</p>
+<p>引入线程之后，不仅是进程之间可以并发，进程内的各线程之间也可以并发，从而进一步提升了系统的并发度，使得一个进程内也可以并发处理各种任务（如QQ视频、文字聊天、传文件)</p>
+<p>引入线程后，<strong>进程只作为除CPU之外的系统资源的分配单元</strong>（如打印机、内存地址空间等都是分配给进程的)。</p>
+<p>换句话说，引入之前，<strong>进程是资源分配、调度的基本单位，引入线程后，进程是资源分配的基本单位，而线程是调度的基本单位。</strong></p>
+<p>因为传统的进程间并发，需要切换进程的运行环境，系统开销很大，如果试试线程并发，那就不需要切换进程环境，系统开销小。<strong>所以，引入线程能够有效减少并发带来的系统开销。</strong></p>
+<p><img src="https://files.seeusercontent.com/2026/03/14/k4Dk/image-20260314140516885.png" srcset="/img/loading.gif" lazyload alt="image-20260314140516885"></p>
+<h3 id="线程的多模型实现方式"><a href="#线程的多模型实现方式" class="headerlink" title="线程的多模型实现方式"></a>线程的多模型实现方式</h3><h4 id="用户级线程"><a href="#用户级线程" class="headerlink" title="用户级线程"></a>用户级线程</h4><p><img src="https://files.seeusercontent.com/2026/03/14/cm1U/image-20260314142057540.png" srcset="/img/loading.gif" lazyload alt="image-20260314142057540"></p>
+<p>早期操作系统只支持进程，不支持线程，当时的线程是使用<strong>线程库</strong>来实现的。</p>
+<p>如果一个通讯软件需要并发运行三个任务，实际上是通过一段很丑陋且低效的代码逻辑来实现的。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{<br><span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;<br><span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)  {<br>  <span class="hljs-keyword">if</span>(i==<span class="hljs-number">0</span>){处理视频聊天的代码；}<br>  <span class="hljs-keyword">if</span>（i==<span class="hljs-number">1</span>){处理文字聊天的代码；}<br>  <span class="hljs-keyword">if</span>(i==<span class="hljs-number">2</span>){处理文件传输的代码；}<br>    i=(i+<span class="hljs-number">1</span>)%<span class="hljs-number">3</span>；<span class="hljs-comment">//i的0,1,2,0,1,2.·.</span><br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>实际上很多的编程语言都提供了线程库，可以实现线程的创建，销毁，调度等功能，这比上面的循环要复杂的多。</p>
+<p>在用户级线程中，线程管理工作是由应用进程来完成的，线程切换的工作也不需要CPU转换形态，且<strong>操作系统也无法意识到线程的存在</strong>。</p>
+<p>优点：</p>
+<ul>
+<li>用户级线程的切换在用户空间即可完成，不需要切换到核心态，线程管理的系统开销更小。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>如果一个用户级线程被堵塞之后，整个进程都会被堵塞，并发性不高，且因为进程是调度的基本单位，所以无法在多核机器上并行运行。</li>
+</ul>
+<p>看会上面的循环，如果i==0，执行视频聊天代码时，如摄像头调用失败，那么就会一直等待，剩下的文字聊天和文件传输线程都无法运行</p>
+<p>在 Linux 中，内核并不真正区分进程和线程，它把它们都视为 <strong>Task</strong>。线程在 Linux 内核里是通过 <code>clone()</code> 系统调用创建的，只是它和父进程共享了地址空间（内存）。</p>
+<h4 id="内核级线程"><a href="#内核级线程" class="headerlink" title="内核级线程"></a>内核级线程</h4><p>大多数现代操作系统都实现了内核级线程，如Windows、Linux。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/14/s8Pf/image-20260314142126158.png" srcset="/img/loading.gif" lazyload alt="image-20260314142126158"></p>
+<p>内核级线程中，<strong>线程管理工作是由操作系统完成</strong>，线程切换需要CPU切换形态，操作系统能够察觉到线程的存在。</p>
+<p>优点：</p>
+<ul>
+<li>当某个线程被堵塞，其他线程可以继续执行，并发能力强，多线程可在多核处理机上并发执行。</li>
+<li>用户进程会占用多个内核级线程，线程切换由操作系统内核完成，需要切换状态，线程管理成本高，开销大。</li>
+</ul>
+<p>优缺点似乎是互补的，有没有办法将他们结合起来呢？</p>
+<h3 id="多线程模型"><a href="#多线程模型" class="headerlink" title="多线程模型"></a>多线程模型</h3><p>根据用户级线程和内核级线程的映射关系就能够划分为几种多线程模型。</p>
+<p><strong>一对一模型就是上面解释的内核级线程。</strong></p>
+<p><strong>多对一模型就是上面解释的用户级线程</strong>。</p>
+<p>多对多模型就是将n个用户及线程映射到m个内核级线程(n&gt;=m)。每个用户进程对应m个内核级线程。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/14/Rut4/image-20260314143540049.png" srcset="/img/loading.gif" lazyload alt="image-20260314143540049"></p>
+<p>多对多模型能够同时克服两个的缺点，且具有很高的自由度。</p>
+<p>操作系统在运行和调度的时候，是以内核级线程作为基本单位的，所以，上面的模式因为只有2个内核级线程只能被分配进两个核。</p>
+<h3 id="线程的状态与转换"><a href="#线程的状态与转换" class="headerlink" title="线程的状态与转换"></a>线程的状态与转换</h3><p>和进程很相像，在这不过多赘述。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/14/Ve5s/image-20260314145344466.png" srcset="/img/loading.gif" lazyload alt="image-20260314145344466"></p>
+<h3 id="线程的组织与控制"><a href="#线程的组织与控制" class="headerlink" title="线程的组织与控制"></a>线程的组织与控制</h3><p>类似于PCB，线程也有对应的数据结构和表。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/14/zIo8/image-20260314145419081.png" srcset="/img/loading.gif" lazyload alt="image-20260314145419081"></p>
+<h3 id="调度"><a href="#调度" class="headerlink" title="调度"></a>调度</h3><p>调度是<strong>指在资源有限的情况下，根据一定的规则或策略，对任务、进程或资源进行安排和分配的过程。</strong>其核心目标是优化系统整体效率，确保任务有序、高效地完成。</p>
+<h3 id="高级调度-作业调度"><a href="#高级调度-作业调度" class="headerlink" title="高级调度(作业调度)"></a>高级调度(作业调度)</h3><p>作业就是一个具体的任务。</p>
+<p>用户向系统提交一个作业就是<strong>用户让操作系统启动一个程序。</strong></p>
+<p>高级调度（作业调度）。按一定的原则从外存的作业后备队列中挑选一个作业调入内存，成列入“就绪队列”，并创建进程。每个作业只调入一次，调出一次。作业调入时会建立PCB,调出时才撤销PCB。</p>
+<p><img src="C:\Users\willm\AppData\Roaming\Typora\typora-user-images\image-20260315121319810.png" srcset="/img/loading.gif" lazyload alt="image-20260315121319810"></p>
+<p>为什么需要挑选？因为<strong>内存空间有限，有时无法将用户提交的作业全部放入内存。</strong></p>
+<h3 id="低级调度-进程调度"><a href="#低级调度-进程调度" class="headerlink" title="低级调度(进程调度)"></a>低级调度(进程调度)</h3><p>低级调度：按照某中策略从就绪队列中选取一个<strong>进程</strong>，将处理机分配给他。</p>
+<p>低级调度是实现并发的一个关键机制，只有高频执行才能让用户认为这是同步发生的。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/15/teE4/image-20260315121435981.png" srcset="/img/loading.gif" lazyload alt="image-20260315121435981"></p>
+<p>进程调度是操作系统中最基本的一种调度，执行频率很高，几十毫秒一次。</p>
+<h3 id="中级调度-内存调度"><a href="#中级调度-内存调度" class="headerlink" title="中级调度(内存调度)"></a>中级调度(内存调度)</h3><p>内存不足时，<strong>可以将某些进程的数据调出外存，等到内存空闲时在重新调入内存。</strong></p>
+<p>暂时调到外存等待的进程状态为挂起状态，被挂起的进程PCB会被组织成挂起队列。</p>
+<p>中级调度（内存调度）一一按照某种策略决定将哪个处于挂起状态的进程重新调入内存。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/15/Zwr5/image-20260315121837447.png" srcset="/img/loading.gif" lazyload alt="image-20260315121837447"></p>
+<p>进程可能会被多次调出多次调入，所以中级调度发生的频率要比高级调度更高。</p>
+<p>有了调度的知识，我们就可以扩充之前的进程五态模型成为七状态模型。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/15/s2mR/image-20260315122947664.png" srcset="/img/loading.gif" lazyload alt="image-20260315122947664"></p>
+<p>挂起和阻塞的区别：<strong>挂起时进程在外存，阻塞时进程还在内存当中。</strong></p>
+<p>你会看到很多箭头，因为操作系统不同，对挂起的方式是不同的。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>要做什么</th>
+<th>调度发生在..</th>
+<th>发生频 率</th>
+<th>对进程状态的影响</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>高级调度 （作业调度）</td>
+<td>按照某种规则，从后备队列 中选择合适的作业将其调入 内存，并为其创建进程</td>
+<td>外存→内存 (面向作业)</td>
+<td>最低</td>
+<td>无→创建态→就绪态</td>
+</tr>
+<tr>
+<td>中级调度 (内存调度)</td>
+<td>按照某种规则，从挂起队列 中选择合适的进程将其数据 调回内存</td>
+<td>外存→内存 (面向进程)</td>
+<td>中等</td>
+<td>挂起态→就绪态 (阻塞挂起→阻塞态）</td>
+</tr>
+<tr>
+<td>低级调度 (进程调度）</td>
+<td>按照某种规则，从就绪队列 中选择一个进程为其分配处 理机</td>
+<td>内存→CPU</td>
+<td>最高</td>
+<td>就绪态→运行态</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>在现代操作系统中，低级调度（CPU调度）的实际执行单位是线程，而不是整个进程。</strong> 但当人们说“调度进程”时，通常指的是调度一个<strong>只有单个线程的进程</strong>，或者是以该进程的<strong>主线程</strong>为代表。</p>
+</blockquote>
+<h3 id="进程调度的时机"><a href="#进程调度的时机" class="headerlink" title="进程调度的时机"></a>进程调度的时机</h3><p>先来看看需要进行进程调度与切换的情况</p>
+<ul>
+<li>当前运行的进程主动放弃处理机</li>
+<li><ul>
+<li>进程正常终止</li>
+<li>运行过程中发生异常而终止</li>
+<li>进程主动请求阻塞</li>
+</ul>
+</li>
+<li>当前运行的进程被动放弃处理机</li>
+<li><ul>
+<li>分给进程的时间片用完</li>
+<li>有更紧急的事情处理如IO中断</li>
+<li>有更高优先级的进程进入就绪队列</li>
+</ul>
+</li>
+</ul>
+<p>还有些时候不能进程调度：</p>
+<ul>
+<li>处理中断时，这段时间与硬件密切相关，难以进行进程切换。</li>
+<li>进程在操作系统内核程序临界区中</li>
+<li>原语操作是不可中断的。</li>
+</ul>
+<p>我们详细解释第二条，一部分资源被称为<strong>临界资源</strong>，一个时间段内只允许一个进程使用的资源。各进程需要互斥地访问临界资源。</p>
+<p>临界区：<strong>访问临界资源的代码</strong></p>
+<p>内核程序临界区一般是用来访问某种内核数据结构的，比如进程的就绪队列（由各就绪进程的PCB组成）</p>
+<p><img src="https://files.seeusercontent.com/2026/03/15/fo6I/image-20260315130009657.png" srcset="/img/loading.gif" lazyload alt="image-20260315130009657"></p>
+<p>记得Java的同步锁吗？进程访问就绪队列时，操作系统会给<strong>就绪队列</strong>上锁，使之在这段时间内只能被一个进程访问，<strong>在程序退出临界区之前同步锁不会解开</strong>。因为进行进程调度是需要访问就绪队列的，但是这里被同步锁拒绝访问了，所以无法进行进程调度。</p>
+<p>如果进程正在访问普通的临界资源，比如打印机，<strong>那么打印机会被上锁</strong>，在同一时间内只允许一个进程访问。但是打印机是慢速设备，打印完成之前不会解锁，那这段时间就只能等待，这会导致CPU效率严重下滑。</p>
+<p>所以，普通临界区访问的临界资源不会直接影响操作系统的内核管理，这里可以进行进程调度。</p>
+<blockquote>
+<p>有的操作系统只允许进程主动放弃处理机。有的则两个都支持。</p>
+</blockquote>
+<p>就此，我们能够分为两种调度方式。</p>
+<ul>
+<li><strong>非剥夺调度方式，又称非抢占方式</strong>。即，只允许进程主动放弃处理机。在运行过程中即便有更紧迫的任务到达，当前进程依然会继续使用处理机，直到该进程终止或主动要求进入阻塞态。</li>
+<li><ul>
+<li>实现简单，系统开销小，但是无法处理紧急任务，只用于早期系统</li>
+</ul>
+</li>
+<li><strong>剥夺调度方式，又称抢占方式</strong>。当一个进程正在处理机上执行时，如果有一个更重要或更紧迫的进程需要使用处理机，则立即暂停正在执行的进程，将处理机分配给更重要紧迫的那个进程。</li>
+<li><ul>
+<li>可以优先处理更紧急进程，被用于分时操作系统和实时操作系统。</li>
+</ul>
+</li>
+</ul>
+<h4 id="进程切换与调度"><a href="#进程切换与调度" class="headerlink" title="进程切换与调度"></a>进程切换与调度</h4><p>“狭义的进程调度”与“进程切换”的区别：<br>狭义的进程调度指的是从就绪队列中选中一个要运行的进程。（这个进程可以是刚刚被暂停执行的进程，也可能是另一个进程，后一种情况就需要进程切换)进程切换是指一个进程让出处理机，由另一个进程占用处理机的过程。<br>广义的进程调度包含了选择一个进程和进程切换两个步骤。</p>
+<p>而进程切换完成了两件事：</p>
+<ul>
+<li>保存原来运行的进程的各种数据</li>
+<li>对新的进程的各种数据的恢复</li>
+</ul>
+<p>注意：<strong>进程切换是有代价的</strong>，因此如果过于频繁的进行进程调度、切换，必然会使整个系统的效率降低，使系统大部分时间都花在了进程切换上，而真正用于执行进程的时间减少。</p>
+<h3 id="调度器-x2F-调度程序"><a href="#调度器-x2F-调度程序" class="headerlink" title="调度器/调度程序"></a>调度器/调度程序</h3><p>调度程序是计算机系统中<strong>负责管理和分配资源的核心组件</strong>，它的任务有两条：</p>
+<ul>
+<li>让谁运行 — 调度算法</li>
+<li>运行多长时间  —时间片大小</li>
+</ul>
+<p>而调度时机，就是什么事件会触发“调度程序”？</p>
+<ul>
+<li>创建新进程</li>
+<li>进程退出</li>
+<li>运行进程出现阻塞</li>
+<li>IO中断发生</li>
+<li>抢占式调度策略，每个时钟中断会触发调度程序工作</li>
+<li>非抢占式调度策略，只有运行的进程阻塞或退出才触发调度程序工作</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/03/16/haV3/image-20260316105542528.png" srcset="/img/loading.gif" lazyload alt="image-20260316105542528"></p>
+<h3 id="闲逛进程"><a href="#闲逛进程" class="headerlink" title="闲逛进程"></a>闲逛进程</h3><p>调度程序永远的备胎，没有其他就绪进程时，运行**闲逛进程(**idle)，具有以下特点：</p>
+<ul>
+<li>优先级最低</li>
+<li>可以是零地址指令，如nop指令</li>
+<li>能耗低</li>
+</ul>
+<p>就像你闲着没事会抖腿一样，<strong>CPU实际上永远都不会有空闲期。</strong></p>
+<h3 id="调度算法的评价指标"><a href="#调度算法的评价指标" class="headerlink" title="调度算法的评价指标"></a>调度算法的评价指标</h3><p>CPU的造价是极其昂贵的，人类需要让CPU尽可能工作</p>
+<p>CPU利用率指的是<strong>忙碌的时间/总时间</strong></p>
+<p>系统吞吐量指的是<strong>单位时间内完成作业的数量，也就是完成作业的数量/花的时间</strong></p>
+<p>而周转时间，就是从作业被提交给系统开始，到作业被完成的时间间隔。他包含四个时间：</p>
+<ul>
+<li><strong>作业在外存中等待高级调度的时间</strong></li>
+<li><strong>进程在就绪队列上等待低级调度的时间</strong></li>
+<li><strong>在CPU上执行的时间</strong></li>
+<li><strong>进程等待IO操作完成的时间</strong></li>
+</ul>
+<p>所以，作业的周转时间等于作业的完成时间-作业的提交时间。</p>
+<p>平均周转时间就是取平均数。</p>
+<p>带权周转时间=周转时间/实际运行时间，这个值越小越好。</p>
+<p>等待时间：进程/作业处在后备队列中等待的时间，等待时间越长，用户越难受。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/16/sjV7/image-20260316120508720.png" srcset="/img/loading.gif" lazyload alt="image-20260316120508720"></p>
+<p>响应时间，<strong>指从用户提交请求到首次产生响应所用的时间。</strong></p>
+<h3 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h3><p>在此之前，先明确进程与作业的区别。</p>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>作业</th>
+<th>进程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>定义与视角</strong></td>
+<td>用户向系统提交的一个任务（程序+数据+说明书）。</td>
+<td>程序在内存中的一次执行过程，是系统进行资源分配和调度的基本单位。</td>
+</tr>
+<tr>
+<td><strong>状态</strong></td>
+<td>静态的。存在于外存（如磁盘）中，等待被调度进入内存执行。</td>
+<td>动态的。存在于内存中，具有创建、就绪、运行、阻塞、终止等多种状态。</td>
+</tr>
+<tr>
+<td><strong>生命周期</strong></td>
+<td>从提交开始，到完成结束。</td>
+<td>从被创建（通常由作业调度产生）开始，到被撤销结束。</td>
+</tr>
+<tr>
+<td><strong>主要关系</strong></td>
+<td>一个作业通常至少对应一个进程。一个大型作业（如编译任务）可能被拆分为多个进程来协作完成。</td>
+<td>进程是作业的执行体现。一个进程必然来源于某个作业（或用户交互命令）。</td>
+</tr>
+</tbody></table>
+<p>你可以把“作业”想象成厨师收到的一张<strong>订单</strong>（上面写着要做哪道菜以及要求），而“进程”就是厨师在厨房里<strong>实际烹饪</strong>这道菜的过程。</p>
+<p>我们会结构化地分析算法：</p>
+<ul>
+<li>算法思想</li>
+<li>算法规则</li>
+<li>用于作业调度还是进程调度(高级调度还是低级调度)</li>
+<li>抢占式？非抢占式？</li>
+<li>优点和缺点</li>
+<li>是否会导致饥饿(进程/作业长时间等待)。</li>
+</ul>
+<h4 id="先来先服务FCFS"><a href="#先来先服务FCFS" class="headerlink" title="先来先服务FCFS"></a>先来先服务FCFS</h4><p>先来先服务调度算法：<strong>按照到达的先后顺序调度，事实上就是等待时间越久的越优先得到服务。</strong></p>
+<p><img src="https://files.seeusercontent.com/2026/03/17/lk1T/image-20260317111726085.png" srcset="/img/loading.gif" lazyload alt="image-20260317111726085"></p>
+<table>
+<thead>
+<tr>
+<th>算法思想</th>
+<th>主要从“公平”的角度考虑（类似于我们生活中排队买东 西的例子）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>算法规则</td>
+<td>按照作业/进程到达的先后顺序进行服务</td>
+</tr>
+<tr>
+<td>用于作业/进程调度</td>
+<td>用于作业调度时，考虑的是哪个作业先到达后备队列；用 于进程调度时，考虑的是哪个进程先到达就绪队列</td>
+</tr>
+<tr>
+<td>是否可抢占？</td>
+<td>非抢占式的算法</td>
+</tr>
+<tr>
+<td>优缺点</td>
+<td>优点：公平、算法实现简单 缺点：排在长作业（进程）后面的短作业需要等待很长时 间，带权周转时间很大，对短作业来说用户体验不好。即，FCFS算法对长作业有利，对短作业不利（Eg：排队买奶茶…）</td>
+</tr>
+<tr>
+<td>是否会导致饥饿</td>
+<td>不会，总会有轮到进程的时候</td>
+</tr>
+</tbody></table>
+<p>FCFS不是很优秀。</p>
+<h4 id="短作业优先SJF"><a href="#短作业优先SJF" class="headerlink" title="短作业优先SJF"></a>短作业优先SJF</h4><blockquote>
+<p>作业调度是SJF，进程调度是SPF，也就是中间的单词不一样 ，一个是Job作业，一个是Progress进程</p>
+</blockquote>
+<p>短作业/进程优先调度算法：<strong>每次调度时选择当前已到达且运行时间最短的作业/进程。</strong></p>
+<p>很多情况下只有非抢占式的，但是也有抢占式的。</p>
+<p>非抢占式短作业优先算法：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/17/biF5/image-20260317112705426.png" srcset="/img/loading.gif" lazyload alt="image-20260317112705426"></p>
+<p>抢占式，又名最短剩余时间优先算法：</p>
+<p>最短剩余时间优先算法：每当有进程加入就绪队列改变时就需要调度，如果新到达的进程剩余时间比当前运行的进程剩余时间更短，则由新进程抢占处理机，当前运行进程重新回到就绪队列。另外，当一个进程完成时也需要调度。</p>
+<p>这种算法如果遇见了更短的进程抵达，会将正在运行的进程从处理机上拉下来，自己上位处运行。被拉下来的进程能够断点续传，已经运行的时间不会重置</p>
+<p><img src="https://files.seeusercontent.com/2026/03/17/Pv6u/image-20260317113457792.png" srcset="/img/loading.gif" lazyload alt="image-20260317113457792"></p>
+<table>
+<thead>
+<tr>
+<th>算法思想</th>
+<th>追求最少的平均等待时间，最少的平均周转时间、最少的平均平均带权周转时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>算法规则</td>
+<td>最短的作业/进程优先得到服务（所谓“最短”，是指要求服务时间最短)</td>
+</tr>
+<tr>
+<td>用于作业和进程调度</td>
+<td>即可用于作业调度，也可用于进程调度。用于进程调度时称为“短进程优先(SPE,Shortest Process First)算法”</td>
+</tr>
+<tr>
+<td>抢占或非抢占</td>
+<td>SF和SPF是非抢占式的算法。但是也有抢占式的版本一一最短剩余时间优先算法(SRTN,Shortest Remaining Time Next)</td>
+</tr>
+<tr>
+<td>优缺点</td>
+<td>优点：“最短的”平均等待时间、平均周转时间缺点：不公平。对短作业有利，对长作业不利。可能产生饥饿现象。另外，作业/进程的运行时间是由用户提供的，并不一定真实，不一定能做到真正的短作业优先</td>
+</tr>
+<tr>
+<td>饥饿？</td>
+<td>会。如果源源不断地有短作业/进程到来，可能使长作业/进程长时间得不到服务，产生“饥饿”现象。如果一直得不到服务，则称为“饿死”</td>
+</tr>
+</tbody></table>
+<p>在<strong>所有进程同时到达</strong>或者<strong>非抢占式</strong>的前提下，SJF 的平均等待时间/周转时间是最优的。而在抢占式环境下，<strong>SRTN（最短剩余时间优先）</strong> 才是理论上的最优。</p>
+<p>还是一样的，取两者精华，就有了新的算法。</p>
+<h3 id="高响应比优先HRRN"><a href="#高响应比优先HRRN" class="headerlink" title="高响应比优先HRRN"></a>高响应比优先HRRN</h3><p>$$<br>\text{响应比}=\frac{\text{等待时间}+\text{要求服务时间}}{\text{要求服务时间}}<br>$$</p>
+<p><img src="https://files.seeusercontent.com/2026/03/17/2dOz/image-20260317160828345.png" srcset="/img/loading.gif" lazyload alt="image-20260317160828345"></p>
+<table>
+<thead>
+<tr>
+<th>算法思想</th>
+<th>要综合考虑作业/进程的等待时间和要求服务的时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>算法规则</td>
+<td>在每次调度时先计算各个作业/进程的响应比，选择响应比最高的为其服务</td>
+</tr>
+<tr>
+<td>用于作业/进程调度</td>
+<td>即可用于作业调度，也可用于进程调度</td>
+</tr>
+<tr>
+<td>是否可抢占？</td>
+<td>非抢占式的算法。因此只有当前运行的作业/进程主动放弃 处理机时，才需要调度，才需要计算响应比</td>
+</tr>
+<tr>
+<td>优缺点</td>
+<td>综合考虑了等待时间和运行时间 (要求服务时间) 等待时间相同时，要求服务时间短的优先（SJF的优点） 要求服务时间相同时，等待时间长的优先（FCFS的优点）</td>
+</tr>
+<tr>
+<td>是否会导致饥饿</td>
+<td>不会， 对于长作业来说，随着等待时间越来越久，其响应比也会 越来越大，从而避免了长作业饥饿的问题</td>
+</tr>
+</tbody></table>
+<p>注：这几种算法主要关心对用户的公平性、平均周转时间、平均等待时间等评价系统整体性能的指标，但是不关心“响应时间”，也并不区分任务的紧急程度，因此对于用户来说，交互性很糟糕，用户无法手动参与调度，很多时候我们需要首先处理某个任务，但你无法让CPU这么做。所以，以上三种只用于批处理系统。</p>
+<h3 id="时间片轮转调度RR"><a href="#时间片轮转调度RR" class="headerlink" title="时间片轮转调度RR"></a>时间片轮转调度RR</h3><p>提倡进程公平性的算法，注意时间片只能影响进程而不是作业。</p>
+<p><strong>最常用于分时操作系统，最注重响应时间，所以不计算周转时间。</strong></p>
+<p><img src="https://files.seeusercontent.com/2026/03/17/i7Ka/image-20260317164324514.png" srcset="/img/loading.gif" lazyload alt="image-20260317164324514"></p>
+<p><img src="https://files.seeusercontent.com/2026/03/17/4zEg/image-20260317164656124.png" srcset="/img/loading.gif" lazyload alt="image-20260317164656124"></p>
+<p>这个算法类似于<strong>循环队列</strong>，时间片的设定对性能的影响是非常显著的。如果时间片太大，使得每个进程都可以在一个时间片内就完成，则时间片轮转调度算法退化为先来先服务调度算法，并且会增大进程响应时间。因此时间片不能太大。反之如果太小，进程的切换就会过于频繁，那花在切换上的时间代价就很大，这也会导致性能的下降 。</p>
+<p>一般来说，设计时间片时要让切换进程的开销占比不超过1%。</p>
+<table>
+<thead>
+<tr>
+<th>算法思想</th>
+<th>公平地、轮流地为各个进程服务，让每个进程在一定时间 间隔内都可以得到响应</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>算法规则</td>
+<td>按照各进程到达就绪队列的顺序，轮流让各个进程执行一 个时间片（如100ms）。若进程未在一个时间片内执行完， 则剥夺处理机，将进程重新放到就绪队列队尾重新排队。</td>
+</tr>
+<tr>
+<td>用于作业/进程调度</td>
+<td>用于进程调度（只有作业放入内存建立了相应的进程后， 才能被分配处理机时间片）</td>
+</tr>
+<tr>
+<td>是否可抢占？</td>
+<td>若进程未能在时间片内运行完，将被强行剥夺处理机使用 权，因此时间片轮转调度算法属于抢占式的算法。由时钟 装置发出时钟中断来通知CPU时间片已到</td>
+</tr>
+<tr>
+<td>优缺点</td>
+<td>优点：公平；响应快，适用于分时操作系统； 缺点：由于高频率的进程切换，因此有一定开销；不区分任务紧急程度</td>
+</tr>
+<tr>
+<td>饥饿?</td>
+<td>不会</td>
+</tr>
+</tbody></table>
+<h3 id="优先级调度算法"><a href="#优先级调度算法" class="headerlink" title="优先级调度算法"></a>优先级调度算法</h3><p>这个算法极强依赖用户自主设计的优先级，相当于把调度问题抛给了用户。这个算法我觉得很好理解。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/17/r6Rw/image-20260317171025306.png" srcset="/img/loading.gif" lazyload alt="image-20260317171025306"></p>
+<p>就绪队列未必只有一个，可以按照不同优先级来组织。另外，也可以把优先级高的进程排在更靠近队头的位置。</p>
+<p>而且，根据优先级确定后是否能够改变，能够分为静态优先级和动态优先级。</p>
+<p>系统进程优先级高于用户进程<br>前台进程优先级高于后台进程<br>操作系统更偏好I/O型进程，如果让IO设备优先运行，能够让它尽早投入工作，使得CPU的利用率，吞吐量能够提升。</p>
+<p>动态优先级则更灵活。可以从追求公平、提升资源利用率等角度考虑如果某进程在就绪队列中等待了很长时间，则可以适当提升其优先级。如果某进程占用处理机运行了很长时间，则可适当降低其优先级。</p>
+<p>这么来看，高响应比也算动态优先级调度算法。</p>
+<table>
+<thead>
+<tr>
+<th>算法思想</th>
+<th>随着计算机的发展，特别是实时操作系统的出现，越来越 多的应用场景需要根据任务的紧急程度来决定处理顺序</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>算法规则</td>
+<td>调度时选择优先级最高的作业/进程</td>
+</tr>
+<tr>
+<td>用于作业/进程调度</td>
+<td>既可用于作业调度，也可用于进程调度。甚至，还会用于 在之后会学习的I/O调度中</td>
+</tr>
+<tr>
+<td>是否可抢占?</td>
+<td>抢占式、非抢占式都有。做题时的区别在于：非抢占式只 需在进程主动放弃处理机时进行调度即可，而抢占式还需 在就绪队列变化时，检查是否会发生抢占。</td>
+</tr>
+<tr>
+<td>优缺点</td>
+<td>优点：用优先级区分紧急程度、重要程度，适用于实时操 作系统。可灵活地调整对各种作业/进程的偏好程度。 缺点：若源源不断地有高优先级进程到来，则可能导致饥饿</td>
+</tr>
+<tr>
+<td>饥饿？</td>
+<td>会</td>
+</tr>
+</tbody></table>
+<p>一样的，我们希望钝化以上算法尖锐的地方，取得一个折中的方案。</p>
+<h3 id="多级反馈队列调度算法"><a href="#多级反馈队列调度算法" class="headerlink" title="多级反馈队列调度算法"></a>多级反馈队列调度算法</h3><blockquote>
+<p>这是最后一个，也是最难理解的算法了。</p>
+</blockquote>
+<p>设置多级就绪队列，各级队列优先级从高到低，时间片从小到大<br>新进程到达时先进入第1级队列，按FCFS原则排队等待被分配时间片。若用完时间片进程还未结束，则进程进入下一级队列队尾。如果此时己经在最下级的队列，则重新放回最下级队列队尾<br>只有第k级队列为空时，才会为k+1级队头的进程分配时间片<br>被抢占处理机的进程重新放回原队列队尾。</p>
+<blockquote>
+<p>但如果进程是由于<strong>发生 I/O 阻塞</strong>主动放弃 CPU，通常在再次就绪时，它会回到<strong>原来的那一级队列</strong>（甚至有的算法会提升它的优先级）。</p>
+</blockquote>
+<p><img src="https://files.seeusercontent.com/2026/03/17/1ywH/image-20260317194047613.png" srcset="/img/loading.gif" lazyload alt="image-20260317194047613"></p>
+<p>复杂的好处就是足够高效。</p>
+<table>
+<thead>
+<tr>
+<th>算法思想</th>
+<th>其他调度算法的折中</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>算法规则</td>
+<td>1.设置多级就绪队列，各级队列优先级从高到低，时间片从小到大2.新进程到达时先进入第1级队列，按FCFS原则排队等待被分配时间片，若用完时间片进程还未结束，则进程进入下一级队列队尾如果此时己经是在最下级的队列，则重新放回该队列队尾3.只有第k级队列为空时，才会为k+1级队头的进程分配时间片</td>
+</tr>
+<tr>
+<td>作业/进程调度</td>
+<td>进程调度</td>
+</tr>
+<tr>
+<td>抢占式/非抢占式</td>
+<td>抢占式的算法。在k级队列的进程运行过程中，若更上级的队列(1k-1级)中进入了一个新进程，则由于新进程处于优先级更高的队列中，因此新进程会抢占处理机，原来运行的进程放回k级队列队尾。</td>
+</tr>
+<tr>
+<td>优缺点</td>
+<td>对各类型进程相对公平(FCFS的优点)；每个新到达的进程都可以很快就得到响应(RR的优点)；短进程只用较少的时间就可完成(SPF的优点)；不必实现估计进程的运行时间（避免用户作假）：可灵活地调整对各类进程的偏好程度，比如CPU密集型进程、I/O密集型进程（拓展：可以将因I/O而阻塞的进程重新放回原队列，这样I/O型进程就可以保持较高优先级)</td>
+</tr>
+<tr>
+<td>饥饿？</td>
+<td>会</td>
+</tr>
+</tbody></table>
+<h3 id="多级队列调度算法"><a href="#多级队列调度算法" class="headerlink" title="多级队列调度算法"></a>多级队列调度算法</h3><blockquote>
+<p>这是针对就绪队列的算法，之前说的是“单一调度策略”，而这个是一个调度框架或者模型，它首先<strong>改变了就绪队列的结构</strong>（分成多个队列），然后<strong>可以</strong>在每个子队列中<strong>采用</strong> FCFS、RR 等不同的单一策略。</p>
+</blockquote>
+<p>系统中按进程类型设置多个队列，进程创建成功后插入某个队列。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/17/1wjF/image-20260317195509306.png" srcset="/img/loading.gif" lazyload alt="image-20260317195509306"></p>
+<p>队列之间可采取固定优先级，或时间片划分固定优先级：高优先级空时低优先级进程才能被调度时间片划分：如三个队列分配时间50%、40%、10%。</p>
+<p>各队列可采用不同的调度策略，如系统进程队列采用优先级调度交互式队列采用RR批处理队列采用FCFS。</p>
+<h3 id="多处理机调度"><a href="#多处理机调度" class="headerlink" title="多处理机调度"></a>多处理机调度</h3><p>CPU是多核的，这也需要调度。</p>
+<p>单处理机调度只需要决定让哪个就绪进程优先上处理机即可。</p>
+<p>而多处理机调度，还需决定被调度的进程上哪个处理机。</p>
+<p>在多处理机调度中，应该力求做到：</p>
+<ul>
+<li><strong>负载均衡</strong>：尽可能让每个CPU都同等忙碌，避免出现一核工作，八核围观的情况。</li>
+<li><strong>处理器亲和性</strong>：尽量让一个进程调度到同一个CPU上运行，以发挥CPU的缓存作用</li>
+</ul>
+<h4 id="公共就绪队列"><a href="#公共就绪队列" class="headerlink" title="公共就绪队列"></a>公共就绪队列</h4><p><img src="https://files.seeusercontent.com/2026/03/17/Uax7/image-20260317204936311.png" srcset="/img/loading.gif" lazyload alt="image-20260317204936311"></p>
+<ul>
+<li><strong>所有CPU共享同一个就绪进程队列</strong></li>
+<li><strong>每个CPU运行调度程序，从公共队列中选择一个运行。</strong></li>
+<li><strong>每个CPU访问公共就绪队列时需要上锁保证互斥访问。</strong></li>
+</ul>
+<p>优点：能够天然实现负载均衡。</p>
+<p>缺点：各个进程频繁切换CPU，亲和性差。</p>
+<p>为了提升处理机亲和性：<br>软亲和：由进程调度程序尽量保证“亲和性”<br>硬亲和：由用户进程通过系统调用，主动要求操作系统分配固定的CPU,确保“亲和性”</p>
+<h4 id="私有就绪队列"><a href="#私有就绪队列" class="headerlink" title="私有就绪队列"></a>私有就绪队列</h4><ul>
+<li>每个CPU都有一个私有就绪队列</li>
+<li>CPU空闲时运行调度程序，从私有就绪队列中选择一个进程运行</li>
+</ul>
+<p>私有队列天然实现了亲和性。</p>
+<p>私有队列需要思考如何实现负载均衡的问题：</p>
+<p>推迁移(Push)策略：一个特定的系统程序周期性检查每个处理器的负载，如果负载不平衡，就从忙碌CPU的就绪队列中“推”一些就绪进程到空闲CPU的就绪队列。包工头重新分配任务。</p>
+<p>拉迁移(pull)策略：每个CPU运行调度程序时，周期性检查自身负载与其他CPU负载。如果一个CPU负载很低，就从其他高负载CPU的就绪队列中“拉”一些就绪进程到自己的就绪队列。自己空闲就主动揽活干。</p>
+<h3 id="进程同步和互斥"><a href="#进程同步和互斥" class="headerlink" title="进程同步和互斥"></a>进程同步和互斥</h3><blockquote>
+<p>我们之前说过，进程具有异步性的特征，并发执行的进程以各自独立的不可预知的速度前进。</p>
+</blockquote>
+<p>有的时候<strong>异步</strong>会带来不必要的等待，所以异步性是需要解决的问题，保证其不会触发不必要的等待。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/19/lX7f/image-20260319122202392.png" srcset="/img/loading.gif" lazyload alt="image-20260319122202392"></p>
+<p>比如在管道通信中：<strong>读进程和写进程</strong>并发地运行，由于并发必然导致异步性，因此“写数据”和“读数据”两个操作执行的先后顺序是不确定的。而实际应用中，又必须按照“写数据→读数据”的顺序来执行的。<br>如何解决这种异步问题，就是“进程同步”所讨论的内容。</p>
+<p>所以同步亦称<strong>直接制约关系</strong>，它是指为完成某种任务而建立的两个或多个进程，这些进程因为需要在某些位置上协调它们的工作次序而产生的制约关系。进程间的直接制约关系就是源于它们之间的相互合作。</p>
+<p>进程的“并发”需要“共享”的支持。各个并发执行的进程不可避免的需要共享一些系统资源（比如内存，又比如打印机、摄像头这样的I/O设备），而共享又分为互斥共享和同时共享。</p>
+<p>我们把一个时间段内只允许一个进程使用的资源称为临界资源。许多物理设备（比如摄像头、打印机）都属于临界资源。此外还有许多变量、数据、内存缓冲区等部属于临界资源。对这些临界资源的访问必须互斥进行。</p>
+<p>对临界资源的互斥访问，能够认定为以下代码逻辑：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">do</span> {<br>entry section;  <span class="hljs-comment">//进入区</span><br>critical section; <span class="hljs-comment">//临界区,又名临界段</span><br><span class="hljs-built_in">exit</span> section;<span class="hljs-comment">//退出区</span><br>remainder section;<span class="hljs-comment">//剩余区</span><br>}<span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)<br></code></pre></td></tr></tbody></table></figure>
+
+<p>进入区检查是否可进入临界区，若可进入，会设置“正在访问临界资源”标志（上同步锁），阻止其他同时进如临界区。临界区是访问临界资源的那段代码，退出区负责解除“正在访问临界资源”标志(解同步锁),剩余区负责做其他处理。所以临界区是进程中访问临界资源的代码段而进入区和退出区是负责实现互斥的代码段。</p>
+<p>为了实现对临界资源的互斥访问，同时保证系统整体性能，需要遵循以下原则：</p>
+<ul>
+<li><strong>空闲让进</strong>：临界区空闲时，可以允许一个请求进入临界区的进程立即进入临界区；</li>
+<li><strong>忙则等待</strong>：当己有进程进入临界区时，其他试图进入临界区的进程必须等待：</li>
+<li><strong>有限等待</strong>：对请求访问的进程，应保证能在有限时间内进入临界区（保证不会饥饿）。</li>
+<li><strong>让权等待</strong>：当进程不能进入临界区时，应立即释放处理机，防止进程忙等待。也就是进程需要的资源处于繁忙时，他需要进入阻塞态而不是占着处理机不放。</li>
+</ul>
+<h3 id="进程互斥的软件实现方法"><a href="#进程互斥的软件实现方法" class="headerlink" title="进程互斥的软件实现方法"></a>进程互斥的软件实现方法</h3><h3 id="单标志法"><a href="#单标志法" class="headerlink" title="单标志法"></a>单标志法</h3><p>算法思想：<strong>两个进程在访问完临界区后会把使用临界区的权限转交给另一个进程。也就是说每个进程进入临界区的权限只能被另一个进程赋予。</strong></p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> turn = <span class="hljs-number">0</span>;<span class="hljs-comment">//可认为是谦让变量</span><br><span class="hljs-comment">//P0进程：</span><br><span class="hljs-keyword">while</span> (turn != <span class="hljs-number">0</span>);    <span class="hljs-number">1</span><br>critical section;     <span class="hljs-number">2</span><br>turn = <span class="hljs-number">1</span>;             <span class="hljs-number">3</span><br>remainder section;    <span class="hljs-number">4</span><br><span class="hljs-comment">//P1进程：</span><br><span class="hljs-keyword">while</span> (turn != <span class="hljs-number">1</span>);    <span class="hljs-number">5</span><br>critical section;     <span class="hljs-number">6</span><br>turn = <span class="hljs-number">0</span>;             <span class="hljs-number">7</span><br>remainder section;    <span class="hljs-number">8</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>turn的初值为0，即刚开始只允许0号进程进入临界区。若P1先上处理机运行，则会一直卡在⑤。直到P1的时间片用完，发生调度，切换P0上处理机运行。代码①不会卡住P0,P0可以正常访问临界区，在P0访问临界区期间即时切换回P1,P1依然会卡在⑤，随后发生调度，P0重新上处理机。只有P0在退出区将turn改为1后，P1才能进入临界区。</p>
+<p>每个进程的流程都是：</p>
+<ul>
+<li>检查资源是否轮到自己用</li>
+<li>访问临界资源</li>
+<li>将谦让变量设置为除自己以外的数值</li>
+<li>做其他事情</li>
+</ul>
+<p>这种算法有一个问题：临界资源只能轮流使用，且如果P1进程下线，那么P0进程将turn设置为1后P0就再也无法使用资源。这就违反了<strong>空闲让进</strong>的原则。</p>
+<h3 id="双标志先检查法"><a href="#双标志先检查法" class="headerlink" title="双标志先检查法"></a>双标志先检查法</h3><p>算法思想：设置一个布尔型数组flag[],数组中各个元素用来标记各进程想进入临界区的意愿，比如“flag[0]=ture”意味着0号进程P0现在想要进入临界区。每个进程在进入临界区之前先检查当前有没有别的进程想进入临界区，如果没有，则把自身对应的标志flag[i]设为true,之后开始访问临界区。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/19/w4oX/image-20260319163005241.png" srcset="/img/loading.gif" lazyload alt="image-20260319163005241"></p>
+<p>每个进程的流程是：</p>
+<ul>
+<li>检查对方(除自己之外的其他人)是否想要使用</li>
+<li>表达想用的意愿，上锁</li>
+<li>访问临界资源</li>
+<li>退出，解锁。</li>
+</ul>
+<p>这个算法同样是有问题的， 如果P0P1两个进程是并发进行的话，那么P0上处理机执行，发现第1条指令符合，准备执行第二条指令时发生切换，P1上处理机执行第5条指令，随后执行第6条设置为true后切换，P0执行第2条指令也设置为true，这会导致双true同时使用临界资源。所以该算法违反了<strong>“忙且等待”</strong>原则。</p>
+<p>原因是检查和上锁这两个步骤不具备原语的连贯性。</p>
+<h3 id="双标志后检查法"><a href="#双标志后检查法" class="headerlink" title="双标志后检查法"></a>双标志后检查法</h3><p>算法思想：双标志先检查法的改版。前一个算法的问题是先“检查”后“上锁”，但是这两个操作又无法一气呵成，因此导致了两个进程同时进入临界区的问题。因此，人们又想到先“上锁”后“检查”的方法，来避免上述问题。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/19/3kbI/image-20260319164437728.png" srcset="/img/loading.gif" lazyload alt="image-20260319164437728">但是如果按照1，5,2,6的顺序执行，会出现P0P1都无法进入临界区的现象。</p>
+<p>因此，双标志后检查法虽然解决了“忙则等待”的问题，但是又违背了“空闲让进”和“有限等待”原则，会因各进程都长期无法访问临界资源而产生“饥饿”现象。</p>
+<h3 id="Peterson皮特森算法："><a href="#Peterson皮特森算法：" class="headerlink" title="Peterson皮特森算法："></a>Peterson皮特森算法：</h3><p>算法思想：结合双标志法、单标志法的思想。如果双方都争着想进入临界区，那可以让进程尝试“孔融让梨”（谦让)。做一个有礼貌的进程。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/19/2Uay/image-20260319170704422.png" srcset="/img/loading.gif" lazyload alt="image-20260319170704422"></p>
+<p>谁最后表达谦让，谁就失去了行动的优先权。</p>
+<p>Peterson算法用软件方法解决了进程互斥问题，遵循了空闲让进、忙则等待、有限等待三个原则，但是依然未遵循<strong>让权等待</strong>的原则。</p>
+<p>该算法在无法进入临界区时会卡在循环而不是让出处理机。</p>
+<h3 id="进程互斥的硬件实现方法"><a href="#进程互斥的硬件实现方法" class="headerlink" title="进程互斥的硬件实现方法"></a>进程互斥的硬件实现方法</h3><blockquote>
+<p>这里可能依赖计算机组成原理的知识。</p>
+</blockquote>
+<h3 id="中断屏蔽法"><a href="#中断屏蔽法" class="headerlink" title="中断屏蔽法"></a>中断屏蔽法</h3><p>利用“开/关中断指令”实现（与原语的实现思想相同，即在某进程开始访问临界区到结束访问为止都不允许被中断，也就不能发生进程切换，因此也不可能发生两个同时访问临界区的情况)</p>
+<p>优点是简单高效，缺点是不适用于多处理机：只适用于操作系统内核进程，不适用于用户进程（因为开/关中断指令只能运行在内核态，这组指令如果能让用户随意使用会很危险)</p>
+<h3 id="TestAndSet指令"><a href="#TestAndSet指令" class="headerlink" title="TestAndSet指令"></a>TestAndSet指令</h3><p>又名TS指令，TestAndSetLock指令或者TSL指令。</p>
+<p>TSL指令是用硬件实现的，执行的过程不允许被中断，只能一气呵成</p>
+<p><img src="https://files.seeusercontent.com/2026/03/19/2nqA/image-20260319192526553.png" srcset="/img/loading.gif" lazyload alt="image-20260319192526553"></p>
+<p>若刚开始lock是false,则TSL返回的old值为false,while循环条件不满足，直接跳过循环，进入临界区。若刚开始lock是true,则执行TLS后old返回的值为true,while循环条件满足，会一直循环，直到当前访问临界区的进程在退出区进行“解锁”相比软件实现方法，TSL指令把“上锁”和“检查”操作用硬件的方式变成了一气呵成的原子操作。</p>
+<p>优点：实现简单，无需像软件实现方法那样严格检查是否会有逻辑漏洞；适用于多处理机环境</p>
+<p>缺点：不满足“让权等待”原则，暂时无法进入临界区内的进程会占用CPU并循环执行TSL，造成忙等。</p>
+<h3 id="Swap指令"><a href="#Swap指令" class="headerlink" title="Swap指令"></a>Swap指令</h3><p>别名Exchange指令，简称XCHG指令。</p>
+<p>用硬件实现，执行过程中不允许中断。</p>
+<img src="https://files.seeusercontent.com/2026/03/19/mtH0/image-20260319193502058.png" srcset="/img/loading.gif" lazyload alt="image-20260319193502058" style="zoom:150%;">
+
+<p>逻辑上来看Swap和TSL并无太大区别，都是先记录下此时临界区是否已经被上锁（记录在old变量上)，再将上锁标记lock设置为true,最后检查old,如果old为false则说明之前没有别的进程对临界区上锁，则可跳出循环，进入临界区。</p>
+<p>优点和缺点和TSL指令是一样的。</p>
+<h3 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h3><p>解决临界区最简单的工具就是互斥锁(mutex lock)。一个进程在进入临界区时应获得锁；在退出临界区时释放锁。函数acquire()获得锁，而函数release()释放锁。每个互斥锁有一个布尔变量available,表示锁是否可用。如果锁是可用的，调用acquire()会成功，锁不再可用。当一个进程试图获取不可用的锁时，会被阻塞，直到锁被释放。</p>
+<figure class="highlight arduino"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-built_in">acquire</span> (){<br> <span class="hljs-keyword">while</span> (!available);<br> available = <span class="hljs-literal">false</span>;<br>}<br><span class="hljs-built_in">release</span>(){<br> available = <span class="hljs-literal">true</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>acquire()或release()的执行必须是原子操作，因此互斥锁通常采用硬件机制来实现。</p>
+<p>互斥锁的主要缺点是忙等待，当有一个进程在临界区中，任何其他进程在进入临界区时必须连续循环调用acquire()，这种不断循环检查该条件的行为并没有释放CPU资源或进入休眠状态。当多个进程共享同一CPU时，就浪费了CPU周期。因此，互斥锁通常用于多处理器系统，一个线程可以在一个处理器上等待，不影响其他线程的执行。</p>
+<p>需要连续循环忙等的互斥锁，都可称为自旋锁(spin lock)，如TSL指令、swap指令、单标志法</p>
+<p>虽然需忙等，进程时间片用完才下处理机，违反“让权等待”的原则，但是优点明显：</p>
+<ul>
+<li><p>等待期间不用切换进程上下文，多处理器系统中，若上锁的时间短，则等待代价很低</p>
+</li>
+<li><p>常用于多处理器系统，一个核忙等，其他核照常工作，并快速释放临界区</p>
+<p>但是不太适用于单处理机系统，忙等的过程中不可能解锁</p>
+</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/03/21/0rHe/image-20260321133820934.png" srcset="/img/loading.gif" lazyload alt="image-20260321133820934"></p>
+<h3 id="信号量机制"><a href="#信号量机制" class="headerlink" title="信号量机制"></a>信号量机制</h3><p>之前学习的实现方式都无法实现“让权等待”原则，最短路径提出者迪杰斯特拉提出了实现进程互斥,同步的方法——<strong>信号量机制。</strong></p>
+<p>用户进程可以通过使用操作系统提供的一对<strong>原语</strong>来对信号量进行操作，从而很方便的实现了进程互斥、进程同步。</p>
+<p>而信号量其实就是一个变量（可以是一个整数，也可以是更复杂的记录型变量），可以用一个信号量来表示系统中某种资源的数量，比如：系统中只有一台打印机，就可以设置一个初值为1的信号量。</p>
+<p>使用<strong>原语</strong>能够解决软件解决方案的主要问题“进入区的各种操作无法一气呵成”，这里使用的原语主要是wait(S)原语和signal(S)原语，可以把原语理解为我们自己写的函数，函数名分别为wait和signal,.括号里的信号量S其实就是函数调用时传入的一个参，分别简称为P(S)，V(S)。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> S = <span class="hljs-number">1</span>; <span class="hljs-comment">//初始化整型信号量S，表示当前系统中的资源数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">wait</span> <span class="hljs-params">(<span class="hljs-type">int</span> S)</span>  <span class="hljs-comment">//原语，相当于进入区</span><br>{<br>    <span class="hljs-keyword">while</span> (S&lt;=<span class="hljs-number">0</span>);  <span class="hljs-comment">//如果资源数不够就循环等待</span><br>    S=S<span class="hljs-number">-1</span>;   <span class="hljs-comment">//如果够用，就占用一个位置。</span><br>}<br><span class="hljs-type">void</span> <span class="hljs-title function_">signal</span> <span class="hljs-params">(<span class="hljs-type">int</span> S)</span>  <span class="hljs-comment">//原语，退出区</span><br>{<br>    S=S+<span class="hljs-number">1</span>;<span class="hljs-comment">//使用后释放资源</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C">进程P0:<br>.....  <br>wait(S);  <span class="hljs-comment">//进入区，申请资源</span><br>使用资源.... <span class="hljs-comment">//临界区，访问资源</span><br>signal(S); <span class="hljs-comment">//退出区，释放资源</span><br>....<br></code></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c">进程P1:<br>.....  <br>wait(S);  <br>使用资源.... <br>signal(S); <br>....<br></code></pre></td></tr></tbody></table></figure>
+
+<p>因为是随时用原语来完成的，所以“检查”和“上锁”两步是一气呵成的，不会导致并发，异步导致的问题。</p>
+<p>但是如果系统资源不够，进程依旧会不停循环检查系统资源数，依旧存在忙等的问题，也不满足“让权等待”原则。</p>
+<p>整型信号量的缺陷是存在“<strong>忙等</strong>”问题，因此人们又提出了“<strong>记录型信号量</strong>”，即用记录型数据结构表示的信号量。</p>
+<h3 id="记录型信号量"><a href="#记录型信号量" class="headerlink" title="记录型信号量"></a>记录型信号量</h3><p>记录型信号量，当某一进程发现没有系统资源可以分配时，就自动将该进程移动到阻塞队列，防止循环检查占用资源，直到被另一个释放资源的进程使用原语唤醒，这么做就避免了忙等的问题。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> {</span><br>    <span class="hljs-type">int</span> value;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">process</span> *<span class="hljs-title">L</span>;</span><br>} semaphore;<br><span class="hljs-type">void</span> <span class="hljs-title function_">wait</span> <span class="hljs-params">(semaphore S)</span><br>{<br>    S.value--;<br>    <span class="hljs-keyword">if</span> (S.value &lt; <span class="hljs-number">0</span>)<br>    {<br>        block (S.L);<br>    }<br>}<br><span class="hljs-type">void</span> <span class="hljs-title function_">signal</span> <span class="hljs-params">(semaphore S)</span><br>{<br>    S.value++;<br>    <span class="hljs-keyword">if</span> (S.value &lt;= <span class="hljs-number">0</span>)<br>    {<br>        wakeup(S.L);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>结合上面的函数体来看下面的流程：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/21/dZ2t/image-20260321144031873.png" srcset="/img/loading.gif" lazyload alt="image-20260321144031873"></p>
+<p>总结一下：<br>S.value的初值表示系统中某种资源的数目。<br>对信号量S的一次P操作意味着进程请求一个单位的该类资源，因此需要执行S.value-,表示资源数减1，当S.value&lt;0时表示该类资源己分配完毕，因此进程应调用block原语进行自我阻塞（当前运行的进程从运行态→阻塞态)，主动放弃处理机，并插入该类资源的等待队列S.L中。可见，该机制遵循了“让权等待”原则，不会出现“忙等”现象。</p>
+<h3 id="信号量机制实现互斥同步和前驱"><a href="#信号量机制实现互斥同步和前驱" class="headerlink" title="信号量机制实现互斥同步和前驱"></a>信号量机制实现互斥同步和前驱</h3><blockquote>
+<p>该机制将持续贯穿第二章剩余部分，如果忘了就回来看看。</p>
+</blockquote>
+<h4 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h4><p><img src="https://files.seeusercontent.com/2026/03/21/O3by/image-20260321151235729.png" srcset="/img/loading.gif" lazyload alt="image-20260321151235729"></p>
+<p>互斥是对同一个进程进行一对PV操作。</p>
+<h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4><p>落实同步性是为了抵抗程序异步执行带来的一系列不稳定的问题,大致步骤是：</p>
+<ul>
+<li><p>分析在什么地方需要同步关系，需要保证一前一后的操作顺序</p>
+</li>
+<li><p>设置同步信号量S，初始为0</p>
+</li>
+<li><p>在“前操作”之后执行V(S)</p>
+</li>
+<li><p>在”后操作”之前执行P(S)</p>
+<p>如果我们需要让代码4在代码2之后 执行，就需要引入同步信号量</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c">semaphore S = <span class="hljs-number">0</span>;<span class="hljs-comment">//初始化同步信号量</span><br>p1(){<br>    代码<span class="hljs-number">1</span>;<br>    代码<span class="hljs-number">2</span>;<br>    V(S);<br>    代码<span class="hljs-number">3</span>;<br>}<br>p2(){<br>    P(S);<br>    代码<span class="hljs-number">4</span>;<br>    代码<span class="hljs-number">5</span>;<br>    代码<span class="hljs-number">6</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>若先执行到 V(S)操作，则 S++后 S=1。之后当执行到P(S)操作时，由于S=1，表示有可用资源，会执行S–，S的值变回0，P2进程不会执行block原语，而是继续往下执行代码4。</p>
+<p>若先执行到P(S)操作，由于S=0,S-后S=-1,表示此时没有可用资源，因此P操作中会执行block原语，主动请求阻塞。之后当执行完代码2，继而执行V(S)操作，S+,使S变回0，由于此时有进程在该信号量对应的阻塞队列中，因此会在V操作中执行wakeup原语，唤醒P2进程。这样P2就可以继续执行代码4了.</p>
+<p>所以无论谁先被调度，代码4一定是在代码2后执行的。请记住这个做法，这很重要。</p>
+<h4 id="前驱关系"><a href="#前驱关系" class="headerlink" title="前驱关系"></a>前驱关系</h4><p>前驱关系就是保证了代码之间的拓扑关系，保证一定的前后执行顺序。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/21/xE5c/image-20260321152939757.png" srcset="/img/loading.gif" lazyload alt="image-20260321152939757"></p>
+<p>实际上，每一对前驱关系都是一个进程同步问题，需要保证一前一后的执行顺序，那么：</p>
+<ul>
+<li>给每一对前驱关系各设置一个同步信号量</li>
+<li>在“前操作”之后对相应的同步信号量执行V操作</li>
+<li>在“后操作”之前对相应的同步信号量执行P操作</li>
+</ul>
+<p>那么就能够使用 PV原语作用于每一个同步关系就行：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/21/L2lf/image-20260321153131104.png" srcset="/img/loading.gif" lazyload alt="image-20260321153131104"></p>
+<p>将一个一个同步的思想集合起来就能够满足前驱的拓扑关系。</p>
+<h3 id="生产者消费者的问题"><a href="#生产者消费者的问题" class="headerlink" title="生产者消费者的问题"></a>生产者消费者的问题</h3><p><img src="https://files.seeusercontent.com/2026/03/21/Idg5/image-20260321155823492.png" srcset="/img/loading.gif" lazyload alt="image-20260321155823492"></p>
+<p>系统中有<strong>一组生产者进程和一组消费者</strong>进程，生产者进程每次生产一个产品放入缓冲区，消费者进程每次从缓冲区中取出一个产品并使用。（注：这里的“产品”理解为某种数据）生产者、消费者共享一个初始为空、大小为n的缓冲区。只有缓冲区没满时，生产者才能把产品放入缓冲区，否则必须等待.</p>
+<p>想起来了吗，缓冲区没满-&gt;生产者生产，缓冲区不空-&gt;消费者消费，否则必须等待，这是一个同步问题。缓冲区是临界资源，所以这也是一个互斥问题。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/21/dmE2/image-20260321162256140.png" srcset="/img/loading.gif" lazyload alt="image-20260321162256140"></p>
+<p>所以我们需要针对互斥，空闲，满载三种状态设定三个信号量，分别是mutex,empty,full。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">semaphore mutex=<span class="hljs-number">1</span>;<span class="hljs-comment">//互斥信号量，实现对缓冲区的互斥访问 </span><br>semaphore empty=n;<span class="hljs-comment">//同步信号量，表示空闲缓冲区的数量 </span><br>semaphore full=<span class="hljs-number">0</span>;<span class="hljs-comment">//同步信号量，表示产品的数量，也即非空缓冲区的数量</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>因此，生产者和消费者的进程的设定应该是：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c">producer(){<br>   <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>){<br>   P(empty);<span class="hljs-comment">//消耗一个缓冲区</span><br>   P(mutex);<br>   把产品放入缓冲区;<br>   V(mutex);<span class="hljs-comment">//互斥是在同一进程中执行PV</span><br>   V(full); <span class="hljs-comment">//增加一个产品</span><br>   }<br>}<br>consumer(){<br>   <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>){<br>   P(full);<span class="hljs-comment">//消耗一个产品</span><br>   P(mutex);<br>   从缓冲区取出一个产品;<br>   V(mutex);<span class="hljs-comment">//互斥是在同一进程中执行PV</span><br>   V(empty); <span class="hljs-comment">//增加一个缓冲区</span><br>   使用产品;<br>   }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>有没有想过，<strong>改变相邻P，V操作的顺序？</strong></p>
+<p><img src="https://files.seeusercontent.com/2026/03/21/i3mG/image-20260321163110858.png" srcset="/img/loading.gif" lazyload alt="image-20260321163110858"></p>
+<p>若此时缓冲区内已经放满产品，则empty=0,full=n。则生产者进程执行①使mutex变为0，再执行②，由于已没有空闲缓冲区，因此生产者被阻塞。由于生产者阻塞，因此切换回消费者进程。消费者进程执行③，由于mutex为0，即生产者还没释放对临界资源的“锁”，因此消费者也被阻塞。</p>
+<p>这就造成了生产者等待消费者释放空闲缓冲区，而消费者又等待生产者释放临界区的情况，生产者和消费者循环等待被对方唤醒，出现“死锁”。</p>
+<p>同样的，若缓冲区中没有产品，即full=0,empty=n。按③④①的顺序执行就会发生死锁。因此，实现互斥的P操作一定要在实现同步的P操作之后。</p>
+<p>但是，V操作不会导致进程阻塞，因此两个V操作顺序可以交换:)</p>
+<p>将业务代码(中文写的)放在一起不会造成严重后果，但是会导致上锁的时间变长，会导致运行效率下降。</p>
+<h3 id="多生产者—多消费者的问题"><a href="#多生产者—多消费者的问题" class="headerlink" title="多生产者—多消费者的问题"></a>多生产者—多消费者的问题</h3><p><strong>多类型</strong>生产者和<strong>多类型</strong>消费者共用一个缓冲区。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/21/q9kX/image-20260321165705176.png" srcset="/img/loading.gif" lazyload alt="image-20260321165705176"></p>
+<ul>
+<li>对盘子的访问需要互斥的进行。</li>
+<li>父亲将苹果放入盘子后，女儿才能取苹果</li>
+<li>母亲将橘子放入盘子后，儿子才能取橘子</li>
+<li>只有盘子为空时，父亲或母亲才能放入水果</li>
+<li>“盘子为空”这个事件可以由儿子或女儿触发，事件发生后才允许父亲或母亲放水果</li>
+</ul>
+<p>互斥很简单，临界区前后分别PV,不需要考虑拓扑结构，所以可以放在最后考虑</p>
+<h4 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h4><p><img src="https://files.seeusercontent.com/2026/03/22/Srh0/image-20260322112721991.png" srcset="/img/loading.gif" lazyload alt="image-20260322112721991"></p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c">semaphore mutex =<span class="hljs-number">1</span>; <span class="hljs-comment">//实现互斥访问盘子（缓冲区）</span><br>semaphore apple=<span class="hljs-number">0</span>; <span class="hljs-comment">//盘子中有几个苹果</span><br>semaphore orange=<span class="hljs-number">0</span>; <span class="hljs-comment">//盘子中有几个橘子</span><br>semaphore plate=<span class="hljs-number">1</span>; <span class="hljs-comment">//盘子中还可以放多少个水果</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p><img src="https://files.seeusercontent.com/2026/03/22/9lEz/image-20260322113152960.png" srcset="/img/loading.gif" lazyload alt="image-20260322113152960"></p>
+<p>其实删除互斥信号量，这个系统也不会出现同时访问临界资源的情况。这是因为缓冲区只有1，在任意时刻信号量最多只有一个的值为1。</p>
+<p>如果缓冲区为2或者更多，不设置互斥信号量会导致写入覆盖的问题。</p>
+<p>这种问题应该优先考虑进程执行的前后关系来思考，得出拓扑结构后就知道如何设计流程。</p>
+<h3 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h3><p>有读者和写者两组并发进程，共享一个文件，当两个或两个以上的读进程同时访问共享数据时不会产生副作用，但若某个写进程和其他进程（读进程或写进程）同时访问共享数据时则可能导致数据不一致的错误。</p>
+<p>因此要求：</p>
+<p>①允许多个读者可以同时对文件执行读操作；</p>
+<p>②只允许一个写者往文件中写信息；</p>
+<p>③任一写者在完成写操作之前不允许其他读者或写者工作；</p>
+<p>④写者执行写操前，应让己有的读者和写者全部退出。</p>
+<p>与消费者进程不同，读者进想在读数据后并不会将数据清空，并不会改变数据。因此多个读者可同时访问共享数据</p>
+<p><img src="https://files.seeusercontent.com/2026/03/22/0yQa/image-20260322122112555.png" srcset="/img/loading.gif" lazyload alt="image-20260322122112555"></p>
+<p>分析进程关系：</p>
+<p>互斥关系：写进程一写进程、写进程一读进程。读进程与读进程不存在互斥问题。</p>
+<figure class="highlight abnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">semaphore rw <span class="hljs-operator">=</span> <span class="hljs-number">1</span><span class="hljs-comment">; //对共享文件的互斥访问</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>读者也需要加锁解锁，但是这么做会导致读者进程不能同时读取，所以需要优化。</p>
+<p><code>int count = 0;</code></p>
+<p>如果读者发现自己是第一个读者，那么就上锁，如果读完后发现自己是最后一个读完的人，就解锁，让权给写者工作。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/22/vuD9/image-20260322134048315.png" srcset="/img/loading.gif" lazyload alt="image-20260322134048315"></p>
+<p>该方案存在一个问题，还是判断-执行这两步操作不是原语导致的。如果读者一判断后发生切换，读者二判断后加锁，随后切换回读者1的加锁操作(P)会发现<code>S.value &lt; 0 </code>随后执行原语进入阻塞阶段，这就造成了读者之间无法同时读取。</p>
+<p>解决方案：</p>
+<ul>
+<li>给count单独加一个互斥信号量，读者1执行P(mutex)之后即使切换，读者2发现其他读者没有完成对count的访问，就会等待而无法介入，等待切回读者1之后正常运行。在这个算法中，读者是具有高优先级的，在最后一个读者读完之前，缓存池都不会被解锁，写者可能长期饥饿甚至饿死。</li>
+<li>使用原语将判断-上锁两步操作绑定，不可中断。理论学习中第一种能够帮助你理解整个流程，但是第二种在工程中效率更高。</li>
+</ul>
+<p>如果要实现写者优先，那就要再加一个互斥写者信号量。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/22/gv5O/image-20260322135820815.png" srcset="/img/loading.gif" lazyload alt="image-20260322135820815"></p>
+<p>这个问题后半段我没看，心累。</p>
+<h3 id="哲学家进餐问题"><a href="#哲学家进餐问题" class="headerlink" title="哲学家进餐问题"></a>哲学家进餐问题</h3><p>一张圆桌上坐着5名哲学家，每两个哲学家之间的桌上摆一根筷子，桌子的中间是一碗米饭。哲学家们倾注毕生的精力用于思考和进餐，哲学家在思考时，并不影响他人。只有当哲学家饥饿时，才试图拿起左、右两根筷子（一根一根地拿起）。如果筷子己在他人手上，则需等待。饥饿的哲学家只有同时拿起两根筷子才可以开始进餐，当进餐完毕后，放下筷子继续思考。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/22/f1Ji/image-20260322143827041.png" srcset="/img/loading.gif" lazyload alt="image-20260322143827041"></p>
+<p>这个问题不存在同步关系，只有互斥关系。</p>
+<p>如资源分配不当，可能导致死锁的问题。</p>
+<p>信号量需要一个数组：<code>chopstick[5]={1,1,1,1,1}</code>实现对筷子的互斥访问，哲学家也需要编号。哲学家i左边的筷子编号为i，右边的筷子编号为(i+1)%5.</p>
+<p>看上去解决方案就是：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/22/m5bG/image-20260322144752820.png" srcset="/img/loading.gif" lazyload alt="image-20260322144752820"></p>
+<p>如果5个哲学家都拿到了自己左边的筷子，然后试图拿取右边的筷子时发现已经被夺取，然后5个人就会一直等待对方放下筷子，显然谁也等不到。这就造成了死锁。</p>
+<p>所以这个解决方案是不合理的。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/22/Vim2/image-20260322145001676.png" srcset="/img/loading.gif" lazyload alt="image-20260322145001676"></p>
+<p>我们可以对哲学家进程施加一些限制条件，比如最多允许四个哲学家同时进餐。这样可以保证至少有一个哲学家是可以拿到左右两只筷子的。且定义奇数位哲学家先抓左边再抓右边，而偶数位相反，这就让相邻的两个人之间至少有一个人能够拥有一双筷子。</p>
+<p>又或者，定义只有左右筷子都可用是才允许他抓起筷子，这样就能减少只有一根筷子的情况。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/22/zSi0/image-20260322151519917.png" srcset="/img/loading.gif" lazyload alt="image-20260322151519917"></p>
+<p>但是这么做也会有问题，0号取走两边的筷子，1号因为缺乏左筷子而阻塞，2号因为mutex(取筷子的动作也是互斥的)也会阻塞，所以2号有获取一双筷子的能力但是却不能这么做。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/22/wKh0/image-20260322151725771.png" srcset="/img/loading.gif" lazyload alt="image-20260322151725771"></p>
+<p>同样地，如果1号拿起一双，4号会取得左筷子随后在右手发生阻塞。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/22/vBl6/image-20260322152040052.png" srcset="/img/loading.gif" lazyload alt="image-20260322152040052"></p>
+<p>所以算法的表述不大严谨，更准确的说法应该是：各哲学家拿筷子这件事必须互斥的执行。这就保证了即使一个哲学家在拿筷子拿到一半时被阻塞，也不会有别的哲学家会继续尝试拿筷子。这样的话，当前正在吃饭的哲学家放下筷子后，被阻塞的哲学家就可以获得等待的筷子了。</p>
+<p>这么做使用全局锁杜绝了死锁，但是如果同时进餐，某个哲学家可能长期得不到筷子而饥饿。</p>
+<p>如果遇到了一个进程需要同时持有多个临界资源的情况，应该参考哲学家问题的思想。</p>
+<h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><p>信号量机制存在的问题是：<strong>编写程序困难，容易出错，甚至连操作顺序错了也会导致严重后果。</strong></p>
+<p>1973年，Brinch Hansen首次在程序设计语言(Pascal)中引入了“管程”成分，一种高级同步机制</p>
+<p>管程是一种特殊的软件模块，有这些部分组成：</p>
+<p>1.局部于管程的共享数据结构说明；</p>
+<p>2.对该数据结构进行操作的一组过程(函数)；</p>
+<p>3.对局部于管程的共享数据设置初始值的语句</p>
+<p>4.管程有一个名字。</p>
+<p>听起来很像编程语言中的类，对吧？</p>
+<p>管程的基本特征：<br>1.局部于管程的数据只能被局部于管程的过程所访问：<br>2.一个进程只有通过调用管程内的过程才能进入管程访问共享数据：<br>3.每次仅允许一个进程在管程内执行某个内部过程。</p>
+<p>就好比，类的私有变量只能用类的公共方法访问修改。管程能够保证互斥访问。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/23/0iAw/image-20260323153359725.png" srcset="/img/loading.gif" lazyload alt="image-20260323153359725"></p>
+<p>缓冲区满时，生产者需要等待，full是满载队列，生产者进程需要在此处等待，直到被signal原语唤醒。</p>
+<p>缓冲区空时，消费者需要等待，empty是空载队列，消费者进程需要在此处等待，直到被signal原语唤醒。</p>
+<p>wait函数做的事情是：</p>
+<ul>
+<li><strong>让调用线程进入睡眠状态</strong>，释放CPU。</li>
+<li><strong>释放管程的互斥锁</strong>，让其他线程可以进入</li>
+<li><strong>将该线程放入条件变量的等待队列</strong>。</li>
+<li><strong>在将来被唤醒时，重新获取互斥锁</strong>后再返回。</li>
+</ul>
+<p>换管程设定完成后，就由编译器负责实现各进程互斥地进入管程中的过程。编译器每次仅允许一个进程在管程内执行某个内部过程。</p>
+<p>如果两个生产者并发执行，依次调用了insert，那么第二个会被暂时阻塞，出于等待状态，直到第一个执行完insert后他才能唤醒执行insert。消费者也是一样的，编译器能够保证互斥，而不需要进程来关心，进程就能够专注于业务逻辑。。</p>
+<ul>
+<li>需要在管程中定义共享数据（如生产者消费者问题的缓冲区）</li>
+<li>需要在管程中定义用于访问这些共享数据的“入口”一一其实就是一些函数（如生产者消费者问题中，可以定义一个函数用于将产品放入缓冲区，再定义一个函数用于从缓冲区取出产品)</li>
+<li>只有通过这些特定的“入口”才能访问共享数据</li>
+<li>管程中有很多“入口”，但是每次只能开放其中一个“入口”，并且只能让一个进程或线程进入（如生产者消费者问题中，各进程需要互斥地访问共享缓冲区。管程的这种特性即可保证一个时间段内最多只会有一个进程在访问缓冲区。注意：这种互斥特性是由编译器负责实现的，程序员不用关心)</li>
+<li>可在管程中设置条件变量及等待/唤醒操作以解决同步问题。可以让一个进程或线程在条件变重上等待（此时，该进程应先释放管程的使用权，也就是让出“入口”）；可以通过唤醒操作将等待在条件变量上的进程或线程唤醒。</li>
+</ul>
+<p>程序员能够用特殊的语法定义一个管程，之后其他人就能够使用管程提供入口实现进程的同步和互斥。</p>
+<p>如JAVA中能够使用synchronized关键字来描述一个同步函数，该函数在同一时间内只能被一个线程调用。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span> <span class="hljs-params">(Item item)</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>管程不过是为了解决信号量机制编程麻烦、易出错的问题，其目的也是实现互斥和同步。</p>
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>死锁：各进程互相等待对方手里的资源，导致各进程都阻塞，无法向前推进的现象。</p>
+<p>参考前面说过的哲学家问题。</p>
+<p>饥饿：由于长期得不到想要的资源，某进程无法向前推进的现象。比如：在短进程优先(SPF)算法中，若有源源不断的短进程到来，则长进程将一直得不到处理机，从而发生长进程“饥饿”。</p>
+<p>死循环：某进程执行过程中一直跳不出某个循环的现象。有时是因为程序逻辑bug导致的，有时是程序员故意设计的。如for(int i = 0,i&gt;=0,i++)。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/23/Qdw5/image-20260323160636869.png" srcset="/img/loading.gif" lazyload alt="image-20260323160636869"></p>
+<p>产生死锁必须同时满足一下四个条件，只要其中任一条件不成立，死锁就不会发生。</p>
+<ul>
+<li>互斥条件：只有对必须互斥使用的资源的争抢才会导致死锁（如哲学家的筷子、打印机设备)。像内存、扬声器这样可以同时让多个进程使用的资源是不会导致死锁的（因为进程不用阻塞等待这种资源)</li>
+<li>不剥夺条件：进程所获得的资源在未使用完之前，不能由其他进程强行夺走，只能主动释放。</li>
+<li>请求和保持条件：进程已经保持了至少一个资源，但又提出了新的资源请求，而该资源又被其他进程占有，此时请求进程被阻塞，但又对自己己有的资源保持不放</li>
+<li>循环等待条件：存在一种进程资源的循环等待链，链中的每一个进程己获得的资源同时被下一个进程所请求</li>
+</ul>
+<p>注意，发生死锁一定有循环等待，但是发生循环等待不一定就代表死锁。所以，循环等待是死锁的必要不充分条件。因为<strong>资源类的实例数量（Instance）</strong>可能大于 1。</p>
+<p>如果同类资源数大于1，则即使有循环等待，也未必发生死锁。但如果系统中每类资源都只有一个，那循环等待就是死锁的充分必要条件了。</p>
+<p>发生死锁的常见情况：</p>
+<ul>
+<li>对系统资源的竞争。各进程对不可剥夺的资源（如打印机）的竞争可能引起死锁，对可剥夺的资源(CPU)的竞争是不会引起死锁的。</li>
+<li>进程推进顺序非法。请求和释放资源的顺序不当，也同样会导致死锁。例如，并发执行的进程P1、P2分别申清并占有了资源R1、R2,之后进程P1又紧接着申请资源R2,而进程P2又申请资源R1,两者会因为申请的资源被对方占有而阻塞，从而发生死锁。</li>
+<li>信号量的使用不当也会造成死锁。如生产者-消费者问题中，如果实现互斥的P操作在实现同步的P操作之前，就有可能导致死锁。（可以把互斥信号量、同步信号量也看做是一种抽象的系统资源)</li>
+</ul>
+<p>总之，对不可剥夺的资源的不合理分配，就很可能导致死锁。</p>
+<h3 id="预防死锁"><a href="#预防死锁" class="headerlink" title="预防死锁"></a>预防死锁</h3><p>破坏造成死锁的4个条件即可。</p>
+<h4 id="互斥条件"><a href="#互斥条件" class="headerlink" title="互斥条件"></a>互斥条件</h4><p>只有对必须互斥使用的资源的争抢才会导致死锁。</p>
+<p>所以把这类资源改成能够共享使用的资源，就能够从根本上解决死锁问题。如SPOOLing技术。</p>
+<p>实际上，SPOOLing 并没有改变打印机作为“临界资源”的物理属性，它只是引入了一个<strong>中间代理进程</strong>（守护进程）。</p>
+<p>比如打印机能新开一个进程，接收来自于不同进程的文件和请求，并形成队列，慢慢使用打印机打印，在进程1和2眼中，这就成了一个共享资源。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/23/au3T/image-20260323163518805.png" srcset="/img/loading.gif" lazyload alt="image-20260323163518805"></p>
+<p>但是很多资源都是不能被改造成可共享资源的，这个策略还是具有很大局限性的。</p>
+<h4 id="不可剥夺条件"><a href="#不可剥夺条件" class="headerlink" title="不可剥夺条件"></a>不可剥夺条件</h4><p>破坏不剥夺条件：</p>
+<ul>
+<li>方案一：当某个进程请求新的资源得不到满足时，它必须立即释放保持的所有资源，待以后需要时再重新申请。也就是说，即使某些资源尚未使用完，也需要主动释放，从而破坏了不可剥夺条件。</li>
+<li>方案二：当某个进程需要的资源被其他进程所占有的时候，可以由操作系统协助，将想要的资源强行剥夺。这种方式一般需要考虑各进程的优先级（比如：剥夺调度方式，就是将处理机资源强行剥夺给优先级更高的进程使形)</li>
+</ul>
+<p>该策略的缺点：</p>
+<ul>
+<li>实现起来比较复杂。</li>
+<li>释放己获得的资源可能造成前一阶段工作的失效。因此这种方法一般只适用于易保存和恢复状态的资源，如CPU。</li>
+<li>反复申请和释放资源会增加系统开销</li>
+<li>方案一只要得不到所有资源就要放弃已占有的所有资源，这会导致饥饿问题。</li>
+</ul>
+<h3 id="请求和保持条件"><a href="#请求和保持条件" class="headerlink" title="请求和保持条件"></a>请求和保持条件</h3><p>进程已经保持了至少一个资源，但又提出了新的资源请求，而该资源又被其他进程占有，此时请求进程被阻塞，但又对自己己有的资源保持不放</p>
+<p>静态配置方法：进程在运行之前一次申请完需要的所有资源，在满足之前不会运行，一旦开始运行，就不会申请其他任何资源。</p>
+<p>实现起来简单，但是缺点明显：</p>
+<ul>
+<li>有些资源可能只需要用很短的时间，因此如果进程的整个运行期间都一直保持着所有资源，就会造成严重的资源浪费，资源利用率极低。另外，该策略也有可能导致某些进程饥饿。</li>
+<li><ul>
+<li>资源浪费，例如，一个进程可能需要先使用键盘输入数据，然后进行长时间计算，最后才用打印机输出结果。但按照静态分配，进程一开始就占用了键盘和打印机，导致打印机在计算阶段（可能长达数小时）完全闲置，其他进程也无法使用，造成资源浪费。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/03/23/uhE6/image-20260323164715132.png" srcset="/img/loading.gif" lazyload alt="image-20260323164715132"></p>
+<p>如果系统源源不断涌入AB两类进程，那C类进程就会饥饿。</p>
+<h4 id="循环等待条件"><a href="#循环等待条件" class="headerlink" title="循环等待条件"></a>循环等待条件</h4><p>循环等待条件：存在一种进程资源的循环等待链，链中的每一个进程已获得的资源同时被下一个进程所请求。</p>
+<p>可采用顺序资源分配法。首先给系统中的资源编号，规定每个进程必须按编号递增的顺序请求资源，同类资源（即编号相同的资源）一次申请完。那么在任何一个时刻，<strong>总有一个进程拥有的资源编号是最大的，那这个进程申请之后的资源必然畅通无阻。</strong>因此，不可能出现所有进程都阻塞的死锁现象。(哲学家中只要有一个人有权夺取筷子，就不会出现死锁)</p>
+<p>一样是有缺点的：</p>
+<ul>
+<li>不方便增加新的设备，需要重新编号</li>
+<li>实际使用顺序可能和编号递增顺序不一致，会导致系统资源浪费</li>
+<li>用户编程很麻烦。</li>
+</ul>
+<h3 id="死锁的避免"><a href="#死锁的避免" class="headerlink" title="死锁的避免"></a>死锁的避免</h3><p>这与前几个静态策略不一样，这是动态策略。</p>
+<h4 id="安全序列"><a href="#安全序列" class="headerlink" title="安全序列"></a>安全序列</h4><p>考虑一个问题：</p>
+<p>你是一位成功的银行家，手里掌握着100个亿的资金<br>有三个企业想找你贷款，分别是企业B、企业A、企业T,为描述方便，简称BAT。<br>B表示：“大哥，我最多会跟你借70亿…”<br>A表示：“大哥，我最多会跟你借40亿.”<br>T表示：“大哥，我最多会跟你借50亿”<br>然而…江湖中有个不成文的规矩：如果你借给企业的钱总数达不到企业提出的最大要求，那么不管你之前给企业借了多少钱，那些钱都拿不回来了。</p>
+<p>刚开始，BAT三个企业分别从你这儿借了20、10、30亿，你手里里还剩下40亿，这时B还想借30亿，刚借吗？</p>
+<p>如果你答应了，那就变成如下的关系：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/23/qO1y/image-20260323193754593.png" srcset="/img/loading.gif" lazyload alt="image-20260323193754593"></p>
+<p>你手里只剩下10亿，不足以支付任何一家企业的全部借款，于是你损失了90亿。</p>
+<p>所以这是一个需要慎重思考的问题。</p>
+<p>如果A想借20亿，你答应了A的请求，那就是：</p>
+<p><img src="https://files.seeusercontent.com/2026/03/23/vkY1/image-20260323194058402.png" srcset="/img/loading.gif" lazyload alt="image-20260323194058402"></p>
+<p>你还剩下20亿，那么之后可以借给T，等T归还之后再用50亿借给B，最后在借给A收回本金。</p>
+<p>又可以借给A，再借给T，最后借给B，也可以收回成本。所以你借给A20亿的决定是绝对安全的，是能够收回本金的。</p>
+<p>所以有些请求时不能答应的，所谓安全序列，就是指如果系统按照这种序列分配资源，则每个进程都能顺利完成。只要能找出一个安全序列(如借给A20亿之后的ATB或者TAB)，系统就是安全状态。当然，安全序列可能有多个。</p>
+<p>如果分配了资源之后，系统中找不出任何一个安全序列，系统就进入了不安全状态。这就意味着之后可能所有进程都无法顺利的执行下去。当然，如果有进程提前归还了一些资源，那系统也有可能重新回到安全状态，不过我们在分配资源之前总是要考虑到最坏的情况，不能将希望寄托于进程提前归还资源。</p>
+<p>如果系统处于安全状态，就一定不会发生死锁。如果系统进入不安全状态，就可能发生死锁（处于不安全状态未必就是发生了死锁，但发生死锁时一定是在不安全状态)。</p>
+<p>我们需要在分配之前考虑分配会不会导致系统进入不安全状态，这就是“银行家算法”的核心思想。</p>
+<p>银行家算法是荷兰学者Dijkstra(没错又是他)为银行系统设计的，以确保银行在发放现金贷款时，不会发生不能满足所有客户需要的情况。后来该算法被用在操作系统中，用于避免死锁。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/23/z2Ji/image-20260323195542052.png" srcset="/img/loading.gif" lazyload alt="image-20260323195542052"></p>
+<p>资源总数(10,5,7)，剩余可用资源(5,3,2)，思考安全序列。</p>
+<p>此时系统是否处于安全状态？<br>思路：尝试找出一个安全序列.P1,P3}<br>依次检查剩余可用资源(3,3,2)是否能满足各进程的需求<br>可满足P1需求，将P1加入安全序列，并更新剩余可用资源值为(5,3,2)<br>依次检查剩余可用资源(5,3,2)是否能满足剩余进程（不包括已加入安全序列的进程）的需求<br>可满足P3需求，将P3加入安全序列，并更新剩余可用资源值为(7,4,3)<br>依次检查剩余可用资源(7,4,3)是否能满足剩余进程（不包括已加入安全序列的进程）的需求<br>以此类推，共五次循环检查即可将5个进程都加入安全序列中，最终可得一个安全序列。该算法称为安全性算法。可以很方便地用代码实现以上流程，每一轮检查都从编号较小的进程开始检查。</p>
+<p>有时候找不到安全序列，就说明已经处于不安全状态。</p>
+<h4 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h4><p><img src="https://files.seeusercontent.com/2026/03/23/nz1U/image-20260323200537888.png" srcset="/img/loading.gif" lazyload alt="image-20260323200537888"></p>
+<p><img src="https://files.seeusercontent.com/2026/03/23/1tzM/image-20260323200635298.png" srcset="/img/loading.gif" lazyload alt="image-20260323200635298"></p>
+<p>记住这几个矩阵的 LaTeX 关系式，逻辑就通了：</p>
+<p>$$<br>Need[i,j]=Max[i,j]−Allocation[i,j]<br>$$</p>
+<ul>
+<li><strong>Max：</strong> 最多要多少。</li>
+<li><strong>Allocation：</strong> 已经给了多少。</li>
+<li><strong>Need：</strong> 还要多少。</li>
+<li><strong>Available：</strong> 银行手里还剩多少。</li>
+</ul>
+<p><strong>安全性检查的核心：</strong> 只有当 Available≥Need[i] 时，才敢把资源分给进程 i。</p>
+<h3 id="死锁的检测与解除"><a href="#死锁的检测与解除" class="headerlink" title="死锁的检测与解除"></a>死锁的检测与解除</h3><p>即使已经有两种办法避免死锁的可能，但是如果死锁真的发生也需要方法去检测和解除。</p>
+<p>为了能对系统是否已发生了死锁进行检测，必须：</p>
+<ul>
+<li>用某种数据结构来保存资源的请求和分配信息：</li>
+<li>提供一种算法，利用上述信息来检测系统是否已进入死锁状态。</li>
+</ul>
+<p>请求边：起始于进程，箭头指向资源，一般用矩形表示资源结点，矩形中的小圆代表该类资源的数量。</p>
+<p>分配边：起始于资源，箭头指向进程 ，表示资源分配给进程的量。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/23/0Loa/image-20260323201934238.png" srcset="/img/loading.gif" lazyload alt="image-20260323201934238"></p>
+<p>如果系统中剩余的可用资源数足够满足进程的需求，那么这个进程暂时是不会阻塞的，可以顺利地执行下去。如果这个进程执行结束了把资源归还系统，就可能使某些正在等待资源的进程被激活，并顺利地执行下去。</p>
+<p>进程执行完毕后归还资源就能够消除对应的边，如果最后边都能消除，那我们就称图“可简化”，那就一定没有发生死锁。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/23/2Bne/image-20260323202930673.png" srcset="/img/loading.gif" lazyload alt="image-20260323202930673"></p>
+<p>即使P3执行完归还资源，P1和P2仍会因为资源不足而阻塞，这就发生了死锁。</p>
+<p>算法核心就是：</p>
+<p>1)在资源分配图中，找出既不阻塞又不是孤点的进程Pⅰ（即找出一条有向边与它相连，且该有向边对应资源的申请数量小于等于系统中己有空闲资源数量。如下图中，R1没有空闲资源，R2有一个空闲资源。若所有的连接该进程的边均满足上述条件，则这个进程能继续运行直至完成，然后释放它所占有的所有资源)。消去它所有的请求边和分配变，使之称为孤立的结点。在下图中， P1是满足这一条件的进程结点，于是将P1的所有边消去。</p>
+<p>2)进程P所释放的资源，可以唤醒某些因等待这些资源而阻塞的进程，原来的阻塞进程可能变为非阻塞进程。在下图中，P2就满足这样的条件。根据1)中的方法进行一系列简化后，若能消去途中所有的边，则称该图是可完全简化的。</p>
+<p><img src="https://files.seeusercontent.com/2026/03/23/Zr4f/image-20260323203341715.png" srcset="/img/loading.gif" lazyload alt="image-20260323203341715"></p>
+<p>就像之前的P1P2P3一样，不是所有的进程都是死锁的。</p>
+<h4 id="死锁的解除"><a href="#死锁的解除" class="headerlink" title="死锁的解除"></a>死锁的解除</h4><p>解除死锁的主要方法有：</p>
+<p>1.资源剥夺法。挂起（暂时放到外存上）某些死锁进程，并抢占它的资源，将这些资源分配给其他的死锁进程。但是应防止被挂起的进程长时间得不到资源而饥饿。</p>
+<p>2.撤销进程法（或称终止进程法）。强制撤销部分、甚至全部死锁进程，并剥夺这些进程的资源。这种方式的优点是实现简单，但所付出的代价可能会很大。因为有些进程可能己经运行了很长时间，已经接近结束了，一旦被终止可谓功亏一篑，以后还得从头再来。</p>
+<p>3.进程回退法。让一个或多个死锁进程回退到足以避免死锁的地步。这就要求系统要记录进程的历史信息，设置还原点，但这很难实现。</p>
+<p>解除死锁毕竟是需要付出代价的，为了让代价最小化，可以根据以下指标决定对哪个进程动手：</p>
+<ul>
+<li>进程优先级</li>
+<li>已执行时间</li>
+<li>剩余完成时间</li>
+<li>已经占用资源</li>
+</ul>
+<blockquote>
+<p>实际上，银行家算法在实际操作系统中几乎是隐形人，它存在技术上的瓶颈和性能瓶颈，现代操作系统多使用“鸵鸟策略 (Ostrich Algorithm)”，像鸵鸟一样把头埋进沙子里，假装死锁不存在，如果真的发生了，让用户来兜底。因为死锁的概率足够低。</p>
+</blockquote>
+<p>操作系统第二章到此结束</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">#操作系统</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/Operating%20System%20Chapter%203:%20Memory/" title="操作系统第三章：内存">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">操作系统第三章：内存</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/Chapter%201%20of%20Operating%20Systems:%20Overview/" title="操作系统第一章：概述">
+                        <span class="hidden-mobile">操作系统第一章：概述</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

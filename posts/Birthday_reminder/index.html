@@ -1,0 +1,1090 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="生日提醒开发笔记 这是笔者在大一下创新实践课程做的项目，即使还有很多上线刚需的功能没有实装，但是暂时的回顾和复盘是很有必要的。年后两个月左右我会将剩下的功能补齐，到时候再更新文档。 笔者表达能力堪忧，所以请结合源码阅读。  项目需求在快节奏的现代生活中，我们忙于处理无数事务，重要的日子——比如亲友的生日——常常在指尖悄然溜走。即便记得日期，也可能因一时疏忽而错过那个送上祝福的最佳时刻。这种遗忘不仅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生日提醒开发笔记">
+<meta property="og:url" content="http://example.com/posts/Birthday_reminder/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="生日提醒开发笔记 这是笔者在大一下创新实践课程做的项目，即使还有很多上线刚需的功能没有实装，但是暂时的回顾和复盘是很有必要的。年后两个月左右我会将剩下的功能补齐，到时候再更新文档。 笔者表达能力堪忧，所以请结合源码阅读。  项目需求在快节奏的现代生活中，我们忙于处理无数事务，重要的日子——比如亲友的生日——常常在指尖悄然溜走。即便记得日期，也可能因一时疏忽而错过那个送上祝福的最佳时刻。这种遗忘不仅">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s21.ax1x.com/2025/10/09/pVH876A.png">
+<meta property="article:published_time" content="2026-01-02T08:31:25.086Z">
+<meta property="article:modified_time" content="2026-01-02T08:31:25.092Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="网络工程">
+<meta property="article:tag" content="JAVA">
+<meta property="article:tag" content="项目">
+<meta property="article:tag" content="spring">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s21.ax1x.com/2025/10/09/pVH876A.png">
+  
+  
+  
+  <title>生日提醒开发笔记 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s21.ax1x.com/2025/10/09/pVH876A.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="生日提醒开发笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-02 08:31" pubdate>
+          2026年1月2日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          27k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          225 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">生日提醒开发笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="生日提醒开发笔记"><a href="#生日提醒开发笔记" class="headerlink" title="生日提醒开发笔记"></a>生日提醒开发笔记</h1><blockquote>
+<p><strong>这是笔者在大一下创新实践课程做的项目，即使还有很多上线刚需的功能没有实装，但是暂时的回顾和复盘是很有必要的。年后两个月左右我会将剩下的功能补齐，到时候再更新文档。</strong></p>
+<p><strong>笔者表达能力堪忧，所以请结合源码阅读。</strong></p>
+</blockquote>
+<h2 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h2><p><strong>在快节奏的现代生活中，我们忙于处理无数事务，重要的日子——比如亲友的生日——常常在指尖悄然溜走。即便记得日期，也可能因一时疏忽而错过那个送上祝福的最佳时刻。这种遗忘不仅留下遗憾，也可能让一份本该温暖的关系悄然降温。</strong></p>
+<p><strong>为此，“生日提醒”应运而生。它不止是一个简单的生日记录工具，更是一位贴心的私人提醒助手。您只需提前设置好重要日期，应用便会在预设时间智能发出提醒，为您留出充足的时间准备礼物、构思祝福，或在那一刻准时送上问候。让我们帮助您，把每一个值得纪念的日子，都变成温暖人心的时刻。</strong></p>
+<h3 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h3><ul>
+<li><strong>亲友管理</strong>：记录亲友基本信息、生日日期、标签分类</li>
+<li><strong>提醒计划</strong>：设置提前N天提醒，支持多种提醒时间</li>
+<li><strong>自动邮件</strong>：生日当天自动发送个性化祝福邮件</li>
+<li><strong>双模式提醒</strong>：<ul>
+<li><strong>提醒用户模式：提前通知用户准备生日祝福</strong></li>
+<li><strong>自动祝福模式：生日当天自动发送祝福给亲友</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><table>
+<thead>
+<tr>
+<th><strong>类别</strong></th>
+<th><strong>技术/组件</strong></th>
+<th><strong>版本/说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>核心框架</strong></td>
+<td><strong>Spring Boot</strong></td>
+<td><strong>3.5.8</strong></td>
+</tr>
+<tr>
+<td><strong>Web框架</strong></td>
+<td><strong>Spring Boot Starter Web</strong></td>
+<td><strong>内置于Spring Boot</strong></td>
+</tr>
+<tr>
+<td><strong>ORM框架</strong></td>
+<td><strong>MyBatis</strong></td>
+<td><strong>3.0.3</strong></td>
+</tr>
+<tr>
+<td><strong>分页插件</strong></td>
+<td><strong>PageHelper</strong></td>
+<td><strong>2.1.0</strong></td>
+</tr>
+<tr>
+<td><strong>邮件服务</strong></td>
+<td><strong>Spring Boot Starter Mail</strong></td>
+<td><strong>内置于Spring Boot</strong></td>
+</tr>
+<tr>
+<td><strong>数据库</strong></td>
+<td><strong>MySQL</strong></td>
+<td><strong>8.0.31</strong></td>
+</tr>
+<tr>
+<td><strong>开发工具</strong></td>
+<td><strong>Lombok</strong></td>
+<td><strong>1.18.38 (用于简化POJO)</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Spring Boot Devtools</strong></td>
+<td><strong>内置于Spring Boot (热部署)</strong></td>
+</tr>
+<tr>
+<td><strong>工具库</strong></td>
+<td><strong>Hutool</strong></td>
+<td><strong>5.8.38</strong></td>
+</tr>
+<tr>
+<td><strong>系统监控</strong></td>
+<td><strong>Spring Boot Actuator</strong></td>
+<td><strong>内置于Spring Boot</strong></td>
+</tr>
+<tr>
+<td><strong>定时任务</strong></td>
+<td><strong>基于Spring Boot注解Schedule</strong></td>
+<td><strong>内置于Spring Boot</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a><strong>前端</strong></h3><table>
+<thead>
+<tr>
+<th><strong>类别</strong></th>
+<th><strong>技术/组件</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>UI框架</strong></td>
+<td><strong>Bootstrap</strong></td>
+<td><strong>5</strong></td>
+</tr>
+<tr>
+<td><strong>图标库</strong></td>
+<td><strong>Font Awesome</strong></td>
+<td><strong>阿里图标库</strong></td>
+</tr>
+<tr>
+<td><strong>脚本语言</strong></td>
+<td><strong>JavaScript</strong></td>
+<td><strong>原生</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="项目构建与运行环境"><a href="#项目构建与运行环境" class="headerlink" title="项目构建与运行环境"></a><strong>项目构建与运行环境</strong></h2><table>
+<thead>
+<tr>
+<th><strong>类别</strong></th>
+<th><strong>技术/组件</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>构建工具</strong></td>
+<td><strong>Maven</strong></td>
+</tr>
+<tr>
+<td><strong>JDK版本</strong></td>
+<td><strong>JDK 25</strong></td>
+</tr>
+<tr>
+<td><strong>数据库</strong></td>
+<td><strong>MySQL 8.0+</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="项目架构与结构"><a href="#项目架构与结构" class="headerlink" title="项目架构与结构"></a><strong>项目架构与结构</strong></h3><figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs awk">com.Birthday_reminder<br>├── Birthday_reminder.java                    <span class="hljs-comment"># Spring Boot启动类</span><br>├── controller/                              <span class="hljs-comment"># 控制器层</span><br>│   ├── HelloController.java                 <span class="hljs-comment"># 测试控制器</span><br>│   ├── MailTestController.java              <span class="hljs-comment"># 邮件测试控制器</span><br>│   ├── RelationshipController.java          <span class="hljs-comment"># 亲友关系控制器</span><br>│   ├── RelationshipRecordController.java    <span class="hljs-comment"># 提醒记录控制器</span><br>│   └── RelationshipReminderController.java  <span class="hljs-comment"># 生日提醒控制器</span><br>├── domain/                                  <span class="hljs-comment"># 实体层</span><br>│   ├── Relationship.java                    <span class="hljs-comment"># 亲友实体类</span><br>│   ├── ReminderPlan.java                    <span class="hljs-comment"># 提醒计划实体类</span><br>│   └── ReminderRecord.java                  <span class="hljs-comment"># 提醒记录实体类</span><br>├── dto/                                     <span class="hljs-comment"># 数据传输对象</span><br>│   ├── PageDTO.java                         <span class="hljs-comment"># 分页数据传输对象基类</span><br>│   └── RelationshipPageDTO.java             <span class="hljs-comment"># 亲友分页数据传输对象</span><br>├── mapper/                                  <span class="hljs-comment"># 数据访问层</span><br>│   ├── RelationshipMapper.java              <span class="hljs-comment"># 亲友数据访问接口</span><br>│   ├── ReminderPlanMapper.java              <span class="hljs-comment"># 提醒计划数据访问接口</span><br>│   └── ReminderRecordMapper.java            <span class="hljs-comment"># 提醒记录数据访问接口</span><br>├── service/                                 <span class="hljs-comment"># 服务层接口</span><br>│   ├── RelationPlanService.java             <span class="hljs-comment"># 关系计划服务接口</span><br>│   ├── RelationshipService.java             <span class="hljs-comment"># 亲友服务接口</span><br>│   └── ReminderRecordService.java           <span class="hljs-comment"># 提醒记录服务接口</span><br>├── service<span class="hljs-regexp">/impl/</span>                            <span class="hljs-comment"># 服务层实现类</span><br>│   ├── RelationPlanServiceImpl.java         <span class="hljs-comment"># 关系计划服务实现类</span><br>│   ├── RelationshipServiceImpl.java         <span class="hljs-comment"># 亲友服务实现类</span><br>│   └── ReminderRecordServiceImpl.java       <span class="hljs-comment"># 提醒记录服务实现类</span><br>├── task/                                    <span class="hljs-comment"># 定时任务</span><br>│   ├── BirthdayReminderJob.java             <span class="hljs-comment"># 生日提醒定时任务</span><br>│   └── MailJob.java                         <span class="hljs-comment"># 邮件发送定时任务</span><br>├── typehandler/                             <span class="hljs-comment"># 类型处理器</span><br>│   └── IntegerListJsonTypeHandler.java      <span class="hljs-comment"># JSON类型处理器</span><br>├── util/                                    <span class="hljs-comment"># 工具类</span><br>│   └── MailUtil.java                        <span class="hljs-comment"># 邮件工具类</span><br>└── vo/                                      <span class="hljs-comment"># 视图对象</span><br>    ├── PageVO.java                          <span class="hljs-comment"># 分页视图对象</span><br>    ├── RelationshipPageVO.java              <span class="hljs-comment"># 亲友分页视图对象</span><br>    └── ResponseEntity.java                  <span class="hljs-comment"># 响应实体类</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h3><p><strong>这是一个基于 *<em><strong>Spring Boot</strong> 的现代化单体应用程序，采用经典的</em>*分层架构</strong>。<strong>MyBatis</strong> 负责数据持久化，配合 <strong>PageHelper</strong> 处理分页。核心的生日提醒功能通过 <strong>Spring Mail</strong> 发送邮件。前端使用 <strong>Bootstrap</strong> 提供响应式界面，整个项目由 <strong>Maven</strong> 统一构建和管理。</p>
+<h2 id="本项目使用的依赖"><a href="#本项目使用的依赖" class="headerlink" title="本项目使用的依赖"></a>本项目使用的依赖</h2><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0"</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span><br>​<br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.example<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>Birthday_reminder<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">parent</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.5.8<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">parent</span>&gt;</span><br>​<br>    <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-mail<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-comment">&lt;!--springboot整合mybatis--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.3<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-comment">&lt;!--mybatis分页插件，已经包含了mybatis--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.github.pagehelper<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.1.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-comment">&lt;!--mysql驱动--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>8.0.31<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-comment">&lt;!--简化实体类--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.projectlombok<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>lombok<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.18.38<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>​<br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>cn.hutool<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>hutool-all<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.8.38<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-devtools<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">optional</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">optional</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-comment">&lt;!--        &lt;dependency&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--            &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--        &lt;/dependency&gt;--&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br>​<br>​<br>    <span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.source</span>&gt;</span>25<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.source</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.target</span>&gt;</span>25<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.target</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span><br>​<br><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="表结构设计"><a href="#表结构设计" class="headerlink" title="表结构设计"></a>表结构设计</h3><p><strong>我们需要三张表，一张是关系表，名为Relationship，作为主表记录主要信息。</strong></p>
+<p><strong>一张是计划表，名为reminder_plan，关联主表记录提醒计划。</strong></p>
+<p><strong>一张是记录表，名为reminder_record，关联主表，存储提醒记录，以便管理员查询和修改bug。</strong></p>
+<p><strong>创建表结构的SQL如下：</strong></p>
+<figure class="highlight pgsql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">​<br># 亲友关系表<br><span class="hljs-comment">-- table_birthday.relationship definition</span><br>​<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `relationship` (<br>                                `id` <span class="hljs-type">int</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT,<br>                                `<span class="hljs-type">name</span>` <span class="hljs-type">varchar</span>(<span class="hljs-number">100</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>                                `my_email` <span class="hljs-type">varchar</span>(<span class="hljs-number">100</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>                                `calendar_type` <span class="hljs-type">int</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">'0'</span>,<br>                                `birthday` <span class="hljs-type">date</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>                                `birthday_month` <span class="hljs-type">int</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>                                `birthday_day` <span class="hljs-type">int</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>                                `tag` <span class="hljs-type">varchar</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>                                `reminder_enabled` <span class="hljs-type">int</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">'0'</span>,<br>                                `congratulate_enabled` <span class="hljs-type">int</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">'0'</span>,<br>                                `relationship_email` <span class="hljs-type">varchar</span>(<span class="hljs-number">100</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>                                `greeting` <span class="hljs-type">varchar</span>(<span class="hljs-number">200</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>                                `self_call` <span class="hljs-type">varchar</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>                                `notes` <span class="hljs-type">text</span>,<br>                                `days_before` <span class="hljs-type">json</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>                                `created_time` <span class="hljs-type">timestamp</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span>,<br>                                `updated_time` <span class="hljs-type">timestamp</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> <span class="hljs-keyword">ON</span> <span class="hljs-keyword">UPDATE</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span>,<br>                                <span class="hljs-keyword">PRIMARY KEY</span> (`id`)<br>) ENGINE=InnoDB AUTO_INCREMENT=<span class="hljs-number">38</span> <span class="hljs-keyword">DEFAULT</span> CHARSET=utf8mb4 <span class="hljs-keyword">COLLATE</span>=utf8mb4_0900_ai_ci;<br># 提醒计划表<br># 该表用于规划后面的发送邮件等任务<br><span class="hljs-comment">-- table_birthday.reminder_plan definition</span><br>​<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `reminder_plan` (<br>                                 `id` <span class="hljs-type">int</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'计划ID，主键'</span>,<br>                                 `relationship_id` <span class="hljs-type">int</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'关联的亲友关系ID'</span>,<br>                                 `reminder_date` <span class="hljs-type">date</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'提醒日期'</span>,<br>                                 `days_before` <span class="hljs-type">int</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'提前提醒天数'</span>,<br>                                 `reminder_type` <span class="hljs-type">int</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">'0'</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'提醒类型 (0:生日提醒, 1:其他提醒)'</span>,<br>                                 `execution_status` <span class="hljs-type">int</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">'0'</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'执行状态 (0:待执行, 1:已执行, 2:已取消)'</span>,<br>                                 `created_time` <span class="hljs-type">timestamp</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'创建时间'</span>,<br>                                 `updated_time` <span class="hljs-type">timestamp</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> <span class="hljs-keyword">ON</span> <span class="hljs-keyword">UPDATE</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'更新时间'</span>,<br>                                 <span class="hljs-keyword">PRIMARY KEY</span> (`id`),<br>                                 KEY `relationship_id` (`relationship_id`),<br>                                 <span class="hljs-keyword">CONSTRAINT</span> `reminder_plan_ibfk_1` <span class="hljs-keyword">FOREIGN KEY</span> (`relationship_id`) <span class="hljs-keyword">REFERENCES</span> `relationship` (`id`) <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">CASCADE</span><br>) ENGINE=InnoDB AUTO_INCREMENT=<span class="hljs-number">32</span> <span class="hljs-keyword">DEFAULT</span> CHARSET=utf8mb4 <span class="hljs-keyword">COLLATE</span>=utf8mb4_0900_ai_ci <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">'提醒计划表'</span>;<br># 提醒记录表<br># 记录，用于保存系统日志供日后查询<br><span class="hljs-comment">-- table_birthday.reminder_record definition</span><br>​<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `reminder_record` (<br>                                   `id` <span class="hljs-type">int</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'记录ID，主键'</span>,<br>                                   `relationship_id` <span class="hljs-type">int</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'关联的亲友关系ID'</span>,<br>                                   `reminder_time` datetime <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'实际提醒时间'</span>,<br>                                   `receiver` <span class="hljs-type">varchar</span>(<span class="hljs-number">100</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'提醒接收方'</span>,<br>                                   `reminder_type` <span class="hljs-type">int</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'提醒类型'</span>,<br>                                   `reminder_content` <span class="hljs-type">text</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'提醒内容'</span>,<br>                                   `send_status` <span class="hljs-type">int</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">'0'</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'发送状态 (0:成功, 1:失败)'</span>,<br>                                   `created_time` <span class="hljs-type">timestamp</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'创建时间'</span>,<br>                                   <span class="hljs-keyword">PRIMARY KEY</span> (`id`),<br>                                   KEY `relationship_id` (`relationship_id`),<br>                                   <span class="hljs-keyword">CONSTRAINT</span> `reminder_record_ibfk_1` <span class="hljs-keyword">FOREIGN KEY</span> (`relationship_id`) <span class="hljs-keyword">REFERENCES</span> `relationship` (`id`) <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">CASCADE</span><br>) ENGINE=InnoDB AUTO_INCREMENT=<span class="hljs-number">3</span> <span class="hljs-keyword">DEFAULT</span> CHARSET=utf8mb4 <span class="hljs-keyword">COLLATE</span>=utf8mb4_0900_ai_ci <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">'提醒记录表'</span>;<br>​<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>值得一提的是，我在创建时间和修改时间使用的语句是</strong></p>
+<figure class="highlight pgsql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">`created_time` <span class="hljs-type">timestamp</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'创建时间'</span>,<br>`updated_time` <span class="hljs-type">timestamp</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> <span class="hljs-keyword">ON</span> <span class="hljs-keyword">UPDATE</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'更新时间'</span>,<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>使用了MySQL的原生功能—-自动填充变动时间戳，这意味着我们不再需要在项目中额外用代码配置。</strong></p>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p><strong>这是在开发过程中一个比较重要的知识点。</strong></p>
+<p><strong>跨域是浏览器的一种安全限制，它阻止你网页上的JavaScript代码，去请求另一个“来源”（域名、端口、协议不同）的服务器的数据。</strong></p>
+<p><strong>也就是****默认情况下，只允许网页与“同源”的服务器自由通信。</strong></p>
+<p><strong>同源</strong>指的是协议端口域名都必须相同，一旦出现以下任意一种情况，浏览器就会自动拦截操作</p>
+<ul>
+<li><strong>协议不同：</strong><code>http://example.com</code> 请求 <code>https://example.com</code></li>
+<li><strong>域名不同：</strong><code>http://a.com</code> 请求 <code>http://b.com</code></li>
+<li><strong>端口不同：</strong><code>http://localhost:3000</code> 请求 <code>http://localhost:8080</code></li>
+</ul>
+<p><strong>作为一个简单的演示级项目，我们将前端三件套的文件(html,css,js)等与后端文件放在一起，实现逻辑上的分离但结构上的耦合。</strong></p>
+<h2 id="使用MyBatisX插件快速生成实体类"><a href="#使用MyBatisX插件快速生成实体类" class="headerlink" title="使用MyBatisX插件快速生成实体类"></a>使用MyBatisX插件快速生成实体类</h2><p><a target="_blank" rel="noopener" href="https://plugins.jetbrains.com/plugin/10119-mybatisx/">MyBatisX</a>插件是一个强大的IDEA插件，能够提供跳转、代码生成、提示等功能，优化基于MyBatis/MyBatis-Plus的开发体验。我们可以用它生成实体类甚至是Service层。</p>
+<p><strong>在Idea中配置数据库之后就能够用MybatisX插件生成实体类，具体教程请自行搜索。</strong></p>
+<p><strong>请原谅，我不可能在这里用大量图片篇幅来解释这个过程。</strong></p>
+<h2 id="项目结构层级作用"><a href="#项目结构层级作用" class="headerlink" title="项目结构层级作用"></a>项目结构层级作用</h2><blockquote>
+<p><strong>想半天也不知道怎么写，将就看吧。</strong></p>
+<p><strong>有些层和其他层耦合严重，介绍层级就按照拓扑排序顺序来，先讲简单的。</strong></p>
+</blockquote>
+<p><strong>项目一共有几个层级，分别是：</strong></p>
+<ul>
+<li><strong>Controller控制器层：与前端直接交互，完成交互逻辑</strong></li>
+<li><strong>Domain实体层：将数据库格式转化为java对象</strong></li>
+<li><strong>DTO层：数据运输对象，封装某些参数在网络中传输，不带逻辑处理，作用是减少网络中传输次数。</strong></li>
+<li><strong>Mapper数据访问层：Java的数据库接口，声明了数据库操作方法</strong></li>
+<li><strong>Service服务层接口：针对三个界面写的三个接口，在Impl层用类实现并填充</strong></li>
+<li><strong>Task层：基于@Schedule实现，负责执行定时任务。</strong></li>
+<li><strong>TypeHandler层：数据转换器层将json类型转化为java对象，这个后面会提一嘴。</strong></li>
+<li><strong>Util层：工具类，发送邮件</strong></li>
+<li><strong>VO层：视图对象，为了美观地展示数据，我们需要将返回的数据封装成一个识图对象，才能与前端联动展示</strong></li>
+</ul>
+<p><strong>所以，整体执行逻辑应该是：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/02/yqdeFsAPBIZ45vC.png" srcset="/img/loading.gif" lazyload alt="4d57680833c09"></p>
+<h2 id="DTO层"><a href="#DTO层" class="headerlink" title="DTO层"></a>DTO层</h2><p><strong>我们用了PageHelper插件来实现分页展示那参数就是页码page和每页要展示的数量size.</strong></p>
+<figure class="highlight angelscript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-symbol">PageDTO</span> <span class="hljs-symbol">implements</span> <span class="hljs-symbol">Serializable</span> {<br>​<br>    <span class="hljs-keyword">private</span> Integer page;<br>    <span class="hljs-keyword">private</span> Integer size;<br>​<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>那就集成序列化类，写一个简单的类就行了。</strong></p>
+<h2 id="Domain层"><a href="#Domain层" class="headerlink" title="Domain层"></a>Domain层</h2><blockquote>
+<p><strong>这里有什么好写的？</strong></p>
+</blockquote>
+<p><strong>使用MyBatisX插件生成的，你自己写的话注意和数据库的数据类型和顺序要完全对得上。</strong></p>
+<p><strong>插件为了保证稳妥，甚至自动生成了操作方法，虽然这样的写法可读性不可理喻。</strong></p>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">public</span> boolean equals(Object that) {<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == that) {<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        }<br>        <span class="hljs-keyword">if</span> (that == <span class="hljs-literal">null</span>) {<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        }<br>        <span class="hljs-keyword">if</span> (getClass() != that.getClass()) {<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        }<br>        Relationship other = (Relationship) that;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span>.getId() == <span class="hljs-literal">null</span> ? other.getId() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getId().equals(other.getId()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getName() == <span class="hljs-literal">null</span> ? other.getName() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getName().equals(other.getName()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getCalendarType() == <span class="hljs-literal">null</span> ? other.getCalendarType() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getCalendarType().equals(other.getCalendarType()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getBirthday() == <span class="hljs-literal">null</span> ? other.getBirthday() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getBirthday().equals(other.getBirthday()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getBirthdayMonth() == <span class="hljs-literal">null</span> ? other.getBirthdayMonth() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getBirthdayMonth().equals(other.getBirthdayMonth()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getBirthdayDay() == <span class="hljs-literal">null</span> ? other.getBirthdayDay() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getBirthdayDay().equals(other.getBirthdayDay()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getTag() == <span class="hljs-literal">null</span> ? other.getTag() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getTag().equals(other.getTag()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getRemindEnabled() == <span class="hljs-literal">null</span> ? other.getRemindEnabled() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getRemindEnabled().equals(other.getRemindEnabled()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getCongratulateEnabled() == <span class="hljs-literal">null</span> ? other.getCongratulateEnabled() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getCongratulateEnabled().equals(other.getCongratulateEnabled()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getRelationshipEmail() == <span class="hljs-literal">null</span> ? other.getRelationshipEmail() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getRelationshipEmail().equals(other.getRelationshipEmail()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getGreeting() == <span class="hljs-literal">null</span> ? other.getGreeting() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getGreeting().equals(other.getGreeting()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getSelfCall() == <span class="hljs-literal">null</span> ? other.getSelfCall() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getSelfCall().equals(other.getSelfCall()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getNotes() == <span class="hljs-literal">null</span> ? other.getNotes() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getNotes().equals(other.getNotes()))<br>            &amp;&amp; (<span class="hljs-keyword">this</span>.getDaysBefore() == <span class="hljs-literal">null</span> ? other.getDaysBefore() == <span class="hljs-literal">null</span> : <span class="hljs-keyword">this</span>.getDaysBefore().equals(other.getDaysBefore()));<br>    }<br>​<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="Util层"><a href="#Util层" class="headerlink" title="Util层"></a>Util层</h2><p><strong>一个工具类，没什么好说的，调用函数，传入该传的原子参数就行。</strong></p>
+<h2 id="Mapper层"><a href="#Mapper层" class="headerlink" title="Mapper层"></a>Mapper层</h2><p><strong>这一层就是声明数据库查询方法，具体实现看源码。</strong></p>
+<h2 id="TypeHandler层"><a href="#TypeHandler层" class="headerlink" title="TypeHandler层"></a>TypeHandler层</h2><p><strong>明确，在前端，提前天数是可选的：</strong></p>
+<p><img src="https://s2.loli.net/2026/01/02/gPn1ByNTFflW3rk.png" srcset="/img/loading.gif" lazyload alt="image-20260102030446635"></p>
+<p><strong>数据库中提前天数我使用的是</strong></p>
+<figure class="highlight pgsql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">`days_before` <span class="hljs-type">json</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>这是一个非空的json数据类型，比较的“生僻”，所以使用MyBatisX插件的时候，他将数据库的提前天数给我生成了object类，这是java的一个很底层的基类，直接使用它可能会出现类型</strong><code>安全问题，代码可读性差，Lombok生成意外方法</code>等问题，所以最好将他转化为java更常用的数据类型，我们单独写了TypeHandler来解决这个问题。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> cn.hutool.json.JSONUtil;  <span class="hljs-comment">//hutool类型工具</span><br><span class="hljs-keyword">import</span> org.apache.ibatis.type.BaseTypeHandler;<br><span class="hljs-keyword">import</span> org.apache.ibatis.type.JdbcType;<br>​<br><span class="hljs-keyword">import</span> java.sql.CallableStatement;<br><span class="hljs-keyword">import</span> java.sql.PreparedStatement;<br><span class="hljs-keyword">import</span> java.sql.ResultSet;<br><span class="hljs-keyword">import</span> java.sql.SQLException;<br><span class="hljs-keyword">import</span> java.util.List;<br>​<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">IntegerListJsonTypeHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">BaseTypeHandler</span>&lt;List&lt;Integer&gt;&gt; {<br>​<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setNonNullParameter</span><span class="hljs-params">(PreparedStatement ps, <span class="hljs-type">int</span> i, List&lt;Integer&gt; parameter, JdbcType jdbcType)</span> <span class="hljs-keyword">throws</span> SQLException {<br>        <span class="hljs-type">String</span> <span class="hljs-variable">json</span> <span class="hljs-operator">=</span>JSONUtil.toJsonStr(parameter);<br>        ps.setString(i,json);<br>    }<span class="hljs-comment">//这里只展示部分代码</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>也是使用了Java内置和hutools工具箱去转换，具体请移步到项目源码。</strong></p>
+<h2 id="Service层"><a href="#Service层" class="headerlink" title="Service层"></a>Service层</h2><p><strong>这里才是真正的业务大脑，在这里需要做到</strong></p>
+<ul>
+<li><strong>一个接口，一个实现</strong></li>
+<li><strong>处理复杂的业务规则</strong></li>
+<li><strong>协调多个Mapper完成一个功能</strong></li>
+</ul>
+<h3 id="Relationship接口"><a href="#Relationship接口" class="headerlink" title="Relationship接口"></a>Relationship接口</h3><p><strong>增删改查：</strong></p>
+<figure class="highlight typescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-title class_">Relationship</span> <span class="hljs-title function_">getRelationship</span>(<span class="hljs-params">Integer id</span>) {<br>        <span class="hljs-keyword">if</span> (id == <span class="hljs-literal">null</span> || id &lt;= <span class="hljs-number">0</span>) {<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">"无效的ID"</span>);<br>        }<br>        <span class="hljs-title class_">Relationship</span> relationship = relationshipMapper.<span class="hljs-title function_">selectById</span>(id);<br>        <span class="hljs-keyword">if</span> (relationship == <span class="hljs-literal">null</span>) {<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">"未找到对应的亲友关系"</span>);<br>        }<br>        <span class="hljs-keyword">return</span> relationship;<br>    }<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Relationship</span> <span class="hljs-title function_">createRelationship</span>(<span class="hljs-params">Relationship relationship</span>) {<br>        int result = relationshipMapper.<span class="hljs-title function_">insert</span>(relationship);<span class="hljs-comment">//具体insert方法怎么写就看源码，这里没什么奇淫技巧。</span><br>        <span class="hljs-keyword">return</span> relationship;<br>    }<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Boolean</span> <span class="hljs-title function_">updateRelationship</span>(<span class="hljs-params">Relationship relationship</span>) {<br>        <span class="hljs-title class_">Relationship</span> existing = relationshipMapper.<span class="hljs-title function_">selectById</span>(relationship.<span class="hljs-title function_">getId</span>());<br>        <span class="hljs-keyword">if</span> (existing == <span class="hljs-literal">null</span>) {<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        }<br>        int result = relationshipMapper.<span class="hljs-title function_">update</span>(relationship);<br>        <span class="hljs-keyword">return</span> result &gt; <span class="hljs-number">0</span>;<br>    }<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Boolean</span> <span class="hljs-title function_">deleteRelationship</span>(<span class="hljs-params">Integer id</span>) {<br>        int result = relationshipMapper.<span class="hljs-title function_">delete</span>(id);<br>        <span class="hljs-keyword">return</span> result &gt; <span class="hljs-number">0</span>;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>分页效果：</strong></p>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 定义方法，接收一个RelationshipPageDTO参数，返回PageInfo&lt;RelationshipPageVO&gt;类型的分页结果</span><br>public PageInfo&lt;RelationshipPageVO&gt; query<span class="hljs-constructor">RelationshipPage(RelationshipPageDTO <span class="hljs-params">dto</span>)</span> {<br><br>    <span class="hljs-comment">// 使用PageHelper插件开始分页查询，设置当前页码和每页大小</span><br>    <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">PageHelper</span>.</span></span>start<span class="hljs-constructor">Page(<span class="hljs-params">dto</span>.<span class="hljs-params">getPage</span>()</span>, dto.get<span class="hljs-constructor">Size()</span>);<br><br>    <span class="hljs-comment">// 调用Mapper层查询所有符合条件的亲友关系列表</span><br>    List&lt;Relationship&gt; relationships = relationshipMapper.select<span class="hljs-constructor">All(<span class="hljs-params">dto</span>)</span>;<br><br>    <span class="hljs-comment">// 将查询结果封装到PageInfo对象中，包含分页相关信息</span><br>    PageInfo&lt;Relationship&gt; pageInfo = <span class="hljs-keyword">new</span> PageInfo&lt;&gt;(relationships);<br><br>    <span class="hljs-comment">// 将Relationship实体对象转换为RelationshipPageVO视图对象</span><br>    <span class="hljs-comment">// 使用Stream流处理，通过BeanUtils.copyProperties方法复制属性</span><br>    List&lt;RelationshipPageVO&gt; vos = pageInfo.get<span class="hljs-constructor">List()</span>.stream<span class="hljs-literal">()</span>.map(relationship -&gt; {<br>        RelationshipPageVO vo = <span class="hljs-keyword">new</span> <span class="hljs-constructor">RelationshipPageVO()</span>;<br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">BeanUtils</span>.</span></span>copy<span class="hljs-constructor">Properties(<span class="hljs-params">relationship</span>, <span class="hljs-params">vo</span>)</span>;  <span class="hljs-comment">// 复制属性从实体对象到视图对象</span><br>        return vo;<br>    }).collect(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Collectors</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">List()</span>);  <span class="hljs-comment">// 收集为List</span><br><br>    <span class="hljs-comment">// 创建新的PageInfo&lt;RelationshipPageVO&gt;对象</span><br>    PageInfo&lt;RelationshipPageVO&gt; result = <span class="hljs-keyword">new</span> PageInfo&lt;&gt;(vos);<br><br>    <span class="hljs-comment">// 将原始pageInfo的分页属性复制到新的result对象中</span><br>    result.set<span class="hljs-constructor">Total(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getTotal</span>()</span>);           <span class="hljs-comment">// 总记录数</span><br>    result.set<span class="hljs-constructor">Pages(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getPages</span>()</span>);           <span class="hljs-comment">// 总页数</span><br>    result.set<span class="hljs-constructor">PageNum(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getPageNum</span>()</span>);       <span class="hljs-comment">// 当前页码</span><br>    result.set<span class="hljs-constructor">PageSize(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getPageSize</span>()</span>);     <span class="hljs-comment">// 每页大小</span><br>    result.set<span class="hljs-constructor">Size(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getSize</span>()</span>);             <span class="hljs-comment">// 当前页大小</span><br>    result.set<span class="hljs-constructor">StartRow(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getStartRow</span>()</span>);     <span class="hljs-comment">// 起始行</span><br>    result.set<span class="hljs-constructor">EndRow(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getEndRow</span>()</span>);         <span class="hljs-comment">// 结束行</span><br>    result.set<span class="hljs-constructor">PrePage(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getPrePage</span>()</span>);       <span class="hljs-comment">// 上一页页码</span><br>    result.set<span class="hljs-constructor">NextPage(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getNextPage</span>()</span>);     <span class="hljs-comment">// 下一页页码</span><br>    result.set<span class="hljs-constructor">IsFirstPage(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">isIsFirstPage</span>()</span>); <span class="hljs-comment">// 是否为第一页</span><br>    result.set<span class="hljs-constructor">IsLastPage(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">isIsLastPage</span>()</span>);   <span class="hljs-comment">// 是否为最后一页</span><br>    result.set<span class="hljs-constructor">HasPreviousPage(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">isHasPreviousPage</span>()</span>); <span class="hljs-comment">// 是否有上一页</span><br>    result.set<span class="hljs-constructor">HasNextPage(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">isHasNextPage</span>()</span>); <span class="hljs-comment">// 是否有下一页</span><br>    result.set<span class="hljs-constructor">NavigatePages(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getNavigatePages</span>()</span>); <span class="hljs-comment">// 导航页码数</span><br>    result.set<span class="hljs-constructor">NavigatepageNums(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getNavigatepageNums</span>()</span>); <span class="hljs-comment">// 导航页码数组</span><br>    result.set<span class="hljs-constructor">NavigateFirstPage(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getNavigateFirstPage</span>()</span>); <span class="hljs-comment">// 导航首页</span><br>    result.set<span class="hljs-constructor">NavigateLastPage(<span class="hljs-params">pageInfo</span>.<span class="hljs-params">getNavigateLastPage</span>()</span>); <span class="hljs-comment">// 导航末页</span><br><br>    <span class="hljs-comment">// 返回封装好的分页结果</span><br>    return result;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>我觉得注释已经够详细了。</strong></p>
+<h2 id="RelationRecord接口"><a href="#RelationRecord接口" class="headerlink" title="RelationRecord接口"></a>RelationRecord接口</h2><figure class="highlight typescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReminderRecordServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ReminderRecordService</span> {<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">ReminderRecordMapper</span> mapper;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">PageInfo</span>&lt;<span class="hljs-title class_">ReminderRecord</span>&gt; <span class="hljs-title function_">getPageList</span>(<span class="hljs-params">Integer page, Integer size, Integer relationshipId</span>) {<br>        <span class="hljs-title class_">PageHelper</span>.<span class="hljs-title function_">startPage</span>(page, size);<br>        <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">ReminderRecord</span>&gt; list = mapper.<span class="hljs-title function_">selectAll</span>(relationshipId);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PageInfo</span>&lt;&gt;(list);<br>    }<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">ReminderRecord</span> <span class="hljs-title function_">getById</span>(<span class="hljs-params">Integer id</span>) {<br>        <span class="hljs-keyword">return</span> mapper.<span class="hljs-title function_">selectById</span>(id);<br>    }<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">markAsProcessed</span>(<span class="hljs-params">Integer id</span>) {<br>        <span class="hljs-comment">// 标记为已处理状态，未实装</span><br>    }<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">ReminderRecord</span>&gt; <span class="hljs-title function_">getPendingRecords</span>(<span class="hljs-params"></span>)<br>    {<br>        <span class="hljs-keyword">return</span> mapper.<span class="hljs-title function_">selectPendingRecords</span>();<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="RelationPlan接口"><a href="#RelationPlan接口" class="headerlink" title="RelationPlan接口"></a>RelationPlan接口</h3><p><strong>该接口需要进行复杂的任务，请保持耐心</strong></p>
+<h4 id="Plan方法"><a href="#Plan方法" class="headerlink" title="Plan方法"></a>Plan方法</h4><p><strong>为指定的亲友关系创建提醒计划。</strong></p>
+<p><del>话说为什么答辩的时候脑子突然宕机了呢</del></p>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 定义方法，接收一个Relationship对象作为参数</span><br>public void plan(Relationship relationship) {<br>    <span class="hljs-comment">// 检查传入的relationship是否为null，如果是则直接返回</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Objects</span>.</span></span>is<span class="hljs-constructor">Null(<span class="hljs-params">relationship</span>)</span>){<br>        return;<br>    }<br><br>    <span class="hljs-comment">// 删除该亲友ID关联的所有旧提醒计划</span><br>    mapper.delete<span class="hljs-constructor">ByRelationshipId(<span class="hljs-params">relationship</span>.<span class="hljs-params">getId</span>()</span>);<br><br>    <span class="hljs-comment">// 验证必要参数（生日月份、日期和用户邮箱）</span><br>    validate<span class="hljs-constructor">Params(<span class="hljs-params">relationship</span>)</span>;<br><br>    <span class="hljs-comment">// 计算下一个生日日期,LocalDate是不带时间的日期类型。</span><br>    LocalDate birthday = calculate<span class="hljs-constructor">Birthday(<span class="hljs-params">relationship</span>)</span>;<br>    <span class="hljs-comment">// 获取当前日期</span><br>    LocalDate now = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalDate</span>.</span></span>now<span class="hljs-literal">()</span>;<br>    <span class="hljs-comment">// 创建一个空的提醒计划列表</span><br>    List&lt;ReminderPlan&gt; plans = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;<span class="hljs-literal">()</span>;<br><br>    <span class="hljs-comment">// 1. 制定提醒用户的计划（reminderType=0）</span><br>    <span class="hljs-comment">// 检查是否启用了提醒功能（remindEnabled为1）</span><br>    <span class="hljs-keyword">if</span> (relationship.get<span class="hljs-constructor">RemindEnabled()</span> != null<span class="hljs-operator"> &amp;&amp; </span>relationship.get<span class="hljs-constructor">RemindEnabled()</span><span class="hljs-operator"> == </span><span class="hljs-number">1</span>) {<br>        <span class="hljs-comment">// 获取提前提醒天数列表（例如：[1, 3, 7] 表示提前1天、3天、7天提醒）</span><br>        List&lt;Integer&gt; daysBefore = relationship.get<span class="hljs-constructor">DaysBefore()</span>;<br>        <span class="hljs-comment">// 检查daysBefore列表是否不为空</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">CollectionUtil</span>.</span></span>is<span class="hljs-constructor">NotEmpty(<span class="hljs-params">daysBefore</span>)</span>) {<br>            <span class="hljs-comment">// 遍历每个提前提醒天数</span><br>            <span class="hljs-keyword">for</span> (Integer bf : daysBefore) {<br>                <span class="hljs-comment">// 计算提醒日期：生日日期减去提前提醒天数</span><br>                LocalDate reminderDate = birthday.minus<span class="hljs-constructor">Days(<span class="hljs-params">bf</span>)</span>;<br>                <span class="hljs-comment">// 如果当前日期已经过了提醒日期，则跳过该计划</span><br>                <span class="hljs-keyword">if</span> (now.is<span class="hljs-constructor">After(<span class="hljs-params">reminderDate</span>)</span>) {<br>                    continue;<br>                }<br>                <span class="hljs-comment">// 创建基础提醒计划</span><br>                ReminderPlan plan = build<span class="hljs-constructor">BasicPlan(<span class="hljs-params">relationship</span>)</span>;<br>                plan.set<span class="hljs-constructor">ReminderType(0)</span>;  <span class="hljs-comment">// 设置为提醒用户类型</span><br>                plan.set<span class="hljs-constructor">ReminderDate(<span class="hljs-params">reminderDate</span>)</span>;  <span class="hljs-comment">// 设置提醒日期</span><br>                plan.set<span class="hljs-constructor">DaysBefore(<span class="hljs-params">bf</span>)</span>;   <span class="hljs-comment">// 设置提前提醒天数</span><br>                plans.add(plan);  <span class="hljs-comment">// 将计划添加到列表</span><br>            }<br>        }<br>    }<br><br>    <span class="hljs-comment">// 2. 制定自动祝贺计划（reminderType=1）</span><br>    <span class="hljs-comment">// 检查是否启用了自动祝贺功能（congratulateEnabled为1）</span><br>    <span class="hljs-keyword">if</span> (relationship.get<span class="hljs-constructor">CongratulateEnabled()</span> != null<span class="hljs-operator"> &amp;&amp; </span>relationship.get<span class="hljs-constructor">CongratulateEnabled()</span><span class="hljs-operator"> == </span><span class="hljs-number">1</span>) {<br>        <span class="hljs-comment">// 检查亲友邮箱是否为空</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">StrUtil</span>.</span></span>is<span class="hljs-constructor">Blank(<span class="hljs-params">relationship</span>.<span class="hljs-params">getRelationshipEmail</span>()</span>)) {<br>            <span class="hljs-comment">// 如果邮箱为空，记录警告日志并跳过祝贺计划</span><br>            log.warn(<span class="hljs-string">"亲友 {} 启用了祝贺功能但没有设置邮箱，跳过祝贺计划"</span>, relationship.get<span class="hljs-constructor">Name()</span>);<br>        } <span class="hljs-keyword">else</span> {<br>            <span class="hljs-comment">// 检查当前日期是否还没过生日</span><br>            <span class="hljs-keyword">if</span> (!now.is<span class="hljs-constructor">After(<span class="hljs-params">birthday</span>)</span>) {<br>                <span class="hljs-comment">// 创建祝贺计划</span><br>                ReminderPlan congratulatePlan = build<span class="hljs-constructor">BasicPlan(<span class="hljs-params">relationship</span>)</span>;<br>                congratulatePlan.set<span class="hljs-constructor">ReminderType(1)</span>;  <span class="hljs-comment">// 设置为发送祝贺类型</span><br>                congratulatePlan.set<span class="hljs-constructor">ReminderDate(<span class="hljs-params">birthday</span>)</span>;  <span class="hljs-comment">// 设置为生日当天</span><br>                congratulatePlan.set<span class="hljs-constructor">DaysBefore(0)</span>;  <span class="hljs-comment">// 当天发送，提前提醒天数为0</span><br>                plans.add(congratulatePlan);  <span class="hljs-comment">// 添加到计划列表</span><br>            }<br>        }<br>    }<br><br>    <span class="hljs-comment">// 如果计划列表不为空，则批量保存到数据库</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">CollectionUtil</span>.</span></span>is<span class="hljs-constructor">NotEmpty(<span class="hljs-params">plans</span>)</span>) {<br>        mapper.save<span class="hljs-constructor">Batch(<span class="hljs-params">plans</span>)</span>;  <span class="hljs-comment">// 批量保存所有计划</span><br>        log.info(<span class="hljs-string">"为亲友 {} 创建了 {} 条计划"</span>, relationship.get<span class="hljs-constructor">Name()</span>, plans.size<span class="hljs-literal">()</span>);  <span class="hljs-comment">// 记录日志</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="executePlan方法"><a href="#executePlan方法" class="headerlink" title="executePlan方法"></a>executePlan方法</h2><figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 标记方法为重写方法，并使用事务管理</span><br>@Override<br>@Transactional<br>public void execute<span class="hljs-constructor">Plan(LocalDate <span class="hljs-params">now</span>)</span> {<br>    <span class="hljs-comment">// 查询当天所有未执行的提醒计划</span><br>    List&lt;ReminderPlan&gt; plans = mapper.<span class="hljs-built_in">list</span><span class="hljs-constructor">UndoPlans(<span class="hljs-params">now</span>)</span>;<br>    <span class="hljs-comment">// 检查是否有待执行的计划</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">CollUtil</span>.</span></span>is<span class="hljs-constructor">Empty(<span class="hljs-params">plans</span>)</span>) {<br>        log.info(<span class="hljs-string">"当前没有执行计划"</span>);  <span class="hljs-comment">// 如果没有计划，记录日志并返回</span><br>        return;<br>    }<br><br>    log.info(<span class="hljs-string">"找到 {} 条待执行的提醒计划"</span>, plans.size<span class="hljs-literal">()</span>);  <span class="hljs-comment">// 记录找到的计划数量</span><br><br>    <span class="hljs-comment">// 遍历每个待执行的计划</span><br>    <span class="hljs-keyword">for</span> (ReminderPlan plan : plans) {<br>        <span class="hljs-keyword">try</span> {<br>            log.info(<span class="hljs-string">"开始执行计划：{}"</span>, plan);  <span class="hljs-comment">// 记录开始执行的计划信息</span><br><br>            <span class="hljs-comment">// 获取计划关联的亲友信息</span><br>            Relationship relationship = relationshipMapper.select<span class="hljs-constructor">ById(<span class="hljs-params">plan</span>.<span class="hljs-params">getRelationshipId</span>()</span>);<br>            <span class="hljs-comment">// 检查亲友信息是否存在</span><br>            <span class="hljs-keyword">if</span> (relationship<span class="hljs-operator"> == </span>null) {<br>                log.warn(<span class="hljs-string">"计划ID {} 关联的亲友信息不存在，跳过"</span>, plan.get<span class="hljs-constructor">Id()</span>);  <span class="hljs-comment">// 如果不存在，记录警告并跳过</span><br>                continue;<br>            }<br><br>            <span class="hljs-comment">// 检查用户邮箱是否存在</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">StrUtil</span>.</span></span>is<span class="hljs-constructor">Blank(<span class="hljs-params">relationship</span>.<span class="hljs-params">getMyEmail</span>()</span>)) {<br>                log.warn(<span class="hljs-string">"计划ID {} 关联的亲友 {} 没有邮箱，跳过"</span>, plan.get<span class="hljs-constructor">Id()</span>, relationship.get<span class="hljs-constructor">Name()</span>);  <span class="hljs-comment">// 如果邮箱为空，记录警告并跳过</span><br>                continue;<br>            }<br><br>            <span class="hljs-comment">// 创建提醒记录</span><br>            ReminderRecord record = <span class="hljs-keyword">new</span> <span class="hljs-constructor">ReminderRecord()</span>;<br>            record.set<span class="hljs-constructor">RelationshipId(<span class="hljs-params">plan</span>.<span class="hljs-params">getRelationshipId</span>()</span>);  <span class="hljs-comment">// 设置关联的亲友ID</span><br>            record.set<span class="hljs-constructor">ReminderTime(LocalDateTime.<span class="hljs-params">now</span>()</span>);         <span class="hljs-comment">// 设置提醒时间为当前时间</span><br>            record.set<span class="hljs-constructor">ReminderType(<span class="hljs-params">plan</span>.<span class="hljs-params">getReminderType</span>()</span>);      <span class="hljs-comment">// 设置提醒类型</span><br><br>            <span class="hljs-comment">// 根据提醒类型设置不同的接收者邮箱</span><br>            <span class="hljs-keyword">if</span> (plan.get<span class="hljs-constructor">ReminderType()</span><span class="hljs-operator"> == </span><span class="hljs-number">0</span>) {<br>                <span class="hljs-comment">// 0-提醒用户：发送到用户邮箱</span><br>                record.set<span class="hljs-constructor">Receiver(<span class="hljs-params">relationship</span>.<span class="hljs-params">getMyEmail</span>()</span>);<br>            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (plan.get<span class="hljs-constructor">ReminderType()</span><span class="hljs-operator"> == </span><span class="hljs-number">1</span>) {<br>                <span class="hljs-comment">// 1-发送祝贺：发送到亲友邮箱</span><br>                record.set<span class="hljs-constructor">Receiver(<span class="hljs-params">relationship</span>.<span class="hljs-params">getRelationshipEmail</span>()</span>);<br>            }<br><br>            <span class="hljs-comment">// 保存提醒记录到数据库</span><br>            reminderRecordMapper.insert(record);<br>            log.info(<span class="hljs-string">"已创建提醒记录：亲友 {}, 接收者 {}"</span>, relationship.get<span class="hljs-constructor">Name()</span>, relationship.get<span class="hljs-constructor">MyEmail()</span>);<br><br>            <span class="hljs-comment">// 更新计划状态为已执行</span><br>            plan.set<span class="hljs-constructor">ExecutionStatus(1)</span>;  <span class="hljs-comment">// 设置执行状态为1（已执行）</span><br>            mapper.update(plan);         <span class="hljs-comment">// 更新数据库中的计划状态</span><br>            log.info(<span class="hljs-string">"计划ID {} 执行完成"</span>, plan.get<span class="hljs-constructor">Id()</span>);  <span class="hljs-comment">// 记录计划执行完成信息</span><br><br>        } catch (Exception e) {<br>            <span class="hljs-comment">// 如果执行过程中出现异常，记录错误日志</span><br>            log.error(<span class="hljs-string">"执行计划ID {} 失败: {}"</span>, plan.get<span class="hljs-constructor">Id()</span>, e.get<span class="hljs-constructor">Message()</span>, e);<br>        }<br>    }<br><br>    log.info(<span class="hljs-string">"提醒计划执行完毕，共处理 {} 条计划"</span>, plans.size<span class="hljs-literal">()</span>);  <span class="hljs-comment">// 记录执行完成信息</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>剩下几个比较基础的增删改查就不赘述了。</strong></p>
+<h2 id="Task层"><a href="#Task层" class="headerlink" title="Task层"></a>Task层</h2><figure class="highlight less"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-tag">public</span> <span class="hljs-selector-tag">class</span> <span class="hljs-selector-tag">BirthdayReminderJob</span> {<br><br>    <span class="hljs-variable">@Autowired</span><br>    private RelationPlanService planService;<br><br>    <span class="hljs-variable">@Scheduled</span>(cron = <span class="hljs-string">"0 0 9,12,20 * * ?"</span>)<span class="hljs-comment">//cron表达式，代表执行频率</span><br><br>    <span class="hljs-variable">@Transactional</span><br>    public void <span class="hljs-built_in">reminder</span>() {<br>        <span class="hljs-comment">// 扫描当天未执行的计划</span><br>        <span class="hljs-selector-tag">planService</span><span class="hljs-selector-class">.executePlan</span>(LocalDate.<span class="hljs-built_in">now</span>());<br><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>cron表达式使用如下：</strong></p>
+<figure class="highlight subunit"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs subunit">┌───────────── 秒（0<span class="hljs-string">-59</span>）<br>│ ┌─────────── 分钟（0<span class="hljs-string">-59</span>）<br>│ │ ┌───────── 小时（0<span class="hljs-string">-23</span>）<br>│ │ │ ┌─────── 日（1<span class="hljs-string">-31</span>）<br>│ │ │ │ ┌───── 月（1<span class="hljs-string">-12</span> 或 JAN-DEC）<br>│ │ │ │ │ ┌─── 周几（0<span class="hljs-string">-7</span> 或 SUN-SAT，0和7均代表周日）<br>│ │ │ │ │ │<br>* * * * * ? *（可选年字段，1970<span class="hljs-string">-2099</span>）<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="VO层"><a href="#VO层" class="headerlink" title="VO层"></a>VO层</h2><p><strong>和前端连起来需要格式化输出和一个响应体类，VO层就是解决这个问题。</strong></p>
+<p><strong>PageVO和RelationshipVO几乎是Domain层的复刻，但是我想说的是ResponseEntity。</strong></p>
+<p><strong>后端需要响应到前端，就需要一个响应体，体内应该有状态码等信息，还需要封装基本的方法。</strong></p>
+<p><strong>使用泛型T是因为响应体通用，处理的对象类型不应受限制。</strong></p>
+<figure class="highlight typescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ResponseEntity</span>&lt;T&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> {<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 是否成功</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Boolean</span> success;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 提示信息</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> message;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 状态码</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> code;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 具体的数据</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> T data;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-title class_">ResponseEntity</span>&lt;T&gt; <span class="hljs-title function_">success</span>(<span class="hljs-params">T data</span>){  <span class="hljs-comment">//下面几个都是状态函数，用于检查运行状态和标注状态码等信息</span><br>        <span class="hljs-title class_">ResponseEntity</span>&lt;T&gt; response=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ResponseEntity</span>&lt;T&gt;();<br>        response.<span class="hljs-property">success</span>=<span class="hljs-literal">true</span>;<br>        response.<span class="hljs-property">data</span>=data;<br>        response.<span class="hljs-property">code</span>=<span class="hljs-string">"200"</span>; <span class="hljs-comment">//200表示成功</span><br>        <span class="hljs-keyword">return</span> response;<br>    }<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-title class_">ResponseEntity</span>&lt;T&gt; <span class="hljs-title function_">success</span>(<span class="hljs-params"></span>){<br>        <span class="hljs-keyword">return</span> <span class="hljs-title function_">success</span>(<span class="hljs-literal">null</span>);<br>    }<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-title class_">ResponseEntity</span>&lt;T&gt; <span class="hljs-title function_">fail</span>(<span class="hljs-params">T data,<span class="hljs-built_in">String</span> message</span>){<br>        <span class="hljs-title class_">ResponseEntity</span>&lt;T&gt; response=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ResponseEntity</span>&lt;T&gt;();<br>        response.<span class="hljs-property">success</span>=<span class="hljs-literal">false</span>;<br>        response.<span class="hljs-property">data</span>=data;<br>        response.<span class="hljs-property">code</span>=<span class="hljs-string">"500"</span>;  <span class="hljs-comment">//500表示错误</span><br>        response.<span class="hljs-property">message</span>=message;<br>        <span class="hljs-keyword">return</span> response;<br>    }<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-title class_">ResponseEntity</span>&lt;T&gt; <span class="hljs-title function_">fail</span>(<span class="hljs-params"></span>){<br>        <span class="hljs-keyword">return</span> <span class="hljs-title function_">fail</span>(<span class="hljs-literal">null</span>);<br>    }<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-title class_">ResponseEntity</span>&lt;T&gt; <span class="hljs-title function_">fail</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> message</span>){<br>        <span class="hljs-keyword">return</span> <span class="hljs-title function_">fail</span>(<span class="hljs-literal">null</span>,message);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="Controller层"><a href="#Controller层" class="headerlink" title="Controller层"></a>Controller层</h2><h3 id="Relationship控制器"><a href="#Relationship控制器" class="headerlink" title="Relationship控制器"></a>Relationship控制器</h3><blockquote>
+<p><strong>该控制器和其他层耦合严重，请配合源码阅读。</strong></p>
+</blockquote>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 标记为REST控制器，处理HTTP请求</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-comment">// 设置基础请求路径</span><br><span class="hljs-meta">@RequestMapping(<span class="hljs-string">"/api/relationship"</span>)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RelationshipController</span> {<br>    <span class="hljs-comment">// 注入关系计划服务</span><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> RelationPlanService relationPlanService;<br><br>    <span class="hljs-comment">// 注入亲友服务</span><br>    <span class="hljs-meta">@Resource</span><br>    <span class="hljs-keyword">private</span> RelationshipService relationshipService;<br><br>    <span class="hljs-comment">// GET请求处理分页查询</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">"/page"</span>)</span><br>    <span class="hljs-keyword">public</span> ResponseEntity&lt;PageVO&lt;RelationshipPageVO&gt;&gt; page(RelationshipPageDTO dto){<br>        <span class="hljs-comment">// 验证并设置默认页码</span><br>        <span class="hljs-keyword">if</span> (dto.getPage() == <span class="hljs-literal">null</span> || dto.getPage() &lt;= <span class="hljs-number">0</span>) {<br>            dto.setPage(<span class="hljs-number">1</span>);<br>        }<br>        <span class="hljs-comment">// 验证并设置默认页面大小</span><br>        <span class="hljs-keyword">if</span> (dto.getSize() == <span class="hljs-literal">null</span> || dto.getSize() &lt;= <span class="hljs-number">0</span>) {<br>            dto.setSize(<span class="hljs-number">10</span>);<br>        }<br><br>        <span class="hljs-comment">// 调用服务层获取分页数据</span><br>        PageInfo&lt;RelationshipPageVO&gt; pageInfo = relationshipService.queryRelationshipPage(dto);<br>        <span class="hljs-comment">// 构建分页响应对象</span><br>        PageVO&lt;RelationshipPageVO&gt; pageVO = new PageVO&lt;&gt;(<br>                pageInfo.getList(),        <span class="hljs-comment">// 数据列表</span><br>                pageInfo.getPages(),       <span class="hljs-comment">// 总页数</span><br>                pageInfo.getPageNum(),     <span class="hljs-comment">// 当前页码</span><br>                pageInfo.getPageSize(),    <span class="hljs-comment">// 每页大小</span><br>                pageInfo.getTotal()        <span class="hljs-comment">// 总记录数</span><br>        );<br>        <span class="hljs-comment">// 返回成功响应</span><br>        <span class="hljs-keyword">return</span> ResponseEntity.success(pageVO);<br>    }<br><br>    <span class="hljs-comment">// GET请求根据ID获取单个亲友信息</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">"/{id}"</span>)</span><br>    <span class="hljs-keyword">public</span> ResponseEntity&lt;Relationship&gt; <span class="hljs-keyword">get</span>(<span class="hljs-meta">@PathVariable</span> Integer id) {<br>        <span class="hljs-keyword">return</span> ResponseEntity.success(relationshipService.getRelationship(id));<br>    }<br><br>    <span class="hljs-comment">// POST请求创建新的亲友关系</span><br>    <span class="hljs-meta">@PostMapping</span><br>    <span class="hljs-meta">@Transactional</span>  <span class="hljs-comment">// 启用事务管理</span><br>    <span class="hljs-keyword">public</span> ResponseEntity&lt;Integer&gt; create(<span class="hljs-meta">@RequestBody</span> Relationship relationship) {<br>        <span class="hljs-keyword">try</span> {<br>            <span class="hljs-comment">// 创建亲友关系</span><br>            Relationship relation = relationshipService.createRelationship(relationship);<br>            <span class="hljs-comment">// 为新创建的亲友生成提醒计划</span><br>            relationPlanService.plan(relation);<br>            <span class="hljs-comment">// 返回新创建的亲友ID</span><br>            <span class="hljs-keyword">return</span> ResponseEntity.success(relation.getId());<br>        } <span class="hljs-keyword">catch</span> (Exception e) {<br>            e.printStackTrace();<br>            <span class="hljs-comment">// 返回失败响应</span><br>            <span class="hljs-keyword">return</span> ResponseEntity.fail(<span class="hljs-string">"创建亲友关系失败: "</span> + e.getMessage());<br>        }<br>    }<br><br>    <span class="hljs-comment">// PUT请求更新亲友信息</span><br>    <span class="hljs-meta">@PutMapping</span><br>    <span class="hljs-meta">@Transactional</span>  <span class="hljs-comment">// 启用事务管理</span><br>    <span class="hljs-keyword">public</span> ResponseEntity&lt;<span class="hljs-built_in">Boolean</span>&gt; update(<span class="hljs-meta">@RequestBody</span> Relationship relationship) {<br>        <span class="hljs-comment">// 更新亲友信息</span><br>        <span class="hljs-built_in">Boolean</span> b = relationshipService.updateRelationship(relationship);<br>        <span class="hljs-comment">// 重新生成提醒计划</span><br>        relationPlanService.plan(relationship);<br>        <span class="hljs-keyword">return</span> ResponseEntity.success(b);<br>    }<br><br>    <span class="hljs-comment">// DELETE请求删除亲友信息</span><br>    <span class="hljs-meta">@DeleteMapping(<span class="hljs-string">"/{id}"</span>)</span><br>    <span class="hljs-meta">@Transactional</span>  <span class="hljs-comment">// 启用事务管理</span><br>    <span class="hljs-keyword">public</span> ResponseEntity&lt;<span class="hljs-built_in">Boolean</span>&gt; delete(<span class="hljs-meta">@PathVariable</span> Integer id) {<br>        <span class="hljs-comment">// 删除亲友信息</span><br>        <span class="hljs-built_in">Boolean</span> b = relationshipService.deleteRelationship(id);<br>        <span class="hljs-comment">// 删除关联的提醒计划</span><br>        relationPlanService.deleteByRelationshipId(id);<br>        <span class="hljs-keyword">return</span> ResponseEntity.success(b);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="RelationshipReminder控制器"><a href="#RelationshipReminder控制器" class="headerlink" title="RelationshipReminder控制器"></a>RelationshipReminder控制器</h3><figure class="highlight swift"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@GetMapping</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">ResponseEntity</span>&lt;<span class="hljs-type">PageVO</span>&lt;<span class="hljs-type">ReminderPlan</span>&gt;&gt; getList(<br>            <span class="hljs-meta">@RequestParam</span>(defaultValue <span class="hljs-operator">=</span> <span class="hljs-string">"0"</span>) <span class="hljs-type">Integer</span> page,<br>            <span class="hljs-meta">@RequestParam</span>(defaultValue <span class="hljs-operator">=</span> <span class="hljs-string">"10"</span>) <span class="hljs-type">Integer</span> size,<br>            <span class="hljs-meta">@RequestParam</span>(<span class="hljs-keyword">required</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>) <span class="hljs-type">Integer</span> relationshipId) {<br>        <span class="hljs-type">PageInfo</span>&lt;<span class="hljs-type">ReminderPlan</span>&gt; pageInfo <span class="hljs-operator">=</span> relationPlanService.getPageList(page <span class="hljs-operator">+</span> <span class="hljs-number">1</span>, size, relationshipId);<br>        <span class="hljs-type">PageVO</span>&lt;<span class="hljs-type">ReminderPlan</span>&gt; pageVO <span class="hljs-operator">=</span> new <span class="hljs-type">PageVO</span>&lt;&gt;(<br>                pageInfo.getList(),<br>                pageInfo.getPages(),<br>                pageInfo.getPageNum(),<br>                pageInfo.getPageSize(),<br>                pageInfo.getTotal()<br>        );<br>        <span class="hljs-keyword">return</span> <span class="hljs-type">ResponseEntity</span>.success(pageVO);<br>    }    <span class="hljs-comment">//依旧PageHelper插件传参，如果没问题就返回一个响应体，响应体中带200状态码和内容</span><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据ID获取提醒计划</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">"/{id}"</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">ResponseEntity</span>&lt;<span class="hljs-type">ReminderPlan</span>&gt; getById(<span class="hljs-meta">@PathVariable</span> <span class="hljs-type">Integer</span> id) {<br>        <span class="hljs-type">ReminderPlan</span> plan <span class="hljs-operator">=</span> relationPlanService.getById(id);<br>        <span class="hljs-keyword">return</span> <span class="hljs-type">ResponseEntity</span>.success(plan);<br>    }<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 创建提醒计划</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">ResponseEntity</span>&lt;<span class="hljs-type">ReminderPlan</span>&gt; create(<span class="hljs-meta">@RequestBody</span> <span class="hljs-type">ReminderPlan</span> reminderPlan) {<br>        <span class="hljs-keyword">try</span> {<br>            relationPlanService.create(reminderPlan);<br>            <span class="hljs-keyword">return</span> <span class="hljs-type">ResponseEntity</span>.success(reminderPlan);<br>        } <span class="hljs-keyword">catch</span> (<span class="hljs-type">Exception</span> e) {<br>            e.printStackTrace();<br>            <span class="hljs-keyword">return</span> <span class="hljs-type">ResponseEntity</span>.fail(<span class="hljs-string">"创建提醒计划失败: "</span> <span class="hljs-operator">+</span> e.getMessage());<br>        }<br>    }<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 更新提醒计划</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PutMapping</span>(<span class="hljs-string">"/{id}"</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">ResponseEntity</span>&lt;<span class="hljs-type">Void</span>&gt; update(<span class="hljs-meta">@PathVariable</span> <span class="hljs-type">Integer</span> id, <span class="hljs-meta">@RequestBody</span> <span class="hljs-type">ReminderPlan</span> reminderPlan) {<br>        reminderPlan.setId(id);<br>        relationPlanService.update(reminderPlan);<br>        <span class="hljs-keyword">return</span> <span class="hljs-type">ResponseEntity</span>.success();<br>    }<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 删除提醒计划</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@DeleteMapping</span>(<span class="hljs-string">"/{id}"</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">ResponseEntity</span>&lt;<span class="hljs-type">Void</span>&gt; delete(<span class="hljs-meta">@PathVariable</span> <span class="hljs-type">Integer</span> id) {<br>        relationPlanService.deleteById(id);<br>        <span class="hljs-keyword">return</span> <span class="hljs-type">ResponseEntity</span>.success();<br>    }<br>}<br><span class="hljs-comment">//这几个增删改查的方法在Service层中写有。</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="Yaml配置"><a href="#Yaml配置" class="headerlink" title="Yaml配置"></a>Yaml配置</h2><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span>  <span class="hljs-comment">##使用8080端口</span><br><br><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">application:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">Birthday_reminder</span><br>  <span class="hljs-attr">datasource:</span><br>    <span class="hljs-attr">url:</span> <span class="hljs-string">jdbc:mysql://127.0.0.1:3306/table_Birthday?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</span>  <span class="hljs-comment">##数据库配置</span><br>    <span class="hljs-attr">username:</span> <span class="hljs-string">root</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-string">root</span><br>    <span class="hljs-attr">driver-class-name:</span> <span class="hljs-string">com.mysql.cj.jdbc.Driver</span><br>  <span class="hljs-attr">mail:</span><br>    <span class="hljs-attr">host:</span> <span class="hljs-string">smtp.qq.com</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">587</span><br>    <span class="hljs-attr">username:</span> <span class="hljs-string">example@qq.com</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-string">xxxxxxxxxxxxxx</span>  <span class="hljs-comment"># 授权码，不是密码，怎么开启使用请自行查找</span><br>    <span class="hljs-attr">properties:</span><br>      <span class="hljs-attr">mail:</span><br>        <span class="hljs-attr">smtp:</span><br>          <span class="hljs-attr">auth:</span> <span class="hljs-literal">true</span><br>          <span class="hljs-attr">starttls:</span><br>            <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">devtools:</span><br>    <span class="hljs-attr">restart:</span><br>      <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span><br>      <span class="hljs-attr">additional-paths:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">src/main/java</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">src/main/resources</span><br><br><span class="hljs-attr">mybatis:</span><br>  <span class="hljs-attr">mapper-locations:</span> <span class="hljs-string">classpath:mapper/*.xml</span><br>  <span class="hljs-attr">type-aliases-package:</span> <span class="hljs-string">com.Birthday_reminder.domain</span><br><br><span class="hljs-attr">logging:</span><br>  <span class="hljs-attr">level:</span><br>    <span class="hljs-attr">com.Birthday_reminder:</span> <span class="hljs-string">DEBUG</span><br>    <span class="hljs-attr">org.springframework.jdbc:</span> <span class="hljs-string">DEBUG</span><br>    <span class="hljs-attr">org.springframework.boot.autoconfigure.jdbc:</span> <span class="hljs-string">DEBUG</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h2><p>见<a target="_blank" rel="noopener" href="https://github.com/Dr-WillMos/Birthday_reminder">Github仓库</a>，如果有问题可以通过邮箱与我交流。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/" class="category-chain-item">网络工程</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">#网络工程</a>
+      
+        <a href="/tags/JAVA/">#JAVA</a>
+      
+        <a href="/tags/%E9%A1%B9%E7%9B%AE/">#项目</a>
+      
+        <a href="/tags/spring/">#spring</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/Chapter_1_Overview_of_Computer_Systems/" title="第一章：计算机系统概述">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第一章：计算机系统概述</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/SpringMVC_request/" title="SpringMVC中的请求方法">
+                        <span class="hidden-mobile">SpringMVC中的请求方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

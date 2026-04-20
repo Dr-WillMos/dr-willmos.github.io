@@ -1,0 +1,1586 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第七章：网络安全分为三方面内容：  安全威胁 安全服务 安全机制  安全威胁 被动攻击  攻击者通过窃听手段仅观察和分析网络中传输数据流中的敏感信息，而不对其进行干扰。   主动攻击  攻击者对网络中传输着的数据流进行各种处理，比如中断，篡改，伪造，恶意程序，拒绝服务等等。    **拒绝服务(Denial of Service,DoS)**攻击基于大量的恶意请求抢占服务器资源，使得服务器难以向正">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络第七章：网络安全">
+<meta property="og:url" content="http://example.com/posts/Chapter%207%20of%20Computer%20Networks:%20Network%20Security/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="第七章：网络安全分为三方面内容：  安全威胁 安全服务 安全机制  安全威胁 被动攻击  攻击者通过窃听手段仅观察和分析网络中传输数据流中的敏感信息，而不对其进行干扰。   主动攻击  攻击者对网络中传输着的数据流进行各种处理，比如中断，篡改，伪造，恶意程序，拒绝服务等等。    **拒绝服务(Denial of Service,DoS)**攻击基于大量的恶意请求抢占服务器资源，使得服务器难以向正">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png">
+<meta property="article:published_time" content="2026-04-20T11:49:59.570Z">
+<meta property="article:modified_time" content="2026-04-20T11:50:00.563Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png">
+  
+  
+  
+  <title>计算机网络第七章：网络安全 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="计算机网络第七章：网络安全"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-20 11:49" pubdate>
+          2026年4月20日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          17k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          146 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机网络第七章：网络安全</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第七章：网络安全"><a href="#第七章：网络安全" class="headerlink" title="第七章：网络安全"></a>第七章：网络安全</h1><p>分为三方面内容：</p>
+<ul>
+<li>安全威胁</li>
+<li>安全服务</li>
+<li>安全机制</li>
+</ul>
+<h4 id="安全威胁"><a href="#安全威胁" class="headerlink" title="安全威胁"></a>安全威胁</h4><ul>
+<li>被动攻击</li>
+<li><ul>
+<li>攻击者通过窃听手段仅观察和分析网络中传输数据流中的敏感信息，而不对其进行干扰。</li>
+</ul>
+</li>
+<li>主动攻击</li>
+<li><ul>
+<li>攻击者对网络中传输着的数据流进行各种处理，比如中断，篡改，伪造，恶意程序，拒绝服务等等。</li>
+</ul>
+</li>
+</ul>
+<p>**拒绝服务(Denial of Service,DoS)**攻击基于大量的恶意请求抢占服务器资源，使得服务器难以向正常用户提供服务。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/A6ce/image-20260415204651230.png" srcset="/img/loading.gif" lazyload alt="image-20260415204651230"></p>
+<p>攻击者能够自行租用黑服务器攻击，也能够使用病毒控制僵尸主机来攻击。</p>
+<p>交换机中毒：攻击者大量伪造了不同源MAC地址的帧，填满转发表使其无法正常工作。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/U5zp/image-20260415204842166.png" srcset="/img/loading.gif" lazyload alt="image-20260415204842166"></p>
+<p>被动攻击不涉及对数据的更改，很难被发现。对付被动攻击主要采用各种数据加密技术进行预防而不是主动检测。</p>
+<p>主动攻击容易检测。对付主动攻击除要采取数据加密技术、访问控制技术等预防措施，还需要采取各种检测技术及时发现并阻止攻击，同时还要对攻击源进行追踪，并利用法律手段对其进行打击。</p>
+<p>为了防止上述各种安全威胁，一个安全的计算机网络应设法提供相应的安全服务</p>
+<h3 id="安全服务"><a href="#安全服务" class="headerlink" title="安全服务"></a>安全服务</h3><p>包括六个服务：</p>
+<ul>
+<li>保密性</li>
+<li><ul>
+<li>确保网络中传输的信息只有其发送方和接收方才能懂得其含义，而信息的截获者则看不懂所截获的数据。显然，保密性是计算机网络中最基本的安全服务，也是对付被动攻击所必须具备的功能。</li>
+</ul>
+</li>
+<li>报文完整性</li>
+<li><ul>
+<li>确保网络中传输的信息不被攻击者篡改或伪造，它在应对主动攻击时也是必不可少的。</li>
+</ul>
+</li>
+<li>实体鉴别</li>
+<li><ul>
+<li>通信两端的实体能够相互验证对方的真实身份，确保不会与冒充者进行通信。目前频发的网络诈骗，多数情况都是由于在网络上不能鉴别出对方的真实身份。实体鉴别在对付主动攻击时是非常重要的。</li>
+</ul>
+</li>
+<li>不可否认性</li>
+<li><ul>
+<li>用来防止发送方或接收方否认发送或接收过某信息。在电子商务中这是一种非常重要的安全服务。</li>
+</ul>
+</li>
+<li>访问控制</li>
+<li><ul>
+<li>可以限制和控制不同实体对信息源或其他系统资源进行访问的能力。必须在鉴别实体身份的基础上对实体的访问权限进行控制。</li>
+</ul>
+</li>
+<li>可用性</li>
+<li><ul>
+<li>确保授权用户能够正常访问系统信息和资源。很多攻击都会导致系统可用性的损失，拒绝服务DoS攻击就是可用性最直接的威胁。</li>
+</ul>
+</li>
+</ul>
+<p>实现以上服务的机制名为<strong>安全机制</strong>，将在接下来陆续介绍。</p>
+<h3 id="密码学基本概念"><a href="#密码学基本概念" class="headerlink" title="密码学基本概念"></a>密码学基本概念</h3><p>将发送的数据变换成对任何不知道如何做逆变换的人都不可理解的形式，从而保证数据的机密性，这种变换称为加密(Encryption)。</p>
+<ul>
+<li>加密前的数据被称为明文(Plaintext)。</li>
+<li>加密后的数据被称为密文(Ciphertext)。</li>
+</ul>
+<p>通过某种逆变换将密文重新变换回明文，这种逆变换称为解密(Decryption)。</p>
+<p>加密和解密过程可以使用密钥(Key)作为参数。</p>
+<ul>
+<li>密钥必须保密，但加密和解密的过程可以公开。</li>
+<li>只有知道密钥的人才能解密密文，否则即使知道加密或解密算法也无法解密密文。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/laA0/image-20260415205837470.png" srcset="/img/loading.gif" lazyload alt="image-20260415205837470"></p>
+<p>加密密钥和解密密钥可以相同，也可以不同（即使不同，这两个密钥也必然有某种相关性）这取决于采用的是对称密钥密码体制还是公开密钥（公钥）密码体制。</p>
+<p>如果不论攻击者截获了多少密文，在密文中都没有足够的信息来唯一地确定出对应的明文，则这一密码体制称为无条件安全的，或称<br>为理论上是不可破的。</p>
+<p>然而，在无任何条件限制下，目前几乎所有实用的密码体制均是可破的。因此，人们关心的是在计算上（而不是理论上）是不可破的密码体制如果一个密码体制中的密码不能在一定时间内被可以使用的计算资源破解，则这一密码体制称为在计算上是安全的。</p>
+<p>比如，计算核弹发生密码所需要的时间是623年，那就没有意义了。</p>
+<p>一般情况下，通过使用长的密钥可以有效增加破解密文的难度，但同时也使得加密方和解密方的计算量加大</p>
+<h3 id="对称密钥密码体制"><a href="#对称密钥密码体制" class="headerlink" title="对称密钥密码体制"></a>对称密钥密码体制</h3><p>对称密钥密码体制是指加密密钥与解密密钥相同的密码体制。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/djT8/image-20260415210331618.png" srcset="/img/loading.gif" lazyload alt="image-20260415210331618"></p>
+<h4 id="数据加密标准DES"><a href="#数据加密标准DES" class="headerlink" title="数据加密标准DES"></a>数据加密标准DES</h4><p>由IBM公司研制并于1977年被美国定为联邦信息标准的数据加密标准(Data Encryption Standard,DES),就是对称密钥密码体制的典型代表。国际标准化组织曾把DES作为数据加密标准。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/7Xqm/image-20260415210447373.png" srcset="/img/loading.gif" lazyload alt="image-20260415210447373"></p>
+<p>DES的保密性仅取决于对密钥的保密和密钥的长度，而算法是公开的。</p>
+<p>20世纪70年代设计的DES,经过了世界上无数优秀学者几十年的密码分析，除了其56比特密钥长度太短，没有发现其任何大的设计缺陷。<br>56比特长的密钥，可用密钥数量为25^6（约7.6×1016）。</p>
+<p>现在对于56比特的DES密钥的搜索已成常态，<strong>56比特DES已不再被认为是安全的.</strong></p>
+<h4 id="三重DES算法"><a href="#三重DES算法" class="headerlink" title="三重DES算法"></a>三重DES算法</h4><p>为了解决56l比特DES密钥太短的问题，学者们提出了三重DES(Triple DES,3DES)。3DES在1985年成为美国的一个商用加密标准RFC2420]。</p>
+<ul>
+<li>3DES使用3个密钥执行三次DES算法。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/6uzK/image-20260415210759842.png" srcset="/img/loading.gif" lazyload alt="image-20260415210759842"></p>
+<p>BM最初设计DES时主要考虑用硬件来实现，因此DES/3DES的软件实现较慢。3DES目前正在被2001年发布的高级加密标准AES所替代。</p>
+<h4 id="高级加密标准AES"><a href="#高级加密标准AES" class="headerlink" title="高级加密标准AES"></a>高级加密标准AES</h4><p>高级加密标准(Advanced Encryption Standard,AES)支持128比特、192比特和256比特的密钥长度，用硬件和软件都可以快速实现。</p>
+<p>AES不需要太多内存，因此适用于小型移动设备。</p>
+<h3 id="公钥密码体制"><a href="#公钥密码体制" class="headerlink" title="公钥密码体制"></a>公钥密码体制</h3><p>在对称密钥密码体制中，加解密双方要共享同一个密钥。</p>
+<p>但是这个约定实际上是很难完成的，如果：</p>
+<ul>
+<li>双方事先约定</li>
+<li><ul>
+<li>给密钥的管理和更换带来极大的不便</li>
+</ul>
+</li>
+<li>用信使来传送密钥</li>
+<li><ul>
+<li>对于高度自动化的大型计算机网络，使用信使来传送密钥显然是不合适的</li>
+</ul>
+</li>
+</ul>
+<p>尽管使用复杂但高度安全的密钥分配中心(Key Distribution Center,KDC)可以解决该问题，但是采用公钥密码体制可以比较容易地解决该问题。</p>
+<p><strong>公钥密码体制使用不同的加密密钥和解密密钥</strong>，<strong>这是非对称的密钥密码体制</strong>，其概念是由Stanford,大学的研究人员Diffie和Hellman于1976年提出的。</p>
+<ul>
+<li>加密密钥是向公众公开的，称为公钥(Public Key,PK)。</li>
+<li>解密密钥是需要保密的，称为私钥或密钥(Secret Key,SK)。</li>
+<li>加密算法E和解密算法D都是公开的。</li>
+<li>尽管SK由PK决定，但却不能根据PK计算出SK。</li>
+</ul>
+<p>公钥密码体制的加密解密过程的一般表示式：</p>
+<p>$$<br>\boldsymbol{D}<em>{S \boldsymbol{K}} \big( \boldsymbol{E}</em>{\boldsymbol{P} \boldsymbol{K}} ( \boldsymbol{X} ) \big)=\boldsymbol{X}<br>$$</p>
+<p>加密和解密运算可以对调：</p>
+<p>$$<br>\boldsymbol{E}<em>{\boldsymbol{P} K} \big( \boldsymbol{D}</em>{\boldsymbol{S} K} ( \boldsymbol{X} ) \big)=\boldsymbol{X}<br>$$</p>
+<p>但是PK只能用来加密，而不能用来解密：</p>
+<p>$$<br>D_{P K} ! \left( \boldsymbol{E}_{P K} ( \boldsymbol{X} ) \right) \neq\boldsymbol{X}<br>$$</p>
+<p>由于从公钥PK不能推导出私钥SK,并且PK不能用来解密，因此PK可以是公开的。</p>
+<p>显然，采用公钥密码体制更易解决密钥分发的问题。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/Nuf6/image-20260415211708141.png" srcset="/img/loading.gif" lazyload alt="image-20260415211708141"></p>
+<p>公钥密码体制不仅用于加密，还可以很方便地用于鉴别和数字签名。<br>目前的公钥密码算法比对称密钥密码算法慢好几个数量级。</p>
+<ul>
+<li>公钥密码体制通常用于会话密钥的建立；</li>
+<li>对称密钥密码体制被用于其他大多数情况下的加密。</li>
+</ul>
+<p>来看看过程：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/jjT9/image-20260415212250650.png" srcset="/img/loading.gif" lazyload alt="image-20260415212250650"></p>
+<p>任何加密方法的安全性取决于密钥的长度和攻破密文所需的计算量，而不是简单地取决于加密体制。因此不能简单地判断，对称密钥密码体制与公钥密码体制相比，哪个密码体制的安全性更好。如果存在曼德尔超算，那算出密码的时间比密码失去作用的时间更短的话，那任何加密算法都不是安全的。</p>
+<h3 id="报文摘要和报文鉴别码"><a href="#报文摘要和报文鉴别码" class="headerlink" title="报文摘要和报文鉴别码"></a>报文摘要和报文鉴别码</h3><p>如果报文被攻击者篡改或伪造，则报文就不具备完整性。</p>
+<p>对报文进行完整性验证就是进行报文鉴别，也就是鉴别报文的真伪。</p>
+<p>使用加密技术通常就可以达到报文鉴别的目的，因为被篡改的报文解密后一般不能得到可理解的内容。</p>
+<ul>
+<li>然而，对于不需要保密而只需要报文鉴别的网络应用（例如从因特网的某个网站下载一个应用软件，用户只关心该软件是否与官方发布的一致，以防范中间人安装包替换攻击)，对整个报文进行加密和解密，会使计算机花费相当多的CPU时间。</li>
+<li>使用报文摘要(Message Digest,MD)进行报文鉴别是一种更有效的方法。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/i6Wz/image-20260415212705869.png" srcset="/img/loading.gif" lazyload alt="image-20260415212705869"></p>
+<p>使用报文摘要对报文进行鉴别的好处是：只对长度固定且比整个报文长度短得多的报文摘要H（m）进行加密，比对整个报文m进行加密要简单得多。</p>
+<p>密钥K仅在通信双方之间共享，没有第三方能用伪造报文产生出使用密钥K加密的伪造报文摘要。</p>
+<p>附加在报文后面用于报文鉴别的码串(即加密后的报文摘要)，称为报文鉴别码(Message Authentication Code,MAC)</p>
+<h4 id="密码散列函数"><a href="#密码散列函数" class="headerlink" title="密码散列函数"></a>密码散列函数</h4><p>报文摘要MD实际上与之前介绍过的帧检验序列（第3章）、首部检验和（第4章）等都是散列函数(Hash Function)的一种应用，用于接收方对收到的数据进行检查以便发现是否有误码。</p>
+<p>散列函数(哈希函数)具有以下特点:</p>
+<ul>
+<li>散列函数的输入长度是可变的，并且可以很长，但其输出长度是固定的，并且较短。散列函数的输出称为散列值，也可简称为散列。</li>
+<li>不同的散列值对应不同的输入，但不同的输入却可能得出相同的散列值。换句话说，<strong>散列函数的输入和输出并非一一对应，而是多对一的。</strong></li>
+</ul>
+<p>为了满足安全性，报文摘要算法必须满足：</p>
+<ul>
+<li>对于任意给定的某个报文摘要值H(x),若想找到一个报文y使得H(y)=H(x),在计算上是不可行的。</li>
+<li>若想找到任意两个报文x和y,使得H(y)=H(x),在计算上是不可行的。</li>
+</ul>
+<p>满足上述两个条件表明：对于发送方产生的报文和其相应的报文摘要H(x),攻击者不可能伪造出另一个报文y,使得y与x具有同样的报文摘要。</p>
+<p>满足上述条件的散列函数就称为<strong>密码散列函数或安全散列函数。</strong></p>
+<p>密码散列函数实际上是一种单向函数，由于无法通过报文摘要还原出原文，因此可把密码散列函数运算看作没有密钥的加密运算。</p>
+<p>最有名的报文摘要算法（或称密码散列函数或散列算法）有MD5 (Message Digest,MD-5)和安全散列算法(Secure Hash Algorithm,SHA-1)</p>
+<p>但是2004年，王小云证明能够用系统方法找出一对报文能够生成相同的md5摘要，仅需小于1小时的时间，这使得md5被安全散列算法SHA-1替代。</p>
+<p>尽管SHA1比MD5安全，但后来也被证明其实际安全性并未达到设计目标，并且也曾被王小云的研究团队攻破。</p>
+<p>尽管现在SHA-1仍在使用，但很快就会被SHA-2和SHA-3所替代。</p>
+<p>利用密码散列函数的特殊性质，可以设计出无需对报文摘要进行加密的报文鉴别方法，只要通信双方共享一个称为<strong>鉴别密钥</strong>的秘密比特串即可。</p>
+<p>直接使用密码散列函数实现报文鉴别的技术又称为散列报文鉴别码(Hashed MAC,HMAC)。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/lIn8/image-20260415213722117.png" srcset="/img/loading.gif" lazyload alt="image-20260415213722117"></p>
+<p>攻击者不知道仅由通信双方共享的鉴别密钥s,也不能从截获的散列报文鉴别码HMAC中计算出s,因此不能伪造报文m’产生（m’+s)的HMAC。</p>
+<h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><p>我们日常生活中的书信或文件可以依据亲笔签名或印章来证明其真实来源。</p>
+<p>类似地，在计算机网络中传送的报文可以使用数字签名(Digital Signature)来证明其真实来源。</p>
+<p>数字签名必须保证以下三点：</p>
+<ul>
+<li>接收方能够核实发送方对报文的数字签名。</li>
+<li>接收方在内的任何人都不能伪造对报文的数字签名。</li>
+<li>发送方事后不能抵赖对报文的数字签名。</li>
+</ul>
+<p>对于事后追责，法律站在我们这边，但是法律发挥作用的前提是有不可磨灭的证据。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/L0rw/image-20260416103408861.png" srcset="/img/loading.gif" lazyload alt="image-20260416103408861"></p>
+<p>报文由A使用解密密钥SK对报文进行解密并生成数字签名，随后将密文发送给接收方B，B再根据自己的私钥将报文还原。</p>
+<p>为什么报文没有经过加密就使用解密密钥SK解密呢？没有关系，加密解密的区分无非是顺序上的不同，实际上他们都是一个数学计算过程，都能够将初始数据转化为不可读取的杂乱无章的内容。</p>
+<p>由于除A外的其他任何人都没有A的私钥SK,所以除A外没有其他任何人能产生带有数字签名的报文,而任何伪造的报文经过接收方用A的公钥运算后都不会得到可理解的内容。因此，B就通过这种方式核实了报文m的确是A签名发送的。</p>
+<p>在非对称加密中，是<strong>他人用你的公钥加密，你用私钥解密</strong>；而在数字签名中，是<strong>你用私钥签名，他人用你的公钥验证</strong>。</p>
+<p>如果A要抵赖曾发送报文m给B,B可以把报文m和带有数字签名的报文出具给第三方。第三方很容易用A的公钥PK,去证实A确实发送过报文给B。<br>反之，若B把报文m伪造成m’,则B不能在第三方前出示带有数字签名的报文,因为B不可能真有A的私钥SK。这样就证明B伪造了报文。</p>
+<p>很显然，数字签名实现了对报文来源的鉴<br>别。</p>
+<p>实际上，需要说明的是，由于公钥密码算法的计算代价非常高，对整个报文进行数字签名是件非常耗时的事情，更有效的方法是<strong>仅对报文摘要</strong>进行数字签名。</p>
+<p>另外，上述过程只对报文进行了签名，但是没有实行加密。A的公钥PK是公开的，这意味着任何攻击者都能够在截获到报文后用公钥将其还原成有意义的字符：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/g5xC/image-20260416104524331.png" srcset="/img/loading.gif" lazyload alt="image-20260416104524331"></p>
+<p>所以我们需要带加密的数字签名</p>
+<h4 id="具有保密性的数字签名"><a href="#具有保密性的数字签名" class="headerlink" title="具有保密性的数字签名"></a>具有保密性的数字签名</h4><p>实际上这并不难，与前面的非对称数字加密联合就可以。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/u0tP/image-20260416104755609.png" srcset="/img/loading.gif" lazyload alt="image-20260416104755609"></p>
+<p>由于其他人无法知道接收方B的私钥，所以截获了报文也无法将其解密。</p>
+<h3 id="实体鉴别"><a href="#实体鉴别" class="headerlink" title="实体鉴别"></a>实体鉴别</h3><p>实体鉴别就是通信双方的一方验证另一方身份的技术，常简称为鉴别。</p>
+<ul>
+<li>实体可以是人、客户进程或服务器进程。</li>
+</ul>
+<p>下面仅介绍如何鉴别通信对端实体的身份，也就是验证通信的对方确实是所要通信的实体，而不是其他伪装者。</p>
+<ul>
+<li>通信实体的鉴别通常是两个通信实体之间传输实际数据之前或进行访问控制之前的必要过程，这是很多安全协议的重要组成部分。</li>
+</ul>
+<p>实体鉴别的最简单方法就是使用用户名和口令。为了应对用户名和口令被攻击者截获的安全威胁，需要对用户名和口令进行加密。但是这样会导致重放攻击(Replay Attack)：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/frW5/image-20260416105514125.png" srcset="/img/loading.gif" lazyload alt="image-20260416105514125"></p>
+<p>攻击者根本无须解密报文，而是能够直接将加密后的密文发送给B，随后B将C认为是A，C就能够伪装A的身份收到B发送的数据。</p>
+<p>为了抵御重放攻击，可以用不重数(nonce)，这是一个不重复使用的大随机数。这被称为”挑战-响应协议”。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/H4rn/image-20260416110054001.png" srcset="/img/loading.gif" lazyload alt="image-20260416110054001"></p>
+<p>A随机生成一个不重数RA，随后将A的用户名和RA加密后传输到B，B接收到后再生成一个随机不重数RB，将RA，RB和数据封装在一个报文中传回A，A用共享密钥解出RA，这就证明了B的身份(只有成功解密的主机才能得知RA，才能在其他的报文中加入RA)。</p>
+<p>随后A将RB和数据封装在报文中发送给B，B收到后用共享密钥解密，就验证了A的身份。之后就能够开始数据传输了。</p>
+<p>由于每次会话必须使用不同的不重数，所以攻击者在进行重放攻击时无法重复使用所截获的不重数，因而也就无法伪装成A或B。</p>
+<p>这个协议通过“<strong>谁能正确说出我刚生成的秘密随机数，谁就拥有共享密钥</strong>”的逻辑，实现了双向身份验证。</p>
+<p>实际上使用公钥密码体制也可以实现实体鉴别。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/aQi1/image-20260416111611484.png" srcset="/img/loading.gif" lazyload alt="image-20260416111611484"></p>
+<p>A生成随机数RA，将其以<strong>明文</strong>的形式发给B，B接收到后，将其与自身的RB用私钥进行数字签名后发给A，A接收后发现<strong>能够使用公钥解密成有意义内容且其中含有RA</strong>这就能够确认B的身份。随后A用自己的私钥加密RB，B接收后用A的公钥解密发现是RB，这就确认了A的身份。随后即可进行数据传输。</p>
+<p>这种基于不重数（随机挑战值）的公钥认证协议，其核心本质正是 <strong>“双方互相验证对方的数字签名”</strong>。</p>
+<p>但是这么做依旧有被攻击的可能。</p>
+<p>C是AB的中间人，AB之间的通信需要C的转发。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/h9tH/image-20260416113430524.png" srcset="/img/loading.gif" lazyload alt="image-20260416113430524"></p>
+<p>过程待补充</p>
+<p>所以，公钥的分发以及公钥真实性的认证也是一个非常重要的问题，</p>
+<h3 id="密钥分发"><a href="#密钥分发" class="headerlink" title="密钥分发"></a>密钥分发</h3><ul>
+<li>在对称密钥密码体制中，通信双方共享的密钥是需要保密的。</li>
+<li>在公钥密码体制中，公钥是公开的，但私钥仍然需要保密。</li>
+<li>密钥分发是密钥系统中一个非常重要的问题。密钥必须通过安全的通路进行分发。</li>
+</ul>
+<p>密钥分早期使用信使来进行分发，但是现在规模大了，只能用网内密钥自动分发，就是通过网络自动分发秘钥。</p>
+<p>对于对称密钥密码体制，目前常用的密钥分发方式是建立密钥分配中心(Key Distribution Center,KDC)。</p>
+<p>KDC是一个公众都信任的机构，其任务就是给需要进行秘密通信的用户临时分配一个会话密钥。</p>
+<p>【举例】假设用户A和B都是KDC的登记用户，他们在KDC登记时就分别拥有了与KDC通信的主密钥KA和KB。用户A和B通过KDC安全获得他们之间共享的、用于一次会话的密钥KAB的过程如下：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/X6bq/image-20260416114955852.png" srcset="/img/loading.gif" lazyload alt="image-20260416114955852"></p>
+<p>如图，A和B分别持有私钥：</p>
+<p>A将想和B通信的请求以明文告知KDC，KDC返回一报文 ，该报文最外层用KA加密，内存KAB和一票据，票据用KB加密，内含KAB和A向B的通信请求。该报文发给A后，A通过私钥解密得到KAB，随后转发给B，B通过B私钥KB解密得到KAB，并得知A想和B通信。持有KAB的双方就能够开始通信。</p>
+<p>注意：</p>
+<ul>
+<li>在网络上传送的密钥都是用于加密的密钥，并且需要加密后才能传送。解密用的密钥都不在网上传送。</li>
+<li>KDC分配给用户的主密钥（例如上述例子中的KA和KB)应当定期更换以减少攻击者破译密钥的机会。</li>
+<li>KDC可以在报文中加入时间戳，以防止报文的截获者利用之前已记录下的报文进行重放攻击。</li>
+</ul>
+<h4 id="公钥的分发"><a href="#公钥的分发" class="headerlink" title="公钥的分发"></a>公钥的分发</h4><p>公钥密码体制中的公钥是公开的，而私钥是用户私有的（保密的)</p>
+<ul>
+<li>如果每个用户都知道其他用户的公钥，用户之间就可以实现安全通信。</li>
+<li>然而，如果通过网络来随意公布用户的公钥，会面临极大的安全风险。</li>
+<li>因此，需要有一个值得信赖的机构将公钥与其对应的实体（人或机器）进行绑定(binding)。这种机构被称为认证中心(Certification Authority,CA),一般由政府出资建立。</li>
+</ul>
+<p>需要发布公钥的用户可以让CA为其公钥签发一个证书(Certification)，证书中包含有公钥及其拥有者的身份标识信息（人名、公司名或IP地址等）。</p>
+<p>CA签发证书的过程如下：</p>
+<ul>
+<li>CA必须核实用户真实身份；</li>
+<li>CA为用户产生公钥私钥对，并生成证书：</li>
+<li>CA用自己的私钥对证书进行数字签名。</li>
+<li>该证书就可以通过网络发送给任何希望与该证书拥有者通信的实体，也可将该证书存放在服务器由其他用户自由下载。</li>
+<li>CA为用户产生的公钥私钥对中的私钥，必须由证书拥有者自己秘密保存。</li>
+<li>任何人都可从可信的地方（例如代表政府的报纸）获取CA自身的公钥，并用这个公钥来验证某个证书是否是该C签发的真实证书。一旦证书被鉴别是真实的，则可以相信证书中的公钥确实属于证书中声称的用户。</li>
+</ul>
+<p>如果全世界仅使用一个CA来签发证书，则会出现负载过重和单点故障等问题。</p>
+<p>因特网采用的是RFC5280](现在是建议标准)给出的、在全球范围内为所有因特网用户提供证书签发与认证服务的公钥基础结构(Public Key Infrastructure,PKI)</p>
+<ul>
+<li>下级CA的证书由上级CA签发和认证。</li>
+<li>所有用户都信任顶级的根CA,但可以信任也可以不信任中间的CA。</li>
+<li>用户可以在自己信任的CA获取个人证书，当要验证来自不信任CA签发的证书时，需要到上一级CA验证该证书的真伪，如果上一级CA也不可信则需要到更上一级CA进行验证，一直追朔到可信任的一级CA,这一过程最终有可能会追溯到顶级的根CA。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/16/kxB5/image-20260416120828045.png" srcset="/img/loading.gif" lazyload alt="image-20260416120828045"></p>
+<p>如win10可以运行<code>certmgr.msc</code>来查看证书：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/Gl9q/image-20260416121023167.png" srcset="/img/loading.gif" lazyload alt="image-20260416121023167"></p>
+<h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3><p>访问控制是信息安全的核心机制，用于<strong>决定谁（用户或进程）在什么条件下可以访问哪些系统资源（如数据、文件、网络），以及能进行何种操作（如读、写、执行）</strong>。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/5Pmw/image-20260416151658839.png" srcset="/img/loading.gif" lazyload alt="image-20260416151658839"></p>
+<p>对合法用户访问权限的授予一般遵循最小特权原则。</p>
+<ul>
+<li>最小特权是指能够满足用户完成工作所需的权限，用户不会被赋予超出其实际需求的权限。</li>
+<li>最小特权原则可以有效防范合法用户滥用权限所带来的安全风险。</li>
+</ul>
+<p>访问控制包含以下要素：</p>
+<ul>
+<li>主体：<strong>访问活动的发起者</strong>，可以是某个用户，也可以是代表用户执行操作的进程、服务和设备等。</li>
+<li>客体：<strong>访问活动中被访问的对象</strong>，凡是可以被操作的信息、文件、设备、服务等资源都可以认为是客体。</li>
+<li>访问：<strong>主体对客体的各种操作类型。</strong>例如创建、读取、修改、删除、执行、发送、接收等操作。不同的系统有不同的访问类型。</li>
+<li>访问策略：<strong>访问控制的核心，访问控制根据访问策略限制主体对客体的访问。</strong>访问控制策略可用三元组(S、O、P)来描述，其中S表示主体，O表示客体，P表示许可(Permission)。许可P明确了允许主体S对客体0O所进行的访问类型。访问策略通常存储在系统的授权服务器中。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/16/9awW/image-20260416152005280.png" srcset="/img/loading.gif" lazyload alt="image-20260416152005280"></p>
+<p>如图，是著名的访问监控器（Reference Monitor）模型：</p>
+<p>主体访问客体前，访问监视器会向授权服务器查询相应的访问策略并决定是否允许其访问。审计模块是该模型的必要补充，会记录访问主体，客体，类型，时间等信息留痕。系统管理员能够事后查看审计记录来定责。</p>
+<p>管理员主要检查的信息有：</p>
+<ul>
+<li>哪些主体对哪些资源的访问请求被拒绝。</li>
+<li>访问策略是否得到了严格执行。</li>
+<li>提供访问活动的证据，为事后追查和追责提供依据。</li>
+</ul>
+<h4 id="三种典型的访问控制策略"><a href="#三种典型的访问控制策略" class="headerlink" title="三种典型的访问控制策略"></a>三种典型的访问控制策略</h4><ul>
+<li>自主访问控制策略</li>
+</ul>
+<p>DAC策略中“自主”的意思是客体的拥有者可以自主地决定其他主体对其拥有的客体所进行访问的权限。</p>
+<ul>
+<li>优点：具有很强的灵活性</li>
+<li>缺点：权限管理过于分散，容易出现漏洞，并且无法有效地控制被攻击主体破坏系统安全性的行为。</li>
+</ul>
+<p>木马程序利用自主访问控制策略的上述缺点，可以很容易地破坏系统的安全性。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/Ky8z/image-20260416152658787.png" srcset="/img/loading.gif" lazyload alt="image-20260416152658787"></p>
+<p>自主访问控制策略的最大特点是“自主”，也就是资源的拥有者对资源的访问策略具有决策权，因此是一种限制比较弱的访问控制策略。这种访问控制策略给用户带来灵活性的同时，也带来了安全隐患。</p>
+<ul>
+<li>强制访问控制策略</li>
+</ul>
+<p>强制访问控制策略与自主访问控制策略不同，它不允许一般的主体进行访问权限的设置。</p>
+<p>在强制访问控制策略中，主体和客体被赋予一定的安全级别。通常只有系统的安全管理员可以进行安全级别的设定，而普通用户不能改变自己或任何客体的安全级别。</p>
+<p>系统通过比较主体和客体的安全级别来决定某个主体是否能够访问某个客体，广泛使用以下两个原则：</p>
+<ul>
+<li>下读：主体的安全级别高于或等于客体才能读取客体，主体往下读取。</li>
+<li>上写：客体安全级别高于或等于主体才能被写入，主体往上写入</li>
+</ul>
+<p>”下读”和“上写”原则限制了信息只能由低级别的对象流向高级别或同级别的对象，这样能够有效防止木马等恶意程序的窃密攻击。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/ekE6/image-20260416153312578.png" srcset="/img/loading.gif" lazyload alt="image-20260416153312578"></p>
+<p>攻击者B安全级别&lt;安全级别&lt;用户A的安全级别</p>
+<p>病毒拥有用户A的安全级别，但是无法创建新的低级文件并写入，这就使得B无法通过木马读取到文件中的信息。</p>
+<ul>
+<li>基于角色的访问控制策略</li>
+</ul>
+<p>基于角色的访问控制策略的核心思想是：根据安全策略划分不同的角色，用户不再直接与许可关联，而是通过角色与许可关联。</p>
+<ul>
+<li>一个用户可以拥有多个角色，一个角色也可以赋予多个用户：</li>
+<li>一个角色可以拥有多种许可，一种许可也可以分配给多个角色。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/16/g6Iu/image-20260416153512650.png" srcset="/img/loading.gif" lazyload alt="image-20260416153512650"></p>
+<p>角色与许可之间的关系比角色与用户的关系要更加稳定。</p>
+<p>当一个用户的职责发生变化或需要为一个新的用户授权时，只要修改或设置用户的角色即可。</p>
+<p>很显然，将用户和访问权限通过角色进行逻辑隔离能够减小授权的复杂性、增强权限的可管理性、减少因授权失误导致安全漏洞的风险。</p>
+<h2 id="网络体系结构的各层采取的措施"><a href="#网络体系结构的各层采取的措施" class="headerlink" title="网络体系结构的各层采取的措施"></a>网络体系结构的各层采取的措施</h2><h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>在物理层实现通信数据的保密性和完整性的方法是对信道进行加密。</p>
+<p>对信道进行加密需要使用信道加密机。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/6Mgg/image-20260416153929210.png" srcset="/img/loading.gif" lazyload alt="image-20260416153929210"></p>
+<p>使用信道加密技术可为通过链路的所有数据提供安全保护，并且对上层协议几乎没有任何影响，也就是具有很好的透明性。</p>
+<ul>
+<li>由于链路上传送的各种协议数据单元PDU的首部和数据载荷都被加密了，PDU的截获者无法从PDU中提取源地址和目的地址，因此可以防止各种形式的流量分析。</li>
+</ul>
+<p>由于信道加密机完全使用硬件加密技术，因此加密和解密速度快，并目无须传送额外的数据，采用该技术不会减少网络的有效带宽。</p>
+<p>在网络互连的情况下，信道加密这种仅用于保护网络局部链路通信安全的技术不能确保端到端通信的安全，他的作用区域仅在一段链路，数据在路由器节点必须解密，这会导致风险</p>
+<p>在实际应用中，通常只在容易被窃听的无线链路(例如卫星链路)上，或军用网络等专用网络的通信链路所在不安全区域的部分使用信道加密技术。</p>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>随着802.11无线局域网(Wi-Fi)的广泛应用，其安全问题越来越受到关注。</p>
+<p>在无线通信方式下，电磁波在自由空间辐射传播，任何无线终端都可在无线接入点的信号覆盖范围内接收其无线信号。</p>
+<ul>
+<li>若不采取相应安全措施，任何无线终端都可以接入到网络中，进而窃听网络通信或非法使用网络资源。</li>
+</ul>
+<p>因此802.11无线局域网的安全问题就显得尤为重要。802.11无线局域网主要在数据链路层为用户提供安全服务。有三个安全机制：</p>
+<ul>
+<li>SSID匹配机制</li>
+<li><ul>
+<li>用户给终端配置的SSID相同，才能接入，实际上没什么用。</li>
+<li><img src="https://files.seeusercontent.com/2026/04/16/3yCy/image-20260416154537346.png" srcset="/img/loading.gif" lazyload alt="image-20260416154537346"></li>
+</ul>
+</li>
+<li>MAC地址过滤机制</li>
+<li><ul>
+<li>网络管理员能够在路由器配置允许接入网络的MAC地址列表，只有表中的MAC地址才能接入网络。一样没什么用。</li>
+<li><img src="https://files.seeusercontent.com/2026/04/16/nC9j/image-20260416154658941.png" srcset="/img/loading.gif" lazyload alt="image-20260416154658941"></li>
+</ul>
+</li>
+<li>有线等效保密WEP机制</li>
+<li><ul>
+<li>网络管理员在AP上配置由AP和用户的无线终端共享的WEP密钥，显然是对称密码体制。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/16/3bTq/image-20260416154758234.png" srcset="/img/loading.gif" lazyload alt="image-20260416154758234"></p>
+<p>WEP并没有密钥分发机制，在鉴别过程和其后的数据通信过程中的所有通信都使用同一个共享密钥，并且所有接入到同一802.11无线局域网的无线终端都使用这同一个密钥。</p>
+<p>另外，WEP采用的加密算法的强度较低。国内外众多研究人员已从理论和实际上都证明了WEP加密存在严重的安全隐患。</p>
+<p>2004年，IEEE 802.11i提出，使用了更强的安全机制。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/cdK1/image-20260416154924585.png" srcset="/img/loading.gif" lazyload alt="image-20260416154924585"></p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/8Viw/image-20260416155153992.png" srcset="/img/loading.gif" lazyload alt="image-20260416155153992"></p>
+<p>待补充</p>
+<p>IEEE802.11提供了多种加密形式，其中包含WEP加密的强化版本临时密钥完整性协议(Temporal Key Integrity Protocol,TKIP)和基于高级加密标准AES的加密方案。</p>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>IPSec是“IP Security”(IP安全)的缩写词，它是为因特网的网际层提供安全服务的协议族<br>(也有人不太严格地称其为”IPSect协议”)[RFC4301,RFC6071]。</p>
+<p>IPSec并不限定用户使用何种特定的加密和鉴别算法，通信双方可以选择合适的算法和参数（例如，密钥长度)。</p>
+<ul>
+<li>为了保证互操作性，PSec也包含了一套加密算法，所有PSc的实现都必须实现这套加密算法。</li>
+</ul>
+<p>IPSec包含两种 不同的工作方式：</p>
+<ul>
+<li>运输方式</li>
+<li>隧道方式</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/16/1xfF/image-20260416160112831.png" srcset="/img/loading.gif" lazyload alt="image-20260416160112831"></p>
+<p>​     无论使用上述哪种方式，所封装出的IP安全数据报的首部都是不加密的。这是为了使因<br>特网中的各路由器能够识别IP安全数据报首部中的相关信息，进而可以将P安全数据报在不<br>安全的因特网中从源点安全地转发到终点。</p>
+<p>所谓”IP安全数据报”，是指数据报的数据载荷<br>是经过加密并能够被鉴别的。</p>
+<p>在使用隧道方式传送P安全数据报之前，应当首先为通信双方建立一条网际层的逻辑连接（即安全隧道)，称为安全关联(Security Association,SA)。</p>
+<p>这样，传统因特网无连接的网际层就变成了具有逻辑连接的一个层。</p>
+<p>提供安全服务的安全关联SA是从源点到终点的单向连接。如果需要进行双向安全通信，则两个方向都需要建立SA。IP安全数据报就在这些SA中传送。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/7buI/image-20260416161010985.png" srcset="/img/loading.gif" lazyload alt="image-20260416161010985"></p>
+<p>如图，总部与分公司间建立起一道安全关联隧道SA。主机A的数据报经过R1被封装加密成IP安全数据报，经过SA运输到达R2，随后R2将其解密成原始IP数据报，并根据目的地址直接交付给B。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/Jx8a/image-20260416161434096.png" srcset="/img/loading.gif" lazyload alt="image-20260416161434096"></p>
+<p>建立安全关联SA的路由器或主机，需要维护这条SA的状态信息</p>
+<ul>
+<li>一个32位的连接标识符，称为安全参数索引(Security Parameter Index,SPI)</li>
+<li>SA的源点和终点的P地址（图中路由器R1和主机B的P地址）</li>
+<li>所使用的的加密类型（例如DES或AES)</li>
+<li>加密的密钥</li>
+<li>完整性检查的类型</li>
+<li>鉴别使用的密钥</li>
+</ul>
+<h4 id="IP安全数据报格式"><a href="#IP安全数据报格式" class="headerlink" title="IP安全数据报格式"></a>IP安全数据报格式</h4><p>在PSec协议族中有两个主要的协议：鉴别首部<br>(Authentication Header,.AH)协议和封装安全有效载荷(Encapsulation Security Payload,ESP)协议。</p>
+<ul>
+<li>AH协议提供源点鉴别和数据完整性服务，但不能提供保密性服务。</li>
+<li>ESP协议比AH协议复杂得多，它提供源点鉴别，数据完整性和保密性服务。</li>
+</ul>
+<p>IPSec既支持IPv4,也支持Pv6。在IPv6中，AH和ESP都是扩展首部的一部分。</p>
+<p>由于AH协议的功能都已包含在ESP协议中，因此使用ESP协议就无须使用AH协议。下面不再介绍AH协议，而只介绍ESP协议的要点。</p>
+<p>使用ESP或AH协议的IP数据报称为IP安全数据报（或IPSec数据报），它可以在两台主机之间、两台路由之间或一台主机和一台路由器之间的安全关联SA(安全隧道)中传送。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/r8eB/image-20260416162241381.png" srcset="/img/loading.gif" lazyload alt="image-20260416162241381"></p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/D8cf/image-20260416162416479.png" srcset="/img/loading.gif" lazyload alt="image-20260416162416479"></p>
+<p>若某个IP安全数据报在因特网中被某个攻击者截获，只要攻击者不知道该P安全数据报的密码：</p>
+<ul>
+<li>攻击者就仅能知道该P安全数据报的首部信息（例如源P地址和目的P地址），但无法看懂其数据载荷的含义。</li>
+<li>即使攻击者故意删除了该P安全数据报的数据载荷中的一些字节，由于接收端能够进行完整性验证，因此不会接受这种含有差错的数据报。</li>
+<li>如果攻击者尝试重放攻击，但由于P安全数据报使用了有效的序号，因此使得重放攻击也不能成功。</li>
+</ul>
+<h4 id="IPSec的其他构件"><a href="#IPSec的其他构件" class="headerlink" title="IPSec的其他构件"></a>IPSec的其他构件</h4><table>
+<thead>
+<tr>
+<th>安全关联数据库 （SecurityAssociationDatabase,SAD)</th>
+<th>发送IP安全数据报的实体（路由器或主机）使用安全关联数据库 SAD来存储可能要用到的很多条安全关联SA。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>安全策略数据库 (Security Policy Database, SPD)</td>
+<td>安全策略数据库SPD指明了什么样的IP数据报需要进行IPSec处理。</td>
+</tr>
+<tr>
+<td>因特网密钥交换协议 (Internet Key Exchange, IKE)</td>
+<td>因特网密钥交换IKE协议为IP安全数据报自动创建安全关联SA（而 无需人工配置）。</td>
+</tr>
+</tbody></table>
+<h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><p>举一个最常见的例子，网上购物，计算机需要提供以下基本服务：</p>
+<ul>
+<li>顾客与销售商之间需要相互鉴别，以防止冒充者</li>
+<li>要确保顾客与销售商之间的报文（例如购物清单和账单)在传输过程中没有被篡改。</li>
+<li>要确保顾客与销售商之间的敏感信息<br>(例如顾客的信用卡号)不被冒充者窃听。</li>
+</ul>
+<p>要实现上述这些安全服务，就需要使用运输<br>层的安全协议，有以下两个：</p>
+<ul>
+<li>安全套接字层SSL</li>
+<li>运输层安全TLS</li>
+</ul>
+<p>作用于应用层与运输层之间，可看作以下层次结构：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/zdA3/image-20260416163842665.png" srcset="/img/loading.gif" lazyload alt="image-20260416163842665"></p>
+<h4 id="安全套接字SSL"><a href="#安全套接字SSL" class="headerlink" title="安全套接字SSL"></a>安全套接字SSL</h4><p>SSL提供以下三个服务：</p>
+<ul>
+<li>SSL服务器鉴别</li>
+<li><ul>
+<li>支持SSL的客户端通过验证来自服务器的证书，来鉴别服务器的真实身份并获得服务器公钥</li>
+</ul>
+</li>
+<li>SSL客户鉴别</li>
+<li><ul>
+<li>用于服务器证实客户身份，这是SSL的可选安全服务</li>
+</ul>
+</li>
+<li>加密的SSL会话</li>
+<li><ul>
+<li>加密客户和服务器之间传送的所有报文，并检测报文是否被篡改。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/16/tI4g/image-20260416164954321.png" srcset="/img/loading.gif" lazyload alt="image-20260416164954321"></p>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p>相较于计算机网络体系结构的其他各层，在应用层实现安全服务相对简单。</p>
+<p>TCP体系结构的应用层中包含大量协议，本节课以电子邮件相关安全协议为例进行介绍。</p>
+<p>PGP(Pretty Good Privacy）是已被广泛应用的，为电子邮件提供加密、鉴别、电子签名和压缩等技术的电子邮件安全软件包，它是Zimmermann于1995年开发的。</p>
+<ul>
+<li>PGP使用对称密钥和公钥的组合进行加密，为电子邮件提供保密性。</li>
+<li>PGP通过报文摘要和数字签名技术为电子邮件提供完整性和不可否认性。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/16/7kYl/image-20260416165333584.png" srcset="/img/loading.gif" lazyload alt="image-20260416165333584"></p>
+<p>接收方：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/Hsf5/image-20260416165406243.png" srcset="/img/loading.gif" lazyload alt="image-20260416165406243"></p>
+<ul>
+<li>邮件的收发双方获取对方公钥的最安全的方法是双方面对面直接交换公钥，但在大多数情况下这并不现实。</li>
+<li>一般的做法是通过认证中心CA签发的证书来验证公钥持有者的合法身份。然而，PGP并没有要求使用CA，而允许使用一种第三方签署的方式来解决该问题。</li>
+<li>需要说明的是，用户发布其公钥的最常见方式，还是通过电子邮件进行分发或把公钥发布在他们的个人网页上。具体采用哪种方式发布自己的公钥，取决于用户对安全性的要求。</li>
+</ul>
+<h3 id="防火墙访问控制和入侵监测系统"><a href="#防火墙访问控制和入侵监测系统" class="headerlink" title="防火墙访问控制和入侵监测系统"></a>防火墙访问控制和入侵监测系统</h3><p><img src="https://files.seeusercontent.com/2026/04/16/kzE3/image-20260416192350461.png" srcset="/img/loading.gif" lazyload alt="image-20260416192350461"></p>
+<p>上述说到的安全机制无法解决的问题是：</p>
+<ul>
+<li>非法用户利用系统漏洞进行未授权登录</li>
+<li>授权用户非法获取更高级别的权限</li>
+<li>通过网络传播病毒、蠕虫和特洛伊木马</li>
+<li>阻止合法用户正常使用服务的拒绝服务攻击</li>
+</ul>
+<p>解决措施是防火墙和入侵监测系统。</p>
+<h4 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h4><p>防火墙（Firewall）属于一种访问控制技术，具体实现为一种可编程的特殊路由器。</p>
+<ul>
+<li>防火墙把一个单位（机构或公司）的内部网络与其他网络（一般为因特网）进行安全隔离。</li>
+<li>根据防火墙中配置的访问控制策略，某些分组允许通过防火墙，而某些分组则被禁止通过。</li>
+<li>访问控制策略由使用防火墙的单位根据自己的安全需要自行制定。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/16/p6lI/image-20260416192611759.png" srcset="/img/loading.gif" lazyload alt="image-20260416192611759"></p>
+<p>实现防火墙的设备有2种：</p>
+<ul>
+<li>分组过滤路由器</li>
+</ul>
+<p>分组过滤路由器是一种具有分组过滤功能的路由器，它根据所配置的分组过滤规则对出入内部网络的分组执行转发或丢弃（即分组过滤）</p>
+<p>分组过滤规则所采用的各参数来自分组的网际层和/或运输层首部中的某些字段的值。</p>
+<ul>
+<li>网际层：源IP地址和目的IP地址</li>
+<li>运输层：源端口和目的端口、以及协议类型(TCP或UDP)</li>
+</ul>
+<p>如图所示：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/zH2y/image-20260416192909366.png" srcset="/img/loading.gif" lazyload alt="image-20260416192909366"></p>
+<p>FTP文件传输协议使用熟知端口号21来进行，防火墙拦截21端口后，内部主机将无法从不信任的外部FTP服务器中下载任何文件。</p>
+<p>通常，分组过滤规则以访问控制列表(Access Control List,ACL)的形式存储在分组过滤路由器中。</p>
+<ul>
+<li>网络管理人员可以通过命令行或图形界面来配置ACL中的规则。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/16/Wb6s/image-20260416193142688.png" srcset="/img/loading.gif" lazyload alt="image-20260416193142688"></p>
+<p>分组过滤路由器简单高效，对用户是透明的（用户感觉不到分组过滤路由器的存在）。<br>然而，分组过滤路由器：</p>
+<ul>
+<li>不能对应用层数据进行过滤。</li>
+<li>不能禁止某个用户对某个特定网络应用进行某个特定的操作</li>
+<li>不支持应用层用户鉴别。</li>
+</ul>
+<p>这就需要应用网关来实现</p>
+<hr>
+<ul>
+<li>应用网关</li>
+</ul>
+<p>应用网关又称为代理服务器(Proxy Server）),它可以实现应用层数据的过滤和高层用户的鉴别。</p>
+<p>当用户通过应用网关访问内网或外网资源时，应用网关可以要求用户进行身份鉴别，然后根据用户身份对用户做出相应的访问控制。</p>
+<p>应用网关也有一些局限：</p>
+<ul>
+<li>每种网络应用都需要一个专用的应用网关。当然，多个不同的应用网关可以运行在同一台主机上。</li>
+<li>在应用层处理和转发报文，处理负担较重。</li>
+<li>应用网关对应用程序是不透明的，用户需要在应用程序客户端指明应用网关（代理服务器）的地址。</li>
+</ul>
+<p>实际上，这两个常常被配合使用：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/Nmd6/image-20260416193741046.png" srcset="/img/loading.gif" lazyload alt="image-20260416193741046"></p>
+<p>防火墙亦有分类：</p>
+<ul>
+<li>网络防火墙</li>
+<li><ul>
+<li>保护内部网络安全，由网络管理员进行配置和使用</li>
+</ul>
+</li>
+<li>个人防火墙</li>
+<li>仅保护单台计算机，由用户为其配置分组过滤规则，操作系统自带功能较弱的防火墙。</li>
+</ul>
+<p>尽管防火墙提高了内部网络的安全防护程度，但仍存在以下局限：</p>
+<ul>
+<li><p>对防火墙的配置是否正确和完善，在很大程度上决定了防火墙可以发挥的安全防护作用。</p>
+</li>
+<li><p>防火墙对恶意代码（病毒、木马等）的查杀能力非常有限，因此不能有效地防止恶意代码通过网络的传播。</p>
+<ul>
+<li>由于查杀恶意代码的计算开销非常大，若提高防火墙的查杀力度，则会降低防火墙的处理速度，进而降低用户的网络带宽。</li>
+</ul>
+</li>
+<li><p>防火墙对于一些利用系统漏洞或网络协议漏洞进行的攻击是无法防范的。</p>
+</li>
+<li><ul>
+<li>攻击者通过分组过滤规则中允许的端口对某个服务器的漏洞进行攻击，这对于一般的分组过滤路<br>由器是无法防护的。</li>
+<li>即使使用应用网关，也必须具有能够识别该特定漏洞的应用网关才能阻断攻击。</li>
+</ul>
+</li>
+<li><p>防火墙技术自身存在不足。</p>
+</li>
+<li><ul>
+<li>分组过滤路由器不能防止P地址和端口号欺骗。<ul>
+<li>应用软件自身也可能有软件漏洞而存在被渗透攻击的风险。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="入侵检测系统"><a href="#入侵检测系统" class="headerlink" title="入侵检测系统"></a>入侵检测系统</h4><p><img src="https://files.seeusercontent.com/2026/04/20/obD2/licensed-image.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>在入侵已经开始但还未造成危害或在造成更大危害之前，及时检测到入侵并尽快阻止入侵，尽量把危害降到最小，就是非常有必要的。入侵检测系统(Intrusion Detection System,IDS)正是这样一种技术。</p>
+<p>IDS对出入网络的分组执行深度检查，当检查到可疑分组时，会及时向网络管理员发出警报或进行阻断。</p>
+<ul>
+<li>由于IDS的误报率较高，因此一般情况下不建议对可疑分组进行自动阻断。</li>
+</ul>
+<p>IDS能够检测出：</p>
+<ul>
+<li>端口扫描</li>
+<li>拒绝服务攻击</li>
+<li>网络映射</li>
+<li>恶意代码</li>
+<li>系统漏洞</li>
+</ul>
+<p>入侵检测系统IDS分为两种：</p>
+<ul>
+<li>基于特征的入侵检测系统</li>
+<li><ul>
+<li>维护一个已知各类攻击的标志性特征的数据库</li>
+<li>检测到与某种攻击特征匹配的分组或分组序列时，就判断可能出现了某种入侵行为。</li>
+<li>标志性特征必须具有很好的区分度。</li>
+<li>标志性特征一般由网络安全专家提供，由单位的网络管理员定制并将其加入到数据库中。</li>
+</ul>
+</li>
+<li>基于异常的入侵检测系统</li>
+<li><ul>
+<li>通过观察正常运行的网络流量来学习正常网络流量的统计特性和规律</li>
+<li>检测到网络流量的某种统计规律不符合正常情况时，则判断可能发生了入侵行为。</li>
+<li>区分正常流量和统计异常流量是非常困难的。</li>
+<li>现在很多研究致力于将机器学习方法应用于入侵检测，减少对网络安全专家的依赖</li>
+</ul>
+</li>
+</ul>
+<p>衡量入侵检测系统DS的重要依据:</p>
+<ul>
+<li>漏报率：未能检测出</li>
+<li>误报率：对正常操作误报</li>
+</ul>
+<h3 id="常见网络攻击和防范"><a href="#常见网络攻击和防范" class="headerlink" title="常见网络攻击和防范"></a>常见网络攻击和防范</h3><h4 id="网络扫描"><a href="#网络扫描" class="headerlink" title="网络扫描"></a>网络扫描</h4><p>网络扫描是获取攻击目标信息的一种重要技术。</p>
+<ul>
+<li>攻击目标信息包括目的主机的P地址、操作系统、运行的程序及存在的漏洞等。</li>
+<li>在进行网络攻击之前，对攻击目标的信息掌握得越全面和具体，就越能有效合理地制定出攻击策略和攻击方法，进而提高网络攻击的成功率。</li>
+</ul>
+<p>这是渗透测试的第一步，信息收集，网络扫描有四种类型：</p>
+<ul>
+<li>主机发现</li>
+</ul>
+<p>主机发现是指搜索要攻击的主机，这是对其进行攻击的前提。搜索要攻击的主机，实际上是要确定该目标主机的P地址。</p>
+<p>进行主机发现的主要方法是利用网际控制报文协议ICMP。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/1orM/image-20260416195154497.png" srcset="/img/loading.gif" lazyload alt="image-20260416195154497"></p>
+<p>使用ping命令对某个lP地址范围内的所有P地址进行连通性测试，来发现正在运行的<br>目标主机。</p>
+<p>为了防范，可以配置主机不对ICMP进行回复，或者配置防火墙阻断ICMP查询报文。</p>
+<p>对策是，攻击者发送首部有误的IP数据报，在用户机引起错误之后让其传回ICMP差错报告报文，而ICMP差错报告报文一般是不会被防火墙拦截的，否则容易导致错误无法被报告和解决。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/bb7A/image-20260416195602338.png" srcset="/img/loading.gif" lazyload alt="image-20260416195602338"></p>
+<ul>
+<li>端口扫描</li>
+</ul>
+<p>在进行主机发现确定了要攻击的目标主机后，攻击者可以进一步通过端口扫描来获取目标主机所有端口的工作状态，进而得出目标主机上开放了哪些网络服务。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/6Yzy/image-20260416195725053.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/f3Xs/image-20260416195745235.png" srcset="/img/loading.gif" lazyload alt="image-20260416195745235"></p>
+<ul>
+<li>操作系统检测</li>
+</ul>
+<p>不同的操作系统所存在的安全漏洞可能有很多不同。要利用这些安全漏洞进行攻击，首先必须检测远程目标主机所使用的操作系统类型，通常有三种方法：</p>
+<ul>
+<li><ul>
+<li>获取操作系统旗标信息：</li>
+<li>在客户机与服务器建立连接<br>的过程中，服务器往往会返<br>回各种独特的欢迎信息。<br>攻击者可根据这些信息来推<br>断出服务器的操作系统类型</li>
+</ul>
+</li>
+<li><ul>
+<li>获取主机端口状态信息：</li>
+<li>操作系统通常会默认开启<br>些常用的网络服务，这些服<br>务会打开各自特定的端口进<br>行网络监听。<br>攻击者可对目标主机进行端<br>口扫描，根据端口扫描结果<br>来推断目标主机的操作系统<br>类型</li>
+</ul>
+</li>
+<li>获取TCP/IP协议栈指纹</li>
+<li><ul>
+<li>尽管RFC文档严格规定了各<br>种协议的三要素（语法、语<br>义和同步)，但并没有规定<br>各种协议的具体实现。<br>同一个协议在不同操作系统<br>中的实现细节可能会有所不<br>同，攻击者可据此推断目标<br>主机的操作系统类型。</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>操作系统</th>
+<th>默认TTL值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Linux (2.4 kernel)</td>
+<td>255</td>
+</tr>
+<tr>
+<td>Windows 10</td>
+<td>128</td>
+</tr>
+<tr>
+<td>MacOS X (10.5.6)</td>
+<td>64</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>操作系统</th>
+<th>TCP窗口默认初始值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Windows</td>
+<td>8KB</td>
+</tr>
+<tr>
+<td>Solaris</td>
+<td>52KB</td>
+</tr>
+<tr>
+<td>FreeBSD</td>
+<td>发送=32KB，接收=56KB</td>
+</tr>
+</tbody></table>
+<ul>
+<li>漏洞扫描</li>
+</ul>
+<p>根据前面两个提供的信息，攻击者能够根据漏洞库查看该操作系统的主机和服务可能出现哪些漏洞来制定攻击方案。</p>
+<h4 id="网络攻击防范"><a href="#网络攻击防范" class="headerlink" title="网络攻击防范"></a>网络攻击防范</h4><ul>
+<li>仅打开确实需要使用的端口，关闭闲置和危险端口。</li>
+<li>限制因特网（不可信网络）中的主机主动与内部网络(可信网络)中的主机进行通信。</li>
+<li>设置防火墙，根据安全要求设置分组过滤策略（例如过滤不必要的CMP报文）</li>
+<li>使用入侵检测系统IDS及时发现网络扫描行为和攻击者P地址，配置防火墙对来自该地址的分组进行阻断。<ul>
+<li>网络扫描的行为特征是比较明显的，例如在短时间内对某一P地址范围内的每个地址和端口<br>发起连接等。</li>
+<li>目前，大部分防火墙都具有识别简单的网络扫描行为的功能。</li>
+<li>然而，很多攻击者也在研究如何隐蔽自己的网络攻击行为。例如利用虚假源地址、减缓扫描速度、动态调整扫描顺序、分布式扫描等。</li>
+</ul>
+</li>
+</ul>
+<h4 id="网络监听"><a href="#网络监听" class="headerlink" title="网络监听"></a>网络监听</h4><p>网络中传输的数据大部分都是明文形式。如果攻击者对网络进行监听并截获了包含有大量明文信息的一系列分组，则可从这些分组中直接分析出账号、密码等敏感信息。</p>
+<p>分为三种：</p>
+<ul>
+<li>分组嗅探器</li>
+</ul>
+<p>分组嗅探器(Packet Sniffer)是一种网络监听工具软件，它运行在网络中的某台主机上，被动接收所有出入该主机的网络适配器（网卡）的数据链路层协议数据单元（即帧）</p>
+<p>如果将网络适配器配置为混杂方式，网络适配器就会接收所有进入自己接口的MAC帧，而不管这些帧的目的MAC地址是否指向该网络适配器。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/f2xT/image-20260416200711824.png" srcset="/img/loading.gif" lazyload alt="image-20260416200711824"></p>
+<p>如此C就能够收到别人的数据包，但是交换器就不同了：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/6iqF/image-20260416200833667.png" srcset="/img/loading.gif" lazyload alt="image-20260416200833667"></p>
+<p>已经完成自学习的交换机不会将帧转发给C，这就需要交换机毒化攻击。</p>
+<ul>
+<li>交换机毒化攻击</li>
+<li><img src="https://files.seeusercontent.com/2026/04/16/5But/image-20260416201156264.png" srcset="/img/loading.gif" lazyload alt="image-20260416201156264"></li>
+</ul>
+<p>攻击者伪造大量MAC地址的帧发给以太网交换机，填满其转发表。让原来有效的转发表项被更新淘汰。</p>
+<p>当有新的帧抵达时，在转发表中找不到该帧的地址对应的接口，交换机只能广播该单播帧，攻击机就能够获取到该帧。</p>
+<ul>
+<li>ARP欺骗</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/16/7oDr/image-20260416201340361.png" srcset="/img/loading.gif" lazyload alt="image-20260416201340361"></p>
+<p>如果网络中的所有主机都被攻击者进行了ARP欺骗，则攻击者就将自己伪装成了路由器，从而可以监听到网络中的所有通信，这对网络安全造成了极大的危害。</p>
+<h4 id="网络监听防范措施"><a href="#网络监听防范措施" class="headerlink" title="网络监听防范措施"></a>网络监听防范措施</h4><ul>
+<li>使用交换机替代集线器，这不但可以提高网络性能，还能使攻击者在交换机环境中更难实施监听。</li>
+<li>禁用交换机的自学习功能，将P地址、MC地址与交换机的接口进行静态绑定，这样可以限制非<br>法主机的接入，使攻击者无法实施交换机毒化攻击，也使ARP欺骗难以实施。</li>
+<li>对于ARP欺骗，主机或路由器可以仅使用静态ARP表，而不再依据ARP请求报文或响应报文动态更<br>新。</li>
+<li>划分VLAN可以限制攻击者的监听范围，因为分组嗅探器只能在单个局域网范围内进行。</li>
+<li>防范网络监听的最有效的方法是进行数据加密和实体鉴别技术。</li>
+</ul>
+<h4 id="拒绝服务攻击"><a href="#拒绝服务攻击" class="headerlink" title="拒绝服务攻击"></a>拒绝服务攻击</h4><p>拒绝服务DoS攻击是最容易实现却又最难防范的攻击手段。<br>类型有三种：</p>
+<ul>
+<li>基于漏洞的DoS攻击</li>
+</ul>
+<p>主要利用网络协议漏洞或操作系统漏洞。攻击者向目标系统发送一些特殊分组，使目标系统在处理这些分组时出现异常，甚至崩溃。这种攻击又称为剧毒包或杀手包(Killer Packet)攻击。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/ki2D/image-20260416201739644.png" srcset="/img/loading.gif" lazyload alt="image-20260416201739644"></p>
+<p>如，死亡之ping（Ping of Death），这是一种网络拒绝服务攻击，攻击者通过发送超过IP协议规定最大长度（65,535字节）的恶意ICMP数据包，导致目标系统因无法处理超大数据包而出现内存溢出、系统崩溃或重启等问题</p>
+<ul>
+<li>基于资源消耗的DoS攻击</li>
+</ul>
+<p>这种攻击是DoS攻击中采用最多的一种攻击。攻击者通过向目标系统发送大量的分组，从而耗尽目标系统的资源，致使目标系统崩溃而无法向正常用户提供服务。</p>
+<p>如TCP SYN洪范攻击：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/nqH7/image-20260416202043203.png" srcset="/img/loading.gif" lazyload alt="image-20260416202043203"></p>
+<p>攻击者向目标服务器发送海量的TCP SYN包服务器收到SYN后，会为每个请求分配资源由于攻击者伪造了源IP地址，服务器发送的SYN-ACK包永远无法到达真实的客户端，也等不到最终的ACK回复。这些未完成的连接会长时间占用服务器的“半连接队列”，直到超时。当海量的伪造请求填满队列后，服务器就无法再处理任何新的合法连接请求，导致服务瘫痪。</p>
+<p>当半连接的数量超过了系统允许的上限时，系统就不会再接受任何TCP连接请求，这将导致TCP服务器无法为正常客户提供服务。</p>
+<p>还有另一种攻击方法：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/l9Uk/image-20260416202311441.png" srcset="/img/loading.gif" lazyload alt="image-20260416202311441"></p>
+<p>还有“反射攻击”</p>
+<p>如Smurf攻击：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/Ve8q/image-20260416202407951.png" srcset="/img/loading.gif" lazyload alt="image-20260416202407951"></p>
+<p>主机A伪造主机C的地址，随后广播，将另外主机作为反射节点，引发其他主机对主机C群起而攻之，导致目标主机崩溃而无法对外提供服务。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/16/2nvB/image-20260416202532044.png" srcset="/img/loading.gif" lazyload alt="image-20260416202532044"></p>
+<p>反射攻击具有放大攻击流量的功能，网络中的主机越多，这种放大效果越好。</p>
+<ul>
+<li>分布式DoS攻击</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/16/4lhJ/image-20260416202649391.png" srcset="/img/loading.gif" lazyload alt="image-20260416202649391"></p>
+<h4 id="防范措施"><a href="#防范措施" class="headerlink" title="防范措施"></a>防范措施</h4><ul>
+<li>利用防火墙对恶意分组进行过滤，例如过滤掉所有ICMP回送请求报文可以防范Smurf攻击。然而，对于像“TCP SYN洪泛”这类攻击，一般很难区分哪些TCP连接请求报文是恶意的。</li>
+<li>使用支持源端过滤的路由器，尽量减少P地址伪造的现象。如果要通过源端过滤来防范DoS攻击，则必须使因特网上所有的路由器都具有源端过滤的功能。然而，目前源端过滤并不是路由器的强<br>制功能，支持源端过滤的路由器还是少数。</li>
+<li>追溯DoS攻击源。路由器对通过自己的P数据报的首部进行标记，通过该标记可追潮到Do$S攻击源。这个过程通常很慢，并且需要人工干预，因此目前主要用于事后追查以及采取相应的法律手段提供依据。</li>
+<li>进行DoS攻击检测，通过分析分组首部特征和流量特征来检测正在发生的DoS攻击并发出警报。</li>
+</ul>
+<p>上述措施并不能彻底防范DoS攻击，DoS攻击是目前最容易实现却又最难防范的攻击手段。</p>
+<blockquote>
+<p>恭喜，计算机网络的路你已经走完了。</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/Chapter%206%20of%20Computer%20Networks:%20Application%20Layer/" title="计算机网络第六章：应用层">
+                        <span class="hidden-mobile">计算机网络第六章：应用层</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
