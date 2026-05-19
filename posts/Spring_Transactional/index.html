@@ -1,0 +1,901 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Spring中的事务请类比MySQL中的事务，因为数据库操作不是原子性的，所以可能存在一些问题。例如我们代码的执行过程中，需要在表A中新增一条数据，在表B中也新增一条有关的数据。如果因为线路不稳定，表A新增成功了，表B新增失败了。最终结果自然是失败。但是数据库中会多出一条脏数据。因为表A已经新增成功了。所以我们就需要使用事务这一功能将操作强制原子化。 安装和配置Spring-JDBC是Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring中的事务">
+<meta property="og:url" content="http://example.com/posts/Spring_Transactional/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="Spring中的事务请类比MySQL中的事务，因为数据库操作不是原子性的，所以可能存在一些问题。例如我们代码的执行过程中，需要在表A中新增一条数据，在表B中也新增一条有关的数据。如果因为线路不稳定，表A新增成功了，表B新增失败了。最终结果自然是失败。但是数据库中会多出一条脏数据。因为表A已经新增成功了。所以我们就需要使用事务这一功能将操作强制原子化。 安装和配置Spring-JDBC是Spring">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s21.ax1x.com/2025/10/09/pVH876A.png">
+<meta property="article:published_time" content="2026-01-02T08:04:34.979Z">
+<meta property="article:modified_time" content="2026-01-02T08:04:35.488Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="网络工程">
+<meta property="article:tag" content="JAVA">
+<meta property="article:tag" content="Spring">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s21.ax1x.com/2025/10/09/pVH876A.png">
+  
+  
+  
+  <title>Spring中的事务 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s21.ax1x.com/2025/10/09/pVH876A.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Spring中的事务"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-02 08:04" pubdate>
+          2026年1月2日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Spring中的事务</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Spring中的事务"><a href="#Spring中的事务" class="headerlink" title="Spring中的事务"></a>Spring中的事务</h1><p>请类比MySQL中的事务，因为数据库操作不是原子性的，所以可能存在一些问题。例如我们代码的执行过程中，需要在表A中新增一条数据，在表B中也新增一条有关的数据。如果因为线路不稳定，表A新增成功了，表B新增失败了。最终结果自然是失败。但是数据库中会多出一条脏数据。因为表A已经新增成功了。所以我们就需要使用事务这一功能将操作强制原子化。</p>
+<h2 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h2><p>Spring-JDBC是Spring框架中对JDBC的增强工具类，通过Maven引入</p>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-jdbc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.3.39<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>使用类来进行配置</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableTransactionManagement</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppConfig</span> {<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> PlatformTransactionManager <span class="hljs-title function_">transactionManager</span><span class="hljs-params">(DataSource dataSource)</span> {<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataSourceTransactionManager</span>(dataSource);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>很简单，在有关数据库操作的函数前加上<code>@Transactional</code>注释就能够声明为事务管理操作</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OrderService</span> {<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-meta">@Transactional</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">createOrder</span><span class="hljs-params">(Order order)</span> {<br>        <span class="hljs-comment">// 数据库操作1</span><br>        orderDao.insert(order);<br>        <span class="hljs-comment">// 数据库操作2</span><br>        inventoryDao.deduct(order.getItemId());<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>使用该注释的参数模板是：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Transactional(</span><br><span class="hljs-meta">    isolation = Isolation.READ_COMMITTED, // 隔离级别</span><br><span class="hljs-meta">    propagation = Propagation.REQUIRED,   // 传播行为</span><br><span class="hljs-meta">    timeout = 30,                        // 超时秒数</span><br><span class="hljs-meta">    rollbackFor = Exception.class        // 回滚异常</span><br><span class="hljs-meta">)</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>事务隔离级别定义了多个事务并发执行时，彼此之间的可见性和影响程度。Spring支持标准SQL定义的4种隔离级别，用于解决并发事务可能引发的数据一致性问题。</p>
+<h4 id="1-读未提交（READ-UNCOMMITTED）"><a href="#1-读未提交（READ-UNCOMMITTED）" class="headerlink" title="1. 读未提交（READ_UNCOMMITTED）"></a>1. <strong>读未提交（READ_UNCOMMITTED）</strong></h4><ul>
+<li><strong>问题</strong>：允许读取其他事务未提交的修改。</li>
+<li><strong>风险</strong>：脏读（Dirty Read）、不可重复读（Non-Repeatable Read）、幻读（Phantom Read）。</li>
+<li><strong>适用场景</strong>：对一致性要求极低，追求高并发性能。</li>
+</ul>
+<h4 id="2-读已提交（READ-COMMITTED）"><a href="#2-读已提交（READ-COMMITTED）" class="headerlink" title="2. 读已提交（READ_COMMITTED）"></a>2. <strong>读已提交（READ_COMMITTED）</strong></h4><ul>
+<li><strong>默认值</strong>：多数数据库（如Oracle）的默认隔离级别。</li>
+<li><strong>解决</strong>：避免脏读，但允许不可重复读和幻读。</li>
+<li><strong>适用场景</strong>：允许事务间看到已提交的数据变化（如统计报表）。</li>
+</ul>
+<h4 id="3-可重复读（REPEATABLE-READ）"><a href="#3-可重复读（REPEATABLE-READ）" class="headerlink" title="3. 可重复读（REPEATABLE_READ）"></a>3. <strong>可重复读（REPEATABLE_READ）</strong></h4><ul>
+<li><strong>默认值</strong>：MySQL的默认隔离级别。</li>
+<li><strong>解决</strong>：避免脏读和不可重复读，但允许幻读。</li>
+<li><strong>机制</strong>：事务内多次读取同一数据的结果一致，但新增数据可能被其他事务插入（幻读）。</li>
+</ul>
+<h4 id="4-串行化（SERIALIZABLE）"><a href="#4-串行化（SERIALIZABLE）" class="headerlink" title="4. 串行化（SERIALIZABLE）"></a>4. <strong>串行化（SERIALIZABLE）</strong></h4><ul>
+<li><strong>解决</strong>：强制事务串行执行，避免所有并发问题（脏读、不可重复读、幻读）。</li>
+<li><strong>代价</strong>：性能最低，仅适用于严格要求一致性且并发量小的场景。</li>
+</ul>
+<h3 id="传播行为："><a href="#传播行为：" class="headerlink" title="传播行为："></a>传播行为：</h3><p>传播行为定义了事务方法在调用其他事务方法时，事务如何传播。Spring提供了7种传播行为，以下是常见类型：</p>
+<h4 id="1-REQUIRED（默认）"><a href="#1-REQUIRED（默认）" class="headerlink" title="1. REQUIRED（默认）"></a>1. <strong>REQUIRED（默认）</strong></h4><ul>
+<li><strong>规则</strong>：如果当前存在事务，则加入该事务；否则新建一个事务。</li>
+<li><strong>场景</strong>：大多数业务方法（如订单和库存操作需在同一个事务中）。</li>
+</ul>
+<h4 id="2-REQUIRES-NEW"><a href="#2-REQUIRES-NEW" class="headerlink" title="2. REQUIRES_NEW"></a>2. <strong>REQUIRES_NEW</strong></h4><ul>
+<li><strong>规则</strong>：无论当前是否存在事务，都新建一个事务，并挂起当前事务（如果存在）。</li>
+<li><strong>场景</strong>：日志记录（即使主事务回滚，日志仍需提交）。</li>
+</ul>
+<h4 id="3-NESTED"><a href="#3-NESTED" class="headerlink" title="3. NESTED"></a>3. <strong>NESTED</strong></h4><ul>
+<li><strong>规则</strong>：如果当前存在事务，则在嵌套事务（保存点）中执行；否则新建事务。</li>
+<li><strong>特点</strong>：嵌套事务回滚不影响外层事务，但外层事务回滚会导致嵌套事务回滚。</li>
+<li><strong>场景</strong>：复杂业务的分步操作（如订单创建成功后，部分子操作可独立回滚）。</li>
+</ul>
+<h4 id="4-SUPPORTS"><a href="#4-SUPPORTS" class="headerlink" title="4. SUPPORTS"></a>4. <strong>SUPPORTS</strong></h4><ul>
+<li><strong>规则</strong>：如果当前存在事务，则加入；否则以非事务方式运行。</li>
+<li><strong>场景</strong>：查询方法可适应有无事务的环境。</li>
+</ul>
+<h4 id="5-NOT-SUPPORTED"><a href="#5-NOT-SUPPORTED" class="headerlink" title="5. NOT_SUPPORTED"></a>5. <strong>NOT_SUPPORTED</strong></h4><ul>
+<li><strong>规则</strong>：以非事务方式执行，挂起当前事务（如果存在）。</li>
+<li><strong>场景</strong>：某些不需要事务的操作（如发送消息）。</li>
+</ul>
+<h4 id="6-MANDATORY"><a href="#6-MANDATORY" class="headerlink" title="6. MANDATORY"></a>6. <strong>MANDATORY</strong></h4><ul>
+<li><strong>规则</strong>：强制当前必须存在事务，否则抛出异常。</li>
+<li><strong>场景</strong>：确保方法必须在事务上下文中调用。</li>
+</ul>
+<h4 id="7-NEVER"><a href="#7-NEVER" class="headerlink" title="7. NEVER"></a>7. <strong>NEVER</strong></h4><ul>
+<li><strong>规则</strong>：强制当前不能存在事务，否则抛出异常。</li>
+<li><strong>场景</strong>：禁止事务的方法（如性能敏感的只读操作）。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/" class="category-chain-item">网络工程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">#网络工程</a>
+      
+        <a href="/tags/JAVA/">#JAVA</a>
+      
+        <a href="/tags/Spring/">#Spring</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/SpringMVC_start/" title="SpringMVC入门和控制器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SpringMVC入门和控制器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/AOP/" title="AOP:面向切面编程">
+                        <span class="hidden-mobile">AOP:面向切面编程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

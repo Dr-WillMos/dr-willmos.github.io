@@ -1,0 +1,1247 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="操作系统：第五章 这是最后一章了，这和计算机组成原理比较相似。  IO设备基本概念操作系统作为系统资源的管理者，也需要对外部设备进行管理。 “I&#x2F;O”就是“输入&#x2F;输出”(Input&#x2F;,Output)I&#x2F;O设备就是可以将数据输入到计算机，或者可以接收计算机输出数据的外部设备，属于计算机中的硬件部件。 UNIX系统将外部设备抽象为一种特殊的文件，用户可以使用与文件操作相同的方式对外部设备进行操作。 按">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统第五章：IO设备">
+<meta property="og:url" content="http://example.com/posts/Operating%20System%20Chapter%205:%20IO%20Devices/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="操作系统：第五章 这是最后一章了，这和计算机组成原理比较相似。  IO设备基本概念操作系统作为系统资源的管理者，也需要对外部设备进行管理。 “I&#x2F;O”就是“输入&#x2F;输出”(Input&#x2F;,Output)I&#x2F;O设备就是可以将数据输入到计算机，或者可以接收计算机输出数据的外部设备，属于计算机中的硬件部件。 UNIX系统将外部设备抽象为一种特殊的文件，用户可以使用与文件操作相同的方式对外部设备进行操作。 按">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s41.ax1x.com/2026/04/20/pecqBUU.jpg">
+<meta property="article:published_time" content="2026-04-20T07:17:37.517Z">
+<meta property="article:modified_time" content="2026-04-20T07:17:38.698Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s41.ax1x.com/2026/04/20/pecqBUU.jpg">
+  
+  
+  
+  <title>操作系统第五章：IO设备 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s41.ax1x.com/2026/04/20/pecqBUU.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="操作系统第五章：IO设备"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-20 07:17" pubdate>
+          2026年4月20日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          13k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          109 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">操作系统第五章：IO设备</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="操作系统：第五章"><a href="#操作系统：第五章" class="headerlink" title="操作系统：第五章"></a>操作系统：第五章</h1><blockquote>
+<p>这是最后一章了，这和计算机组成原理比较相似。</p>
+</blockquote>
+<h3 id="IO设备基本概念"><a href="#IO设备基本概念" class="headerlink" title="IO设备基本概念"></a>IO设备基本概念</h3><p>操作系统作为系统资源的管理者，也需要对外部设备进行管理。</p>
+<p>“I/O”就是“输入/输出”(Input/,Output)<br>I/O设备就是可以将数据输入到计算机，或者可以接收计算机输出数据的外部设备，属于计算机中的硬件部件。</p>
+<p>UNIX系统将外部设备抽象为一种特殊的文件，用户可以使用与文件操作相同的方式对外部设备进行操作。</p>
+<p>按使用特性分类可以分为</p>
+<ul>
+<li>人机交互类外部设备</li>
+<li>存储设备</li>
+<li>网络通信设备</li>
+</ul>
+<p>按传输速率分类</p>
+<ul>
+<li>低速设备</li>
+<li>中速设备</li>
+<li>高速设备</li>
+</ul>
+<p>按信息交换单位</p>
+<ul>
+<li>块设备</li>
+<li>字符设备</li>
+</ul>
+<h3 id="IO控制器"><a href="#IO控制器" class="headerlink" title="IO控制器"></a>IO控制器</h3><p>I/O设备的机械部件主要用来执行具体I/O操作。<br>如我们看得见摸得着的鼠标/键盘的按钮；显示器的LED屏；移动硬盘的磁臂、磁盘盘面。<br>I/O设备的电子部件通常是一块插入主板扩充槽的印刷电路板。</p>
+<p>但是CPU无法直接控制I/O设备的机械部件，因此I/O设备还要有一个电子部件作为CPU和I/O设备机械部件之间的“中介”，用于实现CPU对设备的控制，安装在主板上。<br>这个电子部件就是I/O控制器，又称设备控制器。CPU可控制I/O控制器，又由I/O控制器来控制设备的机械件。</p>
+<p>IO控制器的功能是</p>
+<ul>
+<li>接收和识别CPU发出的命令</li>
+<li><ul>
+<li>如CPU发来的read/write命令，lI/O控制器中会有相应的控制寄存器来存放命令和参数。</li>
+</ul>
+</li>
+<li>向CPU报告设备状态并中断</li>
+<li><ul>
+<li>IO控制器中会有相应的状态控制器，用于记录IO设备的当前状态。</li>
+</ul>
+</li>
+<li>数据交换</li>
+<li><ul>
+<li>IO控制器中会设置相应的数据寄存器。输出时，数据寄存器用于暂存CU发来的数据，之后再由控制器传送设备。输入时，数据寄存器用于暂存设备发来的数据，之后CPU从数据寄存器中取走数据</li>
+</ul>
+</li>
+<li>地址识别</li>
+<li><ul>
+<li>类似于内存的地址，为了区分设备控制器中的各个寄存器，也需要给各个寄存器设置一个特定的“地址”。I/O控制器通过CPU提供的“地址”来判断CPU要读/写的是哪个寄存器</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/04/yK3a/image-20260404211133406.png" srcset="/img/loading.gif" lazyload alt="image-20260404211133406"></p>
+<p>IO控制器的组成部分是：</p>
+<ul>
+<li>控制器与设备的接口</li>
+<li><ul>
+<li>控制器与设备的接口用于实现控制器与设备之间的通信</li>
+</ul>
+</li>
+<li>IO逻辑</li>
+<li><ul>
+<li>I/O逻辑负责接收和识别CPU的各种命令（如地址译码)，并负责对设备发出命令。</li>
+</ul>
+</li>
+<li>CPU与控制器接口</li>
+<li><ul>
+<li>用于实现CPU与控制器之间的通信。CPU通过控制线发出命令：通过地址线指明要操作的设备：通过数据线来取出（输入)数据，或放入（输出）数据</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/04/mRt5/image-20260404211335635.png" srcset="/img/loading.gif" lazyload></p>
+<p>值得注意的小细节：</p>
+<p>①一个I/O控制器可能会对应多个设备：<br>②数据寄存器、控制寄存器、状态寄存器可能有多个（如：每个控制/状态寄存器对应一个具体的设备)，且这些寄存器都要有相应的地址，才能方便CPU操作。有的计算机会让这些寄存器占用内存地址的一部分，称为内存映像I/O:另一些计算机则采用I/O专用地址，即寄存器独立编址。</p>
+<h4 id="内存映像和寄存器独立编制"><a href="#内存映像和寄存器独立编制" class="headerlink" title="内存映像和寄存器独立编制"></a>内存映像和寄存器独立编制</h4><p><img src="https://files.seeusercontent.com/2026/04/04/4Kne/image-20260404211600976.png" srcset="/img/loading.gif" lazyload alt="image-20260404211600976"></p>
+<h3 id="IO控制方式"><a href="#IO控制方式" class="headerlink" title="IO控制方式"></a>IO控制方式</h3><blockquote>
+<p>这里和计算机组成原理可能比较像</p>
+</blockquote>
+<p>我们需要注意5点：</p>
+<ul>
+<li>完成一次读写的流程</li>
+<li>CPU干预的频率</li>
+<li>数据传送的单位</li>
+<li>数据的流向</li>
+<li>主要优点和缺点</li>
+</ul>
+<h4 id="程序直接控制方式"><a href="#程序直接控制方式" class="headerlink" title="程序直接控制方式"></a>程序直接控制方式</h4><p>轮询：CPU发出读命令后不断读取状态寄存器，如果状态为已就绪，就将数据寄存器的内容转移到CPU寄存器，再从CPU寄存器转存到内存当中。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/f4Ko/image-20260405103505338.png" srcset="/img/loading.gif" lazyload alt="image-20260405103505338"></p>
+<p>这种方式称为“轮询”。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/lyX9/image-20260405103804492.png" srcset="/img/loading.gif" lazyload alt="image-20260405103804492"></p>
+<p>CPU干预频率：极度频繁。</p>
+<p>IO操作开始之前、完成之后需要CPU介入，并且在等待IO完成的过程中CPU需要不断地轮询检查。</p>
+<p>数据传送的单位：每次读/写一个字</p>
+<p>数据流向：</p>
+<p>读操作（数据输入）：IO设备→CPU→内存<br>写操作（数据输出）：内存→CPU→IO设备<br>每个字的读/写都需要CPU的帮助。</p>
+<p>主要缺点和主要优点<br>优点：实现简单。在读/写指令之后，加上实现循环检查的一系列指令即可（因此才称为“程序直接控制方式”）<br>缺点：CPU和I/O设备只能串行工作，CPU需要一直轮询检查，长期处于“忙等”状态，CPU利用率低。</p>
+<h4 id="中断驱动方式"><a href="#中断驱动方式" class="headerlink" title="中断驱动方式"></a>中断驱动方式</h4><p>引入中断机制。由于I/O设备速度很慢，因此在CPU发出读/写命令后，可将等待I/O的进程阻塞，先切换到别的进程执行。当I/O完成后，控制器会向CPU发出一个中断信号，CPU检测到中断信号后，会保存当前进程的运行环境信息，转去执行中断处理程序处理该中断。处理中断的过程中，CPU从I/O控制器读一个字的数据传送到cPU寄存器，再写入主存。接着，CPU恢复等待I/O的进程（或其他进程）的运行环境，然后继续执行。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/9qwS/image-20260405105059859.png" srcset="/img/loading.gif" lazyload alt="image-20260405105059859"></p>
+<p>①CPU会在每个指令周期的末尾检查中断：<br>②中断处理过程中需要保存、恢复进程的运行环境，这个过程是需要一定时间开销的。可见，如果中断发生的频率太高，也会降低系统性能。</p>
+<p>CPU干预频率：较低</p>
+<p>每次Io操作开始之前、完成之后需要CPU介入。<br>等待I/O完成的过程中CPU可以切换到别的进程执行。</p>
+<p>数据传输单位：每次一个字</p>
+<p>数据流向：</p>
+<p>读操作（数据输入）：I/O设备→CPU→内存<br>写操作（数据输出）：内存→CPU→I/O设备</p>
+<p>优点：与“程序直接控制方式”相比，在“中断驱动方式”中，I/O控制器会通过中断信号主动报告I/O己完成，CU不再需要不停地轮询。 CPU和I/O设备可并行工作，CPU利用率得到明显提升。</p>
+<p>缺点：每个字在I/O设备与内存之间的传输，都需要经过CPU。而频繁的中断处理会消耗较多的CPU时间。</p>
+<h4 id="DMA方式"><a href="#DMA方式" class="headerlink" title="DMA方式"></a>DMA方式</h4><p>与“中断驱动方式”相比，DMA方式(Direct Memory Access,直接存储器存取。主要用于块设备的<br>I/O控制)有这样几个改进：<br>①数据的传送单位是“块”。不再是一个字、一个字的传送：<br>②数据的流向是从设备直接放入内存，或者从内存直接到设备。不再需要CPU作为“中间商”。<br>③仅在传送一个或多个数据块的开始和结束时，才需要CPU干预。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/J9bq/image-20260405105805164.png" srcset="/img/loading.gif" lazyload alt="image-20260405105805164"></p>
+<p>CPU给IO模块发出读命令，随后做其他事。DMA控制器会根据CPU命令参数来完成读写工作，完成后向CPU发送中断信号，CPU再来处理这个中断。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/ay2Z/image-20260405110012696.png" srcset="/img/loading.gif" lazyload alt="image-20260405110012696"></p>
+<h4 id="DMA控制器"><a href="#DMA控制器" class="headerlink" title="DMA控制器"></a>DMA控制器</h4><p><img src="https://files.seeusercontent.com/2026/04/05/4lrX/image-20260405115957112.png" srcset="/img/loading.gif" lazyload alt="image-20260405115957112"></p>
+<p>DR(Data Register,数据寄存器)：暂存从设备到内存，或从内存到设备的数据。<br>MAR(Memory Address Register,内存地址寄存器)：在输入时，MAR表示数据应放到内存中的什么位置；输出时MAR表示要输出的数据放在内存中的什么位置。<br>DC(Data Counter,.数据计数器)：表示剩余要读/写的字节数/块数。<br>CR(Command Register,.命令/状态寄存器)：用于存放CPU发来的lI/O命令，或设备的状态信息。</p>
+<p>CPU干预频率：极低，仅在传传输一个或者多个数据库的开始和结束时，才需要CPU介入。</p>
+<p>数据传送的单位每次读/写一个或多个块（注意：每次读写的只能是连续的多个块，且这些块读入内存后在内存中也必须是连续的)</p>
+<p>4.数据的流向（不再需要经过CPU)<br>读操作（数据输入）：IO设备→内存<br>写操作（数据输出）：内存→Io设备</p>
+<p>5.主要缺点和主要优点<br>优点：数据传输以“块”为单位，CPU介入频率进一步降低。数据的传输不再需要先经过CPU再写入内存，数据传输效率进一步增加。CPU和IO设备的并行性得到提升。<br>缺点：CPU每发出一条I/O指令，只能读/写一个或多个连续的数据块。</p>
+<p>如果要读/写多个离散存储的数据块，戍者要将数据分别写到不同的内存区域时，CPU要分别发出多条IO指令，进行多次中断处理才能完成。</p>
+<h4 id="通道控制方式"><a href="#通道控制方式" class="headerlink" title="通道控制方式"></a>通道控制方式</h4><p>通道：一种硬件，可以理解为是“性能更低的CPU”。通道可以识别并执行一系列通道指令。</p>
+<p>通道相对于DMA控制器更智能，但是对于CPU，可以执行的指令很单一，而且通道程序是放在主机内存中的，也就是说通道和CPU一起共享内存。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/bQ9z/image-20260405120712341.png" srcset="/img/loading.gif" lazyload alt="image-20260405120712341"></p>
+<p>CPU的干预频率极低，通道会根据CPU的指示执行相应的通道程序，只有完成一组数据块的读/写后才需要发出中断信号，请求CPU干预。</p>
+<p>数据传输单位：每次读写一组数据块</p>
+<p>数据的流向：</p>
+<p>读操作（数据输入）：I/O设备→内存<br>写操作（数据输出）：内存→I/O设备</p>
+<p>缺点：实现复杂，需要专门的通道硬件支持<br>优点：CPU、通道、I/O设备可并行工作，资源利用率很高。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/chU4/image-20260405121430993.png" srcset="/img/loading.gif" lazyload alt="image-20260405121430993"></p>
+<h3 id="IO软件层次结构"><a href="#IO软件层次结构" class="headerlink" title="IO软件层次结构"></a>IO软件层次结构</h3><p><img src="https://files.seeusercontent.com/2026/04/05/2Dox/image-20260405121808394.png" srcset="/img/loading.gif" lazyload alt="image-20260405121808394"></p>
+<p>每一层会利用其下层提供的服务，实现某些功能，并屏蔽实现的具体细节，向高层提供服务(“封装思想”)</p>
+<p>我们来具体看一下每个层的实例。</p>
+<h4 id="用户层软件"><a href="#用户层软件" class="headerlink" title="用户层软件"></a>用户层软件</h4><p><img src="https://files.seeusercontent.com/2026/04/05/sK1y/image-20260405122112110.png" srcset="/img/loading.gif" lazyload alt="image-20260405122112110"></p>
+<h4 id="设备独立性软件"><a href="#设备独立性软件" class="headerlink" title="设备独立性软件"></a>设备独立性软件</h4><p>设备独立性软件，又称设备无关性软件。与设备的硬件特性无关的功能几乎都在这一层实现。</p>
+<ul>
+<li>向上层提供统一的调用接口(R/W)</li>
+<li>设备的保护(访问控制等)</li>
+<li>差错处理</li>
+<li>设备的分配与回收(设备是临界资源)</li>
+<li>数据缓冲区管理(可以通过缓冲技术屏蔽设备之间数据交换单位大小和传输速度的差异)</li>
+<li>建立<strong>逻辑设备名</strong>到<strong>物理设备名</strong>的映射关系；根据设备类型选择调用相应的驱动程序</li>
+</ul>
+<p>详细解释一下逻辑设备名和物理设备名</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/rx6A/image-20260405122955932.png" srcset="/img/loading.gif" lazyload alt="image-20260405122955932"></p>
+<p>逻辑设备名是给用户看的，比如打印机1，打印机2等</p>
+<p>物理设备名 就如物理地址，是给操作系统看的。所以建立二者的映射关系是必要的。</p>
+<p>操作系统系统可以采用两种方式管理逻辑设备表(LUT):<br>第一种方式，整个系统只设置一张LUT,这就意味着所有用户不能使用相同的逻辑设备名，因此这种方式只适用于单用户操作系统。<br>第二种方式，为每个用户设置一张LUT,各个用户使用的逻辑设备名可以重复，适用于多用户操作系统。系统会在用户登录时为其建立一个用户管理进程，而LUT就存放在用户管理进程的PCB中。适用于多用户系统。</p>
+<p>不同厂家的外设的内部电子结构是不同的，所以需要不同的驱动程序。这个驱动程序是由厂家编写的，且一般以独立进程的方式存在。</p>
+<h4 id="中断处理程序"><a href="#中断处理程序" class="headerlink" title="中断处理程序"></a>中断处理程序</h4><p>当I/O任务完成时，I/O控制器会发送一个中断信号，系统会根<br>据中断信号类型找到相应的中断处理程序并执行。</p>
+<p>中断处理程序的处理流程如下：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/Dkm3/image-20260405124353300.png" srcset="/img/loading.gif" lazyload alt="image-20260405124353300"></p>
+<p>所以中断处理程序也需要直接和硬件接触。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><img src="https://files.seeusercontent.com/2026/04/05/sg6S/image-20260405124453075.png" srcset="/img/loading.gif" lazyload alt="image-20260405124453075"></p>
+<h3 id="输入输出应用程序接口"><a href="#输入输出应用程序接口" class="headerlink" title="输入输出应用程序接口"></a>输入输出应用程序接口</h3><p>不同的设备具有不同的特性，不能用统一的系统调用接口来完成所有类型设备的IO需求，所以操作系统必须向上层提供多种IO应用程序接口。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/qT8b/image-20260405132827087.png" srcset="/img/loading.gif" lazyload alt="image-20260405132827087"></p>
+<p>字符设备和块设备我们已经足够熟悉了，重点是网络设备。</p>
+<p>网络设备的通信是通过socket协议进行的。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/V3xz/image-20260405132941635.png" srcset="/img/loading.gif" lazyload alt="image-20260405132941635"></p>
+<h4 id="阻塞IO和非阻塞IO"><a href="#阻塞IO和非阻塞IO" class="headerlink" title="阻塞IO和非阻塞IO"></a>阻塞IO和非阻塞IO</h4><p>阻塞I/O:应用程序发出I/O系统调，进程需转为阻塞态等待。<br>eg:字符设备接口一一从键盘读一个字符get<br>非阻塞I/O:应用程序发出I/O系统调用，系统调用可迅速返回，进程无需阻塞等待。<br>eg:块设备接口一一往磁盘写数据write</p>
+<h4 id="设备驱动程序接口"><a href="#设备驱动程序接口" class="headerlink" title="设备驱动程序接口"></a>设备驱动程序接口</h4><p>若各公司开发的设备驱动程序接口不统一，则操作系统很难调用设备驱动程序。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/ne9U/image-20260405133607725.png" srcset="/img/loading.gif" lazyload alt="image-20260405133607725"></p>
+<p>所以需要统一标准的设备驱动程序接口。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/iD9h/image-20260405133640923.png" srcset="/img/loading.gif" lazyload alt="image-20260405133640923"></p>
+<p>厂商必须根据操作系统规定的接口来编写驱动程序。</p>
+<h3 id="假脱机技术"><a href="#假脱机技术" class="headerlink" title="假脱机技术"></a>假脱机技术</h3><p><img src="https://files.seeusercontent.com/2026/04/05/7mkI/image-20260405143114406.png" srcset="/img/loading.gif" lazyload alt="image-20260405143114406"></p>
+<p>脱机技术是早期计算机系统中使用的一种I/O操作方式。它的核心思想是让输入/输出操作在<strong>脱离主机（CPU）控制</strong>的情况下，由专门的卫星机或外围机独立完成。</p>
+<p>“假脱机技术”，又称“SPOOLing技术”是用软件的方式模拟脱机技术。</p>
+<p>SPOOLing系统组成如下：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/hGj1/image-20260405143316346.png" srcset="/img/loading.gif" lazyload alt="image-20260405143316346"></p>
+<p>在磁盘上开辟出两个存储区域一一“输入井”和“输出井”</p>
+<p>“输入井”模拟脱机输入时的磁带，用于收容/0设备输入的数据</p>
+<p>输出井”模拟脱机输出时的磁带，用于收容用户进程输出的数据</p>
+<p>输入进程模拟脱机输入时的外围控制机</p>
+<p>输出进程模拟脱机输出时的外围控制机</p>
+<p>要实现SPOOLing技术，就需要多个进程支持。</p>
+<p>在输入进程的控制下，“输入缓冲区”用于暂存从输入设备输入的数据，之后再转存到输入井中</p>
+<p>在输出进程的控制下，“输出缓冲区”用于暂存从输出井送来的数据，之后再传送到输出设备上。</p>
+<p>看一个共享打印机的应用。</p>
+<p>独占式设备一只允许各个进程串行使用的设备。一段时间内只能满足一个进程的请求。</p>
+<p>共享设备一一允许多个进程“同时”使用的设备（宏观上同时使用，微观上可能是交替使<br>用)。可以同时满足多个进程的使用请求。</p>
+<p>打印机是独占式设备，但是可以用SPOOLing技术改造成共享设备。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/bk2C/image-20260405144605901.png" srcset="/img/loading.gif" lazyload alt="image-20260405144605901"></p>
+<p>当多个用户进程提出输出打印的请求时，系统会答应它们的请求，但是并不是真正把打印机分配给他们而是由假脱机管理进程为每个进程做两件事：</p>
+<ul>
+<li>在磁盘输出井中为进程申请一个空闲缓冲区（也就是说，这个缓冲区是在磁盘上的)，并将要打印的数据送入其中：</li>
+<li>为用户进程申请一张空白的打印请求表，并将用户的打印请求填入表中（其实就是用来说明用户的打印数据存放位置等信息的)，再将该表挂到假脱机文件队列上。</li>
+</ul>
+<p>当打印机空闲时，输出进程会从文件队列的队头取出一张打印请求表，并根据表中的要求将要打印的据从输出井传送到输出缓冲区，再输出到打印机进行打印。用这种方式可依次处理完全部的打印任务</p>
+<p>虽然系统中只有一个台打印机，但每个进程提出打印请求时，系统都会为在输出井中为其分配一个存储区（相当于分配了一个逻辑设备），使每个用户进程都觉得自己在独占一台打印机，从而实现对打印机的共享。</p>
+<p>SPOOLing技术可以把一台物理设备虚拟成逻辑上的多台设备，可将独占式设备改造成共享设备。</p>
+<p>未采取假脱机技术，用户进程发现打印机处于忙碌，只能进入阻塞态等待，这会导致时间的浪费。但是引入假脱机技术，用户进程就能够将需要打印的文件交付给输出缓冲区后继续去执行其他的事情。</p>
+<p>这就是打印机和打印店的区别，后者有店员来接收并处理进程提交的打印请求。</p>
+<p>假脱机技术通过<strong>引入磁盘队列作为中间层</strong>，实现了<strong>用户进程与慢速物理设备的“时间解耦”</strong>。用户进程只与高速的磁盘交换数据，从而从对慢速设备的等待中彻底脱离出来，极大地提高了进程的响应速度和整个系统的吞吐率。</p>
+<h3 id="设备的分配与回收"><a href="#设备的分配与回收" class="headerlink" title="设备的分配与回收"></a>设备的分配与回收</h3><h4 id="设备分配时考虑的因素"><a href="#设备分配时考虑的因素" class="headerlink" title="设备分配时考虑的因素"></a>设备分配时考虑的因素</h4><ul>
+<li>设备固有属性</li>
+<li><ul>
+<li>独占设备，共享设备和虚拟设备</li>
+</ul>
+</li>
+<li>设备分配算法</li>
+<li><ul>
+<li>先来先服务等算法</li>
+</ul>
+</li>
+<li>设备分配中的安全性</li>
+<li><ul>
+<li>安全分配方式</li>
+</ul>
+</li>
+</ul>
+<p>安全分配方式：为进程分配一个设备后就将进程阻塞，本次I/O完成后才将进程唤醒。(eg:考虑进程请求打印机打印输出的例子)</p>
+<p>一个时段内每个进程只能使用一个设备<br>优点：破坏了“请求和保持”条件，不会死锁<br>缺点：对于一个进程来说，CPU和I/O设备只能串行工作。</p>
+<ul>
+<li><ul>
+<li>不安全分配方式</li>
+</ul>
+</li>
+</ul>
+<p>不安全分配方式：进程发出I/O请求后，系统为其分配I/O设备，进程可继续执行，之后还可以发出新的I/O请求。只有某个I/O请求得不到满足时才将进程阻塞。</p>
+<p>一个进程可以同时使用多个设备<br>优点：进程的计算任务和I/O任务可以并行处理，使进程迅速推进。<br>缺点：有可能发生死锁（死锁避免、死锁的检测和解除）。</p>
+<p>静态分配：进程运行前为其分配全部所需资源，运行结束后归还资源。</p>
+<p>动态分配方式：进程运行过程中动态申请设备资源</p>
+<h4 id="设备分配管理的数据结构"><a href="#设备分配管理的数据结构" class="headerlink" title="设备分配管理的数据结构"></a>设备分配管理的数据结构</h4><p><img src="https://files.seeusercontent.com/2026/04/05/heB9/image-20260405151051178.png" srcset="/img/loading.gif" lazyload alt="image-20260405151051178"></p>
+<p>一个通道可控制多个控制器，每个控制器可控制多个设备。</p>
+<p>设备控制表(DCT)：系统为每个设备配置一张DCT,用于记录设备情况。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/2zvS/image-20260405151700409.png" srcset="/img/loading.gif" lazyload alt="image-20260405151700409"></p>
+<p>注：“进程管理”章节中曾经提到过“系统会根据阻塞原因不同，将进程PCB挂到不同的阻塞队列中”</p>
+<p>控制器控制表(COCT)：每个设备控制器都会对应一张COCT。操作系统根据COCT的信息对控制器进行操作和管理。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/2dGg/image-20260405152040878.png" srcset="/img/loading.gif" lazyload alt="image-20260405152040878"></p>
+<p>通道控制表(CHCT):每个通道都会对应一张CHCT，根据CHCT对通道进行操作和管理。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/3Aqo/image-20260405152223765.png" srcset="/img/loading.gif" lazyload alt="image-20260405152223765"></p>
+<p>系统设备表(SDT)：记录了系统中全部设备的情况，每个设备对应一个表目。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/Fqe1/image-20260405152325200.png" srcset="/img/loading.gif" lazyload alt="image-20260405152325200"></p>
+<h4 id="设备分配的步骤"><a href="#设备分配的步骤" class="headerlink" title="设备分配的步骤"></a>设备分配的步骤</h4><ul>
+<li>根据进程请求的物理设备名查找SDT(注：物理设备名是进程请求分配设备时提供的参数)</li>
+<li>根据SDT找到DCT,若设备忙碌则将进程PCB挂到设备等待队列中，不忙碌则将设备分配给进程。</li>
+<li>根据DCT找到COCT,若控制器忙碌则将进程PCB挂到控制器等待队列中，不忙碌则将控制器分配<br>给进程。</li>
+<li>根据COcT找到CHCT,若通道忙碌则将进程PCB挂到通道等待队列中，不忙碌则将通道分配给进程。</li>
+</ul>
+<p>缺点很明显：<br>①用户编程时必须使用“物理设备名”，底层细节对用户不透明，不方便编程<br>②若换了一个物理设备，则程序无法运行<br>③若进程请求的物理设备正在忙碌，则即使系统中还有同类型的设备，进程也必须阻塞等待。</p>
+<p>改进方法：<strong>建立逻辑设备名与物理设备名的映射机制，用户编程时只需提供逻辑设备名。</strong></p>
+<p><strong>改进后的步骤如下：</strong></p>
+<ul>
+<li>根据进程请求的逻辑设备名查找SDT(注：用户编程时提供的逻辑设备名其实就是“设备类型”)</li>
+<li>查找SDT,找到用户进程指定类型的、并且空闲的设备，将其分配给该进程。操作系统在逻辑设<br>备表(LUT)中新增一个表项。</li>
+<li>根据DCT找到COCT,若控制器忙碌则将进程PCB挂到控制器等待队列中，不忙碌则将控制器分配<br>给进程。</li>
+<li>根据COCT找到CHCT,若通道忙碌则将进程PCB挂到通道等待队列中，不忙碌则将通道分配给进程。</li>
+</ul>
+<h4 id="缓冲区管理"><a href="#缓冲区管理" class="headerlink" title="缓冲区管理"></a>缓冲区管理</h4><p>缓冲区是一个存储区域，可以由专门的硬件寄存器组成，也可利用内存作为缓冲区。</p>
+<p>使用硬件作为缓冲区的成本较高，容量也较小，一般仅用在对速度要求非常高的场合（如存储器管理中所用的联想寄存器，由于对页表的访问频率极高，因此使用速度很快的联想寄存器来存放页表项的副本)</p>
+<p>一般情况下，更多的是利用内存作为缓冲区，“设备独立性软件”的缓冲区管理就是要组织管理好这些缓冲区。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/05/4Dzg/image-20260405153855113.png" srcset="/img/loading.gif" lazyload alt="image-20260405153855113"></p>
+<p>使用缓冲区能够解决高速设备和低速设备之间的矛盾。</p>
+<h4 id="单缓冲"><a href="#单缓冲" class="headerlink" title="单缓冲"></a>单缓冲</h4><p>假设某用户进程请求某种块设备读入若干块的数据。若采用单缓冲的策略，操作系统会在主存中为其分配一个缓冲区（若题目中没有特别说明，一个缓冲区的大小就是一个块）。</p>
+<p>注意：当缓冲区数据非空时，不能往缓冲区充入数据，只能从缓冲区把数据传出；当缓冲区为空时，可以往缓冲区充入数据，但必须把缓冲区充满以后，才能从缓冲区把数据传出。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/Dt7c/image-20260406121605608.png" srcset="/img/loading.gif" lazyload alt="image-20260406121605608"></p>
+<p>第二种情况：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/sa7S/image-20260406121934068.png" srcset="/img/loading.gif" lazyload alt="image-20260406121934068"></p>
+<h4 id="双缓冲"><a href="#双缓冲" class="headerlink" title="双缓冲"></a>双缓冲</h4><p>假设某用户进程请求某种块设备读入若干块的数据。若采用双缓冲的策略，操作系统会在主存中为其分配两个缓冲区（若题目中没有特别说明，一个缓冲区的大小就是一个块）<br>双缓冲题目中，假设初始状态为：工作区空，其中一个缓冲区满，另一个缓冲区空<br>假设T&gt;C+M</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/O0vq/image-20260406122347313.png" srcset="/img/loading.gif" lazyload alt="image-20260406122347313"></p>
+<p>第二种情况：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/ySp3/image-20260406122641637.png" srcset="/img/loading.gif" lazyload alt="image-20260406122641637"></p>
+<p>采用双缓冲策略，处理一个数据块的平均耗时为Max(T,C+M)。</p>
+<h4 id="使用单-x2F-双缓冲在通信时的区别"><a href="#使用单-x2F-双缓冲在通信时的区别" class="headerlink" title="使用单/双缓冲在通信时的区别"></a>使用单/双缓冲在通信时的区别</h4><p><img src="https://files.seeusercontent.com/2026/04/06/g8dO/image-20260406122907422.png" srcset="/img/loading.gif" lazyload alt="image-20260406122907422"></p>
+<p>显然，若两个相互通信的机器只设置单缓冲区，在任一时刻只能实现数据的单向传输。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/a9Fx/image-20260406123000752.png" srcset="/img/loading.gif" lazyload alt="image-20260406123000752"></p>
+<p>若两个相互通信的机器设置双缓冲区，则同一时刻可以实现双向的数据传输。</p>
+<h4 id="循环缓冲区"><a href="#循环缓冲区" class="headerlink" title="循环缓冲区"></a>循环缓冲区</h4><p>将多个大小相等的缓冲区连接成一个循环队列。</p>
+<p>注：以下图示中，橙色表示己充满数据的缓冲区，绿色表示空缓冲区。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/mF3r/image-20260406123127321.png" srcset="/img/loading.gif" lazyload alt="image-20260406123127321"></p>
+<h4 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h4><p>缓冲池由系统中共用的缓冲区组成。这些缓冲区按使用状况可以分为：空缓冲队列、装满输入数据的缓冲队列（输入队列）、装满输出数据的缓冲队列（输出队列）。</p>
+<p>另外，根据一个缓冲区在实际运算中扮演的功能不同，又设置了四种工作缓冲区：用于收容输入数据的工作缓冲区(hin)、用于提取输入数据的工作缓冲区(sin)、用于收容输出数据的工作缓冲区(hout)、用于提取输出数据的工作缓冲区(sout)</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/sXh4/image-20260406123254670.png" srcset="/img/loading.gif" lazyload alt="image-20260406123254670"></p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/vt0C/image-20260406123312856.png" srcset="/img/loading.gif" lazyload alt="image-20260406123312856"></p>
+<p>分情况使用方法大概如下：</p>
+<ul>
+<li>输入进程请求输入数据，取下一块空缓冲区，放入hin充满之后挂到输入队列的队尾。</li>
+<li>计算进程想要取得一块输入数据，取下一个输入队列缓冲区放入sin，被取空后放回到空缓冲队列的队尾。</li>
+<li>计算进程需要将准备好的数据充入缓冲区，取下一个空缓冲区放入hout，充满后挂到输出队列的队尾</li>
+<li>输出进程请求输出数据时，取下一块缓冲区放在sout，输出完毕后为空，挂回到空缓冲队列的队尾。</li>
+</ul>
+<h3 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h3><p>又名机械硬盘，在<a target="_blank" rel="noopener" href="https://blog.willmo.top/posts/chapter_7_i/o_systems/#%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%EF%BC%88%E7%A3%81%E7%9B%98%EF%BC%89">计算机组成原理</a>中已经有写到这一小节的大部分内容。</p>
+<p>在此对重复的部分仅仅贴出PPT，而对计算机组成原理未涉及的部分将展开讲解。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/2Vpq/image-20260406124731760.png" srcset="/img/loading.gif" lazyload alt="image-20260406124731760"></p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/e1Up/image-20260406124753957.png" srcset="/img/loading.gif" lazyload alt="image-20260406124753957"></p>
+<h4 id="磁盘的物理地址"><a href="#磁盘的物理地址" class="headerlink" title="磁盘的物理地址"></a>磁盘的物理地址</h4><p><img src="https://files.seeusercontent.com/2026/04/06/gAj1/image-20260406125055356.png" srcset="/img/loading.gif" lazyload alt="image-20260406125055356"></p>
+<p>所以我们可用（柱面号，盘面号，扇区号）来定位任意一个“磁盘块”。在“文件的物理结构”小节中，我们经常提到文件数据存放在外存中的几号块，这个块号就可以转换成（柱面号，盘面号，扇区号）的地址形式。</p>
+<p>可根据该地址读取一个“块”<br>①根据“柱面号”移动磁臂，让磁头指向指定柱面；<br>②激活指定盘面对应的磁头；<br>③磁盘旋转的过程中，指定的扇区会从<br>磁头下面划过，这样就完成了对指定扇<br>区的读/写。</p>
+<h4 id="磁盘的分类"><a href="#磁盘的分类" class="headerlink" title="磁盘的分类"></a>磁盘的分类</h4><p>根据磁头可否移动可分为两种磁盘：</p>
+<ul>
+<li>活动头磁盘</li>
+<li>固定头磁盘</li>
+</ul>
+<p>根据盘片是否可以更换可以分为：</p>
+<ul>
+<li>可换盘磁盘</li>
+<li>固定盘磁盘</li>
+</ul>
+<h3 id="磁盘调度算法"><a href="#磁盘调度算法" class="headerlink" title="磁盘调度算法"></a>磁盘调度算法</h3><blockquote>
+<p>这一章和处理机调度是比较像的</p>
+</blockquote>
+<p>磁盘的存取时间在计算机组成原理中已提到。</p>
+<p>由于机械硬盘的磁头移动会带来额外的等待时间，所以需要调度算法来减少平均寻道时间。</p>
+<h4 id="先到先服务-FCFS"><a href="#先到先服务-FCFS" class="headerlink" title="先到先服务(FCFS)"></a>先到先服务(FCFS)</h4><p>根据进程请求访问磁盘的先后顺序进行调度。</p>
+<p>假设磁头的初始位置是100号磁道，有多个进程先后陆续地请求访问55、58、39、18、90、160、 150、38、184号磁道</p>
+<p>按照FCFS的规则，按照请求到达的顺序，磁头需要依次移动到55、58、39、18、90、160、150、 38、184号磁道</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/c0kP/image-20260406130931799.png" srcset="/img/loading.gif" lazyload alt="image-20260406130931799"></p>
+<p>磁头总共移动了45+3+19+21+72+70+10+112+146=498个磁道<br>响应一个请求平均需要移动498/9=55.3个磁道（平均寻找长度）</p>
+<p>优点：公平；如果请求访问的磁道比较集中的话，算法性能还算过的去<br>缺点：如果有大量进程竞争使用磁盘，请求访问的磁道很分散，则FCFS在性能上很差，寻道时间长。趋近于随机调度算法，因为寻道请求是随机提交的。</p>
+<h4 id="最短寻找时间优先-SSTF"><a href="#最短寻找时间优先-SSTF" class="headerlink" title="最短寻找时间优先(SSTF)"></a>最短寻找时间优先(SSTF)</h4><p>SSTF算法会优先处理的磁道是与当前磁头最近的磁道。可以保证每次的寻道时间最短，但是并不能保证总的寻道时间最短。（其实就是贪心算法的思想，只是选择眼前最优，但是总体未必最优）<br>假设磁头的初始位置是100号磁道，有多个进程先后陆续地请求访问55、58、39、18、90、160、150、38、184号磁道。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/Rhj0/image-20260406131221373.png" srcset="/img/loading.gif" lazyload alt="image-20260406131221373"></p>
+<p>磁头总共移动了（100-18)+(184-18)=248个磁道<br>响应一个请求平均需要移动248/9=27.5个磁道（平均寻找长度)<br>优点：性能较好，平均寻道时间短<br>缺点：可能产生“饥饿”现象</p>
+<p>产生饥饿的原因在于：磁头在一个小区域内来回来去地移动。</p>
+<h4 id="扫描算法-SCAN"><a href="#扫描算法-SCAN" class="headerlink" title="扫描算法(SCAN)"></a>扫描算法(SCAN)</h4><p>SSTF算法会产生饥饿的原因在于：磁头有可能在一个小区域内来回来去地移动。为了防止这个问题，可以规定，<strong>只有磁头移动到最外侧磁道的时候才能往内移动，移动到最内侧磁道的时候才能往外移动。</strong>这就是扫描算法(SCAN)的思想。由于磁头移动的方式很像电梯，因此也叫电梯算法。<br>假设某磁盘的磁道为0~200号，磁头的初始位置是100号磁道，且此时磁头正在往磁道号增大的方向移动，有多个进程先后陆续地请求访问55、58、39、18、90、160、150、38、184号磁道。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/6uTo/image-20260406131559593.png" srcset="/img/loading.gif" lazyload alt="image-20260406131559593"><br>磁头总共移动了(200-100)+(200-18)=282个磁道<br>响应一个请求平均需要移动282/9=31.3个磁道（平均寻找长度)<br>优点：性能较好，平均寻道时间较短，不会产生饥饿现象<br>缺点：</p>
+<ul>
+<li>只有到达最边上的磁道时才能改变磁头移动方向，事实上，处理了184号的访问请求之后就不需要再往右移动磁头了。</li>
+<li>SCAN算法对于各个位置磁道的响应频率不平均（如：假设此时磁头正在往右移动，且刚处理过 90号磁道，那么下次处理90号磁道的请求就需要等磁头移动很长一段距离；而响应了184号磁道的请求之后，很快又可以再次响应184号磁道的请求了)</li>
+</ul>
+<h4 id="LOOK调度算法"><a href="#LOOK调度算法" class="headerlink" title="LOOK调度算法"></a>LOOK调度算法</h4><p>扫描算法(SCAN)中，只有到达最边上的磁道时才能改变磁头移动方向，事实上，处理了184号磁道的访问请求之后就不需要再往右移动磁头了。LOOK调度算法就是为了解决这个问题，如果在磁头移动方向上已经没有别的请求，就可以立即改变磁头移动方向。（边移动边观察，因此叫LOOK）</p>
+<p>假设某磁盘的磁道为0~200号，磁头的初始位置是100号磁道，且此时磁头正在往磁道号增大的方向移动，有多个进程先后陆续地请求访问55、58、39、18、90、160、150、38、184号磁道</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/Xh7z/image-20260406132019078.png" srcset="/img/loading.gif" lazyload alt="image-20260406132019078"></p>
+<p>磁头总共移动了(184-100)+(184-18)=250个磁道<br>响应一个请求平均需要移动250/9=27.5个磁道（平均寻找长度)<br>优点：比起SCAN算法来，不需要每次都移动到最外侧或最内侧才改变磁头方向，使寻道时间进一步缩短</p>
+<h4 id="循环扫描算法-C-SCAN"><a href="#循环扫描算法-C-SCAN" class="headerlink" title="循环扫描算法(C-SCAN)"></a>循环扫描算法(C-SCAN)</h4><p>SCAN算法对于各个位置磁道的响应频率不平均，而C-SCAN算法就是为了解决这个问题。规定<strong>只有磁头朝某个特定方向移动时才处理磁道访问请求，而返回时直接快速移动至起始端而不处理任何请求</strong>。<br>假设某磁盘的磁道为0~200号，磁头的初始位置是100号磁道，且此时磁头正在往磁道号增大的方向移动，有多个进程先后陆续地请求访问55、58、39、18、90、160、150、38、184号磁道。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/o3Tq/image-20260406132315314.png" srcset="/img/loading.gif" lazyload alt="image-20260406132315314"></p>
+<p>磁头总共移动了(200-100)+(200-0)+(90-0)=390个磁道</p>
+<p>响应一个请求平均需要移动390/9=43.3个磁道（平均寻找长度）</p>
+<p>优点：比起SCAN来，对于各个位置磁道的响应频率很平均。</p>
+<p>缺点：只有到达最边上的磁道时才能改变磁头移动方向，事实上，处理了184号磁道的访问请求之后就不需要再往右移动磁头了；并且，磁头返回时其实只需要返回到18号磁道即可，不需要返回到最边缘的磁道。另外，比起SCAN算法来，平均寻道时间更长。</p>
+<h4 id="C-LOOK调度算法"><a href="#C-LOOK调度算法" class="headerlink" title="C-LOOK调度算法"></a>C-LOOK调度算法</h4><p>C-SCAN算法的主要缺点是只有到达最边上的磁道时才能改变磁头移动方向，并且磁头返回时不一定需要返回到最边缘的磁道上。C-LOOK算法就是为了解决这个问题。<strong>如果磁头移动的方向上己经没有磁道访问请求了，就可以立即让磁头返回，并且磁头只需要返回到有磁道访问请求的位置即可。</strong></p>
+<p>假设某磁盘的磁道为0~200号，磁头的初始位置是100号磁道，且此时磁头正在往磁道号增大的方向移动，有多个进程先后陆续地请求访问55、58、39、18、90、160、150、38、184号磁道</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/Xq1z/image-20260406132558192.png" srcset="/img/loading.gif" lazyload alt="image-20260406132558192"></p>
+<p>磁头总共移动了（184-100)+(184-18)+(90-18)=322个磁道<br>响应一个请求平均需要移动322/9=35.8个磁道（平均寻找长度）<br>优点：比起C-SCAN算法来，不需要每次都移动到最外侧或最内侧才改变磁头方向，使寻道时间进一步缩短。</p>
+<h3 id="减少磁盘延迟时间的办法"><a href="#减少磁盘延迟时间的办法" class="headerlink" title="减少磁盘延迟时间的办法"></a>减少磁盘延迟时间的办法</h3><p>延迟时间：将目标扇区转到磁头下面所花的时间。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/z4rN/image-20260406133239663.png" srcset="/img/loading.gif" lazyload alt="image-20260406133239663"></p>
+<p>磁头读入一个扇区数据后需要一小段时间处理，遗憾的是，这段处理时间通常没有一个单一、全球统一的专有名词，但在磁盘技术和性能分析的语境中，它最常被描述为 <strong>控制器处理时间</strong> 或 <strong>命令开销</strong>，下称命令开销。</p>
+<p>这命令开销的阻隔造成了读取完某一扇区后的真空期，意味着连续读取都需要等待磁盘转一圈，这会使得延迟时间特别长。</p>
+<h4 id="交替编号"><a href="#交替编号" class="headerlink" title="交替编号"></a>交替编号</h4><p>若采用交替编号的策略，即让逻辑上相邻的扇区在物理上有一定的间隔，可以使读取连续的逻辑扇区所需要的延迟时间更小。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/e4If/image-20260406133531462.png" srcset="/img/loading.gif" lazyload alt="image-20260406133531462"></p>
+<p>读取2号扇区后，因为相隔的6号扇区的存在，磁头能够在挂到3号扇区之前就做好读取数据的准备。</p>
+<h4 id="磁盘地址结构的设计"><a href="#磁盘地址结构的设计" class="headerlink" title="磁盘地址结构的设计"></a>磁盘地址结构的设计</h4><p>磁盘的物理地址是（柱面号，盘面号，扇区号），为什么不是（盘面号，柱面号，扇区号）？</p>
+<p>若物理地址结构是（盘面号，柱面号，扇区号），且需要连续读取物理地址(00,000,000)~(00,001,111)的扇区：</p>
+<p>(00,000,000)~(00,000,111)转两圈可读完</p>
+<p>之后再读取物理地址相邻的区域，即<br>(00,001,000)~（00,001,111),需要启动磁头臂，将磁头移动到下一个磁道。</p>
+<hr>
+<p>若物理地址结构是（柱面号，盘面号，扇区号），且需要连续读取物理地址(000,00,000)~(000,01,111)的扇区：</p>
+<p>(000,00,000)~（000,00,111)由盘面0的磁头读入数据</p>
+<p>之后再读取物理地址相邻的区域，即<br>(000,01,000)~（000,01,111),由于柱面号/磁道号相同，只是盘面号不同，因此不需要移动磁头臂。只需要激活相邻盘面的磁头即可</p>
+<p>所以，使用（柱面号，盘面号，扇区号）的地址结构能够有效减少磁头移动消耗的时间。</p>
+<h4 id="错位命名"><a href="#错位命名" class="headerlink" title="错位命名"></a>错位命名</h4><p>更准确的命名是<strong>柱面偏移</strong> 或 <strong>磁道偏移</strong></p>
+<p><strong>在多盘片硬盘中，将不同盘面上同一柱面的各个磁道的起始扇区位置，在圆周方向上故意错开一定角度的技术。</strong></p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/y5nG/image-20260406135451876.png" srcset="/img/loading.gif" lazyload alt="image-20260406135451876"></p>
+<p>读取完第一个盘面后想读取第二个盘面，会因为命令开销的存在而不得不等待再转一圈才能读取。</p>
+<p>通过这种方式：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/Gjy9/image-20260406140412950.png" srcset="/img/loading.gif" lazyload alt="image-20260406140412950"></p>
+<h3 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h3><p>三部分：</p>
+<ul>
+<li>磁盘初始化</li>
+<li>引导块</li>
+<li>坏块的管理</li>
+</ul>
+<h4 id="磁盘初始化"><a href="#磁盘初始化" class="headerlink" title="磁盘初始化"></a>磁盘初始化</h4><p>磁盘初始化：</p>
+<ul>
+<li>Step1:进行低级格式化（物理格式化），将磁盘的各个磁道划分为扇区。一个扇区通常可分为头、数据区域（如512B大小)、尾三个部分组成。管理扇区所需要的各种数据结构一般<br>存放在头、尾两个部分，包括扇区校验码（奇偶校验、CC循环冗余校验码等，校验码用于校验扇区中的数据是否发生错误)</li>
+<li>Step2:将磁盘分区，每个分区由若干柱面组成（即分为我们熟悉的C盘、D盘、E盘)</li>
+<li>Step3:进行逻辑格式化，创建文件系统。包括创建文件系统的根目录、初始化存储空间管理所用的数据结构（如位示图、空闲分区表)</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/06/ju1F/image-20260406141513786.png" srcset="/img/loading.gif" lazyload alt="image-20260406141513786"></p>
+<h4 id="引导块"><a href="#引导块" class="headerlink" title="引导块"></a>引导块</h4><p>计算机开机时需要进行一系列初始化的工作，这些初始化工作是通过执行初始化程序（自举程序)完成的。</p>
+<p>在电路元件中，ROM又名“只读存储器”，出厂写入且不可更改，集成在主板上。</p>
+<p>初始化程序程序（自举程序）如果放在ROM中，万一需要更新自举程序、将会很不方便，因为 ROM中的数据无法更改。</p>
+<p>所以，将完整的自举程序放在磁盘的启动块（即引导块/启动分区)上，启动块位于磁盘的固定位置。</p>
+<p>ROM中只存放很小的“自举装入程序”。开机时计算机先运行“自举装入程序”，通过执行该程序就可找到引导块，并将完整的“自举程序”读入内存，完成初始化。</p>
+<p>拥有启动分区的磁盘称为启动磁盘或系统磁盘(C:盘）</p>
+<h4 id="坏块的管理"><a href="#坏块的管理" class="headerlink" title="坏块的管理"></a>坏块的管理</h4><p>坏块是存储设备中因物理损伤或老化而无法正常读写数据的微小区域。这属于硬件故障，操作系统是无法修复的。应该将坏块标记出来，以免错误地使用到它。</p>
+<p>对于简单的磁盘，可以在逻辑格式化时（建立文件系统时)对整个磁盘进行坏块检查，标明哪些扇区是坏扇区，比如：在FAT表上标明。（在这种方式中，坏块对操作系统不透明)</p>
+<p>对于复杂的磁盘，磁盘控制器（磁盘设备内部的一个硬件部件)会维护一个坏块链表。</p>
+<p>在磁盘出厂前进行低级格式化（物理格式化）时就将坏块链进行初始化会保留一些“备用扇区”，用于替换坏块。这种方案称为扇区备用。且这种处理方式中，坏块对操作系统透明。</p>
+<h3 id="固态硬盘SSD"><a href="#固态硬盘SSD" class="headerlink" title="固态硬盘SSD"></a>固态硬盘SSD</h3><p>固态硬盘SSD基于闪存技术Flash Memory,属于电可擦除ROM,即EEPROM。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/06/xeG3/image-20260406143351851.png" srcset="/img/loading.gif" lazyload alt="image-20260406143351851"></p>
+<h4 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h4><p><img src="https://files.seeusercontent.com/2026/04/06/8Aty/image-20260406144803280.png" srcset="/img/loading.gif" lazyload alt="image-20260406144803280"></p>
+<ul>
+<li>闪存翻译层</li>
+<li><ul>
+<li>负责翻译逻辑块号，找到对应页(Page)</li>
+</ul>
+</li>
+<li>存储介质：</li>
+<li><ul>
+<li>多个闪存芯片(Flash Chip)(黑色的就是)</li>
+<li>每个芯片包含多个块(block)</li>
+<li>每个块包含多个页(page)</li>
+</ul>
+</li>
+</ul>
+<h4 id="读写"><a href="#读写" class="headerlink" title="读写"></a>读写</h4><ul>
+<li>以页(page)为单位读/写，相当于磁盘的”扇区”</li>
+</ul>
+<p>注意，逻辑地址的一个块等同于磁盘的一个块，<strong>等于固态硬盘的一个页</strong>而不是块。</p>
+<p>SSD的读写是以页为单位的。</p>
+<ul>
+<li>以块(block)为单位”擦除”，擦干净的块，其中的每页都可以写一次，读无限次</li>
+</ul>
+<p>如果需要对某块内的某一页进行擦除，就需要把块内待擦除页之外所有页转移到其他块中，并<strong>修改闪存翻译层中的地址</strong>，再将原块擦除。</p>
+<ul>
+<li>支持随机访问，系统给定一个逻辑地址，闪存翻译层可通过电路迅速定位到对应的物理地址</li>
+<li>读快、写慢。要写的页如果有数据，则不能写入，需要将块内其他页全部复制到一个新的（擦除过的）块中，再写入新的页</li>
+</ul>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>SSD读写速度快，随机访问性能高，用电路控制访问位置；机械硬盘通过移动磁臂旋转磁盘控制访问位置，有寻道时间和旋转延迟</li>
+<li>SSD安静无噪音、耐摔抗震、能耗低、但是造价更贵</li>
+<li>SSD的一个”块”被擦除次数过多（重复写同一个块）可能会坏掉，而机械硬盘的扇区不会因为写的次数太多而坏掉</li>
+</ul>
+<h3 id="磨损均衡技术"><a href="#磨损均衡技术" class="headerlink" title="磨损均衡技术"></a>磨损均衡技术</h3><p>因为SSD的一个”块”被擦除次数过多容易报废，所以需要将将“擦除”平均分布在各个块上，以提升使用寿命。</p>
+<p>这被称为磨损均衡，两种：</p>
+<ul>
+<li><strong>动态磨损均衡：写入数据时，自动选择较新的闪存块。</strong></li>
+<li><strong>静态磨损均衡：就算没有数据写入，SSD也会检测并自动进行数据分配，让老的闪存块承担无须写数据的存储任务，同时让新的闪存块腾出空间，承担平常的写操作。</strong></li>
+</ul>
+<blockquote>
+<p>这里就是终点了，谢谢你读到这里。为了你，也为了我。</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">#操作系统</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/Chapter%201%20of%20Computer%20Networks:%20Overview/" title="计算机网络第一章：概述">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算机网络第一章：概述</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/Operating%20System%20Chapter%204:%20Files/" title="操作系统第四章：文件">
+                        <span class="hidden-mobile">操作系统第四章：文件</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

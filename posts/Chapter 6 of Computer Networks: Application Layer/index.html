@@ -1,0 +1,1055 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第六章：应用层 恭喜，这里是计算机网络体系结构的顶层。  概述 应用层是计算机网络体系结构的最顶层，是设计和建立计算机网络的最终目的，也是计算机网络中发展最快的部分。 我们将介绍：  万维网www 域名系统DNS 动态主机配置DHCP 电子邮件 文件传送FTP和P2P文件共享 多媒体网络应用  客户&#x2F;服务器方式(C&#x2F;S方式)和对等方式(P2P方式)客户&#x2F;服务器(Client&#x2F;Server,C&#x2F;S)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络第六章：应用层">
+<meta property="og:url" content="http://example.com/posts/Chapter%206%20of%20Computer%20Networks:%20Application%20Layer/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="第六章：应用层 恭喜，这里是计算机网络体系结构的顶层。  概述 应用层是计算机网络体系结构的最顶层，是设计和建立计算机网络的最终目的，也是计算机网络中发展最快的部分。 我们将介绍：  万维网www 域名系统DNS 动态主机配置DHCP 电子邮件 文件传送FTP和P2P文件共享 多媒体网络应用  客户&#x2F;服务器方式(C&#x2F;S方式)和对等方式(P2P方式)客户&#x2F;服务器(Client&#x2F;Server,C&#x2F;S)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png">
+<meta property="article:published_time" content="2026-04-20T11:48:35.927Z">
+<meta property="article:modified_time" content="2026-04-20T11:48:36.703Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png">
+  
+  
+  
+  <title>计算机网络第六章：应用层 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://files.seeusercontent.com/2026/04/20/b3Ek/wallhaven-zxzmpw.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="计算机网络第六章：应用层"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-20 11:48" pubdate>
+          2026年4月20日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          58 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机网络第六章：应用层</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第六章：应用层"><a href="#第六章：应用层" class="headerlink" title="第六章：应用层"></a>第六章：应用层</h1><blockquote>
+<p>恭喜，这里是计算机网络体系结构的顶层。</p>
+</blockquote>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><img src="https://files.seeusercontent.com/2026/04/15/Ecj6/image-20260415134634090.png" srcset="/img/loading.gif" lazyload alt="image-20260415134634090"></p>
+<p>应用层是计算机网络体系结构的最顶层，是设计和建立计算机网络的最终目的，也是计算机网络中发展最快的部分。</p>
+<p>我们将介绍：</p>
+<ul>
+<li>万维网www</li>
+<li>域名系统DNS</li>
+<li>动态主机配置DHCP</li>
+<li>电子邮件</li>
+<li>文件传送FTP和P2P文件共享</li>
+<li>多媒体网络应用</li>
+</ul>
+<h3 id="客户-x2F-服务器方式-C-x2F-S方式-和对等方式-P2P方式"><a href="#客户-x2F-服务器方式-C-x2F-S方式-和对等方式-P2P方式" class="headerlink" title="客户/服务器方式(C/S方式)和对等方式(P2P方式)"></a>客户/服务器方式(C/S方式)和对等方式(P2P方式)</h3><p>客户/服务器(Client/Server,C/S)方式</p>
+<ul>
+<li>客户和服务器是指通信中所涉及的两个应用进程。</li>
+<li>客户/服务器方式所描述的是进程之间服务和被服务的关系。</li>
+<li>客户是服务请求方，服务器是服务提供方。</li>
+<li>服务器总是处于运行状态，并等待客户的服务请求。服务器具有固定端口号（例如HTTP服务器的默认端口号为80)，而运行服务器的主机也具有固定的P地址。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/3aeP/image-20260415141101123.png" srcset="/img/loading.gif" lazyload alt="image-20260415141101123"></p>
+<p>C/S方式是因特网上传统的、同时也是最成熟的方式，很多我们熟悉的网络应用采用的都是C/S方式，包括万维网WWW、电子邮件、文件传输FTP等。</p>
+<p>基于C/S方式的应用服务通常是服务集中型的，即应用服务集中在网络中比客户计算机少得多的服务<br>器计算机上。</p>
+<ul>
+<li>由于一台服务器计算机要为多个客户机提供服务，在C/S应用中，常会出现服务器计算机跟不上众多客户机请求的情况。</li>
+<li>为此，在C/S应用中，常用计算机群集<br>(或服务器场)构建一个强大的虚拟服务器。</li>
+</ul>
+<p>对等(Peer-to-Peer,P2P)方式</p>
+<ul>
+<li>在P2P方式中，没有固定的服务请求者和服务提供者，分布在网络边缘各端系统中的应用进程是对等的，被称为对等方。对等方相互之间直接通信，每个对等方既是服务的请求者，又是服务的提供者。</li>
+<li>目前，在因特网上流行的P2P应用主要包括P2P文件共享、即时通信、P2P流媒体、分布式存储等。</li>
+<li>基于P2P的应用是服务分散型的，因为服务不是集中在少数几个服务器计算机中，而是分散在大量对等计算机中，这些计算机并不为服务提供商所有，而是为个人控制的桌面计算机和笔记本电脑，它们通常位于住宅、校园和办公室中。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/9Dmo/image-20260415141406010.png" srcset="/img/loading.gif" lazyload alt="image-20260415141406010"></p>
+<ul>
+<li>P2P方式的最突出特性之一就是它的可扩展性。因为系统每增加一个对等方，不仅增加的是服务的请求者，同时也增加了服务的提供者，系统性能不会因规模的增大而降低。</li>
+<li>P2P方式具有成本上的优势，因为它通常不需要庞大的服务器设施和服务器带宽。为了降低成本，服务提供商对于将P2P方式用于应用的兴趣越来越大。</li>
+</ul>
+<h3 id="动态主机配置协议DHCP"><a href="#动态主机配置协议DHCP" class="headerlink" title="动态主机配置协议DHCP"></a>动态主机配置协议DHCP</h3><p>DHCP是一种网络管理协议，它能自动为网络中的设备分配IP地址、子网掩码、默认网关和DNS服务器等配置信息。</p>
+<p>所谓分配，实际上是客户端向DHCP服务器租用某个IP地址，他免去了手工配置麻烦，易出错的痛点。</p>
+<h4 id="DHCP工作原理"><a href="#DHCP工作原理" class="headerlink" title="DHCP工作原理"></a>DHCP工作原理</h4><p><img src="https://files.seeusercontent.com/2026/04/15/In3e/image-20260415143004390.png" srcset="/img/loading.gif" lazyload alt="image-20260415143004390"></p>
+<p>如图，起初，DHCP客户端广播寻找DHCP服务器，服务器接收后提供IP地址租用服务并从自己的地址池中选择一个可用的IP地址连通其他配置封装为数据报返回一个“DHCP OFFER”报文。客户端可能接收到多个DHCP报文，一般选择最先收到的那个，客户端处理报文但不会使用内部的IP地址，会回复 一个“DHCP请求”报文申请使用那个IP地址。DHCP服务器收到请求后传回ACK数据报。</p>
+<p>接收到ACK确认后，客户端会用ARP检查IP地址是否被其他主机占用，如未占用，IP租用正式成立，DHCP客户端将IP地址等配置使用在自己的端口上。</p>
+<p>租用期不是永久的，需要续约。</p>
+<p>在租用期过半的时候，客户端会向服务器发送DHCP续约请求报文，若服务器同意传回ACK，那就得到新的租用期，若没有同意，那客户端必须停止使用原IP地址并重新申请IP地址。</p>
+<p>若DHCP服务器仍不响应，客户端将在租用期到达0.875时重新申请。</p>
+<p>若DHCP服务器还在装死，那租用期到后，客户端会重新申请IP地址。</p>
+<p>另外，客户端可以随时向DHCP服务器终止IP租用合约，只需要向服务器发送释放请求即可。</p>
+<h4 id="DHCP中继代理"><a href="#DHCP中继代理" class="headerlink" title="DHCP中继代理"></a>DHCP中继代理</h4><p><img src="https://files.seeusercontent.com/2026/04/15/e9mC/image-20260415144236124.png" srcset="/img/loading.gif" lazyload alt="image-20260415144236124"></p>
+<p>黄色的主机不可使用DHCP，因为广播报文不会被路由器转发，而是丢弃。</p>
+<p>方法是给该路由器配置DHCP服务器的IP地址并使之成为 DHCP中继代理。</p>
+<p>当路由器接收到DHCP请求后，会将其单播转发给DHCP服务器。</p>
+<h3 id="域名系统DNS"><a href="#域名系统DNS" class="headerlink" title="域名系统DNS"></a>域名系统DNS</h3><p>我们在访问某个url来获取网站信息时，实际上计算机访问了对应服务器的IP地址，因为访问地址才符合计算机网络的设计。但是对于人类，域名显然比IP要好记得多，所以需要一个东西来实现域名到IP的转换。</p>
+<p>DNS是域名系统（Domain Name System）的简称，它的核心作用是将我们容易记住的域名（例如 <code>www.qq.com</code>）翻译成计算机能识别的IP地址（例如 <code>14.18.240.1</code>）。</p>
+<p>这种域名和ip键值对在本地会存有一部分，但是用户访问的网站是无限可能的，所以遇到本地查询不到的情况就需要询问DNS域名系统。</p>
+<p>遗憾的是，DNS服务器不可只有一个，因为因特网过于庞大，任何计算机都难以承受，且中心化的代价就是如果该DNS中心发生停电，整个世界的网络都会瘫痪。</p>
+<p>早在1983年，因特网就开始采用层次结构的命名树作为主机的名字(即域名)并使用分布式的域名系统DNS, DNS使大多数域名都在本地解析，仅少量解析需要在因特网上通信，因此系统效率很高。</p>
+<p>由于DNS是分布式系统，即使单个计算机出了故障，也不会妨碍整个系统的正常运行</p>
+<h4 id="分布式DNS"><a href="#分布式DNS" class="headerlink" title="分布式DNS"></a>分布式DNS</h4><p>因特网采用层次树状结构的域名结构。</p>
+<p>域名的结构由若干个分量组成，各分量之间用“点”隔开，分别代表不同级别的域名。</p>
+<table>
+<thead>
+<tr>
+<th>..</th>
+<th>四级域名</th>
+<th>三级域名</th>
+<th>二级域名</th>
+<th>顶级域名</th>
+</tr>
+</thead>
+</table>
+<ul>
+<li>每一级的域名都由英文字母和数字组成，不超过63个字符，不区分大小写字母。</li>
+<li>级别最低的域名写在最左边，而级别最高的顶级域名写在最右边。</li>
+<li>完整的域名不超过255个字符。</li>
+<li>域名系统既不规定一个域名需要包含多少个下级域名，也不规定每一级的域名代表什么意思。</li>
+<li>各级域名由其上一级的域名管理机构管理，而最高的顶级域名则由因特网名称与数字地址分配机构ICANN进行管理。</li>
+</ul>
+<p>如该博客：</p>
+<p>blog.willmo.top</p>
+<ul>
+<li>top是顶级域名，是我向域名服务商namesilo购买的</li>
+<li>willmo是我购买时填入的二级域名</li>
+<li>blog是我在DNS中分配的三级域名</li>
+</ul>
+<p>顶级域名TLD(Top Level Domain)分为以下三类：</p>
+<ul>
+<li>国家顶级域名nTLD<br>采用S03166的规定。如cn表示中国，us表示美国，uk表示英国、等等。</li>
+<li>通用顶级域名gTLD<br>最常见的通用顶级域名有七个，即：com(公司企业)、net(网络服务机<br>构)、org(非营利性组织)、int(国际组织)、edu(美国教育结构)、<br>gov(美国政府部门)、mil(美国军事部门)。</li>
+<li>反向域arpa<br>用于反向域名解析，即IP地址反向解析为域名。</li>
+</ul>
+<p>在国家顶级域名下注册的二级域名均由该国家自行确定。例如，顶级域名为jp的日本，将其教育和企业机构的二级域名定为ac和co，而不用edu和com。</p>
+<h4 id="因特网域名空间"><a href="#因特网域名空间" class="headerlink" title="因特网域名空间"></a>因特网域名空间</h4><p>像是一颗倒着生长的树：</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/M1ma/image-20260415151254828.png" srcset="/img/loading.gif" lazyload alt="image-20260415151254828"></p>
+<h4 id="DNS域名分布式解析"><a href="#DNS域名分布式解析" class="headerlink" title="DNS域名分布式解析"></a>DNS域名分布式解析</h4><p><img src="https://files.seeusercontent.com/2026/04/15/f7Xd/image-20260415151440997.png" srcset="/img/loading.gif" lazyload alt="image-20260415151440997"></p>
+<blockquote>
+<p>等我慢慢转成文字。</p>
+</blockquote>
+<p>查询方式有：</p>
+<ul>
+<li>递归查询</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/Pr2m/image-20260415151637265.png" srcset="/img/loading.gif" lazyload alt="image-20260415151637265"></p>
+<ul>
+<li>迭代查询</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/lJ2c/image-20260415151714998.png" srcset="/img/loading.gif" lazyload alt="image-20260415151714998"></p>
+<p>由于递归查询对于被查询的域名服务器负担太大，通常采用以下模式：从请求主机到本地域名服务器的查询是递归查询，而其余的查询是迭代查询。</p>
+<hr>
+<p>为了提高DNS的查询效率，并减轻根域名服务器的负荷和减少因特网上的DNS查询报文数量，在域名服务器中广泛地使用了高速缓存。高速缓存用来存放最近查询过的域名以及从何处获得域名映射信息的记录。</p>
+<p>由于域名到P地址的映射关系并不是永久不变，为保持高速缓存中的内容正确，域名服务器应为每项内容设置计时器并删除超过合理时间的项（例如，每个项目只存放两天）</p>
+<p>不但在本地域名服务器中需要高速缓存，在用户主机中也很需要。许多用户主机在启动时从本地域名服务器下载域名和P地址的全部数据库，维护存放自己最近使用的域名的高速缓存，并且只在从缓存中找不到域名时才向域名服务器查询。同理，主机也需要保持高速缓存中内容的正确性。</p>
+<p>DNS报文使用UDP进行封装。</p>
+<h3 id="文件传送协议FTP"><a href="#文件传送协议FTP" class="headerlink" title="文件传送协议FTP"></a>文件传送协议FTP</h3><p>将某台计算机中的文件通过网络传送到可能相距很远的另一台计算机中，是一项基本的网络应用，即文件传送。<br>文件传送协议FTP(File Transfer Protocol)是因特网上使用得最广泛的文件传送协议。</p>
+<ul>
+<li>FTP提供交互式的访问，允许客户指明文件的类型与格式（如指明是否使用ASCII码），并允许文件具有存取权限（如访问文件的用户必须经过授权，并输入有效的口令）。</li>
+<li>FTP屏蔽了各计算机系统的细节，因而适合于在异构网络中任意计算机之间传送文件。</li>
+</ul>
+<p>FTP基于某个服务器计算机，为了保证访问性和稳定性，应该采用大存储，高稳定性的服务器来搭建。但是 为了短暂测试也可以用个人PC搭建。</p>
+<h4 id="FTP的工作原理"><a href="#FTP的工作原理" class="headerlink" title="FTP的工作原理"></a>FTP的工作原理</h4><p><img src="https://files.seeusercontent.com/2026/04/15/Zp0j/image-20260415163414973.png" srcset="/img/loading.gif" lazyload alt="image-20260415163414973"></p>
+<ul>
+<li>主动模式</li>
+</ul>
+<p>FTP用户端向一直在监听熟知端口号21的服务器建立控制TCP链接，该链接用于传输命令，从始至终一直存在。</p>
+<p>当有数据需要传输时，就建立另一个文件传输TCP链接，该链接用于传送文件，只有在传输文件时在存活。</p>
+<ul>
+<li>被动模式</li>
+</ul>
+<p>控制链接的建立与主动模式没什么不同，但是文件传输链接的建立有不同：</p>
+<p>当需要传输数据时，客户端通过控制连接发送命令。服务器收到后，会<strong>随机开启一个高端端口（例如1024以上）并监听</strong>，然后将这个端口号通过控制连接告诉客户端。客户端<strong>主动向服务器的这个指定端口发起连接</strong>，从而建立数据通道。</p>
+<h3 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h3><p>电子邮件(E-mail)是因特网上最早流行的一种应用，并且仍然是当今因特网上最重要、最实用的应用之一。</p>
+<ul>
+<li>发件人将邮件发送到自己使用的邮件服务器：</li>
+<li>发件人的邮件服务器将收到的邮件按其</li>
+<li>目的地址转发到收件人邮件服务器中的收件人邮箱：</li>
+<li>收件人在方便的时候访问收件人邮件服务器中自己的邮箱，获取收到的电子邮件。</li>
+<li>电子邮件使用方便、传递迅速而且费用低廉。它不仅可以传送文字信息，而且还可附上声音和图像。</li>
+</ul>
+<p>电子邮件系统采用客户/服务器方式。<br>电子邮件系统的三个主要组成构件：用户代理，邮件服务器，以及电子邮件所需的协议。</p>
+<ul>
+<li>用户代理是用户与电子邮件系统的接口，又称为电子邮件客户端软件。</li>
+<li>邮件服务器是电子邮件系统的基础设施。因特网上所有的ISP都有邮件服务器，其功能是发送和接收邮件，同时还要负责维护用户的邮箱。</li>
+<li>协议包括邮件发送协议（例如SMTP)和邮件读取协议（例如POP3,IMAP)</li>
+</ul>
+<p>下面解释过程:</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/s7Ux/image-20260415191006173.png" srcset="/img/loading.gif" lazyload alt="image-20260415191006173"></p>
+<p>发送方使用SMTP协议与发送方服务器建立TCP链接并传输邮件，随后发送方服务器与接收方服务器建立链接后完成传输，随后接收方通过POP3协议从接收方服务器中读取邮件。分为接收方和发送方是因为实际过程中收发双方的邮件服务很可能不一样，比如QQ邮箱和谷歌邮箱。</p>
+<h4 id="邮件发送SMTP工作原理"><a href="#邮件发送SMTP工作原理" class="headerlink" title="邮件发送SMTP工作原理"></a>邮件发送SMTP工作原理</h4><p><img src="https://files.seeusercontent.com/2026/04/15/z2Rn/image-20260415191810636.png" srcset="/img/loading.gif" lazyload alt="image-20260415191810636"></p>
+<p>多说无益，自己看吧。</p>
+<h4 id="电子邮件的信息格式"><a href="#电子邮件的信息格式" class="headerlink" title="电子邮件的信息格式"></a>电子邮件的信息格式</h4><p>电子邮件的信息格式并不是由SMTP定义的，而是在RFC822中单独定义的。这个RFC文档已在2008年更新为RFC5322。一个电子邮件有<strong>信封</strong>和<strong>内容</strong>两部分。而内容又由<strong>首部</strong>和<strong>主体</strong>两部分构成。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/xBw4/image-20260415192129149.png" srcset="/img/loading.gif" lazyload alt="image-20260415192129149"></p>
+<p>补充：邮件的抄送人（CC， Carbon Copy）是指除了主要收件人（“收件人”栏）之外，发送方希望其知晓邮件内容、但通常不要求其直接回复或采取行动的人。</p>
+<h4 id="SMTP的局限"><a href="#SMTP的局限" class="headerlink" title="SMTP的局限"></a>SMTP的局限</h4><ul>
+<li>SMTP协议只能传送ASCI码文本数据，不能传送可执行文件或其他的二进制对象。</li>
+<li>SMTP不能满足传送多媒体邮件（例如带有图片、音频或视频数据）的需要。并且许多其他非英语国家的文字<br>(例如中文、俄文、甚至带有重音符号的法文或德文)也无法用SMTP传送。</li>
+<li>为解决SMTP传送非ASCII码文本的问题，提出了多用途因特网邮件扩展MIME(Multipurpose Internet Mail Extensions)</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/Ss3a/image-20260415192329529.png" srcset="/img/loading.gif" lazyload alt="image-20260415192329529"></p>
+<p>MINE做到了：</p>
+<ul>
+<li>增加了5个新的邮件首部字段，这些字段提供了有关邮件主体的信息。</li>
+<li>定义了许多邮件内容的格式，对多媒体电子邮件的表示方法进行了标准化。</li>
+<li>定义了传送编码，可对任何内容格式进行转换，而不会被邮件系统改变。</li>
+</ul>
+<p>实际上，MIME不仅仅用于SMTP,也用于后来的同样面向ASCII字符的HTTP。</p>
+<h4 id="邮件读取POP和IMAP"><a href="#邮件读取POP和IMAP" class="headerlink" title="邮件读取POP和IMAP"></a>邮件读取POP和IMAP</h4><ul>
+<li>邮局协议POP(Post Office Protocol),POP3是其第三个版本，是因特网正式标准非常简单、功能有限的邮件读取协议。</li>
+<li><ul>
+<li>用户只能以下载并删除方式或下载并保留方式从邮件服务器下载邮件到用户方计算机。不允许用户在邮件服务器上管理自己的邮件。（例如创建文件夹，对邮件进行分类管<br>理等)。</li>
+</ul>
+</li>
+<li>因特网邮件访问协议IMAP(Internet Message Access Protocol)),IMAP4是其第四个版本，目前还只是因特网建议标准功能。</li>
+<li><ul>
+<li>比POP3强大的邮件读取协议，用户在自己的计算机上就可以操控邮件服务器中的邮箱，就像在本地<br>操控一样，因此IMAP是一个联机协议。</li>
+</ul>
+</li>
+</ul>
+<p>POP3和IMAP4都采用基于TCP连接的客户/服务器方式。POP3使用熟知端口110，IMAP4使用熟知端口143。</p>
+<h4 id="基于万维网的电子邮件"><a href="#基于万维网的电子邮件" class="headerlink" title="基于万维网的电子邮件"></a>基于万维网的电子邮件</h4><p>通过浏览器登录（提供用户名和口令）邮件服务器万维网网站就可以撰写、收发、阅读和管理电子邮件。这种工作模式与MAP很类似，不同的是用户计算机无需安装专门的用户代理程序，只需要使用通用的万维网浏览器。<br>邮件服务器网站通常都提供非常强大和方便的邮件管理功能，用户可以在邮件服务器网站上管理和处理自己的邮件，而不需要将邮件下载到本地进行管理。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/L8fi/image-20260415192858696.png" srcset="/img/loading.gif" lazyload alt="image-20260415192858696"></p>
+<h3 id="万维网"><a href="#万维网" class="headerlink" title="万维网"></a>万维网</h3><p>万维网WWW(World Wide Web)并非某种特殊的计算机网络。它是一个大规模的、联机式的信息储藏所，是运行在因特网上的一个分布式应用。<br>万维网利用网页之间的超链接将不同网站的网页链接成一张逻辑上的信息网。</p>
+<p>浏览器最重要的部分是渲染引擎，也就是浏览器内核。负责对网页内容进行解析和显示。</p>
+<ul>
+<li>不同的浏览器内核对网页内容的解析也有不同，因此同一网页在不同内核的浏览器里的显示效果可能不同：</li>
+<li>网页编写者需要在不同内核的浏览器中测试网页显示效果。</li>
+</ul>
+<p>为了方便地访问在世界范围的文档，万维网使用统一资源定位符URL来指明因特网上任何种类“资源”的位置。<br>URL的一般形式由以下四个部分组成：</p>
+<p><code>&lt;协议&gt;：//&lt;主机&gt;：&lt;端口&gt;/&lt;路径&gt;</code></p>
+<p>而万维网的文档是html，css和javascript。</p>
+<ul>
+<li>超文本标记语言HTML(HyperText Markup Language)<br>使用多种“标签”来描述网页的结构和内容</li>
+<li>层叠样式表CSS(Cascading Style Sheets)<br>从审美的角度来描述网页的样式</li>
+<li>js，一种脚本语言（和Java没有任何关系）<br>控制网页的行为</li>
+</ul>
+<h4 id="超文本传输协议HTTP"><a href="#超文本传输协议HTTP" class="headerlink" title="超文本传输协议HTTP"></a>超文本传输协议HTTP</h4><p>HTTP定义了浏览器（即万维网客户进程）<br>怎样向万维网服务器请求万维网文档，以及万维网服务器怎样把万维网文档传送给浏览器。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/en9U/image-20260415193759372.png" srcset="/img/loading.gif" lazyload alt="image-20260415193759372"></p>
+<p>HTTP/1.0采用非持续连接方式。在该方式下，每次浏览器要请求一个文件都要与服务器建立TCP连接，当收到响应后就立即关闭连接。</p>
+<ul>
+<li>每请求一个文档就要有两倍的TT的开销。若一个网页上有很多引用对象（例如图片等），那么请求每一个对象都需要花费2RTT的时间。</li>
+<li>为了减小时延，浏览器通常会建立多个并行的TCP连接同时请求多个对象。但是，这会大量占用万维网服务器的资源，特别是万维网服务器往往要同时服务于大量客户的请求，这会使其负担很重。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/Fx2b/image-20260415193953925.png" srcset="/img/loading.gif" lazyload alt="image-20260415193953925"></p>
+<p>HTTP/1.1采用持续连接方式。在该方式下，万维网服务器在发送响应后仍然保持这条连接，使同一个客户（浏览器）和该服务器可以继续在这条连接上传送后续的HTTP请求报文和响应报文。这并不局限于传送同一个页面上引用的对象，而是只要这些文档都在同一个服务器上就行。</p>
+<p>为了进一步提高效率，HTTP/1.1的持续连接还可以使用流水线方式工作，即浏览器在收到HTTP的响应报文之前就能够连续发送多个请求报文。这样的一个接一个的请求报文到达服务器后，服务器就发回一个接一个的响应报文。这样就节省了很多个RTT时间，使TCP连接中的空闲时间减少，提高了下载文档的效率。</p>
+<h4 id="HTTP的报文格式"><a href="#HTTP的报文格式" class="headerlink" title="HTTP的报文格式"></a>HTTP的报文格式</h4><p>HTTP是面向文本的，其报文中的每一个字段都是一些ASCII码串，并且每个字段的长度都是不确定的。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/Gxx2/image-20260415194319215.png" srcset="/img/loading.gif" lazyload alt="image-20260415194319215"></p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/z9tU/image-20260415194426876.png" srcset="/img/loading.gif" lazyload alt="image-20260415194426876"></p>
+<h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><ul>
+<li>使用Cookie在服务器上记录用户信息</li>
+<li>现在，用户可以通过万维网实现各种复杂的应用，如网上购物、电子商务等。这些应用往往需要万维网服务<br>器能够识别用户。</li>
+</ul>
+<p>Cookie提供了一种机制使得万维网服务器能够“记住”用户，而无需用户主动提供用户标识信息。也就是说，Cookie是一种对无状态的HTTP进行状态化的技术。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/gIl8/image-20260415194706811.png" srcset="/img/loading.gif" lazyload alt="image-20260415194706811"></p>
+<h4 id="万维网缓存"><a href="#万维网缓存" class="headerlink" title="万维网缓存"></a>万维网缓存</h4><ul>
+<li>在万维网中还可以使用缓存机制以提高万维网的效率。</li>
+<li>万维网缓存又称为Web缓存(Web Cache),可位于客户机，也可位于中间系统上，位于中间系统上的<br>Web缓存又称为代理服务器(Proxy Server)。</li>
+<li>Web缓存把最近的一些请求和响应暂存在本地磁盘中。当新请求到达时，若发现这个请求与暂时存放的请求相同，就返回暂存的响应，而不需要按URL的地址再次去因特网访问该资源。</li>
+</ul>
+<p><img src="https://files.seeusercontent.com/2026/04/15/q7Gq/image-20260415194900348.png" srcset="/img/loading.gif" lazyload alt="image-20260415194900348"></p>
+<p>代理服务器内的文件资源存在一个过期时间，若到了时间，就需要重新向原始服务器发送请求，通过提供修改日期，原始服务器查看代理服务器中的文件与自己的是否一致，如果一致就发回304响应，若不一致就将新文件传到代理服务器。这样代理服务器就完成了文档的更新。</p>
+<p><img src="https://files.seeusercontent.com/2026/04/15/aXh9/image-20260415195304877.png" srcset="/img/loading.gif" lazyload alt="image-20260415195304877"></p>
+<p>至此，应用层完结</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/Chapter%207%20of%20Computer%20Networks:%20Network%20Security/" title="计算机网络第七章：网络安全">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算机网络第七章：网络安全</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/Computer%20Networks%20Chapter%205:%20Transport%20Layer/" title="计算机网络第五章：运输层">
+                        <span class="hidden-mobile">计算机网络第五章：运输层</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

@@ -1,0 +1,940 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="视盾项目扩展 版本:1.0  | 写完这篇文档的时间是2026年5月19日20:28:30  当前技术栈   层级 技术栈 关键组件    客户端 Android (API 29+) MediaProjection, MediaRecorder, ForegroundService, WindowManager   后端（现有） Spring Boot 3.5.14, Java 25 MyBati">
+<meta property="og:type" content="article">
+<meta property="og:title" content="视盾扩展">
+<meta property="og:url" content="http://example.com/posts/AIscanner/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="视盾项目扩展 版本:1.0  | 写完这篇文档的时间是2026年5月19日20:28:30  当前技术栈   层级 技术栈 关键组件    客户端 Android (API 29+) MediaProjection, MediaRecorder, ForegroundService, WindowManager   后端（现有） Spring Boot 3.5.14, Java 25 MyBati">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-19T12:36:34.557Z">
+<meta property="article:modified_time" content="2026-05-19T12:36:34.509Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>视盾扩展 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="视盾扩展"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-05-19 12:36" pubdate>
+          2026年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">视盾扩展</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="视盾项目扩展"><a href="#视盾项目扩展" class="headerlink" title="视盾项目扩展"></a>视盾项目扩展</h1><blockquote>
+<p>版本:1.0  | 写完这篇文档的时间是2026年5月19日20:28:30</p>
+</blockquote>
+<h2 id="当前技术栈"><a href="#当前技术栈" class="headerlink" title="当前技术栈"></a>当前技术栈</h2><table>
+<thead>
+<tr>
+<th>层级</th>
+<th>技术栈</th>
+<th>关键组件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>客户端</td>
+<td>Android (API 29+)</td>
+<td>MediaProjection, MediaRecorder, ForegroundService, WindowManager</td>
+</tr>
+<tr>
+<td>后端（现有）</td>
+<td>Spring Boot 3.5.14, Java 25</td>
+<td>MyBatis, MySQL, Redis (Lettuce), RestClient</td>
+</tr>
+<tr>
+<td>AI 服务（其他人）</td>
+<td>Python 3.10+, FastAPI</td>
+<td>CLIP (ViT-B/32), Whisper (base), FFmpeg</td>
+</tr>
+<tr>
+<td>中间件</td>
+<td>Redis（已用）, RocketMQ（实装待启用）</td>
+<td>黑名单 Set, 异步消息</td>
+</tr>
+</tbody></table>
+<h2 id="零级优先"><a href="#零级优先" class="headerlink" title="零级优先"></a>零级优先</h2><h3 id="视频上传安全与校验"><a href="#视频上传安全与校验" class="headerlink" title="视频上传安全与校验"></a>视频上传安全与校验</h3><ul>
+<li><strong>目标</strong>：防止无效/恶意视频消耗 AI 资源</li>
+<li><strong>技术栈</strong>：Spring Boot (MultipartFile 校验), Java 25</li>
+<li><strong>实现方案</strong>：<ul>
+<li>增加 <code>@VideoValidation</code> 自定义校验器，检查：<ul>
+<li>文件扩展名 <code>.mp4</code></li>
+<li>MIME 类型 <code>video/mp4</code></li>
+<li>文件大小 ≤ 10MB（已有）</li>
+<li>视频时长 ≤ 5 秒（通过 FFmpeg 或 <code>Metadata</code> 解析）</li>
+</ul>
+</li>
+<li>校验失败返回 400 及明确错误码</li>
+<li>可能需要开发用户登录。</li>
+</ul>
+</li>
+</ul>
+<h3 id="基础鉴权（API-Key）"><a href="#基础鉴权（API-Key）" class="headerlink" title="基础鉴权（API Key）"></a>基础鉴权（API Key）</h3><ul>
+<li><strong>目标</strong>：防止未授权客户端调用后端接口，攻击者可能拆包或者抓包拿到api后攻击</li>
+<li><strong>技术栈</strong>：Spring Security</li>
+<li><strong>实现方案</strong>：<ul>
+<li>为每个客户端颁发 <code>X-API-Key</code></li>
+<li>后端使用拦截器或 <code>OncePerRequestFilter</code> 校验</li>
+<li>配置化密钥（环境变量）</li>
+</ul>
+</li>
+</ul>
+<h3 id="视频编码压缩（客户端）"><a href="#视频编码压缩（客户端）" class="headerlink" title="视频编码压缩（客户端）"></a>视频编码压缩（客户端）</h3><ul>
+<li><p><strong>目标</strong>：降低上传流量，提升低端机兼容性</p>
+</li>
+<li><p><strong>技术栈</strong>：Android MediaRecorder</p>
+</li>
+<li><p><strong>实现方案</strong>：</p>
+<ul>
+<li>修改 <code>prepareRecorder()</code>：<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">recorder.setVideoEncodingBitRate(<span class="hljs-number">500_000</span>);  <span class="hljs-comment">// 500kbps</span><br>recorder.setVideoFrameRate(<span class="hljs-number">15</span>);             <span class="hljs-comment">// 15 fps</span><br>recorder.setVideoSize(<span class="hljs-number">854</span>, <span class="hljs-number">480</span>);            <span class="hljs-comment">// 480p</span><br></code></pre></td></tr></tbody></table></figure></li>
+<li>保持 H.264 + MP4 封装</li>
+</ul>
+</li>
+</ul>
+<h3 id="可观测性基础（日志-健康检查）"><a href="#可观测性基础（日志-健康检查）" class="headerlink" title="可观测性基础（日志 + 健康检查）"></a>可观测性基础（日志 + 健康检查）</h3><ul>
+<li><strong>目标</strong>：便于排查问题，演示时展示系统状态</li>
+<li><strong>技术栈</strong>：Spring Boot Actuator, Micrometer,</li>
+<li><strong>实现方案</strong>：<ul>
+<li>添加依赖 <code>spring-boot-starter-actuator</code></li>
+<li>暴露 <code>health</code>, <code>info</code>, <code>metrics</code> 端点（可选鉴权）</li>
+<li>在 <code>DetectionService</code> 关键节点打印日志（含耗时）</li>
+<li>自定义 <code>AIHealthIndicator</code> 检测 Python 服务连通性</li>
+</ul>
+</li>
+</ul>
+<h3 id="Docker-Compose-一键启动"><a href="#Docker-Compose-一键启动" class="headerlink" title="Docker Compose 一键启动"></a>Docker Compose 一键启动</h3><ul>
+<li><strong>目标</strong>：评审/演示环境快速搭建，且能够开箱即用快速部署。</li>
+<li><strong>技术栈</strong>：Docker, Docker Compose</li>
+<li><strong>实现方案</strong>：<ul>
+<li>编写 <code>Dockerfile</code> 用于 Spring Boot 后端</li>
+<li>编写 <code>docker-compose.yml</code> 集成：<ul>
+<li>MySQL 8.0</li>
+<li>Redis 7-alpine</li>
+<li>Spring Boot 后端</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="一级优先"><a href="#一级优先" class="headerlink" title="一级优先"></a>一级优先</h2><h3 id="历史检测记录客户端"><a href="#历史检测记录客户端" class="headerlink" title="历史检测记录客户端"></a>历史检测记录客户端</h3><blockquote>
+<p>我想过，本地缓存是必要的，在每次启动的时候就将记录(无非就是文本也没多大)存在本地，可以加快速度也减轻mysql压力</p>
+</blockquote>
+<ul>
+<li><strong>目标</strong>：用户可追溯过往监测结果</li>
+<li><strong>技术栈</strong>：Android (RecyclerView, Room), Retrofit</li>
+<li><strong>实现方案</strong>：<ul>
+<li>后端新增接口 <code>GET /api/v1/history?deviceId=&amp;page=&amp;size=</code></li>
+<li>返回分页检测记录（id, riskLevel, score, createdAt）</li>
+<li>客户端使用 <code>Room</code> 本地缓存 + 下拉刷新</li>
+<li>UI 按风险等级颜色区分</li>
+</ul>
+</li>
+</ul>
+<h3 id="RocketMQ-异步持久化"><a href="#RocketMQ-异步持久化" class="headerlink" title="RocketMQ 异步持久化"></a>RocketMQ 异步持久化</h3><ul>
+<li><strong>目标</strong>：降低检测接口响应延迟，解耦 AI 调用与 DB 写入</li>
+<li><strong>技术栈</strong>：RocketMQ, Spring Boot RocketMQ Starter</li>
+<li><strong>实现方案</strong>：<ul>
+<li>启用 MQ（配置 <code>rocketmq.name-server</code>）</li>
+<li>检测成功后，发送消息到 <code>detection-record</code> topic</li>
+<li>独立 <code>@RocketMQMessageListener</code> 消费者执行 <code>insert</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="多层次名单（灰度-x2F-临时黑名单）"><a href="#多层次名单（灰度-x2F-临时黑名单）" class="headerlink" title="多层次名单（灰度/临时黑名单）"></a>多层次名单（灰度/临时黑名单）</h3><ul>
+<li><strong>目标</strong>：如果黑名单来自权威发布者，如抖音官方，那我们是否可以用“Blacklist命中”一票否决而不用ai调用？这确实能够减少无效 AI 调用</li>
+<li><strong>技术栈</strong>：Redis (Set / Sorted Set), Spring Data Redis</li>
+<li><strong>实现方案</strong>：<ul>
+<li><strong>全局黑名单</strong>（现有 <code>blacklist:authors</code>）：永久，人工维护</li>
+<li><strong>临时黑名单</strong>：<code>blacklist:temp:authors</code>（Sorted Set, score=过期时间戳），自动清理</li>
+</ul>
+</li>
+</ul>
+<h3 id="流式上传（分段上传）"><a href="#流式上传（分段上传）" class="headerlink" title="流式上传（分段上传）"></a>流式上传（分段上传）</h3><ul>
+<li><strong>目标</strong>：还是需要并发，这才能提高效率减少单次上传等待，提供更快的部分反馈。</li>
+<li><strong>技术栈</strong>：Android (OkHttp multipart), Spring Boot</li>
+<li><strong>实现方案</strong>：<ul>
+<li>客户端：5 秒录屏切成 5 个 1 秒片段，依次上传</li>
+<li>后端：新增 <code>/api/v1/detect/stream</code> 接口，接收 <code>fragmentIndex</code> 和 <code>totalFragments</code></li>
+<li>Redis 暂存片段，最后一个片段到达后组装并调用 AI</li>
+<li>可选：每个片段单独 AI 分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-基础可视化后台（管理端）"><a href="#5-基础可视化后台（管理端）" class="headerlink" title="5. 基础可视化后台（管理端）"></a>5. 基础可视化后台（管理端）</h3><ul>
+<li><strong>目标</strong>：管理员需要有一个简单的后台操作，来查看服务器压力，甚至是导出数据交付给警方做反诈工作等</li>
+<li><strong>技术栈</strong>：Spring Boot +Vue 3</li>
+<li><strong>实现方案</strong>（简化版）：<ul>
+<li>使用 Vue快速搭建 3 个页面：<ul>
+<li>检测记录列表（分页、筛选）</li>
+<li>黑名单管理（增删、批量导入）</li>
+<li>系统状态（AI 连通性、Redis 命中率）</li>
+</ul>
+</li>
+<li>复用现有 Controller，增加 <code>@Controller</code> 视图方法</li>
+<li>基本认证（HTTP Basic）</li>
+</ul>
+</li>
+</ul>
+<h2 id="二级优先"><a href="#二级优先" class="headerlink" title="二级优先"></a>二级优先</h2><h3 id="语音播报-紧急联系人通知"><a href="#语音播报-紧急联系人通知" class="headerlink" title="语音播报 + 紧急联系人通知"></a>语音播报 + 紧急联系人通知</h3><ul>
+<li><strong>目标</strong>：高危场景下主动触达用户亲友</li>
+<li><strong>技术栈</strong>：Android TextToSpeech, 短信/推送 API</li>
+<li><strong>实现方案</strong>：<ul>
+<li>高危判定后自动语音朗读警告用户</li>
+</ul>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

@@ -1,0 +1,935 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第五章：指令系统记得在第一章写的层次结构吗？  ISA是一种规定和结构规范，是软件和硬件之间的接口。 目前分为Intel x86（支配着计算机的PC时代） arm（最流行的嵌入式设备指令系统） MIPS和RISC-V（新兴的，能够使得计算机系统构建变得简单） 指令集又分为复杂指令集和精简指令集，Intel x86属于复杂指令集，其他属于后者。 MIPS和X86两种ISA，都有32位和64位两种版本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第五章：指令系统">
+<meta property="og:url" content="http://example.com/posts/Chapter_5_Command_System/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="第五章：指令系统记得在第一章写的层次结构吗？  ISA是一种规定和结构规范，是软件和硬件之间的接口。 目前分为Intel x86（支配着计算机的PC时代） arm（最流行的嵌入式设备指令系统） MIPS和RISC-V（新兴的，能够使得计算机系统构建变得简单） 指令集又分为复杂指令集和精简指令集，Intel x86属于复杂指令集，其他属于后者。 MIPS和X86两种ISA，都有32位和64位两种版本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png">
+<meta property="article:published_time" content="2026-01-25T04:22:28.892Z">
+<meta property="article:modified_time" content="2026-01-25T04:22:29.687Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机组成原理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png">
+  
+  
+  
+  <title>第五章：指令系统 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s41.ax1x.com/2026/01/25/pZ2NHxJ.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第五章：指令系统"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-25 04:22" pubdate>
+          2026年1月25日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">第五章：指令系统</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第五章：指令系统"><a href="#第五章：指令系统" class="headerlink" title="第五章：指令系统"></a>第五章：指令系统</h1><p><strong>记得在第一章写的层次结构吗？</strong></p>
+<p><img src="https://s2.loli.net/2026/01/03/nwjRpAyZNLtHbU7.png" srcset="/img/loading.gif" lazyload alt="image-20251117153817438"></p>
+<p><strong>ISA是一种规定和结构规范，是软件和硬件之间的接口。</strong></p>
+<p><strong>目前分为Intel x86（支配着计算机的PC时代）</strong></p>
+<p><strong>arm（最流行的嵌入式设备指令系统）</strong></p>
+<p><strong>MIPS和RISC-V（新兴的，能够使得计算机系统构建变得简单）</strong></p>
+<p>指令集又分为<strong>复杂指令集</strong>和<strong>精简指令集</strong>，Intel x86属于复杂指令集，其他属于后者。</p>
+<p>MIPS和X86两种<strong>ISA</strong>，都有32位和64位两种版本，也就是说寄存器可以是32位和64位</p>
+<p><img src="https://s2.loli.net/2025/11/26/1WlxsjguXh69D3c.png" srcset="/img/loading.gif" lazyload alt="image-20251125221854356"></p>
+<p><strong>本章的学习流程会配合C语言，需要你根据一段C语言代码找到对应的MIPS代码。使用</strong><a href="godbolt.org">GodBolt</a>能够将C语音代码转化为其他指令系统的代码。</p>
+<p><img src="https://s2.loli.net/2025/11/26/pM2jP7c6E3HQDrg.png" srcset="/img/loading.gif" lazyload alt="image-20251126111028860"></p>
+<h2 id="MIPS"><a href="#MIPS" class="headerlink" title="MIPS"></a>MIPS</h2><p><strong>MIPS是“Microprocessor without Interlocked Pipeline Stages”的缩写，即“无互锁流水级的微处理器”</strong></p>
+<p><strong>MIPS规定了在CPU内部有32个通用寄存器，每个寄存器的大小是32位，32位为一个字，也就是一个字等于四个字节。</strong></p>
+<p><strong>MIPS是精简指令集</strong></p>
+<p><img src="https://s2.loli.net/2025/12/01/swF4vS9DKLiyGJc.png" srcset="/img/loading.gif" lazyload alt="image-20251201144921739"></p>
+<h3 id="寄存器寻址"><a href="#寄存器寻址" class="headerlink" title="寄存器寻址"></a>寄存器寻址</h3><p><img src="https://s2.loli.net/2025/12/01/KgYmB9EbJ2OFder.png" srcset="/img/loading.gif" lazyload alt="image-20251201193928997"></p>
+<p><strong>注意看，addu是无符号加指令，subu是无符号减指令（上面没有） ，li是加载指令，jal是程序跳转指令，该指令意味着程序需要暂时离开当前位置去执行一个子任务（函数或者子程序）</strong></p>
+<p><strong>首先，将25加载到7号寄存器，将12加载到6号寄存器，直到将-10加载到4号寄存器，jal指令跳转到函数add中继续执行，将4号和5号相加，结果存到4号寄存器，随即将4和6相加放到4号，再将4和7相加，结果放到2号寄存器返回给res</strong></p>
+<h3 id="基址寻址"><a href="#基址寻址" class="headerlink" title="基址寻址"></a>基址寻址</h3><p><img src="https://s2.loli.net/2025/12/01/JkT86s2EhwF5y7X.png" srcset="/img/loading.gif" lazyload alt="image-20251201200613540"></p>
+<p><strong>栈指针是29号寄存器，里面存有一个存储地址这里是偏移值8，sw是存数指令，将一个字的数据存到指定的内存单元中。</strong></p>
+<p><strong>这里将1存入2号寄存器，随后将2号寄存器的值存入到24+$sp(8) = 32号主存中，循环往复直到主存被写入A数组的6个元素，随后给5号寄存器写入10，addiu执行将8+24=32存放到4号寄存器中，随后jal跳转到add_3</strong></p>
+<p><strong>add_3中有三条指令</strong></p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">lw</span> $<span class="hljs-number">2</span>,<span class="hljs-number">12</span>($<span class="hljs-number">4</span>)<br><span class="hljs-attribute">nop</span><br><span class="hljs-attribute">addu</span> $<span class="hljs-number">2</span>,$<span class="hljs-number">2</span>,$<span class="hljs-number">5</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>lw是取数，从指定内存地址取得一个字，这是取得4号寄存器的值32+12（索引是3，一个字是4，那就是3*4 = 12）= 44存入2号寄存器中，nop指令是空操作指令，addu将2和5相加，结果存入2号寄存器</strong></p>
+<p><strong>数据传送指令：在主存储器和寄存器之间传送数据指令，比如sw，lw。</strong></p>
+<p><strong>$sp也可以叫基址寄存器,又名栈指针寄存器，写在前面的值是偏移值offset，目标地址为$sp+offset。</strong></p>
+<p><strong>CPU寄存器是主体，主存是客体</strong></p>
+<blockquote>
+<p><strong>初次之外还有立即寻址，也就是操作数就在指令内，这样的操作数称为立即数。</strong></p>
+</blockquote>
+<h3 id="整体指令执行流程"><a href="#整体指令执行流程" class="headerlink" title="整体指令执行流程"></a>整体指令执行流程</h3><p><img src="https://s2.loli.net/2025/12/02/6OqkJhHj18dESfi.png" srcset="/img/loading.gif" lazyload alt="image-20251202144247923">两种寻址方式讲的有点细，我们需要跳出来看整体的执行流程。指令也一样是存在主存中的，一开始PC是0，CU向PC和MAR发送信号，将PC的值发送到MAR，通过地址总线读取0号内存的指令，CU通过控制总线发送信号，主存将指令发送到CPU的MDR中，PC自动加4(每一条指令4个字节)，MDR中的指令会移交到IR，CU对IR做译码操作，ALU将4号寄存器里的值和偏移值12做加法，得到44送到MAR，CU,MAR配合读出44号内存的数字存到寄存器中。</p>
+<h3 id="R型指令格式"><a href="#R型指令格式" class="headerlink" title="R型指令格式"></a>R型指令格式</h3><blockquote>
+<p><strong>R型指令可以表示算数，逻辑，移位运算指令。</strong></p>
+</blockquote>
+<p><strong>一条指令对应的二进制位长度就是指令字长。</strong></p>
+<p><strong>精简指令集比如RISC或者MIPS是定长的。</strong></p>
+<p><strong>复杂指令集比如CISC是变长的。</strong></p>
+<p><strong>MIPS中所有的指令都是32位的，32位分布结构如下：</strong></p>
+<p><img src="https://s2.loli.net/2025/12/02/Suv75hNLOE91Hd2.png" srcset="/img/loading.gif" lazyload alt="image-20251202145924526"></p>
+<p><strong>前六位op是用来区分指令格式的，可以分为R型（寄存器型），I型（立即数型），J型（跳转型）等等。</strong></p>
+<p><strong>比如指令</strong><code>add $2,$4,$6</code>$4是rs（第一源）,$6是rt（第二源）,$2是rd（目的寄存器）。</p>
+<p><strong>指令送入IR中，译码器根据前6位操作码确定格式，CU再根据最后6位功能码进行译码分析其操作，转交ALU或者其他模块执行。</strong></p>
+<p><strong>寄存器地址是5位，因为2^5=32，正好能够表示32个寄存器。</strong></p>
+<p>而位移量是5位，<strong>5位二进制数恰好可以表示0到31（2^5=32个值），而这足以覆盖一个32位寄存器所有有意义的移位操作。</strong></p>
+<blockquote>
+<p><strong>你只需要知道原理，不需要知道具体怎么写，我们不可能用汇编语言或者机器语言来写程序。</strong></p>
+</blockquote>
+<h3 id="乘除指令"><a href="#乘除指令" class="headerlink" title="乘除指令"></a>乘除指令</h3><p><strong>记得之前说过的吗？有两个32位的乘商寄存器：Hi和Lo是专用寄存器。</strong></p>
+<p><img src="https://s2.loli.net/2025/12/02/PTivDrAa95IERWZ.png" srcset="/img/loading.gif" lazyload alt="image-20251202160008452"></p>
+<p><code>mult</code>是将两个操作数存到专用寄存器中，<code>mflo</code>再将结果存到2号寄存器中</p>
+<p><strong>除法也是差不多，在这里就不赘述了。</strong></p>
+<h3 id="R型指令格式的总结"><a href="#R型指令格式的总结" class="headerlink" title="R型指令格式的总结"></a>R型指令格式的总结</h3><p><img src="https://s2.loli.net/2025/12/02/Pi4mMGZjEaK2zOJ.png" srcset="/img/loading.gif" lazyload alt="image-20251202160632925"></p>
+<p><strong>因为指令字长是一定的，所以即使nop只有一个操作字段，也不得不用32位来表示，虽然这样看起来确实很规整。</strong></p>
+<h3 id="I型指令格式"><a href="#I型指令格式" class="headerlink" title="I型指令格式"></a>I型指令格式</h3><p><img src="https://s2.loli.net/2025/12/02/QLKOVoDb9CZ3gd5.png" srcset="/img/loading.gif" lazyload alt="image-20251202192910943"></p>
+<p><strong>其中rs是源操作数寄存器，rt是目标操作数寄存器，im是立即数，就是包含在指令中的操作数，范围是-32768到+32767。</strong></p>
+<p><strong>I型指令没有独立的功能码，因为从根本上就不需要。</strong></p>
+<p><strong>比如指令</strong><code>lw $2,1200($4)</code>，所以$4是rs，1200是立即数,$2是目标操作数寄存器。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><img src="https://s2.loli.net/2025/12/02/HWkfZ6rehotV1zl.png" srcset="/img/loading.gif" lazyload alt="image-20251202193834837"></p>
+<h3 id="MIPS执行if语句"><a href="#MIPS执行if语句" class="headerlink" title="MIPS执行if语句"></a>MIPS执行if语句</h3><p><img src="https://s2.loli.net/2025/12/02/h4dDRG5BuM6nAmf.png" srcset="/img/loading.gif" lazyload alt="image-20251202195009184"></p>
+<p><img src="https://s2.loli.net/2025/12/02/Zu1CFIVeifPpDxG.png" srcset="/img/loading.gif" lazyload alt="image-20251202202342495"></p>
+<p><img src="https://s2.loli.net/2025/12/02/RG3XgTUisn7trZH.png" srcset="/img/loading.gif" lazyload alt="image-20251202202356984"></p>
+<h3 id="MIPS中执行循环结构"><a href="#MIPS中执行循环结构" class="headerlink" title="MIPS中执行循环结构"></a>MIPS中执行循环结构</h3><p><img src="https://s2.loli.net/2025/12/03/vJOia81wg9jmHk5.png" srcset="/img/loading.gif" lazyload alt="image-20251203134516104"></p>
+<p>将同一段高级语言代码能够转化为不同的汇编语言代码，不同汇编代码之间性能差别很大，<strong>挑选并采用最佳性能的过程叫优化。</strong></p>
+<p><img src="https://s2.loli.net/2025/12/03/ISRH4uOvjGCo6L8.png" srcset="/img/loading.gif" lazyload alt="image-20251203135415382"></p>
+<p><img src="https://s2.loli.net/2025/12/03/XG3h82RgSm5VbMY.png" srcset="/img/loading.gif" lazyload alt="image-20251203135444575"></p>
+<h3 id="指令设计"><a href="#指令设计" class="headerlink" title="指令设计"></a>指令设计</h3><p><strong>指令长度：字面意思，就是指令的长度，就是指令的二进制位数。</strong></p>
+<p><strong>越短越好，降低空间开销。</strong></p>
+<p>可以设置为**定长指令集(MIPS)，或者是变长指令集(x86)**。</p>
+<h3 id="指令格式："><a href="#指令格式：" class="headerlink" title="指令格式："></a>指令格式：</h3><p><strong>一般指令都需要两个部分，一个是操作码一个是地址码，地址码可以是立即数或者寄存器编号，也可以有多个地址码。</strong></p>
+<p><img src="https://s2.loli.net/2025/12/09/H8b9FdJBQZ5Onk3.png" srcset="/img/loading.gif" lazyload alt="image-20251209143216922"></p>
+<p><strong>但是我们会使用PC存放下一个指令地址</strong></p>
+<p><img src="https://s2.loli.net/2025/12/09/H1gvw2dne76DOsN.png" srcset="/img/loading.gif" lazyload alt="image-20251209142906162"></p>
+<p><strong>有些操作不需要输出到某个寄存器</strong></p>
+<p><img src="https://s2.loli.net/2025/12/09/TuLdPKcIsvZEb8e.png" srcset="/img/loading.gif" lazyload alt="image-20251209143256102"></p>
+<p><strong>部分操作是单目的。</strong></p>
+<p><img src="https://s2.loli.net/2025/12/09/pTVN47uFxRrMCDj.png" srcset="/img/loading.gif" lazyload alt="image-20251209143311733"></p>
+<p><strong>随地址码位数扩大，那么能表示的地址范围就越来越大。</strong></p>
+<h3 id="指令寻址"><a href="#指令寻址" class="headerlink" title="指令寻址"></a>指令寻址</h3><p>分为<strong>立即数寻址，直接寻址，间接寻址，相对寻址，基址寻址，变址寻址，隐含寻址</strong>。</p>
+<p><strong>其中基址寻址，变址寻址，隐含寻址统称偏移寻址。</strong></p>
+<p><strong>立即数寻址就是在指令中直接给出操作数本身。</strong></p>
+<p><strong>直接寻址分为寄存器直接寻址和主存直接寻址。</strong></p>
+<p><strong>寄存器直接寻址就是操作数存放在CPU寄存器中，主存直接寻址就是操作数放在主存中，指令给出寄存器编号或者主存的有效地址来寻找并调用操作数。</strong></p>
+<blockquote>
+<p><strong>因为寄存器数量远小于主存单元数，所以寄存器编号比主存短很多，所以寄存器寻址方式的指令比较短，访问也比主存更快。</strong></p>
+</blockquote>
+<p><strong>间接寻址也分为寄存器间接寻址和主存间接寻址。</strong></p>
+<p><strong>寄存器间接寻址就是：指令中的地址码是一个寄存器编号，寄存器中存放的是操作数的有效地址，常用于指针。</strong></p>
+<p><img src="https://s2.loli.net/2025/12/09/3lIyrOtL1ZKTVF6.png" srcset="/img/loading.gif" lazyload alt="image-20251209144854536"></p>
+<p><strong>主存间接寻址就是：在指令中给出的地址码是存放操作数有效地址的主存单元地址，用的比较少。</strong></p>
+<p><img src="https://s2.loli.net/2025/12/09/1QSNf32ktWDFAPr.png" srcset="/img/loading.gif" lazyload alt="image-20251209145031647"></p>
+<p><strong>基址寻址：指令中给出形式地址R和偏移量offset</strong></p>
+<p><strong>操作数的有效地址等于给出的形式地址R加上某个偏移量offset</strong></p>
+<p><img src="https://s2.loli.net/2025/12/09/fd485eyTRPvsLpV.png" srcset="/img/loading.gif" lazyload alt="image-20251209145309835"></p>
+<p><strong>相对寻址：操作数有效地址等于PC寄存器的值加上给出的偏移值offset</strong></p>
+<p><img src="https://s2.loli.net/2025/12/09/wq8kG9bS3pliHeU.png" srcset="/img/loading.gif" lazyload alt="image-20251209145521340"></p>
+<p><strong>变址寻址：</strong></p>
+<p><strong>操作数地址等于一个基地址和一个动态可变偏移量相加。</strong></p>
+<p><strong>可变偏移量往往是一个内容可改变的寄存器</strong></p>
+<p><img src="https://s2.loli.net/2025/12/09/oFHG2a1TvrcMXY8.png" srcset="/img/loading.gif" lazyload alt="image-20251209145947932"></p>
+<p><strong>隐含寻址是一种特别的指令设计技巧，它的核心在于指令中并不直接写明某个操作数的地址，而是通过操作码或约定俗成的规则隐含地指定</strong></p>
+<p><strong>为了让CPU知道寻址方式，指令往往是这种结构：</strong></p>
+<p><img src="https://s2.loli.net/2025/12/09/yxq59cMszYOQgt7.png" srcset="/img/loading.gif" lazyload alt="image-20251209150127712"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#计算机组成原理</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/Chapter_6_CPU/" title="第六章：中央处理器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第六章：中央处理器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/Chapter_4_Representation_and_operation_of_data/" title="第四章：数据的表示与运算">
+                        <span class="hidden-mobile">第四章：数据的表示与运算</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

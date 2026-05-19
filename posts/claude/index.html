@@ -1,0 +1,890 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Claude Code基础使用手册 不要完全依赖AI，面对一个黑箱项目时的束手无策，源于人类最原始的傲慢。  简介Claude Code 是 Anthropic 推出的面向开发者的 AI 编程协作工具，与在聊天窗口里写几段代码不同，Claude Code 的核心目标是理解你的整个项目，并参与到真实的编码、修改和重构过程中。 Claude Code不是chat，并不局限于聊天，Claude Code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Claude Code基础使用手册">
+<meta property="og:url" content="http://example.com/posts/claude/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="Claude Code基础使用手册 不要完全依赖AI，面对一个黑箱项目时的束手无策，源于人类最原始的傲慢。  简介Claude Code 是 Anthropic 推出的面向开发者的 AI 编程协作工具，与在聊天窗口里写几段代码不同，Claude Code 的核心目标是理解你的整个项目，并参与到真实的编码、修改和重构过程中。 Claude Code不是chat，并不局限于聊天，Claude Code">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/05/11/Mrv7/sjkf.png">
+<meta property="article:published_time" content="2026-05-02T06:38:50.101Z">
+<meta property="article:modified_time" content="2026-05-11T11:43:05.289Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Vibe coding">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.seeusercontent.com/2026/05/11/Mrv7/sjkf.png">
+  
+  
+  
+  <title>Claude Code基础使用手册 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://files.seeusercontent.com/2026/05/11/Mrv7/sjkf.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Claude Code基础使用手册"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-05-02 06:38" pubdate>
+          2026年5月2日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Claude Code基础使用手册</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Claude-Code基础使用手册"><a href="#Claude-Code基础使用手册" class="headerlink" title="Claude Code基础使用手册"></a>Claude Code基础使用手册</h1><blockquote>
+<p>不要完全依赖AI，面对一个黑箱项目时的束手无策，源于人类最原始的傲慢。</p>
+</blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Claude Code 是 Anthropic 推出的面向开发者的 AI 编程协作工具，与在聊天窗口里写几段代码不同，Claude Code 的核心目标是理解你的整个项目，并参与到真实的编码、修改和重构过程中。</p>
+<p>Claude Code不是chat，并不局限于聊天，Claude Code时Agent，是代理人，能够帮助用户直接编辑代码以完成项目。</p>
+<h2 id="Claude-Code-CLI安装"><a href="#Claude-Code-CLI安装" class="headerlink" title="Claude Code CLI安装"></a>Claude Code CLI安装</h2><p>在Windows的Powershell安装：</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">irm</span> https://claude.ai/install.ps1 | <span class="hljs-built_in">iex</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>检验是否安装成功：</p>
+<figure class="highlight ada"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">claude <span class="hljs-comment">--version</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>如果出现版本号就是安装成功。</p>
+<p>更新命令：</p>
+<figure class="highlight cmake"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">claude <span class="hljs-keyword">install</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>或者可以在<code>settings.json</code>中设置</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">{</span><br>  <span class="hljs-attr">"autoUpdatesChannel"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"stable"</span>    <span class="hljs-comment">// 更新渠道：stable（稳定版，推荐）或 beta（测试版）</span><br><span class="hljs-punctuation">}</span><br><span class="hljs-punctuation">{</span><br>  <span class="hljs-attr">"env"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><br>    <span class="hljs-attr">"DISABLE_AUTOUPDATER"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"1"</span>    <span class="hljs-comment">// 设为 "1" 禁用自动更新，"0" 或删除该行则恢复自动更新</span><br>  <span class="hljs-punctuation">}</span><br><span class="hljs-punctuation">}</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>删除指令：</p>
+<figure class="highlight basic"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-comment">Remove-Item -Path "$env:USERPROFILE\.local\bin\claude.exe" -Force</span><br><span class="hljs-comment">Remove-Item -Path "$env:USERPROFILE\.local\share\claude" -Recurse -Force</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>安装过程中可能需要手动添加环境变量，这里不多赘述。</p>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">claude</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>首次启动后claude会引导你登录，但是登录似乎需要Max或者Pro。不登录也没关系。</p>
+<h2 id="接入DeepSeek-API"><a href="#接入DeepSeek-API" class="headerlink" title="接入DeepSeek API"></a>接入DeepSeek API</h2><p>Deepseek是思考问题的大脑，Claude是大脑之下的身体而已，所以我们只需要付给Deepseek API费用就足够了。</p>
+<p>你需要去在 <a target="_blank" rel="noopener" href="https://platform.deepseek.com/api_keys">DeepSeek Platform</a> 注册账号并创建 API Key。</p>
+<p>然后在Powershell中执行命令以设置环境变量：</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$env:ANTHROPIC_BASE_URL</span>=<span class="hljs-string">"https://api.deepseek.com/anthropic"</span><br><span class="hljs-variable">$env:ANTHROPIC_AUTH_TOKEN</span>=<span class="hljs-string">"&lt;你的 DeepSeek API Key&gt;"</span><br><span class="hljs-variable">$env:ANTHROPIC_MODEL</span>=<span class="hljs-string">"deepseek-v4-pro[1m]"</span><br><span class="hljs-variable">$env:ANTHROPIC_DEFAULT_OPUS_MODEL</span>=<span class="hljs-string">"deepseek-v4-pro[1m]"</span><br><span class="hljs-variable">$env:ANTHROPIC_DEFAULT_SONNET_MODEL</span>=<span class="hljs-string">"deepseek-v4-pro[1m]"</span><br><span class="hljs-variable">$env:ANTHROPIC_DEFAULT_HAIKU_MODEL</span>=<span class="hljs-string">"deepseek-v4-flash"</span><br><span class="hljs-variable">$env:CLAUDE_CODE_SUBAGENT_MODEL</span>=<span class="hljs-string">"deepseek-v4-flash"</span><br><span class="hljs-variable">$env:CLAUDE_CODE_EFFORT_LEVEL</span>=<span class="hljs-string">"max"</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>随后在任意项目地址使用<code>claude</code>启动：</p>
+<p><img src="C:\Users\willm\AppData\Roaming\Typora\typora-user-images\image-20260502140258568.png" srcset="/img/loading.gif" lazyload alt="image-20260502140258568"></p>
+<p>可以看到deepseek-v4-pro的模型，提问会消耗api，所以如果要吹水建议去网页chat。</p>
+<p>API是按量计费的，如果使用包月的Coding Plan 就能够按月计费。</p>
+<p>随后你可以在IDE中安装claude的插件来在IDE中使用。</p>
+<p>至此，你已经安装并配置完成了，在Token够用的情况下，你可以自由地使用Claude Code。</p>
+<h2 id="项目初始化"><a href="#项目初始化" class="headerlink" title="项目初始化"></a>项目初始化</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/init<br></code></pre></td></tr></tbody></table></figure>
+
+<p>Claude 会自动扫描你的代码库——读取 package.json、现有文档、配置文件以及代码结构，然后生成一份专属于你项目的 CLAUDE.md 文件。</p>
+<p>Claude 整个过程无需手动操作，Claude 会自行分析并输出初始配置。</p>
+<p>CLAUDE.md 是一个放在项目根目录的 Markdown 文件，Claude Code 在每次会话开始时都会自动读取。</p>
+<p>CLAUDE.md 会成为 Claude 系统提示的一部分，使每次对话都能预先加载项目上下文，不再需要重复解释基本信息。</p>
+<p>但是<strong>不要让 CLAUDE.md 替代 linter</strong>：在文件中写代码风格规范是最常见的误区之一。永远不要用 LLM 来做 linter 的工作——linter 更快、更便宜，而且是确定性的。代码风格约束只会让上下文窗口膨胀，降低 Claude 的指令遵从质量。</p>
+<p>你可以使用<code>#</code>让模型记住什么事情，比如：</p>
+<figure class="highlight 1c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># 强制使用shell以保证兼容性</span><br><span class="hljs-meta"># 最后项目需要经过编译测试</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="Claude-Code目录结构"><a href="#Claude-Code目录结构" class="headerlink" title="Claude Code目录结构"></a>Claude Code目录结构</h2><figure class="highlight stylus"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs stylus">your-project/<br>├── CLAUDE<span class="hljs-selector-class">.md</span>                    ← 团队共享指令，提交到 git<br>├── CLAUDE<span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.md</span>              ← 个人覆盖，被 git 忽略<br>└── .claude/<br>    ├── settings<span class="hljs-selector-class">.json</span>            ← 权限 + 配置，提交到 git<br>    ├── settings<span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>      ← 个人权限，被 git 忽略<br>    ├── commands/                ← 自定义斜杠命令<br>    │   ├── review<span class="hljs-selector-class">.md</span>            →  /project:review<br>    │   ├── fix-issue<span class="hljs-selector-class">.md</span>         →  /project:fix-issue<br>    │   └── deploy<span class="hljs-selector-class">.md</span>            →  /project:deploy<br>    ├── rules/                   ← 模块化指令文件（全局生效）<br>    │   ├── code-style<span class="hljs-selector-class">.md</span><br>    │   ├── testing<span class="hljs-selector-class">.md</span><br>    │   └── api-conventions<span class="hljs-selector-class">.md</span><br>    ├── skills/                  ← 自动调用的工作流<br>    │   ├── security-review/<br>    │   │   └── SKILL<span class="hljs-selector-class">.md</span><br>    │   └── deploy/<br>    │       └── SKILL<span class="hljs-selector-class">.md</span><br>    └── agents/                  ← 子代理角色定义<br>        ├── code-reviewer<span class="hljs-selector-class">.md</span><br>        └── security-auditor.md<br></code></pre></td></tr></tbody></table></figure>
+
+<p>Claude的三种模式：</p>
+<ul>
+<li>Ask 模式：只看不动（只读分析）</li>
+<li>Plan 模式：谋定而后动（只规划，不执行）</li>
+<li>Edit 模式：直接执行（可写代码）</li>
+</ul>
+<h2 id="斜杠命令"><a href="#斜杠命令" class="headerlink" title="斜杠命令"></a>斜杠命令</h2><p>使用斜杠命令来控制Claude的行为：</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2026/01/d29e985e-5cb1-43bc-b6fb-e3b290f83bf9.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="CLAUDE-md"><a href="#CLAUDE-md" class="headerlink" title="CLAUDE.md"></a>CLAUDE.md</h2><p>Claude Code每次关闭就会忘记一切，所以需要Claude来让它记住重要的东西</p>
+<p><code>CLAUDE.md</code> 是 Claude Code 中最重要的配置文件，用于向 Claude 传递项目级别的持久指令。每次启动 Claude Code 会话时，它都会自动读取并加载这个文件中的内容，作为系统级上下文融入每一次对话中。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Vide-coding/" class="category-chain-item">Vide coding</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Vibe-coding/">#Vibe coding</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/RocketMQ/" title="RocketMQ消息队列">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RocketMQ消息队列</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/Chapter%207%20of%20Computer%20Networks:%20Network%20Security/" title="计算机网络第七章：网络安全">
+                        <span class="hidden-mobile">计算机网络第七章：网络安全</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
