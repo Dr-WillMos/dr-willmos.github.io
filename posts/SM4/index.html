@@ -1,0 +1,957 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <link rel="icon" href="https://s3.bmp.ovh/imgs/2022/07/21/9d7051f1f6380bec.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WillMo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SM4SM4是一个对称加密算法  明文分组长度：128位 16字节 4字 密钥长度：128位 16字节 4字 迭代次数：32次  字：SM4 内部把 128 位分成 4 个 32 位字，记作： $$X_{0},X_{1},X_{2},X_{3}$$ 轮：SM4 要迭代 32 轮。每一轮用一个 32 位“轮密钥” S 盒：一个固定的 8 位进、8 位出的替换表，用来制造非线性。SM4 的 S 盒有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SM4密码">
+<meta property="og:url" content="https://blog.willmo.top/posts/SM4/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="SM4SM4是一个对称加密算法  明文分组长度：128位 16字节 4字 密钥长度：128位 16字节 4字 迭代次数：32次  字：SM4 内部把 128 位分成 4 个 32 位字，记作： $$X_{0},X_{1},X_{2},X_{3}$$ 轮：SM4 要迭代 32 轮。每一轮用一个 32 位“轮密钥” S 盒：一个固定的 8 位进、8 位出的替换表，用来制造非线性。SM4 的 S 盒有">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s41.ax1x.com/2026/10/27/pnr44oj.png">
+<meta property="article:published_time" content="2026-10-27T02:59:49.282Z">
+<meta property="article:modified_time" content="2026-10-27T02:59:47.447Z">
+<meta property="article:author" content="WillMo">
+<meta property="article:tag" content="密码学">
+<meta property="article:tag" content="SM4">
+<meta property="article:tag" content="加密">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s41.ax1x.com/2026/10/27/pnr44oj.png">
+  
+  
+  
+  <title>SM4密码 - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.willmo.top","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1ec3a98f56fb1a02dc9d1d547938a1da","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21411813,"cnzz":null,"leancloud":{"app_id":"IRSLghqK5TgDLPVQvHP7CDVQ-gzGzoHsz","app_key":"EDZJI99CBPVdQKIIiwWO7jNU","server_url":"https://irslghqk.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1ec3a98f56fb1a02dc9d1d547938a1da";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21411813.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start --><link rel="alternate" type="application/atom+xml" title="WillMo" href="/atom.xml" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://willmo-personal.netlify.app/">
+                <i class="iconfont icon-codepen-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/talks/">
+                <i class="iconfont icon-comment"></i>
+                碎语
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s41.ax1x.com/2026/10/27/pnr44oj.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SM4密码"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-10-27 02:59" pubdate>
+          2026年10月27日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SM4密码</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="SM4"><a href="#SM4" class="headerlink" title="SM4"></a>SM4</h1><p>SM4是一个对称加密算法</p>
+<ul>
+<li>明文分组长度：128位 16字节 4字</li>
+<li>密钥长度：128位 16字节 4字</li>
+<li>迭代次数：32次</li>
+</ul>
+<p><strong>字</strong>：SM4 内部把 128 位分成 <strong>4 个 32 位字</strong>，记作：</p>
+<p>$$<br>X_{0},X_{1},X_{2},X_{3}<br>$$</p>
+<p><strong>轮</strong>：SM4 要迭代 <strong>32 轮</strong>。每一轮用一个 32 位“轮密钥”</p>
+<p><strong>S 盒</strong>：一个固定的 8 位进、8 位出的替换表，用来制造非线性。SM4 的 S 盒有 256 项，教学时先理解“查表替换”即可。</p>
+<p><strong>循环左移</strong>：把 32 位二进制整体左移，移出去的高位补到低位。记作 B&lt;&lt;&lt;n，用于在比特层面进一步扩散复杂度</p>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>正如所有的对称加密一样，加密和解密用的是同一个密钥和密文。</p>
+<p>可以记住以下流程：</p>
+<p><strong>128 位主密钥 → 密钥扩展 → 32 个轮密钥</strong><br><strong>128 位明文 → 32 轮加密 → 128 位密文</strong><br><strong>解密 = 同样的 32 轮，但轮密钥倒着用</strong></p>
+<p>全流程大概是：</p>
+<figure class="highlight tp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs tp">初始： <span class="hljs-keyword">X</span><span class="hljs-number">0</span>  <span class="hljs-keyword">X</span><span class="hljs-number">1</span>  <span class="hljs-keyword">X</span><span class="hljs-number">2</span>  <span class="hljs-keyword">X</span><span class="hljs-number">3</span><br>第<span class="hljs-number">0</span>轮： <span class="hljs-keyword">X</span><span class="hljs-number">1</span>  <span class="hljs-keyword">X</span><span class="hljs-number">2</span>  <span class="hljs-keyword">X</span><span class="hljs-number">3</span>  <span class="hljs-keyword">X</span><span class="hljs-number">4</span><br>第<span class="hljs-number">1</span>轮： <span class="hljs-keyword">X</span><span class="hljs-number">2</span>  <span class="hljs-keyword">X</span><span class="hljs-number">3</span>  <span class="hljs-keyword">X</span><span class="hljs-number">4</span>  <span class="hljs-keyword">X</span><span class="hljs-number">5</span><br>...<br>第<span class="hljs-number">31</span>轮：<span class="hljs-keyword">X</span><span class="hljs-number">32</span> <span class="hljs-keyword">X</span><span class="hljs-number">33</span> <span class="hljs-keyword">X</span><span class="hljs-number">34</span> <span class="hljs-keyword">X</span><span class="hljs-number">35</span><br>密文： <span class="hljs-keyword">X</span><span class="hljs-number">35</span> <span class="hljs-keyword">X</span><span class="hljs-number">34</span> <span class="hljs-keyword">X</span><span class="hljs-number">33</span> <span class="hljs-keyword">X</span><span class="hljs-number">32</span>   ← 注意最后要反序<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="密码学中的零件"><a href="#密码学中的零件" class="headerlink" title="密码学中的零件"></a>密码学中的零件</h3><h4 id="异或⊕"><a href="#异或⊕" class="headerlink" title="异或⊕"></a>异或⊕</h4><p>异或凭借<strong>自逆</strong>的特点，被广泛运用在加解密中。</p>
+<p>$$<br>a \oplus b \oplus b = a<br>$$</p>
+<p>那么A就是明文，经过密钥处理两次后就能够还原回明文。</p>
+<h4 id="S盒"><a href="#S盒" class="headerlink" title="S盒"></a>S盒</h4><p><strong>凯撒密码是一种单表替换密码</strong>，通过将明文中的每个字母沿字母表固定位移若干位来加密消息。 位移量为 3 时，A 变为 D，B 变为 E，Z 循环回绕变为 C。</p>
+<p>实际上线性是非常危险的，因为一旦攻击者摸清了位移量，加密就不再有意义，所以采取一次非线性措施是非常重要的。</p>
+<p>把 32 位字拆成 4 个字节，每个字节查一张固定的 <strong>8 进 8 出表</strong>，输入一个字节，输出一个字，而这张表就是<strong>S盒</strong></p>
+<h4 id="循环左移异或"><a href="#循环左移异或" class="headerlink" title="循环左移异或"></a>循环左移异或</h4><p>32 位循环左移记作 B⋘n：左移 n 位，移出去的位补到低位。</p>
+<p>相当于将密文放到一个环中，朝着某个方向转动几位，随后敲定。</p>
+<p>这能够将之前某一段的变化扩大到整个密文中，这种操作叫做<strong>扩散</strong></p>
+<h3 id="轮函数"><a href="#轮函数" class="headerlink" title="轮函数"></a>轮函数</h3><p>一轮的变换函数为：</p>
+<p>$$<br>T \left( x \right)=L \left( S \left( x \right) \right)<br>$$</p>
+<p>其中S(x)对32位字的4个字节做S盒替换</p>
+<p>L为之前提到的循环左移异或</p>
+<p>所以 T 的流程是：</p>
+<blockquote>
+<p>32 位输入 → 4 字节 S 盒替换 → 五个循环移位版本异或 → 32 位输出</p>
+</blockquote>
+<h3 id="轮加密"><a href="#轮加密" class="headerlink" title="轮加密"></a>轮加密</h3><p>$$<br>\text{设轮密钥为} rk_{0},rk_{1},\ldots,rk_{31}, \text{明文四字为} X_{0},X_{1},X_{2},X_{3}, \text{对} i=0 \text{到} 31\colon<br>$$</p>
+<p>$$<br>X_{i+4}=X_{i}\oplus T\big(X_{i+1}\oplus X_{i+2}\oplus X_{i+3}\oplus rk_{i} \big)<br>$$</p>
+<p>每一轮都做四件事</p>
+<ul>
+<li><p>取出后三个字</p>
+</li>
+<li><p>将后三个字和轮密钥异或</p>
+</li>
+<li><p>经过轮函数T</p>
+</li>
+<li><p>与最旧的字异或得到新字X(i+4)</p>
+<p>经过32轮后再加上倒反序，就形成了</p>
+<p>$$<br>( Y_{0},Y_{1},Y_{2},Y_{3} ) = ( X_{35},X_{34},X_{33},X_{32} )<br>$$</p>
+</li>
+</ul>
+<h3 id="密钥扩展"><a href="#密钥扩展" class="headerlink" title="密钥扩展"></a>密钥扩展</h3><p>上一个条目提到，需要32次加密，那就需要32个密钥，但是主密钥只有一个128位的，这就需要密钥扩展</p>
+<p>主密钥 128 位也拆成四个 32 位字：</p>
+<p>$$<br>MK_{0},MK_{1},MK_{2},MK_{3}<br>$$</p>
+<p>与固定向量FK异或</p>
+<p>$$<br>K_{0}=MK_{0}\oplus FK_{0},\quad\ldots,\quad K_{3}=MK_{3}\oplus FK_{3}<br>$$</p>
+<p>然后将K值用和轮加密相近的方式拿到密钥</p>
+<p>$$<br>rk_{i}=K_{i+4}=K_{i}\oplus T^{\prime}(K_{i+1}\oplus K_{i+2}\oplus K_{i+3} \oplus CK_{i})<br>$$</p>
+<p>CK是一个32轮常向量,用公式生成</p>
+<p>$$<br>ck_{i,j}=(4i+j)\times7\ \mathrm{mod}\ 256<br>$$</p>
+<h3 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h3><p>注，解密结构和加密完全一样。</p>
+<p>$$<br>Y_{i+4}=Y_i\oplus T(Y_{i+1}\oplus Y_{i+2}\oplus Y_{i+3}\oplus rk_{31-i})<br>$$</p>
+<p>最后输出</p>
+<p>$$<br>(Y_{35},Y_{34},Y_{33},Y_{32})<br>$$</p>
+<p>唯一区别是轮密钥<strong>逆序使用</strong>。原因很直观：加密每轮用异或把新字“叠”进去，异或可逆；把轮密钥倒过来，就能一层层还原。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/" class="category-chain-item">密码学</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%BE%E7%A8%8B%E6%89%80%E9%9C%80/" class="category-chain-item">课程所需</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">#密码学</a>
+      
+        <a href="/tags/SM4/">#SM4</a>
+      
+        <a href="/tags/%E5%8A%A0%E5%AF%86/">#加密</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/RocketMQ/" title="RocketMQ消息队列">
+                        <span class="hidden-mobile">RocketMQ消息队列</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/talks.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
