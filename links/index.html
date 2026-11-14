@@ -1,0 +1,706 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><meta charset="UTF-8"><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><link rel="preconnect" href="https://img.willmo.top">
+<link rel="preconnect" href="https://lib.baomitu.com">
+<link rel="preconnect" href="https://v1.hitokoto.cn"><!-- hexo injector head_begin end -->
+  
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img.willmo.top/img/favicon.png">
+  <link rel="icon" href="https://img.willmo.top/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WillMo">
+  <meta name="keywords" content="WillMo,个人博客,计算机基础,数据结构,操作系统,计算机网络,Java,后端开发">
+  
+    <meta name="description" content="加载中…  友链申请在添加本站友链之前，请您详细阅读规则：  域名中有违反中华人民共和国法律的字眼的； 使用 .onion 等无法通过正常互联网访问的； 网站中带有不符合中国大陆法律内容的。  请确保您已添加本站为友链，然后填写下方表单提交，等待博主审核通过后即会显示在上方列表中。本站会定期检查友链状况，若发现删除本站友链未事先通知、或服务器长期不稳定的，友链将会被取消，敬请谅解。 本站信息 名称">
+<meta property="og:type" content="website">
+<meta property="og:title" content="links">
+<meta property="og:url" content="https://blog.willmo.top/links/index.html">
+<meta property="og:site_name" content="WillMo">
+<meta property="og:description" content="加载中…  友链申请在添加本站友链之前，请您详细阅读规则：  域名中有违反中华人民共和国法律的字眼的； 使用 .onion 等无法通过正常互联网访问的； 网站中带有不符合中国大陆法律内容的。  请确保您已添加本站为友链，然后填写下方表单提交，等待博主审核通过后即会显示在上方列表中。本站会定期检查友链状况，若发现删除本站友链未事先通知、或服务器长期不稳定的，友链将会被取消，敬请谅解。 本站信息 名称">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-15T12:16:41.000Z">
+<meta property="article:modified_time" content="2026-05-13T06:03:51.965Z">
+<meta property="article:author" content="WillMo">
+<meta property="article:tag" content="WillMo,个人博客,计算机基础,数据结构,操作系统,计算机网络,Java,后端开发">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>links - WillMo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="/css/iconfont-theme.css">
+
+
+
+<link rel="stylesheet" href="/css/iconfont-social.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/photos.css">
+<link rel="stylesheet" href="/css/circle.css">
+<link rel="stylesheet" href="/css/series.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.willmo.top","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""],"_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start --><link rel="alternate" type="application/atom+xml" title="WillMo" href="/atom.xml" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="preload" as="image" href="https://img.willmo.top/imgse/2023/06/22/pCJrBAU.jpg"></head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WillMo&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="animated-icon"><span></span><span></span><span></span></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/circle/">
+                <i class="iconfont icon-friends"></i>
+                朋友圈
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/book/">
+                <i class="iconfont icon-books"></i>
+                书单
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-image"></i>
+                相册
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.foreverblog.cn/go.html">
+                <i class="iconfont icon-users"></i>
+                开往
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" data-parallax="true"
+     style="background: url('https://img.willmo.top/imgse/2023/06/22/pCJrBAU.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="links"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <div id="friends-grid" class="fl-grid"><div class="fl-loading">加载中…</div></div>
+
+<h2 id="友链申请"><a href="#友链申请" class="headerlink" title="友链申请"></a>友链申请</h2><p>在添加本站友链之前，请您详细阅读规则：</p>
+<ol>
+<li>域名中有违反中华人民共和国法律的字眼的；</li>
+<li>使用 .onion 等无法通过正常互联网访问的；</li>
+<li>网站中带有不符合中国大陆法律内容的。</li>
+</ol>
+<p>请确保您已添加本站为友链，然后填写下方表单提交，等待博主审核通过后即会显示在上方列表中。本站会定期检查友链状况，若发现删除本站友链未事先通知、或服务器长期不稳定的，友链将会被取消，敬请谅解。</p>
+<h3 id="本站信息"><a href="#本站信息" class="headerlink" title="本站信息"></a>本站信息</h3><ul>
+<li><strong>名称</strong>：WillMo</li>
+<li><strong>链接</strong>：<a href="https://blog.willmo.top/">https://blog.willmo.top</a></li>
+<li><strong>简介</strong>：基金会 | Java开发 | 文学部门</li>
+<li><strong>头像</strong>：<a target="_blank" rel="noopener" href="https://img.willmo.top/smms/2024/11/04/qGy8LpR3PwIhiBl.jpg">https://img.willmo.top/smms/2024/11/04/qGy8LpR3PwIhiBl.jpg</a></li>
+</ul>
+<h3 id="申请表单"><a href="#申请表单" class="headerlink" title="申请表单"></a>申请表单</h3><div class="fa-card">
+  <form id="friend-apply-form" onsubmit="return false">
+    <div class="fa-field">
+      <label for="fa-name">网站名 <span class="fa-req">*</span></label>
+      <input type="text" id="fa-name" placeholder="你的站点名称" autocomplete="off">
+    </div>
+    <div class="fa-field">
+      <label for="fa-url">网址 <span class="fa-req">*</span></label>
+      <input type="url" id="fa-url" placeholder="https://yoursite.com" autocomplete="off">
+    </div>
+    <div class="fa-field">
+      <label for="fa-image">头像 <span class="fa-req">*</span></label>
+      <input type="url" id="fa-image" placeholder="https://yoursite.com/avatar.png" autocomplete="off">
+    </div>
+    <div class="fa-field">
+      <label for="fa-description">简介 <span class="fa-req">*</span></label>
+      <input type="text" id="fa-description" placeholder="一句话介绍你的站点" autocomplete="off">
+    </div>
+    <button type="submit" id="fa-submit">提交申请</button>
+    <p id="fa-result" class="fa-result"></p>
+  </form>
+</div>
+
+<style>
+.fa-card{max-width:560px;margin:1.5rem 0;padding:1.75rem;background:rgba(255,255,255,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(0,0,0,.06);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.fa-field{margin-bottom:1.1rem}
+.fa-field label{display:block;font-size:.9rem;font-weight:600;margin-bottom:.4rem;color:#495057}
+.fa-req{color:#e74c3c}
+.fa-field input{width:100%;box-sizing:border-box;padding:.7rem .9rem;font-size:.95rem;border:1px solid rgba(0,0,0,.12);border-radius:10px;background:#fff;color:#333;transition:border-color .2s,box-shadow .2s}
+.fa-field input:focus{outline:none;border-color:#7c5cff;box-shadow:0 0 0 3px rgba(124,92,255,.18)}
+#fa-submit{cursor:pointer;padding:.7rem 1.8rem;font-size:.95rem;font-weight:600;color:#fff;background:linear-gradient(135deg,#7c5cff,#9d7bff);border:none;border-radius:10px;transition:transform .15s,box-shadow .2s;box-shadow:0 4px 14px rgba(124,92,255,.35)}
+#fa-submit:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(124,92,255,.45)}
+#fa-submit:disabled{opacity:.65;cursor:not-allowed;transform:none}
+.fa-result{margin-top:1rem;font-size:.9rem;font-weight:500;min-height:1.2rem}
+.fa-result.fa-success{color:#1aa260}
+.fa-result.fa-error{color:#e74c3c}
+html[data-user-color-scheme="dark"] .fa-card{background:rgba(30,30,40,.6);border-color:rgba(255,255,255,.08);box-shadow:0 6px 24px rgba(0,0,0,.4)}
+html[data-user-color-scheme="dark"] .fa-field label{color:#b8bcc4}
+html[data-user-color-scheme="dark"] .fa-field input{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:#e0e0e0}
+html[data-user-color-scheme="dark"] .fa-field input:focus{border-color:#9d7bff;box-shadow:0 0 0 3px rgba(124,92,255,.3)}
+
+/* 友链列表：头像在右、文字在左的极简卡片 */
+.fl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin:1rem 0}
+.fl-card{position:relative;display:flex;align-items:center;gap:14px;padding:20px 18px;background:#f8fafc;border:1px solid #eceef2;border-radius:10px;text-decoration:none;color:inherit;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.fl-card:hover{transform:translateY(-3px);border-color:#c9c0ff;box-shadow:0 8px 22px rgba(124,92,255,.14)}
+.fl-rss{position:absolute;top:12px;right:12px;color:#c4c9d4;line-height:0;pointer-events:none}
+.fl-rss svg{display:block}
+.fl-body{flex:1;min-width:0;padding-right:6px}
+.fl-name{font-size:1.02rem;font-weight:700;color:#303133;margin-bottom:5px;line-height:1.3}
+.fl-desc{font-size:.85rem;color:#909399;line-height:1.55;word-break:break-word;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.fl-avatar{width:58px;height:58px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid #eef0f4;background:#eee}
+.fl-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.fl-loading,.fl-empty{grid-column:1/-1;text-align:center;padding:2rem;color:#909399;font-size:.9rem}
+html[data-user-color-scheme="dark"] .fl-card{background:rgba(35,35,45,.6);border-color:rgba(255,255,255,.08)}
+html[data-user-color-scheme="dark"] .fl-card:hover{border-color:rgba(124,92,255,.5);box-shadow:0 8px 22px rgba(0,0,0,.5)}
+html[data-user-color-scheme="dark"] .fl-name{color:#e8eaf0}
+html[data-user-color-scheme="dark"] .fl-desc{color:#a8adbb}
+html[data-user-color-scheme="dark"] .fl-rss{color:#5f6473}
+html[data-user-color-scheme="dark"] .fl-avatar{border-color:rgba(255,255,255,.12)}
+</style>
+
+<script>
+(function () {
+  var form = document.getElementById('friend-apply-form');
+  if (!form) return;
+  var btn = document.getElementById('fa-submit');
+  var result = document.getElementById('fa-result');
+  var urlRe = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+  function setMsg(text, ok) {
+    result.textContent = text;
+    result.className = 'fa-result ' + (ok ? 'fa-success' : 'fa-error');
+  }
+  form.addEventListener('submit', function () {
+    var name = document.getElementById('fa-name').value.trim();
+    var url = document.getElementById('fa-url').value.trim();
+    var image = document.getElementById('fa-image').value.trim();
+    var desc = document.getElementById('fa-description').value.trim();
+    result.textContent = ''; result.className = 'fa-result';
+    if (!name || !url || !image || !desc) { setMsg('请填写完整信息'); return; }
+    if (!urlRe.test(url) || !urlRe.test(image)) { setMsg('网址和头像必须是包含 http(s):// 的完整链接'); return; }
+    btn.disabled = true; btn.textContent = '提交中…';
+    var body = 'name=' + encodeURIComponent(name) + '&url=' + encodeURIComponent(url) +
+      '&image=' + encodeURIComponent(image) + '&description=' + encodeURIComponent(desc);
+    fetch('https://cms.willmo.top/pub/ask_friend/', {
+      method: 'post', body: body,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).then(function (r) {
+      return r.json().then(function (res) { return { ok: r.ok, res: res }; });
+    }).then(function (o) {
+      if (o.ok && o.res.status) {
+        setMsg('提交成功，请等待博主审核！', true);
+        form.reset();
+      } else {
+        setMsg('申请失败：' + (o.res.msg || '未知错误（可能是友链申请 API 未在 Qexo 后台开启）'));
+      }
+    }).catch(function () {
+      setMsg('网络异常，请稍后重试');
+    }).finally(function () {
+      btn.disabled = false; btn.textContent = '提交申请';
+    });
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var grid = document.getElementById('friends-grid');
+  if (!grid) return;
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  fetch('https://cms.willmo.top/pub/friends/').then(function (r) { return r.json(); }).then(function (res) {
+    var list = (res && res.data) ? res.data : [];
+    if (!list.length) { grid.innerHTML = '<div class="fl-empty">暂无友链</div>'; return; }
+    var rss = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>';
+    var html = '';
+    list.forEach(function (f) {
+      html += '<a class="fl-card" href="' + esc(f.url) + '" target="_blank" rel="noopener">'
+        + '<span class="fl-rss" aria-hidden="true">' + rss + '</span>'
+        + '<div class="fl-body"><div class="fl-name">' + esc(f.name) + '</div>'
+        + '<div class="fl-desc">' + esc(f.description) + '</div></div>'
+        + '<div class="fl-avatar"><img src="' + esc(f.image) + '" alt="' + esc(f.name) + '" loading="lazy"></div>'
+        + '</a>';
+    });
+    grid.innerHTML = html;
+  }).catch(function () { grid.innerHTML = '<div class="fl-empty">友链加载失败，请稍后重试</div>'; });
+})();
+</script>
+
+
+  
+  <article id="comments">
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.willmo.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.1.0/qq"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h2 class="modal-title w-100 font-weight-bold">搜索</h2>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

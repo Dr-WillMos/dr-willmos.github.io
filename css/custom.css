@@ -1,0 +1,381 @@
+/* ================== 书单页 ================== */
+#book {
+    width: 100%;
+}
+
+#book .page {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+/* ---------- 分类标签页 ---------- */
+#book .book-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 8px 8px 0;
+}
+
+#book .book-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border: 1px solid var(--line-color);
+    border-radius: 999px;
+    background: var(--board-bg-color);
+    color: var(--sec-text-color);
+    font-size: 14px;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: color .25s ease, border-color .25s ease, background .25s ease;
+}
+
+#book .book-tab:hover {
+    color: var(--text-color);
+    border-color: #b854d4;
+}
+
+#book .book-tab.is-active {
+    color: #fff;
+    border-color: transparent;
+    background: #b854d4;
+}
+
+#book .book-tab:focus-visible {
+    outline: 2px solid #b854d4;
+    outline-offset: 2px;
+}
+
+#book .book-tab-count {
+    min-width: 1.4em;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: var(--body-bg-color);
+    color: var(--sec-text-color);
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+#book .book-tab.is-active .book-tab-count {
+    color: #b854d4;
+    background: #fff;
+}
+
+/* ---------- 栏目面板 ---------- */
+#book .book-panel {
+    display: none;
+}
+
+#book .book-panel.is-active {
+    display: block;
+}
+
+/* ---------- 空态占位 ---------- */
+#book .book-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin: 8px;
+    padding: 48px 24px;
+    border: 1px dashed var(--line-color);
+    border-radius: 12px;
+    background: var(--board-bg-color);
+    text-align: center;
+}
+
+#book .book-empty-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+#book .book-empty-desc {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--sec-text-color);
+}
+
+#book .content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+    align-items: stretch;
+    gap: 18px;
+    margin: 0;
+    padding: 8px;
+    list-style: none;
+}
+
+#book .content li {
+    list-style: none;
+    margin: 0;
+    border: 1px solid var(--line-color);
+    border-radius: 12px;
+    background: var(--board-bg-color);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .05);
+    overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+#book .content li:hover {
+    transform: translateY(-4px);
+    border-color: transparent;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, .13);
+}
+
+#book .content li .info {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    height: 100%;
+    padding: 18px 16px;
+}
+
+/* ---------- 3D 书封 ---------- */
+.book-container {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    perspective: 600px;
+}
+
+.book {
+    position: relative;
+    width: 100px;
+    height: 150px;
+    transform-style: preserve-3d;
+    transform: rotateY(-26deg);
+    transition: transform .5s ease;
+}
+
+.book>:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    transform: translateZ(12.5px);
+    border-radius: 0 3px 3px 0;
+    box-shadow: 5px 6px 18px rgba(0, 0, 0, .35);
+}
+
+.book:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 23px;
+    height: 146px;
+    transform: translateX(84.5px) rotateY(90deg);
+    background: repeating-linear-gradient(90deg, #fff, #f3f3f3 2px, #fff 4px);
+}
+
+.book:after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 150px;
+    transform: translateZ(-12.5px);
+    border-radius: 0 2px 2px 0;
+    background-color: #555;
+}
+
+#book .content li:hover .book {
+    transform: rotateY(0deg);
+}
+
+/* ---------- 文字信息 ---------- */
+#book .info-card {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    min-width: 0;
+}
+
+#book .info-card h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+#book .content li .info p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--sec-text-color);
+}
+
+/* ---------- 下载按钮 ---------- */
+#book .content li .info p a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    color: #b854d4;
+    background: rgba(184, 84, 212, .12);
+    transition: background .25s ease, color .25s ease;
+}
+
+#book .content li .info p a:hover {
+    color: #fff;
+    background: #b854d4;
+}
+
+#book .content li .info .pwd-text {
+    font-size: 12px;
+    opacity: .75;
+}
+
+/* ---------- 摘句（原 hover 浮层改为常驻） ---------- */
+#book .info-card .hidden-content {
+    order: 10;
+    position: static;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: var(--body-bg-color);
+    opacity: 1;
+    filter: none;
+    transform: none;
+}
+
+#book .info-card .hidden-content .text {
+    display: -webkit-box;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    float: none;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--sec-text-color);
+    text-align: left;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* ================== 图标保护（全站） ================== */
+#book .content li .info .fa-star {
+    margin-right: 4px;
+    color: #d68fe9;
+}
+
+.icon-star:before {
+    content: "\e80b";
+}
+
+[class*=" icon-"]:before,
+[class^=icon-]:before {
+    display: inline-block;
+    width: 1em;
+    font-family: Fontello;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1em;
+    text-align: center;
+    text-decoration: inherit;
+    text-transform: none;
+    font-variant: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 保护所有 Fluid 图标 */
+.iconfont {
+    font-family: "iconfont" !important;
+    font-style: normal !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* 保护伪元素 */
+.iconfont::before {
+    font-family: "iconfont" !important;
+}
+
+/* 移动端压缩 Banner 高度，缓解横向头图两侧被过度裁切的问题 */
+@media (max-width: 767px) {
+    .header-inner {
+        max-height: 62.5vw;
+    }
+}
+
+/* ================== 无障碍（WCAG AA）修正 ================== */
+
+/* 1. 摘要区 / 时间 / 分类链接的点击区域小于 24×24px，
+      用内边距撑开热区，再用负外边距抵消，视觉位置不变 */
+#board .post-meta > a,
+#board .post-meta > time {
+    display: inline-block;
+    padding: 4px 0;
+    margin: -4px 0;
+}
+
+/* 2. 搜索弹窗标题由 h4 改为 h2（修正 h1→h4 跳级），字号沿用原来的 h4 尺寸 */
+#modalSearch .modal-title {
+    font-size: 1.5rem;
+}
+
+/* 3. 分页翻页按钮里的图标是纯装饰，真正的可访问名称由 aria-label 提供，
+      这里保证聚焦时轮廓可见 */
+#pagination .extend:focus-visible {
+    outline: 2px solid #b854d4;
+    outline-offset: 2px;
+}
+
+/* tools/optimize-output.js 会把 button 内的 <div class="animated-icon"> 换成 <span>
+   （button 只允许 phrasing content）。span 默认 display:inline，
+   会让主题给的 width/height 失效、三条杠被压成 0 尺寸，移动端汉堡菜单就消失了。
+   这里显式恢复成块级。 */
+.navbar .navbar-toggler .animated-icon {
+    display: block;
+}
+
+/* tools/optimize-output.js 把非标准属性 parallax="true" 改名成 data-parallax="true"，
+   主题里 .banner[parallax="true"] 的选择器就匹配不上了，视差滚动会丢掉
+   GPU 合成提示和过渡动画（滚动时发涩）。这里按原样补一份。 */
+.banner[data-parallax="true"] {
+    will-change: transform;
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    transition: transform 0.05s ease-out;
+}
+
+/* 同上，主题里的 img[lazyload] { object-fit: cover } 也需要跟着新属性名补一份 */
+img[data-lazyload] {
+    object-fit: cover;
+}
+
+/* 移动端折叠菜单可滚动：避免列表过长底部被截断、夜间模式按钮点不到。
+   Fluid 基于 Bootstrap 4.6，折叠展开后 class 是 collapse show。 */
+@media (max-width: 767px) {
+    #navbarSupportedContent.show {
+        max-height: calc(100vh - 56px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+

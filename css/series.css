@@ -1,0 +1,78 @@
+/* ================== 系列文章导航 ================== */
+.series-nav {
+    margin-bottom: 1.6rem;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--line-color);
+    border-radius: 12px;
+    background: var(--board-bg-color);
+}
+
+.series-nav__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.series-nav__name {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.series-nav__count {
+    font-size: 0.85rem;
+    color: var(--sec-text-color);
+    white-space: nowrap;
+}
+
+.series-nav__list {
+    margin: 0;
+    padding-left: 1.3rem;
+}
+
+.series-nav__item {
+    font-size: 0.92rem;
+    line-height: 1.9;
+    color: var(--sec-text-color);
+}
+
+.series-nav__item a {
+    color: var(--sec-text-color);
+    text-decoration: none;
+}
+
+.series-nav__item a:hover {
+    color: var(--text-color);
+    text-decoration: underline;
+}
+
+.series-nav__item--current {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.series-nav__item--current > span::after {
+    content: "（当前）";
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--sec-text-color);
+}
+
+.series-nav__steps {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--line-color);
+}
+
+.series-nav__step {
+    font-size: 0.92rem;
+    color: var(--link-hover-color, var(--text-color));
+    text-decoration: none;
+}
+
+.series-nav__step:hover {
+    text-decoration: underline;
+}
